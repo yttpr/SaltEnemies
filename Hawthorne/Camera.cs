@@ -11,15 +11,7 @@ namespace Hawthorne
     {
         public static void Add()
         {
-            PerformEffectPassiveAbility noTouch = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
-            noTouch._passiveName = "Don't Touch Me";
-            noTouch.passiveIcon = ResourceLoader.LoadSprite("Lightweight", 32);
-            noTouch.type = (PassiveAbilityTypes)544522;
-            noTouch._enemyDescription = "Upon being clicked, gain an additional ability on the timeline.";
-            noTouch._characterDescription = "whoops";
-            noTouch.doesPassiveTriggerInformationPanel = true;
-            noTouch.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<TurnOffOnClickTriggerEffect>(), 1, new IntentType?(), Slots.Self) });
-            noTouch._triggerOn = new TriggerCalls[2] { TriggerCalls.OnDeath, TriggerCalls.OnCombatEnd };
+            
 
             Enemy camera = new Enemy()
             {
