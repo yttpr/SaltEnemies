@@ -1,1 +1,4 @@
-Salt's Brutal Orchestra Enemy Mod now on git. i plan on putting my other mods up here as a sort of backing up? but uh. All the other mods will be me decompiling my code because i accidentally lost literally all of my files! which fucking sucks. oh well
+Art, Code, Design, Music by Salt.
+Additional Art by ChillyBonez, ZLD1, Embercoral, ArtistZero, Childeater/Whimsical, TheLorac.
+Additional Music by MillieAmp, Conman84, Embercoral.
+Official link: https://yttpr.itch.io/salt-enemies-tm
