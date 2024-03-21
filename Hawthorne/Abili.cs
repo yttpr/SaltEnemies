@@ -3157,12 +3157,12 @@ namespace Hawthorne
                     _underwater = new Ability()
                     {
                         name = "Hold Me Underwater",
-                        description = "Inflict 2 Constricted and 2 Deep Water on the Opposing position.",
+                        description = "Inflict 2 Constricted and 3 Deep Water on the Opposing position.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Front),
-                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.Front)
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 3, CustomIntentIconSystem.GetIntent("Water"), Slots.Front)
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Takedown_1_A").visuals,
                         animationTarget = Slots.Front,
@@ -3181,16 +3181,16 @@ namespace Hawthorne
                     _lostLove = new Ability()
                     {
                         name = "Lost without Your Love",
-                        description = "Inflict 5 Deep Water on the Opposing position. \nIf there is no Opposing party member, move to the Left or Right, then apply 2 Deep Water on self.",
+                        description = "Inflict 4 Deep Water on the Opposing position. \nIf there is no Opposing party member, move to the Left or Right, then apply 3 Deep Water on self.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<IsUnitEffect>(), 0, CustomIntentIconSystem.GetIntent("Water"), Slots.Front),
                             new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Front), 2, IntentType.Misc_Hidden, Slots.Front, BasicEffects.DidThat(true)),
-                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 5, null, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 4, null, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self, BasicEffects.DidThat(false, 3)),
                             new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Self), 2, null, Slots.Self, BasicEffects.DidThat(false, 4)),
-                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, GetIntent("Water"), Slots.Self, BasicEffects.DidThat(false, 5))
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 3, GetIntent("Water"), Slots.Self, BasicEffects.DidThat(false, 5))
                         },
                         visuals = null,
                         animationTarget = Slots.Self,
@@ -3210,12 +3210,13 @@ namespace Hawthorne
                     _tailHead = new Ability()
                     {
                         name = "Tail to Head",
-                        description = "Remove all Deep Water from the Opposing position. Inflict half the amount to every other party member tile.",
+                        description = "Remove all Deep Water from the Opposing position. Inflict half the amount to every other party member tile.\nMove the Opposing party member to the Left or Right.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<RemoveAllWaterEffect>(), 1, GetIntent("RemWater"), Slots.Front),
-                            new Effect(ScriptableObject.CreateInstance<ApplyWaterLastExitEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.SlotTarget(new int[]{4, 3, 2, 1, -1, -2, -3, -4}, false))
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterLastExitEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.SlotTarget(new int[]{4, 3, 2, 1, -1, -2, -3, -4}, false)),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front)
                         },
                         visuals = LoadedAssetsHandler.GetEnemy("Ouroborus_Tail_BOSS").abilities[0].ability.visuals,
                         animationTarget = Slots.Front,
