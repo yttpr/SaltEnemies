@@ -1,4 +1,5 @@
-﻿using MonoMod.RuntimeDetour;
+﻿using FMODUnity;
+using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -568,6 +569,7 @@ namespace Hawthorne
                 return;
             }
             if (DoDebugs.MiscInfo) Debug.Log("does apply");
+            RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
             CombatManager.Instance.AddSubAction(new PerformSlotStatusEffectAction(this, caller, null));
             if (DoDebugs.MiscInfo) Debug.Log("done");
         }

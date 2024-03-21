@@ -112,6 +112,7 @@ namespace Hawthorne
             IndicatorGroup.Add(2467431);
             MawGroup.Add(2467432);//doesnt has music
             Iconoclast2Group.Add();
+            ClioneSong.Add(2467433);
         }
         public static void ModifyEncounters()
         {
@@ -329,6 +330,9 @@ namespace Hawthorne
             SaltMod.NerveMed();
             SaltMod.MawGard();
             SaltMod.IconoclastTwo();
+            SaltMod.ClioneShoreMed();
+            SaltMod.ClioneShoreH();
+            SaltMod.ClioneOrph();
         }
     }
 }

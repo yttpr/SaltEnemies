@@ -1972,9 +1972,10 @@ namespace Hawthorne
             if (BirdScale) list.Add("Hunter_EN");
             if (harder && Third) list.Add("Firebird_EN");
             if (!harder && EnemyExist("FumeFactory_EN")) for (int i = 0; i < 5; i++) list.Add("FumeFactory_EN");
-            if (!harder && EnemyExist("Evangelists_EN")) for (int i = 0; i < 3; i++) list.Add("Evangelists_EN");
+            if (harder && EnemyExist("Evangelists_EN")) for (int i = 0; i < 3; i++) list.Add("Evangelists_EN");
             if (harder && EnemyExist("BlackStar_EN")) for (int i = 0; i < 7; i++) list.Add("BlackStar_EN");
             if (harder && EnemyExist("Indicator_EN")) for (int i = 0; i < 5; i++) list.Add("Indicator_EN");
+            if (EnemyExist("Clione_EN")) for (int i = 0; i < 7; i++) list.Add("Clione_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2394,6 +2395,7 @@ namespace Hawthorne
                 if (EnemyExist("OsseousClad_EN") && Half) list.Add("OsseousClad_EN");
                 if (EnemyExist("MechanicalLens_EN") && Third) list.Add("MechanicalLens_EN");
                 if (EnemyExist("Windle1_EN") && Quarter) list.Add("Windle1_EN");
+                if (EnemyExist("Clione_EN") && Half) list.Add("Clione_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()

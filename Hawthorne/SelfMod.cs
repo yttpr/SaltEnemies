@@ -3795,5 +3795,74 @@ namespace Hawthorne
                 if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
             }
         }
+        public static void ClioneShoreMed()
+        {
+            string bundle = "ClioneShoreMed";
+            string main = "Clione_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void ClioneShoreH()
+        {
+            string bundle = "ClioneShoreHard";
+            string main = "Clione_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void ClioneOrph()
+        {
+            string bundle = "ClioneOrphMed";
+            string main = "Clione_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
     }
 }

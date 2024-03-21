@@ -438,6 +438,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "SkinningHomunculus_EN",
+                        "SkinningHomunculus_EN"
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified " + bundle);

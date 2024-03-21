@@ -78,6 +78,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Underwater, Abili.LostLove, Abili.TailHead };
             enemy.enemyID = "Clione_EN";
+            enemy.unitType = UnitType.Fish;
             enemy.AddEnemy();
         }
     }

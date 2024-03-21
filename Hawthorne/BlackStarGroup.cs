@@ -1392,4 +1392,301 @@ namespace Hawthorne
             jarden.AddEncounter();
         }
     }
+    public static class ClioneSong
+    {
+        public static void Add(int sign)
+        {
+            if (!EnemyExist("Clione_EN")) return;
+
+            BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("ClioneWorld.png"));
+
+            ShoreMed(sign);
+            ShoreHard(sign);
+            OrphMed(sign);
+        }
+        public static void ShoreMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "ClioneShoreMed",
+                area = 0,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(15, 25),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/ClioneSong",
+                roarEvent = "event:/Hawthorne/Misc/Water",
+                difficulty = EncounterDifficulty.Medium
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Clione_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "Mung_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "Mung_EN", enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=1},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(true), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(Third), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomSupport(0, false, false), enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomShoreMidget(false), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomSupport(0, false, false), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=4},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(0, true), enemySlot=3},
+                new FieldEnemy(){enemyName = SmartColor(0), enemySlot=4},
+                });
+                ResetColor();
+            }
+
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void ShoreHard(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "ClioneShoreHard",
+                area = 0,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(10, 20),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/ClioneSong",
+                roarEvent = "event:/Hawthorne/Misc/Water",
+                difficulty = EncounterDifficulty.Hard
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Clione_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=4},
+                });
+            }
+            fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=2},
+                });
+            for (int i = 0; i < 4; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.FarShoreSlop(), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomSupport(0, false, false), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=4},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(0, true), enemySlot=3},
+                new FieldEnemy(){enemyName = SmartColor(0), enemySlot=4},
+                });
+                ResetColor();
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Shore.RandomShoreWhore(), enemySlot=4},
+                });
+            }
+
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void OrphMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "ClioneOrphMed",
+                area = 1,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(10, 20),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/ClioneSong",
+                roarEvent = "event:/Hawthorne/Misc/Water",
+                difficulty = EncounterDifficulty.Medium
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Clione_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "MusicMan_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "MusicMan_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MusicMan_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "SingingStone_EN", enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                string a = RandomOrph;
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = a, enemySlot=1},
+                new FieldEnemy(){enemyName = a, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(1), enemySlot=3},
+                });
+                string b = RandomOrph;
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = b, enemySlot=1},
+                new FieldEnemy(){enemyName = b, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=3},
+                });
+                string c = RandomOrph;
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = c, enemySlot=1},
+                new FieldEnemy(){enemyName = c, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomColor(1), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomColor(1), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(1), enemySlot=3},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(1, true), enemySlot=2},
+                new FieldEnemy(){enemyName = SmartColor(1), enemySlot=3},
+                });
+                ResetColor();
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(1, true, true), enemySlot=2},
+                new FieldEnemy(){enemyName = SmartColor(1), enemySlot=3},
+                });
+                ResetColor();
+            }
+            if (GreyScale)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(), enemySlot=1},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=3},
+                    });
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(), enemySlot=1},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=3},
+                    new FieldEnemy(){enemyName = GreyScaleSupport(), enemySlot=4},
+                    });
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(), enemySlot=1},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=3},
+                    new FieldEnemy(){enemyName = GreyScaleSupport(), enemySlot=4},
+                    });
+                }
+            }
+
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+    }
 }
