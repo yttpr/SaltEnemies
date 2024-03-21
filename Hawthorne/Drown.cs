@@ -29,7 +29,7 @@ namespace Hawthorne
         }
         public static void Setup()
         {
-            IDetour addLeftEffectIDetour = (IDetour)new Hook((MethodBase)typeof(CombatManager).GetMethod(nameof(CombatManager.InitializeCombat), ~BindingFlags.Default), typeof(HasteInfo).GetMethod(nameof(AddDrowningStatusEffect), ~BindingFlags.Default));
+            IDetour addLeftEffectIDetour = (IDetour)new Hook((MethodBase)typeof(CombatManager).GetMethod(nameof(CombatManager.InitializeCombat), ~BindingFlags.Default), typeof(DrownInfo).GetMethod(nameof(AddDrowningStatusEffect), ~BindingFlags.Default));
             new CustomIntentInfo("Drown", (IntentType)Drown, ResourceLoader.LoadSprite("Drowning.png"), IntentType.Status_Cursed);
 
         }
@@ -329,7 +329,7 @@ namespace Hawthorne
         }
         public static void Setup()
         {
-            IDetour addMoldEffectIDetour = new Hook(typeof(CombatManager).GetMethod(nameof(CombatManager.InitializeCombat), ~BindingFlags.Default), typeof(RootsInfo).GetMethod(nameof(AddRootsSlotEffect), ~BindingFlags.Default));
+            IDetour addMoldEffectIDetour = new Hook(typeof(CombatManager).GetMethod(nameof(CombatManager.InitializeCombat), ~BindingFlags.Default), typeof(WaterInfo).GetMethod(nameof(AddRootsSlotEffect), ~BindingFlags.Default));
             new CustomIntentInfo("Water", (IntentType)Water, ResourceLoader.LoadSprite("DeepFieldIcon.png"), IntentType.Status_OilSlicked);
             WaterView.Setup();
         }

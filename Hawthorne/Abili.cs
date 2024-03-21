@@ -3164,7 +3164,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.Front)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Takedown_1_A").visuals,
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Takedown_1_A").visuals,
                         animationTarget = Slots.Front,
                     };
                 }

@@ -145,6 +145,8 @@ namespace Hawthorne
             Hawthorne.StarsEncounters.Add();
             if (DoDebugs.GenInfo) Logger.LogInfo("Beginning Group 4");
             Hawthorne.Rework.Setup();
+            Hawthorne.DrownInfo.Setup();
+            Hawthorne.WaterInfo.Setup();
             Hawthorne.GroupFour.Setup();
             Hawthorne.GroupFour.AddEnemies();
             TellsYouToInstallSaltAdjustments.TellYou();
