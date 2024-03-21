@@ -1285,7 +1285,7 @@ namespace Hawthorne
                     turb._passiveName = "Turbulent";
                     turb.type = (PassiveAbilityTypes)7644013;
                     turb.passiveIcon = ResourceLoader.LoadSprite("BlackstarPassive.png", 32);
-                    turb._enemyDescription = "On being directly damaged, shuffle the position of all allies.";
+                    turb._enemyDescription = "On being directly damaged, shuffle the position of all enemies.";
                     turb._characterDescription = turb._enemyDescription;
                     turb.doesPassiveTriggerInformationPanel = true;
                     turb.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<MassSwapZoneEffect>(), 1, null, Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, true)) });
@@ -1335,6 +1335,27 @@ namespace Hawthorne
                     _badDog = bad;
                 }
                 return _badDog;
+            }
+        }
+        static BasePassiveAbilitySO _waves;
+        public static BasePassiveAbilitySO Waves
+        {
+            get
+            {
+                if (_waves == null)
+                {
+                    PerformEffectPassiveAbility turb = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    turb._passiveName = "Waves";
+                    turb.type = (PassiveAbilityTypes)7648910;
+                    turb.passiveIcon = ResourceLoader.LoadSprite("WavesPassive.png", 32);
+                    turb._enemyDescription = "On moving, inflict 2 Deep Water on the Opposing position..";
+                    turb._characterDescription = turb._enemyDescription;
+                    turb.doesPassiveTriggerInformationPanel = true;
+                    turb.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, null, Slots.Front) });
+                    turb._triggerOn = new TriggerCalls[1] { TriggerCalls.OnMoved };
+                    _waves = turb;
+                }
+                return _waves;
             }
         }
 

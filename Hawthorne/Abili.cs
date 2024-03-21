@@ -3147,6 +3147,83 @@ namespace Hawthorne
                 return _salivate;
             }
         }
+        static Ability _underwater;
+        public static Ability Underwater
+        {
+            get
+            {
+                if (_underwater == null)
+                {
+                    _underwater = new Ability()
+                    {
+                        name = "Hold Me Underwater",
+                        description = "Inflict 2 Constricted and 2 Deep Water on the Opposing position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Takedown_1_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _underwater;
+            }
+        }
+        static Ability _lostLove;
+        public static Ability LostLove
+        {
+            get
+            {
+                if (_lostLove == null)
+                {
+                    _lostLove = new Ability()
+                    {
+                        name = "Lost without Your Love",
+                        description = "Inflict 5 Deep Water on the Opposing position. \nIf there is no Opposing party member, move to the Left or Right, then apply 2 Deep Water on self.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<IsUnitEffect>(), 0, CustomIntentIconSystem.GetIntent("Water"), Slots.Front),
+                            new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Front), 2, IntentType.Misc_Hidden, Slots.Front, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 5, null, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self, BasicEffects.DidThat(false, 3)),
+                            new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Self), 2, null, Slots.Self, BasicEffects.DidThat(false, 4)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, GetIntent("Water"), Slots.Self, BasicEffects.DidThat(false, 5))
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _lostLove;
+            }
+        }
+        static Ability _tailHead;
+        public static Ability TailHead
+        {
+            get
+            {
+                if (_tailHead == null)
+                {
+                    new CustomIntentInfo("RemWater", (IntentType)7378610, ResourceLoader.LoadSprite("WaterRemove.png"), IntentType.Rem_Status_OilSlicked);
+                    _tailHead = new Ability()
+                    {
+                        name = "Tail to Head",
+                        description = "Remove all Deep Water from the Opposing position. Inflict half the amount to every other party member tile.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RemoveAllWaterEffect>(), 1, GetIntent("RemWater"), Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterLastExitEffect>(), 2, CustomIntentIconSystem.GetIntent("Water"), Slots.SlotTarget(new int[]{4, 3, 2, 1, -1, -2, -3, -4}, false))
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemy("Ouroborus_Tail_BOSS").abilities[0].ability.visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _tailHead;
+            }
+        }
 
     }
 
@@ -6057,6 +6134,44 @@ namespace Hawthorne
             if (caster.ContainsPassiveAbility(PassiveAbilityTypes.Withering)) return false;
             foreach (CombatSlot slot in CombatManager.Instance._stats.combatSlots.EnemySlots) if (!slot.HasUnit) return true;
             return false;
+        }
+    }
+    public class IsUnitEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            foreach (TargetSlotInfo target in targets) if (target.HasUnit) exitAmount++;
+            return exitAmount > 0;
+        }
+    }
+    public class RemoveAllWaterEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            for (int i = 0; i < targets.Length; i++)
+            {
+                if (targets[i].IsTargetCharacterSlot)
+                {
+                    exitAmount += stats.combatSlots.CharacterSlots[targets[i].SlotID].TryRemoveSlotStatusEffect((SlotStatusEffectType)WaterInfo.Water);
+                }
+                else
+                {
+                    exitAmount += stats.combatSlots.EnemySlots[targets[i].SlotID].TryRemoveSlotStatusEffect((SlotStatusEffectType)WaterInfo.Water);
+                }
+            }
+
+            return exitAmount > 0;
+        }
+    }
+    public class ApplyWaterLastExitEffect : ApplyWaterSlotEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (base.PreviousExitValue <= 0) return false;
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, Math.Max(1, (int)Math.Floor(((float)base.PreviousExitValue) / 2)), out exitAmount);
         }
     }
 }

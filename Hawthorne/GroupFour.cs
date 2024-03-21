@@ -59,6 +59,7 @@ namespace Hawthorne
             Singularity.Add(544473);
             Indicator.Add(544472);
             Maw.Add(544471);
+            Clione.Add(544470);
         }
         public static void AddEncounters()
         {
@@ -86,7 +87,7 @@ namespace Hawthorne
             FlowerSong.RedGard(2167409);
             FlowerSong.GreyGard(2067409);
             MiriamSong.Add(2467410);
-            EyePalmGroup.Add(2467411);//doesnt has music
+            EyePalmGroup.Add(2467411);
             TankSong.Add(2467412);
             SigilGroup.Add(2467413);//doesnt has music
             TortoiseSong.Add(2467414);

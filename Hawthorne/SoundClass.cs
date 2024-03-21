@@ -33,9 +33,13 @@ namespace Hawthorne
         {
             CreateSoundBankFile("HawthorneBank");
             CreateSoundBankFile("HawthorneBank.strings");
+            CreateSoundBankFile("Friendship");
+            CreateSoundBankFile("Friendship.strings");
 
             FMODUnity.RuntimeManager.LoadBank("HawthorneBank", true);
             FMODUnity.RuntimeManager.LoadBank("HawthorneBank.strings", true);
+            FMODUnity.RuntimeManager.LoadBank("Friendship", true);
+            FMODUnity.RuntimeManager.LoadBank("Friendship.strings", true);
 
         }
     }

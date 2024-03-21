@@ -900,7 +900,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity/2,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/EyePalmSong",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -1199,7 +1199,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/EyePalmSong",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -1595,7 +1595,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity /2,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/EyePalmSong",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHisImage_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Easy
             };

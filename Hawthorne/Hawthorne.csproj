@@ -64,6 +64,13 @@
 	  <None Remove="birdCrap\terror.png" />
 	  <None Remove="BrutalOrchestraCharacters-sheet.png" />
 	  <None Remove="Classic.png" />
+	  <None Remove="Cliome\ClioneDead.png" />
+	  <None Remove="Cliome\ClioneIcon.png" />
+	  <None Remove="Cliome\ClioneWorld.png" />
+	  <None Remove="Cliome\DeepFieldIcon.png" />
+	  <None Remove="Cliome\Drowning.png" />
+	  <None Remove="Cliome\WaterRemove.png" />
+	  <None Remove="Cliome\WavesPassive.png" />
 	  <None Remove="CNSDead.png" />
 	  <None Remove="CNSIcon.png" />
 	  <None Remove="CNSIconB.png" />
@@ -81,6 +88,8 @@
 	  <None Remove="Determined.png" />
 	  <None Remove="Dodge.png" />
 	  <None Remove="DontTouchMe.png" />
+	  <None Remove="ENEMIES\Friendship.bank" />
+	  <None Remove="ENEMIES\Friendship.strings.bank" />
 	  <None Remove="ENEMIES\group4" />
 	  <None Remove="ENEMIES\hawthorne" />
 	  <None Remove="ENEMIES\HawthorneBank.bank" />
@@ -453,6 +462,13 @@
 	  <EmbeddedResource Include="birdCrap\terror.png" />
 	  <EmbeddedResource Include="BrutalOrchestraCharacters-sheet.png" />
 	  <EmbeddedResource Include="Classic.png" />
+	  <EmbeddedResource Include="Cliome\ClioneDead.png" />
+	  <EmbeddedResource Include="Cliome\ClioneIcon.png" />
+	  <EmbeddedResource Include="Cliome\ClioneWorld.png" />
+	  <EmbeddedResource Include="Cliome\DeepFieldIcon.png" />
+	  <EmbeddedResource Include="Cliome\Drowning.png" />
+	  <EmbeddedResource Include="Cliome\WaterRemove.png" />
+	  <EmbeddedResource Include="Cliome\WavesPassive.png" />
 	  <EmbeddedResource Include="CNSDead.png" />
 	  <EmbeddedResource Include="CNSIcon.png" />
 	  <EmbeddedResource Include="CNSIconB.png" />
@@ -470,6 +486,8 @@
 	  <EmbeddedResource Include="Determined.png" />
 	  <EmbeddedResource Include="Dodge.png" />
 	  <EmbeddedResource Include="DontTouchMe.png" />
+	  <EmbeddedResource Include="ENEMIES\Friendship.bank" />
+	  <EmbeddedResource Include="ENEMIES\Friendship.strings.bank" />
 	  <EmbeddedResource Include="ENEMIES\group4" />
 	  <EmbeddedResource Include="ENEMIES\hawthorne" />
 	  <EmbeddedResource Include="ENEMIES\HawthorneBank.bank" />
