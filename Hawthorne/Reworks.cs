@@ -769,7 +769,7 @@ namespace Hawthorne
         public void OnEffectorTriggerAttached(ISlotStatusEffector caller)
         {
             Effector = caller;
-            ignoreSet = true;
+            if (caller is CombatSlot slot && slot.HasUnit) ignoreSet = true;
             CombatManager.Instance.AddObserver(OnStatusTick, TriggerCalls.OnTurnFinished.ToString(), Effector);
         }
 

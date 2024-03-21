@@ -1,9 +1,12 @@
 ﻿using MonoMod.RuntimeDetour;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+//using Coffee.UIExtensions;
 
 namespace Hawthorne
 {
@@ -337,10 +340,10 @@ namespace Hawthorne
     public static class WaterView
     {
 
-        public static GameObject[] WaterFool = new GameObject[5];
+        public static GameObject[][] WaterFool = new GameObject[5][];
         public static GameObject[] WaterEnemy = new GameObject[5];
 
-        public static GameObject Fool;
+        public static GameObject[] Fool;
         public static GameObject Enemy;
 
         public static void UpdateFieldListCharacterModdedLayout(
@@ -357,31 +360,58 @@ namespace Hawthorne
                 if (effect.slotStatusEffectType == (SlotStatusEffectType)WaterInfo.Water)
                     flag = true;
             }
-            if (Fool == null) Fool = SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishFool.prefab").gameObject;
-            GameObject gameObject = Fool;
-            if ((UnityEngine.Object)WaterFool[self.SlotID] == (UnityEngine.Object)null)
+            if (Fool == null)
             {
-                WaterFool[self.SlotID] = UnityEngine.Object.Instantiate<GameObject>(gameObject, self.transform.localPosition, self.transform.localRotation, self._constrictedEffect.transform.parent.transform);
-                WaterFool[self.SlotID].transform.localPosition = Vector3.zero;
-                WaterFool[self.SlotID].transform.rotation = self._constrictedEffect.transform.rotation;
-                WaterFool[self.SlotID].GetComponent<RectTransform>().anchorMin = self._shieldEffect.GetComponent<RectTransform>().anchorMin;
-                WaterFool[self.SlotID].GetComponent<RectTransform>().anchorMax = self._shieldEffect.GetComponent<RectTransform>().anchorMax;
-                WaterFool[self.SlotID].GetComponent<RectTransform>().position = self._shieldEffect.GetComponent<RectTransform>().position;
+                Fool = new GameObject[]
+                {
+                    SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishFoolBack.prefab").gameObject,
+                    SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishFoolJelly.prefab").gameObject,
+                    SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishFoolFront.prefab").gameObject,
+                    SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishFoolWater.prefab").gameObject,
+                };
+                /*UIParticle uii = Fool.gameObject.AddComponent<UIParticle>();
+                uii.m_Particles = new List<ParticleSystem>()
+                {
+                    uii.transform.GetChild(0).GetComponent<ParticleSystem>(),
+                    uii.transform.GetChild(1).GetComponent<ParticleSystem>(),
+                    uii.transform.GetChild(2).GetComponent<ParticleSystem>(),
+                    uii.transform.GetChild(3).GetComponent<ParticleSystem>(),
+                };*/
             }
+            GameObject[] gameObjects = Fool;
+            if (WaterFool[self.SlotID] == null || WaterFool[self.SlotID].Length <= 0)
+            {
+                WaterFool[self.SlotID] = new GameObject[4];
+                WaterFool[self.SlotID][0] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[0], self.transform.localPosition, self.transform.localRotation, self._backFireEffect.transform.parent.transform);
+                WaterFool[self.SlotID][1] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[1], self.transform.localPosition, self.transform.localRotation, self._backFireEffect.transform.parent.transform);
+                WaterFool[self.SlotID][2] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[2], self.transform.localPosition, self.transform.localRotation, self._constrictedEffect.transform.parent.transform);
+                WaterFool[self.SlotID][3] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[3], self.transform.localPosition, self.transform.localRotation, self._constrictedEffect.transform.parent.transform);
+                for (int i = 0; i < 4; i++)
+                {
+                    WaterFool[self.SlotID][i].transform.localPosition = Vector3.zero;
+                    WaterFool[self.SlotID][i].transform.rotation = self._constrictedEffect.transform.rotation;
+                    WaterFool[self.SlotID][i].GetComponent<RectTransform>().anchorMin = self._shieldEffect.GetComponent<RectTransform>().anchorMin;
+                    WaterFool[self.SlotID][i].GetComponent<RectTransform>().anchorMax = self._shieldEffect.GetComponent<RectTransform>().anchorMax;
+                    WaterFool[self.SlotID][i].GetComponent<RectTransform>().position = self._shieldEffect.GetComponent<RectTransform>().position;
+                }
+            }
+            for (int i = 0; i < 4; i++) WaterFool[self.SlotID][i].SetActive(flag);
             if (flag)
             {
-                WaterFool[self.SlotID].SetActive(true);
-                WaterFool[self.SlotID].transform.GetChild(0).GetComponent<ParticleSystem>().Play(true);
+                
+                //WaterFool[self.SlotID].transform.GetComponent<UIParticle>().Play();
+                /*WaterFool[self.SlotID].transform.GetChild(0).GetComponent<ParticleSystem>().Play(true);
                 WaterFool[self.SlotID].transform.GetChild(1).GetComponent<ParticleSystem>().Play(true);
                 WaterFool[self.SlotID].transform.GetChild(2).GetComponent<ParticleSystem>().Play(true);
-                WaterFool[self.SlotID].transform.GetChild(3).GetComponent<ParticleSystem>().Play(true);
+                WaterFool[self.SlotID].transform.GetChild(3).GetComponent<ParticleSystem>().Play(true);*/
             }
             else if (!flag)
             {
-                WaterFool[self.SlotID].transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true);
+                //WaterFool[self.SlotID].transform.GetComponent<UIParticle>().Stop();
+                /*WaterFool[self.SlotID].transform.GetChild(0).GetComponent<ParticleSystem>().Stop(true);
                 WaterFool[self.SlotID].transform.GetChild(1).GetComponent<ParticleSystem>().Stop(true);
                 WaterFool[self.SlotID].transform.GetChild(2).GetComponent<ParticleSystem>().Stop(true);
-                WaterFool[self.SlotID].transform.GetChild(3).GetComponent<ParticleSystem>().Stop(true);
+                WaterFool[self.SlotID].transform.GetChild(3).GetComponent<ParticleSystem>().Stop(true);*/
             }
             orig(self, effects, icons, texts);
         }
@@ -552,7 +582,7 @@ namespace Hawthorne
         public void OnEffectorTriggerAttached(ISlotStatusEffector caller)
         {
             Effector = caller;
-            ignoreSet = true;
+            if (caller is CombatSlot slot && slot.HasUnit) ignoreSet = true;
             CombatManager.Instance.AddObserver(OnStatusTick, TriggerCalls.OnTurnFinished.ToString(), Effector);
         }
 
@@ -690,6 +720,19 @@ namespace Hawthorne
             }
 
             return false;
+        }
+    }
+    public class SillyAction : CombatAction
+    {
+        public readonly Water_SlotStatusEffect _self;
+        public SillyAction(Water_SlotStatusEffect self)
+        {
+            _self = self;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            _self.ignoreSet = false;
+            yield return false;
         }
     }
     public static class Watery
