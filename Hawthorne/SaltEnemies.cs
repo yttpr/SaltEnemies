@@ -2661,7 +2661,7 @@ namespace Hawthorne
         {
             U1_3_27();
             U1_3_29();
-            U1_3_29_1();
+            U1_3_29_2();
         }
         public static void U1_3_27()
         {
@@ -2735,11 +2735,11 @@ namespace Hawthorne
                 PageCollector.UpdatePage("MedamaudePage.png");
             }
         }
-        public static void U1_3_29_1()
+        public static void U1_3_29_2()
         {
-            if (!File.Exists(SavePath + "Update_1_3_29_1.txt"))
+            if (!File.Exists(SavePath + "Update_1_3_29_2.txt"))
             {
-                File.WriteAllText(SavePath + "Update_1_3_29_1.txt", "Updatd pages !");
+                File.WriteAllText(SavePath + "Update_1_3_29_2.txt", "Updatd pages !");
                 PageCollector.UpdatePage("ClionePage.png");
             }
         }
