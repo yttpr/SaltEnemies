@@ -344,6 +344,16 @@ namespace Hawthorne
         public static GameObject[][] WaterFool = new GameObject[5][];
         public static GameObject[] WaterEnemy = new GameObject[5];
 
+        public static bool[] HasWaterFool = new bool[5];
+        public static bool[] HasWaterEnemy = new bool[5];
+        public static void Reset()
+        {
+            HasWaterEnemy = new bool[5];
+            HasWaterFool = new bool[5];
+            WaterFool = new GameObject[5][];
+            WaterEnemy = new GameObject[5];
+        }
+
         public static GameObject[] Fool;
         public static GameObject Enemy;
 
@@ -361,6 +371,8 @@ namespace Hawthorne
                 if (effect.slotStatusEffectType == (SlotStatusEffectType)WaterInfo.Water)
                     flag = true;
             }
+            if (HasWaterFool == null || HasWaterFool.Length <= self.SlotID) HasWaterFool = new bool[5];
+            HasWaterFool[self.SlotID] = flag;
             try
             {
                 if (Fool == null)
@@ -431,6 +443,7 @@ namespace Hawthorne
                     if (enumerator.Current.slotStatusEffectType == (SlotStatusEffectType)WaterInfo.Water)
                         flag = true;
                 }
+                if (HasWaterEnemy == null || HasWaterEnemy.Length <= self.SlotID) HasWaterEnemy = new bool[5]; HasWaterEnemy[self.SlotID] = flag;
                 if (Enemy == null) Enemy = SaltEnemies.Group4.LoadAsset<GameObject>("Assets/Water/FishEnemy.prefab");
                 GameObject original = Enemy;
                 if ((UnityEngine.Object)WaterEnemy[self.SlotID] == (UnityEngine.Object)null)
@@ -473,15 +486,21 @@ namespace Hawthorne
         public static IEnumerator Execute(Func<CombatAction, CombatStats, IEnumerator> orig, CombatAction self, CombatStats stats)
         {
             yield return orig(self, stats);
+            
             try
             {
                 if (self is CharacterSlotsHaveSwappedUIAction ch)
                 {
                     foreach (int i in ch._newSlotIDs)
                     {
-                        foreach (CombatSlot slot in stats.combatSlots.CharacterSlots)
+                        if (HasWaterFool == null || HasWaterFool.Length <= i) HasWaterFool = new bool[5];
+                        foreach (CharacterSlotLayout slot in stats.combatUI._characterZone._slots)
                         {
-                            if (slot.ContainsStatusEffect((SlotStatusEffectType)WaterInfo.Water) && slot.SlotID == i) RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
+                            if (slot.SlotID == i && slot._hasUnit && HasWaterFool[slot.SlotID])
+                            {
+                                if (DoDebugs.MiscInfo) Debug.Log(slot.SlotID);
+                                RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
+                            }
                         }
                     }
                 }
@@ -489,9 +508,53 @@ namespace Hawthorne
                 {
                     foreach (int i in en._newSlotIDs)
                     {
-                        foreach (CombatSlot slot in stats.combatSlots.EnemySlots)
+                        if (HasWaterEnemy == null || HasWaterEnemy.Length <= i) HasWaterEnemy = new bool[5];
+                        foreach (EnemySlotLayout slot in stats.combatUI._enemyZone._slots)
                         {
-                            if (slot.SlotID == i && slot.ContainsStatusEffect((SlotStatusEffectType)WaterInfo.Water)) RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
+                            bool HasUnit = false;
+                            int Size = 1;
+                            foreach (EnemyCombatUIInfo enUI in stats.combatUI._enemiesInCombat.Values)
+                            {
+                                if (enUI.SlotID <= slot.SlotID && slot.SlotID < enUI.SlotID + enUI.EnemyBase.size)
+                                {
+                                    HasUnit = true;
+                                    Size = enUI.EnemyBase.size;
+                                }
+                            }
+                            if (slot.SlotID == i && HasUnit)
+                            {
+                                if (HasWaterEnemy[slot.SlotID])
+                                {
+                                    if (DoDebugs.MiscInfo) Debug.Log(slot.SlotID);
+                                    RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
+                                }
+                                else if (Size > 1)
+                                {
+                                    for (int p = slot.SlotID; p < slot.SlotID + Size; p++)
+                                    {
+                                        if (HasWaterEnemy == null || HasWaterEnemy.Length <= p) HasWaterEnemy = new bool[5];
+                                        bool Found = false;
+                                        foreach (EnemySlotLayout plot in stats.combatUI._enemyZone._slots)
+                                        {
+                                            bool isUnited = false;
+                                            foreach (EnemyCombatUIInfo enUI in stats.combatUI._enemiesInCombat.Values)
+                                            {
+                                                if (enUI.SlotID <= plot.SlotID && plot.SlotID < enUI.SlotID + enUI.EnemyBase.size)
+                                                {
+                                                    isUnited = true;
+                                                }
+                                            }
+                                            if (plot.SlotID == p && isUnited && HasWaterEnemy[plot.SlotID])
+                                            {
+                                                RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/Water");
+                                                Found = true;
+                                                break;
+                                            }
+                                        }
+                                        if (Found) break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -501,6 +564,7 @@ namespace Hawthorne
                 Debug.LogError("failed to play water sound.");
             }
         }
+        
     }
     public class Water_SlotStatusEffect : ISlotStatusEffect, ITriggerEffect<IUnit>
     {

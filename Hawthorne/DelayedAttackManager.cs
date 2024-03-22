@@ -89,6 +89,7 @@ namespace Hawthorne
             Attacks.Clear();
             ThreadCleaner.CleanThreads();
             ButterflyUnboxer.Boxeds.Clear();
+            WaterView.Reset();
         }
 
         public static void UIInitialization(Action<CombatStats> orig, CombatStats self)
