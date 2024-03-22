@@ -59,10 +59,11 @@ namespace Hawthorne
             lens.name = "Lens Flash";
             lens.description = "Move towards the closest party member. Add one of the opposing party member's ability to this enemy's moveset and attempt to copy a random passive from them.";
             lens.rarity = 5;
-            lens.effects = new Effect[3];
+            lens.effects = new Effect[4];
             lens.effects[0] = new Effect(ScriptableObject.CreateInstance<LensFlashEffect>(), 1, IntentType.Swap_Sides, Slots.Self);
             lens.effects[1] = new Effect(ScriptableObject.CreateInstance<ExitValueSetterEffect>(), 1, IntentType.Misc, Slots.Front, didThat);
             lens.effects[2] = new Effect(ScriptableObject.CreateInstance<StealRandomPassiveEffect>(), 1, null, Slots.Front, BasicEffects.DidThat(true, 2));
+            lens.effects[3] = new Effect(ScriptableObject.CreateInstance<PlayHealthColorSoundEffect>(), 1, null, Slots.Front);
             lens.visuals = null;
             lens.animationTarget = Slots.Self;
 

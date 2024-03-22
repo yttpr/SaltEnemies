@@ -6177,4 +6177,21 @@ namespace Hawthorne
             return base.PerformEffect(stats, caster, targets, areTargetSlots, Math.Max(1, (int)Math.Floor(((float)base.PreviousExitValue) / 2)), out exitAmount);
         }
     }
+    public class PlayHealthColorSoundUIAction : CombatAction
+    {
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            stats.combatUI._characterZone._unitSoundsHandler.PlayHealthColorEvent();
+            yield return null;
+        }
+    }
+    public class PlayHealthColorSoundEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
+            return true;
+        }
+    }
 }

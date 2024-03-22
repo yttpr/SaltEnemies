@@ -2101,14 +2101,19 @@ namespace Hawthorne
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
             exitAmount = 0;
+            if (targets.Length <= 0) return false;
             if (!targets[0].HasUnit)
             {
                 return false;
             }
-            CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Cheese!\""));
+            if (Hawthorne.Check.Half) CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Cheese!\""));
+            else CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Smile for the Camera!"));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             if (caster.MaximizeHealth(targets[0].Unit.MaximumHealth))
+            {
                 exitAmount++;
+                CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
+            }
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
@@ -2127,20 +2132,34 @@ namespace Hawthorne
                 string descp = namae;
                 descp += " will perforn an extra ability \"Lens Flash\" each turn.";
                 enemy.PassiveAbilities[0]._enemyDescription = descp;
-                foreach (EnemyCombatUIInfo enemyInfo in stats.combatUI._enemiesInCombat.Values)
+                try
                 {
-                    if (enemyInfo.SlotID == enemy.SlotID)
+                    foreach (EnemyCombatUIInfo enemyInfo in stats.combatUI._enemiesInCombat.Values)
                     {
-                        enemyInfo.Name = namae;
-                        enemyInfo.Passives[0]._enemyDescription = descp;
+                        if (enemyInfo.SlotID == enemy.SlotID)
+                        {
+                            enemyInfo.Name = namae;
+                            enemyInfo.Passives[0]._enemyDescription = descp;
+                        }
                     }
+                }
+                catch
+                {
+                    if (DoDebugs.MiscInfo) Debug.LogError("camera name change fail");
                 }
 
 
                 exitAmount++;
-                CameraEffects.AddPassives(character, new CameraEffects.PassiveHolder(character.PassiveAbilities.ToArray()), enemy);
-
+                try
+                {
+                    CameraEffects.AddPassives(character, new CameraEffects.PassiveHolder(character.PassiveAbilities.ToArray()), enemy);
+                }
+                catch
+                {
+                    if (DoDebugs.MiscInfo) Debug.LogError("steal passives fail");
+                }
             }
+            CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
             return exitAmount > 0;
         }
     }
@@ -2149,7 +2168,14 @@ namespace Hawthorne
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
             exitAmount = 0;
-            if (caster is EnemyCombat enemy) foreach (TargetSlotInfo target in targets) if (target.HasUnit && target.Unit is CharacterCombat chara) CameraEffects.AddPassives(chara, new CameraEffects.PassiveHolder(chara.PassiveAbilities.ToArray(), chara), enemy, true, true);
+            try
+            {
+                if (caster is EnemyCombat enemy) foreach (TargetSlotInfo target in targets) if (target.HasUnit && target.Unit is CharacterCombat chara) CameraEffects.AddPassives(chara, new CameraEffects.PassiveHolder(chara.PassiveAbilities.ToArray(), chara), enemy, true, true);
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("steal passive fail");
+            }
             return true;
         }
     }
