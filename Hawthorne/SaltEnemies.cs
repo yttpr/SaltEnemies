@@ -38,7 +38,7 @@ using HarmonyLib;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.27")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.28")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
