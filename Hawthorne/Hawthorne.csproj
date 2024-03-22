@@ -293,6 +293,7 @@
 	  <None Remove="Pages\BlueFlowerPage.png" />
 	  <None Remove="Pages\ButterflyPage.png" />
 	  <None Remove="Pages\CameraPage.png" />
+	  <None Remove="Pages\ClionePage.png" />
 	  <None Remove="Pages\ClockPage.png" />
 	  <None Remove="Pages\CNSPage.png" />
 	  <None Remove="Pages\CoffinPage.png" />
@@ -691,6 +692,7 @@
 	  <EmbeddedResource Include="Pages\BlueFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\ButterflyPage.png" />
 	  <EmbeddedResource Include="Pages\CameraPage.png" />
+	  <EmbeddedResource Include="Pages\ClionePage.png" />
 	  <EmbeddedResource Include="Pages\ClockPage.png" />
 	  <EmbeddedResource Include="Pages\CNSPage.png" />
 	  <EmbeddedResource Include="Pages\CoffinPage.png" />

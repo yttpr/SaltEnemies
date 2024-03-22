@@ -98,6 +98,7 @@ namespace Hawthorne
             if (self.IsEnemy("Singularity_EN")) AddPage("SingularityPage.png");
             if (self.IsEnemy("Indicator_EN")) AddPage("IndicatorPage.png");
             if (self.IsEnemy("Maw_EN")) AddPage("MawPage.png");
+            if (self.IsEnemy("Clione_EN")) AddPage("ClionePage.png");
         }
 
         public static bool IsEnemy(this EnemyCombat self, string enemy)
