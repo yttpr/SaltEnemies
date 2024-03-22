@@ -3348,7 +3348,7 @@ namespace Hawthorne
                 area = 2,
                 randomPlacement = true,
                 hardmodeEncounter = true,
-                rarity = UnityEngine.Random.Range(3, 10),
+                rarity = UnityEngine.Random.Range(1, 5),
                 signType = (SignType)sign,
                 musicEvent = LoadedAssetsHandler.GetEnemyBundle("BOSS_Zone02_Smoothskin_EnemyBundle")._musicEventReference,
                 roarEvent = "event:/Hawthorne/Die/XylophoneDie",

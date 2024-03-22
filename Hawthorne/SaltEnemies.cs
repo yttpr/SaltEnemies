@@ -743,6 +743,7 @@ namespace Hawthorne
             addSepulchrePool("BlackStar_EN");
             addSepulchrePool("Indicator_EN");
             addSepulchrePool("Maw_EN");
+            addSepulchrePool("Clione_EN");
             AddScrungiePool("LostSheep_EN");
             AddScrungiePool("Derogatory_EN");
             AddScrungiePool("Denial_EN");
@@ -784,6 +785,7 @@ namespace Hawthorne
             addFountainPool("Windle2_EN");
             addFountainPool("BlackStar_EN");
             addFountainPool("Indicator_EN");
+            addFountainPool("Clione_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -843,6 +845,7 @@ namespace Hawthorne
             addBronzoPool("Singularity_EN");
             addBronzoPool("Indicator_EN");
             addBronzoPool("Maw_EN");
+            addBronzoPool("Clione_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1890,6 +1893,7 @@ namespace Hawthorne
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("LittleBeak_EN")) list.Add("LittleBeak_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Warbird_EN")) list.Add("Warbird_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 5 && EnemyExist("Windle2_EN")) list.Add("Windle2_EN");
+                if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
             }
             if (zone == 2)
             {
@@ -1920,6 +1924,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 75 && EnemyExist("Windle3_EN")) list.Add("Windle3_EN");
                 if (!red && EnemyExist("BlackStar_EN")) list.Add("BlackStar_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Indicator_EN")) list.Add("Indicator_EN");
+                if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2396,6 +2401,7 @@ namespace Hawthorne
                 if (EnemyExist("MechanicalLens_EN") && Third) list.Add("MechanicalLens_EN");
                 if (EnemyExist("Windle1_EN") && Quarter) list.Add("Windle1_EN");
                 if (EnemyExist("Clione_EN") && Half) list.Add("Clione_EN");
+                if (EnemyExist("UnculturedSwine_EN") && Half) list.Add("UnculturedSwine_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -2536,6 +2542,43 @@ namespace Hawthorne
                 }
                 ResetIntelligentColor();
                 return ret.ToArray();
+            }
+        }
+        public static class Garden
+        {
+            static bool ChunkDoubleable;
+            public static string RandomChunk(bool Red = false, bool tryDouble = false)
+            {
+                List<string> list = new List<string>();
+                list.Add("InHisImage_EN");
+                list.Add("InHerImage_EN");
+                if (tryDouble && ChunkDoubleable)
+                {
+                    ChunkDoubleable = false;
+                    return list.GetRandom();
+                }
+                if (EnemyExist("SterileBud_EN")) list.Add("SterileBud_EN");
+                if (EnemyExist("Harbinger_EN")) list.Add("Harbinger_EN");
+                if (EnemyExist("HowlingAvian_EN") && Half) list.Add("HowlingAvian_EN");
+                if (!Red && EnemyExist("TripodFish_EN") && Quarter) list.Add("TripodFish_EN");
+                if (!Red && EnemyExist("MarbleMaw_EN") && Half) list.Add("MarbleMaw_EN");
+                string ret = list.GetRandom();
+                if (ret == "InHisImage_EN" || ret == "InHerImage_EN") ChunkDoubleable = true;
+                else ChunkDoubleable = false;
+                return ret;
+            }
+            public static string RandomWhore(bool Red = false)
+            {
+                List<string> list = new List<string>();
+                list.Add("SkinningHomunculus_EN");
+                list.Add("GigglingMinister_EN");
+                if (!Red && Half) list.Add("ChoirBoy_EN");
+                if (EnemyExist("Satyr_EN")) list.Add("Satyr_EN");
+                if (EnemyExist("Firebird_EN") && Half) list.Add("Firebird_EN");
+                if (!Red && EnemyExist("Maw_EN") && Half) list.Add("Maw_EN");
+                if (!Red && EnemyExist("TheCrow_EN") && Half) list.Add("TheCrow_EN");
+                if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
+                return list.GetRandom();
             }
         }
     }

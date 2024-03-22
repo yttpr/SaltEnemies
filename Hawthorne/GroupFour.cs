@@ -146,6 +146,7 @@ namespace Hawthorne
             Modifications.MunglingMed();
             Modifications.PurpleSpogShore();
             Modifications.MunglingEZ();
+            Modifications.MudLungMed();
             Modifications.MudLungEZ();
             Modifications.KekoMed();
             Modifications.KekastleHard();
@@ -333,6 +334,7 @@ namespace Hawthorne
             SaltMod.ClioneShoreMed();
             SaltMod.ClioneShoreH();
             SaltMod.ClioneOrph();
+            SaltMod.ClioneGard();
         }
     }
 }

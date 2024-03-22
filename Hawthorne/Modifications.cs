@@ -1095,6 +1095,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "SkinningHomunculus_EN",
+                        "ShiveringHomunculus_EN",
+                        RandomSupport(2, false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -1243,6 +1256,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "BlackStar_EN",
+                        "ShiveringHomunculus_EN",
+                        "ShiveringHomunculus_EN",
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Trolling(72))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         "ShiveringHomunculus_EN",
                         "ShiveringHomunculus_EN",
                         "ShiveringHomunculus_EN",
@@ -1545,6 +1571,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "InHerImage_EN",
+                        "InHisImage_EN",
+                        RandomSupport(2, false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -1704,6 +1743,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "BlackStar_EN",
+                        "InHisImage_EN",
+                        "NextOfKin_EN",
+                        "NextOfKin_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         "InHisImage_EN",
                         "NextOfKin_EN",
                         "NextOfKin_EN",
@@ -2123,6 +2175,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "InHisImage_EN",
+                        "InHerImage_EN",
+                        RandomColor(2)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2402,6 +2467,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "GigglingMinister_EN",
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2602,6 +2679,19 @@ namespace Hawthorne
                     {
                         "BlackStar_EN",
                         "NextOfKin_EN",
+                        "NextOfKin_EN",
+                        "InHerImage_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomSupport(2),
                         "NextOfKin_EN",
                         "InHerImage_EN",
                     }
@@ -2936,6 +3026,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "GigglingMinister_EN",
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomColor(2)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3013,6 +3116,18 @@ namespace Hawthorne
                         "Nameless_EN",
                         "GigglingMinister_EN",
                         "Damocles_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Clione_EN",
+                        "GigglingMinister_EN",
                     }
                 });
             }
@@ -3185,6 +3300,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        RandomOrph,
+                        "WrigglingSacrifice_EN",
+                        "Clione_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(1),
+                        RandomOrph,
+                        "WrigglingSacrifice_EN",
+                        "Clione_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3335,6 +3476,18 @@ namespace Hawthorne
                         "ChoirBoy_EN",
                         "ChoirBoy_EN",
                         "BlackStar_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "ChoirBoy_EN",
+                        RandomSupport(2, true, false),
                     }
                 });
             }
@@ -3710,6 +3863,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RainBaseColor(false, false, true, "Spoggle_Writhing_EN"),
+                        "Spoggle_Writhing_EN",
+                        RandomSupport(1, false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Clione_EN",
+                        "Spoggle_Writhing_EN",
+                        RandomSupport(1, false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4046,6 +4225,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Scrungie_EN",
+                        "Scrungie_EN",
+                        "Clione_EN",
+                        RandomSupport(1)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4375,6 +4567,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spoggle_Resonant_EN",
+                        "Clione_EN",
+                        RainBaseColor(false, true, true, "Spoggle_Resonant_EN"),
+                        RandomSupport(1, true, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4607,6 +4812,30 @@ namespace Hawthorne
                         "Revola_EN",
                         "Warbird_EN",
                         "FumeFactory_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Revola_EN",
+                        "Clione_EN",
+                        "Clione_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Revola_EN",
+                        RandomOrph,
+                        "Clione_EN",
                     }
                 });
             }
@@ -4874,6 +5103,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "MusicMan_EN",
+                        "MusicMan_EN",
+                        RandomSupport(1, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -5049,6 +5291,18 @@ namespace Hawthorne
                         "MusicMan_EN",
                         "MusicMan_EN",
                         "SilverSuckle_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "MusicMan_EN",
+                        "MusicMan_EN",
                     }
                 });
             }
@@ -5490,6 +5744,19 @@ namespace Hawthorne
                         "JumbleGuts_Clotted_EN",
                         BowGuts.UpTo(3).GetRandom(),
                         en
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Flummoxing_EN",
+                        RandomRedColor(true),
+                        RandomSupport(1)
                     }
                 });
             }
@@ -5936,6 +6203,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Hollowing_EN",
+                        RandomRedColor(true),
+                        RandomSupport(1)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -6245,6 +6525,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Conductor_EN",
+                        "Clione_EN",
+                        RandomOrph,
+                        RandomOrph
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Conductor_EN",
+                        "Clione_EN",
+                        SmartColor(1, true),
+                        SmartColor(1)
+                    }
+                });
+                ResetColor();
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -6509,6 +6814,18 @@ namespace Hawthorne
                         "MechanicalLens_EN",
                         RandomColor(1),
                         "MechanicalLens_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Third)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Conductor_EN",
+                        "Clione_EN",
+                        RandomSupport(1, false, false)
                     }
                 });
             }
@@ -6800,6 +7117,27 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Voboola_EN",
+                        RandomColor(0),
+                        "Clione_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Voboola_EN",
+                        Half ? RandomEncounters.Shore.FarShoreSlop() : RandomShoreMidget(false),
+                        "Clione_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7059,6 +7397,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RainBaseColor(false, false),
+                        "Spoggle_Writhing_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7303,6 +7653,28 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Spitfire_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Spitfire_EN",
+                        RainBaseWeighted(false, false, true, "Spoggle_Spitfire_EN"),
+                        RandomSupport(0, true, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7496,6 +7868,28 @@ namespace Hawthorne
                         "Spoggle_Ruminating_EN",
                         "Skyloft_EN",
                         "MunglingMudLung_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Ruminating_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Ruminating_EN",
+                        RainBaseWeighted(false, false, true, "Spoggle_Ruminating_EN"),
+                        RandomSupport(0, true, false)
                     }
                 });
             }
@@ -7764,6 +8158,27 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        "Clione_EN",
+                        "MunglingMudLung_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(0),
+                        "Clione_EN",
+                        "MunglingMudLung_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7934,6 +8349,30 @@ namespace Hawthorne
                         "FesteringFaction_EN",
                         "Spoggle_Resonant_EN",
                         RainBaseWeighted(false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Resonant_EN",
+                        "Voboola_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Spoggle_Resonant_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
                     }
                 });
             }
@@ -8117,6 +8556,19 @@ namespace Hawthorne
                     {
                         "LostSheep_EN",
                         RandomColor(0),
+                        "MudLung_EN",
+                        "MudLung_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomShoreMidget(false),
                         "MudLung_EN",
                         "MudLung_EN",
                     }
@@ -8362,6 +8814,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Keko_EN",
+                        "Keko_EN",
+                        "Keko_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -8425,6 +8890,17 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Windle1_EN",
+                        "Kekastle_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         "Kekastle_EN",
                     }
                 });
@@ -8730,6 +9206,29 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Waning_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Waning_EN")
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Waning_EN",
+                        RandomSupport(0),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Waning_EN")
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -8969,6 +9468,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Hollowing_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9164,6 +9675,29 @@ namespace Hawthorne
                         "MunglingMudLung_EN",
                         "JumbleGuts_Waning_EN",
                         "JumbleGuts_Clotted_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Clotted_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Clotted_EN")
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Clotted_EN",
+                        RandomSupport(0),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Clotted_EN")
                     }
                 });
             }
@@ -9547,6 +10081,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "JumbleGuts_Flummoxing_EN",
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Flummoxing_EN"),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9838,6 +10384,48 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(0),
+                        "Flarb_EN",
+                        "Clione_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        "Flarb_EN",
+                        "Clione_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomShoreMidget(false),
+                        "Flarb_EN",
+                        "Clione_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        "Flarb_EN",
+                        "Clione_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -10008,6 +10596,27 @@ namespace Hawthorne
                         "Skyloft_EN",
                         "FlaMinGoa_EN",
                         "MunglingMudLung_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        Half ? RandomShoreMidget() : RandomEncounters.Shore.FarShoreSlop()
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        RandomColor(0)
                     }
                 });
             }
@@ -10321,6 +10930,40 @@ namespace Hawthorne
                         "MudLung_EN",
                         "FlaMinGoa_EN",
                         "Windle1_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        Half ? RandomEncounters.Shore.FarShoreSlop() : RandomShoreMidget(false)
                     }
                 });
             }
@@ -11115,6 +11758,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 1
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -11770,6 +12437,35 @@ namespace Hawthorne
                         {
                             enemyName = "OsseousClad_EN",
                             enemySlot = 2
+                        },
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 3
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0, false, false),
+                            enemySlot = 4
                         },
                     }
                 });
@@ -12474,6 +13170,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Garden.RandomChunk(true),
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -13029,6 +13749,35 @@ namespace Hawthorne
                         {
                             enemyName = "Lymphropod_EN",
                             enemySlot = 1
+                        },
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0),
+                            enemySlot = 0
                         },
                     }
                 });
@@ -13783,6 +14532,61 @@ namespace Hawthorne
                 });
                 ResetColor();
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                    }
+                });
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0, false, false),
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -14183,6 +14987,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++) if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "Clione_EN",
+                        Half ? RandomEncounters.Shore.FarShoreSlop() : RandomColor(0)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -14373,6 +15189,30 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Warbird_EN",
+                        "DrySimian_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomColor(0),
+                        "DrySimian_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
                         "DrySimian_EN",
                     }
                 });
@@ -14791,6 +15631,46 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "DrySimian_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "DrySimian_EN",
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "DrySimian_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -15179,6 +16059,17 @@ namespace Hawthorne
                         "Lurchin_EN",
                         "Skyloft_EN",
                         RandomShoreMidget(),
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         main,
                     }
                 });
@@ -15607,6 +16498,33 @@ namespace Hawthorne
                         "Nephilim_EN",
                         "OsseousClad_EN",
                         RandomShoreMidget()
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Nephilim_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Nephilim_EN",
+                        Half ? RandomEncounters.Shore.RandomShoreWhore() : RandomEncounters.Shore.RandomShoreBigGuy()
                     }
                 });
             }
@@ -16165,6 +17083,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomColor(1),
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomOrph,
+                        main
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -16645,6 +17587,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomColor(1),
+                        main,
+                        sub
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomOrph,
+                        main,
+                        RandomSupport(1, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -16899,6 +17867,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomOrph,
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "SingingStone_EN",
+                        RainBaseWeighted(true, true, false),
+                        main
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -16945,6 +17938,19 @@ namespace Hawthorne
                         RandomOrph,
                         main,
                         RainBaseWeighted(false),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomOrph,
+                        main,
+                        RainBaseWeighted(false, true, false),
                     }
                 });
             }
@@ -17294,6 +18300,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
+                        RandomColor(1)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -17340,6 +18359,19 @@ namespace Hawthorne
                         "MechanicalLens_EN",
                         "Spoggle_Writhing_EN",
                         "MechanicalLens_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Third)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "Clione_EN",
+                        RainBaseWeighted(false, true, true, main),
+                        RandomOrph,
                     }
                 });
             }
@@ -17481,6 +18513,29 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Something_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        Half ? RandomOrph : RandomSupport(1, true, false),
                         main,
                     }
                 });
@@ -17786,6 +18841,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -18065,6 +19132,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -18299,6 +19378,18 @@ namespace Hawthorne
                         "Maw_EN",
                         main,
                         "SkinningHomunculus_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
                     }
                 });
             }
@@ -18577,6 +19668,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        RandomSupport(2, false, false),
+                        main,
+                        main
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -18803,6 +19907,19 @@ namespace Hawthorne
                         main,
                         "InHerImage_EN",
                         "InHerImage_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        Half ? RandomEncounters.Garden.RandomChunk() : RandomSupport(2, false, false),
+                        RandomEncounters.Garden.RandomWhore()
                     }
                 });
             }
@@ -19227,6 +20344,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19589,6 +20718,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(true, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19727,6 +20868,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(true, false),
+                        "Mung_EN"
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19862,6 +21016,19 @@ namespace Hawthorne
                         "FesteringFaction_EN",
                         main,
                         RainBaseColor(true, false),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(true, false),
+                        "Mung_EN"
                     }
                 });
             }
@@ -20015,6 +21182,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(false, false),
+                        "Mung_EN"
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20162,6 +21342,19 @@ namespace Hawthorne
                         "Skyloft_EN",
                         main,
                         RainBaseColor(false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(false, false),
+                        "Mung_EN"
                     }
                 });
             }
@@ -20315,6 +21508,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RainBaseColor(false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20400,7 +21605,21 @@ namespace Hawthorne
                         }
                     });
                 }
-                
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
+
             }
             bool ShoudntRedSection = true;
             if (ShoudntRedSection)
@@ -20746,6 +21965,20 @@ namespace Hawthorne
                         _enemyNames = new string[]
                         {
                         "Seraphim_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
                         main,
                         RandomOrph,
                         RainBaseColor(jumble)
@@ -21106,6 +22339,20 @@ namespace Hawthorne
                         }
                     });
                 }
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
 
             }
             bool ShoudntRedSection = true;
@@ -21452,6 +22699,20 @@ namespace Hawthorne
                         _enemyNames = new string[]
                         {
                         "Seraphim_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
                         main,
                         RandomOrph,
                         RainBaseColor(jumble)
@@ -21812,6 +23073,20 @@ namespace Hawthorne
                         }
                     });
                 }
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
 
             }
             bool ShoudntRedSection = true;
@@ -22158,6 +23433,20 @@ namespace Hawthorne
                         _enemyNames = new string[]
                         {
                         "Seraphim_EN",
+                        main,
+                        RandomOrph,
+                        RainBaseColor(jumble)
+
+                        }
+                    });
+                }
+                if (EnemyExist("Clione_EN") && Third)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        "Clione_EN",
                         main,
                         RandomOrph,
                         RainBaseColor(jumble)
@@ -22742,6 +24031,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                string e = RandomEncounters.Garden.RandomChunk();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        e,e
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -23061,6 +24363,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore()
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -23331,6 +24645,19 @@ namespace Hawthorne
                         main,
                         main,
                         "BlackStar_EN",
+                        RandomSupport(2, false, false)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        "Clione_EN",
                         RandomSupport(2, false, false)
                     }
                 });
@@ -23612,6 +24939,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(2),
+                        "Clione_EN",
+                        RandomSupport(2, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -23841,6 +25181,19 @@ namespace Hawthorne
                         main,
                         "InHisImage_EN",
                         "InHerImage_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true)
                     }
                 });
             }
@@ -24145,6 +25498,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomSupport(2, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24224,6 +25590,18 @@ namespace Hawthorne
                         main,
                         main,
                         main
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
                     }
                 });
             }
@@ -24770,6 +26148,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25162,6 +26565,80 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        "FlaMinGoa_EN"
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "Lurchin_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        "Lurchin_EN"
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "Lymphropod_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        "Lymphropod_EN",
+                        main
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "OsseousClad_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        "OsseousClad_EN"
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "Disembodied_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        "Disembodied_EN"
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25299,6 +26776,19 @@ namespace Hawthorne
                         sub
                     }
             });
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        sub,
+                        RandomOrph
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25680,6 +27170,17 @@ namespace Hawthorne
                     }
                 }
             }
+            for (int w = 0; w < 15; w++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        sub,
+                        main,
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25809,6 +27310,19 @@ namespace Hawthorne
                         main,
                         "Enigma_EN",
                         "Enigma_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomOrph,
+                        RandomSupport(1)
                     }
                 });
             }
@@ -26500,6 +28014,95 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "MudLung_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "LittleBeak_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "LittleBeak_EN",
+                        "Clione_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "Disembodied_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Disembodied_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "LipBug_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "LipBug_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "OsseousClad_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "OsseousClad_EN",
+                        main,
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -26934,6 +28537,94 @@ namespace Hawthorne
                     {
                         "A'Flower'_EN",
                         "OsseousClad_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "MudLung_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "FlaMinGoa_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "Lymphropod_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "Lymphropod_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("LittleBeak_EN", "Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "LittleBeak_EN",
+                        "Clione_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "OsseousClad_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "OsseousClad_EN",
+                        main,
+                    }
+                });
+            }
+            if (MultiENExist("Clione_EN", "A'Flower'_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "A'Flower'_EN",
                         main,
                     }
                 });
@@ -27439,6 +29130,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (MultiENExist("Enigma_EN", "Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Enigma_EN",
+                        main,
+                        "Clione_EN",
+                        red
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -27776,6 +29480,19 @@ namespace Hawthorne
                         main,
                         RandomOrph,
                         Colophon.Exclude(main).GetRandom()
+                    }
+                });
+            }
+            if (MultiENExist("OsseousClad_EN", "Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "OsseousClad_EN",
+                        main,
+                        "Clione_EN",
+                        sub
                     }
                 });
             }
@@ -28275,6 +29992,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -28612,6 +30353,30 @@ namespace Hawthorne
                         {
                             enemyName = "Enigma_EN",
                             enemySlot = 4
+                        },
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomOrph,
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2
                         },
                     }
                 });
@@ -29433,6 +31198,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Spligs.Exclude(main).GetRandom(),
+                            enemySlot = 3
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -29886,6 +31680,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Spligs.Exclude(main).GetRandom(),
+                            enemySlot = 3
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -30126,6 +31949,19 @@ namespace Hawthorne
                         main,
                         Spligs.Exclude(main).GetRandom(),
                         "FlaMinGoa_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        Spligs.Exclude(main).GetRandom(),
+                        RandomEncounters.Shore.RandomShoreWhore()
                     }
                 });
             }
@@ -30393,6 +32229,18 @@ namespace Hawthorne
                         "Sigil_EN",
                         main,
                         main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        Half ? RandomColor(0) : ShoreSlop(),
                     }
                 });
             }
@@ -30776,6 +32624,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? RandomColor(0) : ShoreSlop(),
+                            enemySlot = 1
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -31008,6 +32881,19 @@ namespace Hawthorne
                     }
                 });
                 ResetColor();
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        main
+                    }
+                });
             }
             if (BundleRandom(bundle))
             {
@@ -31272,6 +33158,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
+                        RandomShoreMidget()
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -31465,6 +33364,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -31586,6 +33511,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -31702,6 +33639,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Monck_EN",
+                        main,
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         main,
                         RandomEncounters.Shore.FarShoreSlop(),
                     }
@@ -31895,6 +33844,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "WindSong_EN",
+                        main,
+                        RandomOrph,
+                        Spligs.Exclude(main).GetRandom()
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         main,
                         RandomOrph,
                         Spligs.Exclude(main).GetRandom()
@@ -32095,6 +34057,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomOrph,
+                        Spligs.Exclude(main).GetRandom()
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -32260,6 +34235,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "FumeFactory_EN",
+                        main,
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
                         main,
                         main
                     }
@@ -32465,6 +34452,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        Half ? RandomColor(1) : RandomOrph
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -32525,6 +34524,16 @@ namespace Hawthorne
                         RandomOrph,
                     }
             });
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                    {
+                        Half ? RandomSupport(1, false, false) : RandomColor(1),
+                        main,
+                        RandomOrph,
+                        RandomSupport(1)
+                    }
+            });
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -32583,6 +34592,16 @@ namespace Hawthorne
                         RandomOrph,
                         main,
                         RandomOrph,
+                    }
+            });
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                    {
+                        Half ? RandomSupport(1, false, false) : RandomColor(1),
+                        main,
+                        RandomOrph,
+                        RandomSupport(1)
                     }
             });
             if (BundleRandom(bundle))
@@ -33148,6 +35167,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Clione_EN",
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "ChoirBoy_EN",
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(2, true, false),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -33313,6 +35361,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Indicator_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        "ShiveringHomunculus_EN",
                         main,
                         sub,
                     }

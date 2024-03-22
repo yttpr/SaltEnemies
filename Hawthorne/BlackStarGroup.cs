@@ -1403,6 +1403,7 @@ namespace Hawthorne
             ShoreMed(sign);
             ShoreHard(sign);
             OrphMed(sign);
+            GardHard(sign);
         }
         public static void ShoreMed(int sign)
         {
@@ -1682,6 +1683,37 @@ namespace Hawthorne
                     new FieldEnemy(){enemyName = GreyScaleSupport(), enemySlot=4},
                     });
                 }
+            }
+
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void GardHard(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "FuckWithYou",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = 1,
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/ClioneSong",
+                roarEvent = "event:/Hawthorne/Misc/Water",
+                difficulty = EncounterDifficulty.Hard
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Clione_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "Clione_EN", enemySlot=4},
+                });
             }
 
             jarden.variations = fields.ToArray();

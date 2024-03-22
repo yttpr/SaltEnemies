@@ -944,7 +944,7 @@ namespace Hawthorne
                     snakegod._passiveName = "Vindictive";
                     snakegod.passiveIcon = ResourceLoader.LoadSprite("HateYou.png");
                     snakegod.type = (PassiveAbilityTypes)93892579;
-                    snakegod._enemyDescription = "This enemy remembers its oppressors.";
+                    snakegod._enemyDescription = "This enemy remembers its oppressors. On taking direct damage, inflict 1 Scar on the attacker.";
                     snakegod._characterDescription = "Won't work cuz i didn't set up the hook for it lol!";
                     snakegod.doesPassiveTriggerInformationPanel = false;
                     snakegod._triggerOn = new TriggerCalls[1] { TriggerCalls.Count };
@@ -3077,7 +3077,7 @@ namespace Hawthorne
                 (effector as IUnit).SetStoredValue(Pain, 0);
                 return false;
             }
-            if (!effector.IsAlive) return false;
+            if (!effector.IsAlive || effector.CurrentHealth <= 0) return false;
             return true;
         }
 
@@ -3297,7 +3297,15 @@ namespace Hawthorne
                             snakey.LastAttacker = chara.ID;
                             self.SetStoredValue(Last, id);
                             if (!snakey.AllAttackers.Contains(chara.ID)) snakey.AllAttackers.Add(chara.ID);
-                        } }
+                        } 
+                        if (killer != null)
+                        {
+                            CombatManager.Instance._stats.statusEffectDataBase.TryGetValue(StatusEffectType.Scars, out StatusEffectInfoSO value);
+                            Scars_StatusEffect scars_StatusEffect = new Scars_StatusEffect(1);
+                            scars_StatusEffect.SetEffectInformation(value);
+                            killer.ApplyStatusEffect(scars_StatusEffect, 1);
+                        }
+                    }
                 } 
             }
             return ret;

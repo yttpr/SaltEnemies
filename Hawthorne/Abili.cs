@@ -2306,11 +2306,12 @@ namespace Hawthorne
                     _silenceFools = new Ability()
                     {
                         name = "Silence the Foolish",
-                        description = "Apply 4 Muted to the last party member who dealt damage to this enemy. Produce 2 Red Pigment.",
+                        description = "Apply 2 Muted and 2 Fire to the last party member who dealt damage to this enemy. Produce 2 Red Pigment.",
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<ApplyMutedEffect>(), 4, (IntentType)846750, Targetting_BySnakeGod.Create(false)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyMutedEffect>(), 2, (IntentType)846750, Targetting_BySnakeGod.Create(false)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 2, IntentType.Field_Fire, Targetting_BySnakeGod.Create(false)),
                             new Effect(BasicEffects.GenPigment(Pigments.Red), 2, IntentType.Mana_Generate, Slots.Self)
                         },
                         visuals = LoadedAssetsHandler.GetEnemyAbility("UglyOnTheInside_A").visuals,
@@ -2330,11 +2331,12 @@ namespace Hawthorne
                     _hangWeak = new Ability()
                     {
                         name = "Hang the Weak",
-                        description = "Inflict 1 Constricted on every party member who dealt damage to this enemy. Produce 1 Red Pigment.",
+                        description = "Inflict 1 Constricted and 3 Oil-Slicked on every party member who dealt damage to this enemy. Produce 1 Red Pigment.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, IntentType.Field_Constricted, Targetting_BySnakeGod.Create(true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyOilSlickedEffect>(), 3, IntentType.Status_OilSlicked, Targetting_BySnakeGod.Create(true)),
                             new Effect(BasicEffects.GenPigment(Pigments.Red), 1, IntentType.Mana_Generate, Slots.Self)
                         },
                         visuals = LoadedAssetsHandler.GetEnemyAbility("FallingSkies_A").visuals,
@@ -2403,12 +2405,12 @@ namespace Hawthorne
                     _scareFeeble = new Ability()
                     {
                         name = "Terrify the Feeble",
-                        description = "Make the party member with the lowest health instantly flee. Produce 3 Red pigment.",
+                        description = "Make the party member with the lowest health instantly flee. Produce 4 Red pigment.",
                         rarity = 15,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Targetting.LowestEnemy),
-                            new Effect(BasicEffects.GenPigment(Pigments.Red), 3, IntentType.Mana_Generate, Slots.Self)
+                            new Effect(BasicEffects.GenPigment(Pigments.Red), 4, IntentType.Mana_Generate, Slots.Self)
                         },
                         visuals = LoadedAssetsHandler.GetEnemyAbility("ThePact_A").visuals,
                         animationTarget = Targetting.LowestEnemy,

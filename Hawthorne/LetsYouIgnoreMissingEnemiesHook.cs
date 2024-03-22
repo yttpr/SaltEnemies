@@ -127,6 +127,7 @@ namespace Hawthorne
             CheckEnemy("BlackStar_EN");
             CheckEnemy("Indicator_EN");
             CheckEnemy("Maw_EN");
+            CheckEnemy("Clione_EN");
         }
         public static void CheckEnemy(string enemy)
         {
