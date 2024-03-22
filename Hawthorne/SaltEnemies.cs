@@ -38,7 +38,7 @@ using HarmonyLib;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.28")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.29")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -2659,6 +2659,12 @@ namespace Hawthorne
     {
         public static void Update()
         {
+            U1_3_27();
+            U1_3_29();
+            U1_3_29_1();
+        }
+        public static void U1_3_27()
+        {
             if (!File.Exists(SavePath + "Update_1_3_27.txt"))
             {
                 File.WriteAllText(SavePath + "Update_1_3_27.txt", "Updatd pages !");
@@ -2668,6 +2674,7 @@ namespace Hawthorne
                 PageCollector.UpdatePage("BlueFlowerPage.png");
                 PageCollector.UpdatePage("ButterflyPage.png");
                 PageCollector.UpdatePage("CameraPage.png");
+                PageCollector.UpdatePage("ClionePage.png");
                 PageCollector.UpdatePage("ClockPage.png");
                 PageCollector.UpdatePage("CNSPage.png");
                 PageCollector.UpdatePage("CoffinPage.png");
@@ -2717,6 +2724,23 @@ namespace Hawthorne
                 PageCollector.UpdatePage("WindlePage.png");
                 PageCollector.UpdatePage("WindSongPage.png");
                 PageCollector.UpdatePage("YellowFlowerPage.png");
+            }
+        }
+        public static void U1_3_29()
+        {
+            if (!File.Exists(SavePath + "Update_1_3_29.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_3_29.txt", "Updatd pages !");
+                PageCollector.UpdatePage("DelusionPage.png");
+                PageCollector.UpdatePage("MedamaudePage.png");
+            }
+        }
+        public static void U1_3_29_1()
+        {
+            if (!File.Exists(SavePath + "Update_1_3_29_1.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_3_29_1.txt", "Updatd pages !");
+                PageCollector.UpdatePage("ClionePage.png");
             }
         }
     }

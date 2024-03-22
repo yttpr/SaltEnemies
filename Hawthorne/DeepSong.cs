@@ -81,7 +81,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / (UnityEngine.Random.Range(2, 4)),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_Spoggle_Writhing_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/GreyScaleTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -453,7 +453,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / 2,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_Spoggle_Writhing_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/GreyScaleTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Hard
             };
@@ -1031,7 +1031,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_Spoggle_Writhing_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/GreyScaleTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
