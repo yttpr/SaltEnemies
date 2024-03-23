@@ -1358,6 +1358,47 @@ namespace Hawthorne
                 return _waves;
             }
         }
+        static BasePassiveAbilitySO _whimsy;
+        public static BasePassiveAbilitySO Whimsy
+        {
+            get
+            {
+                if (_whimsy == null)
+                {
+                    ChildrenPassiveAbility whi = ScriptableObject.CreateInstance<ChildrenPassiveAbility>();
+                    whi._passiveName = "Whimsy";
+                    whi.type = (PassiveAbilityTypes)38381149;
+                    whi.passiveIcon = ResourceLoader.LoadSprite("WileyPassive.png", 32);
+                    whi._enemyDescription = "Status and Field effects other than Shield, Constricted, and Stunned, will no longer decrease while this unit is in combat.";
+                    whi._characterDescription = whi._enemyDescription;
+                    whi.doesPassiveTriggerInformationPanel = false;
+                    whi._triggerOn = new TriggerCalls[] { TriggerCalls.OnBeingDamaged, TriggerCalls.OnRoundFinished, TriggerCalls.OnDeath };
+                    _whimsy = whi;
+                }
+                return _whimsy;
+            }
+        }
+        static BasePassiveAbilitySO _fakeDecay;
+        public static BasePassiveAbilitySO FakeDecay
+        {
+            get
+            {
+                if (_fakeDecay == null)
+                {
+                    PerformEffectPassiveAbility whi = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    whi._passiveName = "Decay";
+                    whi.type = PassiveAbilityTypes.Decay;
+                    whi.passiveIcon = Passives.Decay.passiveIcon;
+                    whi._enemyDescription = "On death, lose a part of yourself.";
+                    whi._characterDescription = whi._enemyDescription;
+                    whi.doesPassiveTriggerInformationPanel = false;
+                    whi._triggerOn = new TriggerCalls[] { TriggerCalls.Count};
+                    whi.effects = new EffectInfo[0];
+                    _fakeDecay = whi;
+                }
+                return _fakeDecay;
+            }
+        }
 
     }
 
@@ -5054,6 +5095,157 @@ namespace Hawthorne
 
             exitAmount = targets.Length;
             return true;
+        }
+    }
+    public class ChildrenPassiveAbility : BasePassiveAbilitySO
+    {
+        public static UnitStoredValueNames value => (UnitStoredValueNames)3838114;
+        public override bool DoesPassiveTrigger => true;
+        public override bool IsPassiveImmediate => false;
+        public override void TriggerPassive(object sender, object args)
+        {
+            if (sender is EnemyCombat enemy && args is DeathReference refff)
+            {
+                if (CombatManager.Instance._stats.LockedPassives.Contains(PassiveAbilityTypes.Decay)) return;
+                if (!CombatManager.Instance._stats.IsPlayerTurn && enemy.GetStoredValue(value) > 0) return;
+                if (refff.witheringDeath) return;
+                Effect[] array = new Effect[1];
+                if (PageCollector.IsEnemy(enemy, "Children6_EN"))
+                {
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children5_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children5_EN"))
+                {
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children4_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children4_EN"))
+                {
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children3_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children3_EN"))
+                {
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children2_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children2_EN"))
+                {
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children1_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children1_EN"))
+                {
+                    if (UnityEngine.Random.Range(0, 100) < 90) return;
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "Children0_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                else if (PageCollector.IsEnemy(enemy, "Children0_EN"))
+                {
+                    if (UnityEngine.Random.Range(0, 100) < 99) return;
+                    SpawnEnemyInSlotFromEntryStringNameEffect ef = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    ef.en = "ChildrenPrayer_EN";
+                    ef.trySpawnAnywhereIfFail = true;
+                    array[0] = new Effect(ef, 0, null, Slots.Self);
+                }
+                CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(enemy.ID, enemy.IsUnitCharacter, Passives.Decay.GetPassiveLocData().text, Passives.Decay.passiveIcon));
+                CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(array), enemy));
+            }
+            else if (args is DamageReceivedValueChangeException hitBy && sender is IUnit unit)
+            {
+                if (!CombatManager.Instance._stats.IsPlayerTurn && !hitBy.directDamage && hitBy.amount > 500) unit.SetStoredValue(value, 1);
+            }
+            else if (sender is IUnit unor)
+            {
+                unor.SetStoredValue(value, 0);
+            }
+        }
+        public override void OnPassiveConnected(IUnit unit)
+        {
+            CombatManager.Instance._stats.AddStatusEffectReductionBlockedSource();
+        }
+        public override void OnPassiveDisconnected(IUnit unit)
+        {
+            CombatManager.Instance._stats.RemoveStatusEffectReductionBlockedSource();
+        }
+    }
+    public static class AnExtension
+    {
+        public static Type[] GetAllDerived(Type baze)
+        {
+            List<Type> typeList = new List<Type>();
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    if (baze.IsAssignableFrom(type) && !typeList.Contains(type) && type != baze)
+                        typeList.Add(type);
+                }
+            }
+            return typeList.ToArray();
+        }
+    }
+    public class PerformRandomEffectsAmongEffects : EffectSO
+    {
+        public Dictionary<string, string> List;
+        public bool UsePreviousExitValueForNewEntry;
+        public List<EffectSO> Effects;
+        public void Setup()
+        {
+            if (List == null) return;
+            if (Effects == null) Effects = new List<EffectSO>();
+            Type[] types = AnExtension.GetAllDerived(typeof(EffectSO));
+            List<string> remove = new List<string>();
+            foreach (string name in List.Keys)
+            {
+                bool skip = false;
+                foreach (EffectSO e in Effects) if (e.GetType().Name == name) { skip = true; break; }
+                if (skip) continue;
+                List<Type> test = new List<Type>();
+                foreach (Type type in types)
+                {
+                    if (type.Name == name) test.Add(type);
+                    if (List[name] == "") break;
+                    else if (List[name] == type.Namespace) break;
+                }
+                if (test.Count > 0) { Effects.Add(ScriptableObject.CreateInstance(test[test.Count - 1]) as EffectSO); remove.Add(name); }
+            }
+            foreach (string g in remove) List.Remove(g);
+        }
+        public EffectSO GrabRand()
+        {
+            if (Effects == null || Effects.Count <= 0) return null;
+            return Effects[UnityEngine.Random.Range(0, Effects.Count)];
+        }
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            int effectsRan = 0;
+            if (Effects == null || Effects.Count <= 0) return false;
+            for (int i = 0; i < entryVariable; i++)
+            {
+                EffectSO run = GrabRand();
+                if (run != null)
+                {
+                    if (run.PerformEffect(stats, caster, targets, areTargetSlots, UsePreviousExitValueForNewEntry ? PreviousExitValue : 1, out int exi))
+                        exitAmount += exi;
+                    effectsRan++;
+                }
+            }
+            return effectsRan > 0;
         }
     }
 }

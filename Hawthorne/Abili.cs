@@ -3227,6 +3227,97 @@ namespace Hawthorne
                 return _tailHead;
             }
         }
+        static Ability _slop;
+        public static Ability Slop
+        {
+            get
+            {
+                if (_slop == null)
+                {
+                    PerformRandomEffectsAmongEffects e = ScriptableObject.CreateInstance<PerformRandomEffectsAmongEffects>();
+                    e.List = new Dictionary<string, string>();
+                    e.List.Add(nameof(ApplyShieldSlotEffect), "");
+                    e.List.Add(nameof(ApplyFireSlotEffect), "");
+                    e.List.Add(nameof(ApplyConstrictedSlotEffect), "");
+                    e.List.Add(nameof(ApplyMoldSlotEffect), nameof(Hawthorne));
+                    e.List.Add(nameof(ApplyRootsSlotEffect), nameof(Hawthorne));
+                    e.List.Add(nameof(ApplyWaterSlotEffect), nameof(Hawthorne));
+                    e.List.Add("ApplyBubblesEffect", "TevlevsRapscallions");
+                    e.List.Add("ApplyAbsField", "ZLDCHPak");
+                    e.List.Add("ApplyDeepFrozenSlotEffect", "MizerFool.VladEffects");
+                    e.List.Add("ApplySpikesSlotEffect", "MFoolModOne");
+                    e.Setup();
+                    _slop = new Ability()
+                    {
+                        name = "Slop",
+                        description = "Inflict 1 completely random Field Effect on the Opposing position and on self.",
+                        rarity = 10,
+                        effects = new Effect[]
+                        {
+                            new Effect(e, 1, IntentType.Misc_Hidden, Slots.Front),
+                            new Effect(e, 1, IntentType.Misc_Hidden, Slots.Self)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Flood_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _slop;
+            }
+        }
+        static Ability _pingo;
+        public static Ability Pingo
+        {
+            get
+            {
+                if (_pingo == null)
+                {
+                    _pingo = new Ability()
+                    {
+                        name = "Pingo",
+                        description = "Inflict 1 Parasitism on the Opposing party member. If successful, instantly kill this enemy.",
+                        rarity = 2,
+                        priority = -5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ParasiteEffection.apply, 1, IntentType.Misc_Additional, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Self, BasicEffects.DidThat(true))
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Weave_1_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _pingo;
+            }
+        }
+        static Ability _skitter;
+        public static Ability Skitter
+        {
+            get
+            {
+                if (_skitter == null)
+                {
+                    _skitter = new Ability()
+                    {
+                        name = "Skitter",
+                        description = "Move to the Left or Right 5 times.",
+                        rarity = 2,
+                        priority = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(BasicEffects.PlaySound(LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._roarReference.roarEvent), 1, null, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _skitter;
+            }
+        }
 
     }
 
@@ -6192,6 +6283,185 @@ namespace Hawthorne
             exitAmount = 0;
             CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
             return true;
+        }
+    }
+    public class SpawnChildrenEffect : SpawnEnemyAnywhereEffect
+    {
+        public static UnitStoredValueNames value => (UnitStoredValueNames)2720067;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (!stats.InCombat) return false;
+            for (int i = caster.GetStoredValue(value); i > 0; i -= 6)
+            {
+                if (i >= 6 && Check.EnemyExist("Children6_EN")) enemy = LoadedAssetsHandler.GetEnemy("Children6_EN");
+                else if (Check.EnemyExist("Children" + i.ToString() + "_EN")) enemy = LoadedAssetsHandler.GetEnemy("Children" + i.ToString() + "_EN");
+                else enemy = LoadedAssetsHandler.GetEnemy("SilverSuckle_EN");
+                base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out int exi);
+            }
+            exitAmount = caster.GetStoredValue(value);
+            caster.SetStoredValue(value, 0);
+            return exitAmount > 0;
+        }
+    }
+    public static class ParasiteEffection
+    {
+        public static ApplyParasiteEffect apply
+        {
+            get
+            {
+                ParasitePassiveAbility parasitePassiveAbility = ScriptableObject.CreateInstance<ParasitePassiveAbility>();
+                parasitePassiveAbility.conditions = ((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd.conditions;
+                parasitePassiveAbility._damagePercentage = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd)._damagePercentage;
+                parasitePassiveAbility.connectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[0]);
+                CasterSetStoredValueEffect casterSetStoredValueEffect = ScriptableObject.CreateInstance<CasterSetStoredValueEffect>();
+                casterSetStoredValueEffect._valueName = (UnitStoredValueNames)14;
+                SpawnChildrenEffect sp = ScriptableObject.CreateInstance<SpawnChildrenEffect>();
+                sp.enemy = Check.EnemyExist("Children1_EN") ? LoadedAssetsHandler.GetEnemy("Children1_EN") : LoadedAssetsHandler.GetEnemy("SilverSuckle_EN");
+                sp._spawnType = SpawnType.Basic;
+                parasitePassiveAbility.disconnectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                {
+                new Effect(casterSetStoredValueEffect, 0, null, Slots.Self, null),
+                new Effect(sp, 1, null, Slots.Self)
+                });
+                parasitePassiveAbility.connectionImmediateEffect = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd).connectionImmediateEffect;
+                parasitePassiveAbility.disconnectionImmediateEffect = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd).disconnectionImmediateEffect;
+                parasitePassiveAbility.doesPassiveTriggerInformationPanel = ((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd.doesPassiveTriggerInformationPanel;
+                DealRandomAmountDamageConvertToParasiteEffect dealRandomAmountDamageConvertToParasiteEffect = ScriptableObject.CreateInstance<DealRandomAmountDamageConvertToParasiteEffect>();
+                dealRandomAmountDamageConvertToParasiteEffect._indirect = true;
+                dealRandomAmountDamageConvertToParasiteEffect._minAmount = 1;
+                dealRandomAmountDamageConvertToParasiteEffect._passiveToAdd = parasitePassiveAbility;
+                parasitePassiveAbility.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                {
+                new Effect(dealRandomAmountDamageConvertToParasiteEffect, 1, null, Slots.Self, null)
+                });
+                parasitePassiveAbility.passiveIcon = ((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd.passiveIcon;
+                parasitePassiveAbility.specialStoredValue = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd).specialStoredValue;
+                parasitePassiveAbility.type = (PassiveAbilityTypes)45;
+                parasitePassiveAbility._characterDescription = "Increases the damage received by 5% per point of Parasite. Parasite will decrease by the original unmutliplied damage amount. Parasite will remove 0-1 health from this party member at the end of every turn and convert it into more Parasite.";
+                parasitePassiveAbility._damagePercentage = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd)._damagePercentage;
+                parasitePassiveAbility._enemyDescription = "Increases the damage received by 5% per point of Parasite. Parasite will decrease by the original unmutliplied damage amount. Parasite will remove 0-1 health from this enemy at the end of every turn and convert it into more Parasite.";
+                parasitePassiveAbility._isFriendly = false;
+                parasitePassiveAbility._parasiteShield = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd)._parasiteShield;
+                parasitePassiveAbility._passiveName = "Parasitism";
+                parasitePassiveAbility._secondTriggerOn = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd)._secondTriggerOn;
+                parasitePassiveAbility._thirdTriggerOn = ((ParasitePassiveAbility)((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd)._thirdTriggerOn;
+                parasitePassiveAbility._triggerOn = ((AddPassiveEffect)LoadedAssetsHandler.GetCharacterAbility("Eviscerate_1_A").effects[5].effect)._passiveToAdd._triggerOn;
+                ApplyParasiteEffect applyParasiteEffect = ScriptableObject.CreateInstance<ApplyParasiteEffect>();
+                applyParasiteEffect._passiveToAdd = parasitePassiveAbility;
+                return applyParasiteEffect;
+            }
+        }
+    }
+    public class CasterSetStoredValueEffect : EffectSO
+    {
+        [SerializeField]
+        public UnitStoredValueNames _valueName = (UnitStoredValueNames)2;
+
+        public override bool PerformEffect(
+          CombatStats stats,
+          IUnit caster,
+          TargetSlotInfo[] targets,
+          bool areTargetSlots,
+          int entryVariable,
+          out int exitAmount)
+        {
+            exitAmount = 0;
+            caster.SetStoredValue(this._valueName, entryVariable);
+            return exitAmount > 0;
+        }
+    }
+    public class DealRandomAmountDamageConvertToParasiteEffect : EffectSO
+    {
+        [SerializeField]
+        public DeathType _deathType = (DeathType)1;
+        [SerializeField]
+        public bool _usePreviousExitValue;
+        [SerializeField]
+        public bool _ignoreShield;
+        [SerializeField]
+        public bool _indirect;
+        [SerializeField]
+        public bool _returnKillAsSuccess;
+        [SerializeField]
+        public int _minAmount = 0;
+        [SerializeField]
+        public BasePassiveAbilitySO _passiveToAdd = Passives.Parasitism;
+
+        public override bool PerformEffect(
+          CombatStats stats,
+          IUnit caster,
+          TargetSlotInfo[] targets,
+          bool areTargetSlots,
+          int entryVariable,
+          out int exitAmount)
+        {
+            if (this._usePreviousExitValue)
+                entryVariable *= this.PreviousExitValue;
+            exitAmount = 0;
+            bool flag = false;
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit)
+                {
+                    int num1 = UnityEngine.Random.Range(this._minAmount, entryVariable);
+                    int num2 = areTargetSlots ? target.SlotID - target.Unit.SlotID : -1;
+                    int num3 = num1;
+                    DamageInfo damageInfo;
+                    if (this._indirect)
+                    {
+                        damageInfo = target.Unit.Damage(num3, (IUnit)null, this._deathType, num2, false, false, true, (DamageType)0);
+                    }
+                    else
+                    {
+                        int num4 = caster.WillApplyDamage(num3, target.Unit);
+                        damageInfo = target.Unit.Damage(num4, caster, this._deathType, num2, true, true, this._ignoreShield, (DamageType)0);
+                    }
+                    flag |= damageInfo.beenKilled;
+                    exitAmount += damageInfo.damageAmount;
+                    if (damageInfo.damageAmount > 0)
+                    {
+                        int damageAmount = damageInfo.damageAmount;
+                        IUnit unit = target.Unit;
+                        if (!unit.ContainsPassiveAbility((PassiveAbilityTypes)45))
+                            unit.AddPassiveAbility(this._passiveToAdd);
+                        int num5 = unit.GetStoredValue((UnitStoredValueNames)14) + damageAmount;
+                        unit.SetStoredValue((UnitStoredValueNames)14, num5);
+                    }
+                }
+            }
+            if (!this._indirect && exitAmount > 0)
+                caster.DidApplyDamage(exitAmount);
+            return !this._returnKillAsSuccess ? exitAmount > 0 : flag;
+        }
+    }
+    public class ApplyParasiteEffect : EffectSO
+    {
+        [SerializeField]
+        public BasePassiveAbilitySO _passiveToAdd = Passives.Parasitism;
+
+        public override bool PerformEffect(
+          CombatStats stats,
+          IUnit caster,
+          TargetSlotInfo[] targets,
+          bool areTargetSlots,
+          int entryVariable,
+          out int exitAmount)
+        {
+            exitAmount = 0;
+            for (int index = 0; index < targets.Length; ++index)
+            {
+                if (targets[index].HasUnit)
+                {
+                    if (!targets[index].Unit.ContainsPassiveAbility((PassiveAbilityTypes)45))
+                        targets[index].Unit.AddPassiveAbility(this._passiveToAdd);
+                    int num = targets[index].Unit.GetStoredValue((UnitStoredValueNames)14) + entryVariable;
+                    targets[index].Unit.SetStoredValue((UnitStoredValueNames)14, num);
+                    targets[index].Unit.SetStoredValue(SpawnChildrenEffect.value, targets[index].Unit.GetStoredValue(SpawnChildrenEffect.value) + 1);
+                    exitAmount += num;
+                }
+            }
+            return exitAmount > 0;
         }
     }
 }

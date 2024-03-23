@@ -35,6 +35,7 @@ using static UnityEngine.GraphicsBuffer;
 using THE_DEAD;
 using static Hawthorne.Check;
 using HarmonyLib;
+using MonoMod.Cil;
 
 namespace Hawthorne
 {
@@ -156,7 +157,7 @@ namespace Hawthorne
             Hawthorne.Shittary.Setup();
             try { EnemyRefresher.Setup(); }
             catch { Debug.LogError("enemy refreshser failed to set up :("); }
-
+            Hawthorne.MultiSpriteEnemyLayout.Setup();
             
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
@@ -746,12 +747,14 @@ namespace Hawthorne
             addSepulchrePool("Clione_EN");
             AddScrungiePool("LostSheep_EN");
             AddScrungiePool("Derogatory_EN");
+            addSepulchrePool("Children6_EN");
             AddScrungiePool("Denial_EN");
             AddScrungiePool("DeadPixel_EN");
             AddScrungiePool("LittleAngel_EN");
             AddScrungiePool("StarGazer_EN");
             AddScrungiePool("Windle1_EN");
             AddScrungiePool("BlackStar_EN");
+            AddScrungiePool("Children6_EN");
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -786,6 +789,7 @@ namespace Hawthorne
             addFountainPool("BlackStar_EN");
             addFountainPool("Indicator_EN");
             addFountainPool("Clione_EN");
+            addFountainPool("Children1_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -846,6 +850,7 @@ namespace Hawthorne
             addBronzoPool("Indicator_EN");
             addBronzoPool("Maw_EN");
             addBronzoPool("Clione_EN");
+            addBronzoPool("Children6_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1894,6 +1899,7 @@ namespace Hawthorne
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Warbird_EN")) list.Add("Warbird_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 5 && EnemyExist("Windle2_EN")) list.Add("Windle2_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
+                if (!red && !killable && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Children6_EN")) list.Add("Children6_EN");
             }
             if (zone == 2)
             {
@@ -1902,6 +1908,7 @@ namespace Hawthorne
                 if (Supporting) { list.Add("LostSheep_EN"); if (UnityEngine.Random.Range(0, 100) < 66) list.Add("Enigma_EN"); };
                 if (!red && EnemyExist("TitteringPeon_EN")) list.Add("TitteringPeon_EN");
                 if (EnemyExist("Unterling_EN")) list.Add("Unterling_EN");
+                if (!red && !killable && EnemyExist("Children6_EN")) list.Add("Children6_EN");
                 if (!mustSmall && EnemyExist("ScreamingHomunculus_EN")) list.Add("ScreamingHomunculus_EN");
                 if (!killable && !red && EnemyExist("LittleAngel_EN")) list.Add("LittleAngel_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 5 && EnemyExist("StarGazer_EN")) list.Add("StarGazer_EN");
@@ -1981,6 +1988,8 @@ namespace Hawthorne
             if (harder && EnemyExist("BlackStar_EN")) for (int i = 0; i < 7; i++) list.Add("BlackStar_EN");
             if (harder && EnemyExist("Indicator_EN")) for (int i = 0; i < 5; i++) list.Add("Indicator_EN");
             if (EnemyExist("Clione_EN")) for (int i = 0; i < 7; i++) list.Add("Clione_EN");
+            if (harder && EnemyExist("Children6_EN")) for (int i = 0; i < 3; i++) list.Add("Children6_EN");
+            if (EnemyExist("Children6_EN")) for (int i = 0; i < 2; i++) list.Add("Children6_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)

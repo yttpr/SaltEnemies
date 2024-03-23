@@ -60,6 +60,7 @@ namespace Hawthorne
             Indicator.Add(544472);
             Maw.Add(544471);
             Clione.Add(544470);
+            Children.Add(544469);
         }
         public static void AddEncounters()
         {
