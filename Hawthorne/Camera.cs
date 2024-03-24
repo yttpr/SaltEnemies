@@ -21,10 +21,14 @@ namespace Hawthorne
                 entityID = (EntityIDs)544511,
                 healthColor = Pigments.Gray,
                 priority = 0,
-                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/camera/Camera_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/camera/Camera_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             camera.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/camera/Camera_Gibs.prefab").GetComponent<ParticleSystem>();
             camera.prefab.SetDefaultParams();
+            (camera.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                camera.prefab._locator.transform.Find("Sprite").Find("Wings").GetComponent<SpriteRenderer>(),
+            };
             camera.combatSprite = ResourceLoader.LoadSprite("DroneIconB", 32);
             camera.overworldAliveSprite = ResourceLoader.LoadSprite("DroneIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
             camera.overworldDeadSprite = ResourceLoader.LoadSprite("DroneDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));

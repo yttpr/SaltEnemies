@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Schema;
 using UnityEngine;
 using THE_DEAD;
+using Hawthorne.gay;
 
 namespace Hawthorne
 {
@@ -32,11 +33,15 @@ namespace Hawthorne
                 entityID = (EntityIDs)54428,
                 healthColor = Pigments.Red,
                 priority = -1,
-                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Satyr_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Satyr_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             if (DoDebugs.GenInfo) Debug.Log("enemy prefab");
             satyr.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Satyr_Giblets.prefab").GetComponent<ParticleSystem>();
             satyr.prefab.SetDefaultParams();
+            (satyr.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                satyr.prefab._locator.transform.Find("Sprite").Find("TorsoBack").GetComponent<SpriteRenderer>(),
+            };
             if (DoDebugs.GenInfo) Debug.Log("prefabs");
             satyr.combatSprite = ResourceLoader.LoadSprite("Icon_Satyr_B", 32);
             satyr.overworldAliveSprite = ResourceLoader.LoadSprite("Icon_Satyr", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
@@ -45,7 +50,7 @@ namespace Hawthorne
             satyr.hurtSound = LoadedAssetsHandler.GetEnemy("Sepulchre_EN").damageSound;
             satyr.deathSound = LoadedAssetsHandler.GetEnemy("Sepulchre_EN").deathSound;
             if (DoDebugs.GenInfo) Debug.Log("sounds");
-            satyr.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
+            satyr.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_Satyr>();
             satyr.passives = new BasePassiveAbilitySO[1]
             {
                 Passives.Skittish

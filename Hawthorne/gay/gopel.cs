@@ -47,10 +47,14 @@ namespace Hawthorne.gay
                 entityID = (EntityIDs)544519,
                 healthColor = Pigments.Gray,
                 priority = 0,
-                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/greyShit/GreySpog_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/greyShit/GreySpog_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             gopel.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/greyShit/GreySpog_Gibs.prefab").GetComponent<ParticleSystem>();
             gopel.prefab.SetDefaultParams();
+            (gopel.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                gopel.prefab._locator.transform.Find("Sprite").Find("body").Find("body").GetComponent<SpriteRenderer>(),
+            };
             gopel.combatSprite = ResourceLoader.LoadSprite("GSpogIconB", 32);
             gopel.overworldAliveSprite = ResourceLoader.LoadSprite("GSpogIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
             gopel.overworldDeadSprite = ResourceLoader.LoadSprite("GSpogDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));

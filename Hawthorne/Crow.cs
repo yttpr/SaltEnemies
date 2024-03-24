@@ -54,10 +54,14 @@ namespace Hawthorne
                 entityID = (EntityIDs)544524,
                 healthColor = Pigments.Blue,
                 priority = 0,
-                prefab = SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Crow_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Crow_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             birb.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Crow_Gibs.prefab").GetComponent<ParticleSystem>();
             birb.prefab.SetDefaultParams();
+            (birb.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                birb.prefab._locator.transform.Find("Sprite").GetComponent<SpriteRenderer>(),
+            };
             if (DoDebugs.GenInfo) Debug.Log("prefabs");
             birb.combatSprite = ResourceLoader.LoadSprite("CrowIconB", 32);
             birb.overworldAliveSprite = ResourceLoader.LoadSprite("CrowIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));

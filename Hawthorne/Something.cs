@@ -176,11 +176,15 @@ namespace Hawthorne
                 entityID = (EntityIDs)544527,
                 healthColor = Pigments.Red,
                 priority = 0,
-                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Something_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Something_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             if (DoDebugs.GenInfo) Debug.Log("main prefab");
             something.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis2/Something_Gibs.prefab").GetComponent<ParticleSystem>();
             something.prefab.SetDefaultParams();
+            (something.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                something.prefab._locator.transform.Find("Sprite").Find("body").GetComponent<SpriteRenderer>(),
+            };
             something.combatSprite = ResourceLoader.LoadSprite("SomethingIconB", 32);
             something.overworldAliveSprite = ResourceLoader.LoadSprite("SomethingIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
             something.overworldDeadSprite = ResourceLoader.LoadSprite("SomethingDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));

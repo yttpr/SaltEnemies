@@ -43,7 +43,7 @@ namespace Hawthorne
             }
             enemyEncounter.variations = new FieldEnemy[1][];
             enemyEncounter.signType = (SignType)6329;
-            enemyEncounter.musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference;
+            enemyEncounter.musicEvent = "event:/Hawthorne/DontTouchMeTheme";
             enemyEncounter.roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._roarReference.roarEvent;
             enemyEncounter.variations[0] = new FieldEnemy[3];
             enemyEncounter.variations[0][0] = new FieldEnemy()

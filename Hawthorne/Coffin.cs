@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Hawthorne
 {
@@ -82,8 +84,8 @@ namespace Hawthorne
         }
         public static void Setup()
         {
-            IDetour hook0 = new Hook(typeof(MultiSpriteEnemyLayout).GetMethod(nameof(Initialization), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseIni), ~BindingFlags.Default));
-            IDetour hook1 = new Hook(typeof(MultiSpriteEnemyLayout).GetMethod(nameof(UpdateSlotSelection), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseUpi), ~BindingFlags.Default));
+            //IDetour hook0 = new Hook(typeof(MultiSpriteEnemyLayout).GetMethod(nameof(Initialization), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseIni), ~BindingFlags.Default));
+            //IDetour hook1 = new Hook(typeof(MultiSpriteEnemyLayout).GetMethod(nameof(UpdateSlotSelection), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseUpi), ~BindingFlags.Default));
             IDetour hook2 = new Hook(typeof(EnemyInFieldLayout).GetMethod(nameof(Initialization), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseIni), ~BindingFlags.Default));
             IDetour hook3 = new Hook(typeof(EnemyInFieldLayout).GetMethod(nameof(UpdateSlotSelection), ~BindingFlags.Default), typeof(MultiSpriteEnemyLayout).GetMethod(nameof(BaseUpi), ~BindingFlags.Default));
         }
@@ -161,7 +163,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add4(int entity, string ID)
         {
@@ -196,7 +198,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add3(int entity, string ID)
         {
@@ -230,7 +232,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add2(int entity, string ID)
         {
@@ -263,7 +265,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add1(int entity, string ID)
         {
@@ -291,7 +293,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add0(int entity, string ID)
         {
@@ -319,7 +321,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = ID + "_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add00(int entity, string ID)
         {
@@ -347,7 +349,7 @@ namespace Hawthorne
             };
             enemy.abilities = new Ability[] { Abili.Slop, Abili.Pingo, Abili.Skitter };
             enemy.enemyID = "ChildrenPrayer_EN";
-            enemy.AddEnemy();
+            enemy.SilentAddEnemy();
         }
         public static void Add(int entity)
         {
@@ -359,6 +361,47 @@ namespace Hawthorne
             Add1(entity, "Children1");
             Add0(entity, "Children0");
             Add00(entity, "Children00");
+        }
+    }
+
+    public static class SilentAdder
+    {
+        public static void SilentAddEnemy(this Enemy self)
+        {
+            EnemySO enemySO = ScriptableObject.CreateInstance(typeof(EnemySO)) as EnemySO;
+            string input = ((self.enemyID == "") ? (self.name + "_EN") : self.enemyID);
+            string text2 = (enemySO.name = Regex.Replace(input, "\\s+", ""));
+            enemySO._enemyName = self.name;
+            enemySO.health = self.health;
+            enemySO.size = self.size;
+            enemySO.healthColor = self.healthColor;
+            enemySO.enemyOverworldSprite = self.overworldAliveSprite;
+            enemySO.enemyOWCorpseSprite = self.overworldDeadSprite;
+            enemySO.enemySprite = self.combatSprite;
+            enemySO.abilitySelector = self.abilitySelector;
+            enemySO.passiveAbilities = self.passives;
+            enemySO.enterEffects = ExtensionMethods.ToEffectInfoArray(self.enterEffects);
+            enemySO.exitEffects = ExtensionMethods.ToEffectInfoArray(self.exitEffects);
+            enemySO.damageSound = self.hurtSound;
+            enemySO.deathSound = self.deathSound;
+            self.prefab.SetDefaultParams();
+            enemySO.enemyTemplate = self.prefab;
+            enemySO.priority = ScriptableObject.CreateInstance(typeof(PrioritySO)) as PrioritySO;
+            enemySO.priority.priorityValue = self.priority;
+            enemySO.unitType = self.unitType;
+            EnemyAbilityInfo[] array = new EnemyAbilityInfo[self.abilities.Length];
+            for (int i = 0; i < self.abilities.Length; i++)
+            {
+                array[i] = self.abilities[i].EnemyAbility();
+            }
+
+            enemySO.abilities = array;
+            enemySO.enemyLoot = new EnemyLoot
+            {
+                _lootableItems = self.loot
+            };
+            LoadedAssetsHandler.LoadedEnemies.Add(text2, enemySO);
+            BrutalAPI.BrutalAPI.moddedEnemies.Add(enemySO);
         }
     }
 }

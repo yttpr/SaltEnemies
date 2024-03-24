@@ -99,6 +99,13 @@ namespace Hawthorne
             if (self.IsEnemy("Indicator_EN")) AddPage("IndicatorPage.png");
             if (self.IsEnemy("Maw_EN")) AddPage("MawPage.png");
             if (self.IsEnemy("Clione_EN")) AddPage("ClionePage.png");
+            if (self.IsEnemy("Children6_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children5_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children4_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children3_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children2_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children1_EN")) AddPage("ChildrenPage.png");
+            if (self.IsEnemy("Children0_EN")) AddPage("ChildrenPage.png");
         }
 
         public static bool IsEnemy(this EnemyCombat self, string enemy)

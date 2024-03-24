@@ -4866,7 +4866,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/DontTouchMeTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };

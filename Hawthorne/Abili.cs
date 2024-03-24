@@ -3246,16 +3246,21 @@ namespace Hawthorne
                     e.List.Add("ApplyAbsField", "ZLDCHPak");
                     e.List.Add("ApplyDeepFrozenSlotEffect", "MizerFool.VladEffects");
                     e.List.Add("ApplySpikesSlotEffect", "MFoolModOne");
+                    e.List.Add("ApplyFumesSlotEffect", "CrayolapedeModinreallife.AbilityEffects");
                     e.Setup();
+                    e.UsePreviousExitValueForNewEntry = true;
                     _slop = new Ability()
                     {
                         name = "Slop",
-                        description = "Inflict 1 completely random Field Effect on the Opposing position and on self.",
-                        rarity = 10,
+                        description = "Inflict 2 stacks of a completely random Field Effect on the Opposing position and on self. Move to the Left or Right.",
+                        rarity = 12,
                         effects = new Effect[]
                         {
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 2, null, Slots.Self),
                             new Effect(e, 1, IntentType.Misc_Hidden, Slots.Front),
-                            new Effect(e, 1, IntentType.Misc_Hidden, Slots.Self)
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 2, null, Slots.Self),
+                            new Effect(e, 1, IntentType.Misc_Hidden, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self)
                         },
                         visuals = LoadedAssetsHandler.GetEnemyAbility("Flood_A").visuals,
                         animationTarget = Slots.Front,

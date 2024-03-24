@@ -39,7 +39,7 @@ using MonoMod.Cil;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.29")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.30")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -1076,10 +1076,16 @@ namespace Hawthorne
             //AG
             addSepulchrePool("MarbleMaw_EN");
             addSepulchrePool("UnculturedSwine_EN");
+            addSepulchrePool("FrowningChancellor_EN");
+            addSepulchrePool("Jansuli_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
+            addFountainPool("FrowningChancellor_EN");
+            addFountainPool("Jansuli_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
+            addBronzoPool("FrowningChancellor_EN");
+            addBronzoPool("Jansuli_EN");
 
             /*
             Marble Maw and the lads
@@ -1103,6 +1109,7 @@ namespace Hawthorne
             //(LoadedAssetsHandler.GetEnemy("Bronzo5_EN").abilities[0].ability.effects[0].effect as SpawnRandomEnemyAnywhereEffect)._enemies
 
             LetsYouIgnoreMissingEnemiesHook.ReadOutDisabled();
+            PerformRandomEffectsAmongEffects.GO();
 
         }
         public static bool Crossed = false;
@@ -1700,7 +1707,8 @@ namespace Hawthorne
                 else if (EnemyExist("OsseousClad_EN")) list.Add("OsseousClad_EN");
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Something_EN")) list.Add("Something_EN");
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("LittleBeak_EN")) list.Add("LittleBeak_EN");
-                if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN"); 
+                if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
+                else if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Jansuli_EN")) list.Add("Jansuli_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
         }
@@ -1990,6 +1998,7 @@ namespace Hawthorne
             if (EnemyExist("Clione_EN")) for (int i = 0; i < 7; i++) list.Add("Clione_EN");
             if (harder && EnemyExist("Children6_EN")) for (int i = 0; i < 3; i++) list.Add("Children6_EN");
             if (EnemyExist("Children6_EN")) for (int i = 0; i < 2; i++) list.Add("Children6_EN");
+            if (harder && EnemyExist("MarbleMaw_EN")) for (int i = 0; i < 5; i++) list.Add("MarbleMaw_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2587,6 +2596,7 @@ namespace Hawthorne
                 if (!Red && EnemyExist("Maw_EN") && Half) list.Add("Maw_EN");
                 if (!Red && EnemyExist("TheCrow_EN") && Half) list.Add("TheCrow_EN");
                 if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
+                if (EnemyExist("FrowningChancellor_EN") && Half) list.Add("FrowningChancellor_EN");
                 return list.GetRandom();
             }
         }
@@ -2671,6 +2681,7 @@ namespace Hawthorne
             U1_3_27();
             U1_3_29();
             U1_3_29_2();
+            U1_3_30();
         }
         public static void U1_3_27()
         {
@@ -2683,6 +2694,7 @@ namespace Hawthorne
                 PageCollector.UpdatePage("BlueFlowerPage.png");
                 PageCollector.UpdatePage("ButterflyPage.png");
                 PageCollector.UpdatePage("CameraPage.png");
+                PageCollector.UpdatePage("ChildrenPage.png");
                 PageCollector.UpdatePage("ClionePage.png");
                 PageCollector.UpdatePage("ClockPage.png");
                 PageCollector.UpdatePage("CNSPage.png");
@@ -2750,6 +2762,14 @@ namespace Hawthorne
             {
                 File.WriteAllText(SavePath + "Update_1_3_29_2.txt", "Updatd pages !");
                 PageCollector.UpdatePage("ClionePage.png");
+            }
+        }
+        public static void U1_3_30()
+        {
+            if (!File.Exists(SavePath + "Update_1_3_30.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_3_30.txt", "Updatd pages !");
+                PageCollector.UpdatePage("DontTouchMePage.png");
             }
         }
     }

@@ -352,6 +352,7 @@ namespace Hawthorne
             HasWaterFool = new bool[5];
             WaterFool = new GameObject[5][];
             WaterEnemy = new GameObject[5];
+            MoldView.Reset();
         }
 
         public static GameObject[] Fool;
@@ -481,6 +482,7 @@ namespace Hawthorne
             IDetour detour11 = (IDetour)new Hook((MethodBase)typeof(CharacterSlotLayout).GetMethod("UpdateFieldListLayout", ~BindingFlags.Default), typeof(WaterView).GetMethod("UpdateFieldListCharacterModdedLayout", ~BindingFlags.Default));
             IDetour hook0 = new Hook(typeof(CharacterSlotsHaveSwappedUIAction).GetMethod(nameof(CharacterSlotsHaveSwappedUIAction.Execute), ~BindingFlags.Default), typeof(WaterView).GetMethod(nameof(WaterView.Execute), ~BindingFlags.Default));
             IDetour hook1 = new Hook(typeof(EnemySlotsHaveSwappedUIAction).GetMethod(nameof(EnemySlotsHaveSwappedUIAction.Execute), ~BindingFlags.Default), typeof(WaterView).GetMethod(nameof(WaterView.Execute), ~BindingFlags.Default));
+            MoldView.Setup();
         }
 
         public static IEnumerator Execute(Func<CombatAction, CombatStats, IEnumerator> orig, CombatAction self, CombatStats stats)
@@ -935,4 +937,128 @@ namespace Hawthorne
         }
     }
 
+
+
+    public static class MoldView
+    {
+
+        public static GameObject[][] MoldFool = new GameObject[5][];
+        public static GameObject[] MoldEnemy = new GameObject[5];
+        public static void Reset()
+        {
+            MoldFool = new GameObject[5][];
+            MoldEnemy = new GameObject[5];
+        }
+
+        public static GameObject[] Fool;
+        public static GameObject Enemy;
+
+        public static void UpdateFieldListCharacterModdedLayout(
+          Action<CharacterSlotLayout, List<SlotStatusEffectInfoSO>, Sprite[], string[]> orig,
+          CharacterSlotLayout self,
+          List<SlotStatusEffectInfoSO> effects,
+          Sprite[] icons,
+          string[] texts)
+        {
+            self._fieldListLayout.SetInformation(self.SlotID, icons, texts, true);
+            bool flag = false;
+            foreach (SlotStatusEffectInfoSO effect in effects)
+            {
+                if (effect.slotStatusEffectType == (SlotStatusEffectType)862351)
+                    flag = true;
+            }
+            try
+            {
+                if (Fool == null)
+                {
+                    Fool = new GameObject[]
+                    {
+                    SaltEnemies.assetBundle.LoadAsset<GameObject>("Assets/Moldy/SmokeChara.prefab").gameObject,
+                    SaltEnemies.assetBundle.LoadAsset<GameObject>("Assets/Moldy/MoldChara.prefab").gameObject,
+                    };
+                }
+            }
+            catch
+            {
+                Fool = null;
+                if (DoDebugs.MiscInfo) Debug.LogError("failed to grab mold from assetbundle");
+            }
+            GameObject[] gameObjects = Fool;
+            try
+            {
+                if (MoldFool[self.SlotID] == null || MoldFool[self.SlotID].Length <= 0)
+                {
+                    MoldFool[self.SlotID] = new GameObject[2];
+                    MoldFool[self.SlotID][0] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[0], self.transform.localPosition, self.transform.localRotation, self._backFireEffect.transform.parent.transform);
+                    MoldFool[self.SlotID][1] = UnityEngine.Object.Instantiate<GameObject>(gameObjects[1], self.transform.localPosition, self.transform.localRotation, self._constrictedEffect.transform.parent.transform);
+                    for (int i = 0; i < 2; i++)
+                    {
+                        MoldFool[self.SlotID][i].transform.localPosition = Vector3.zero;
+                        MoldFool[self.SlotID][i].transform.rotation = self._constrictedEffect.transform.rotation;
+                        MoldFool[self.SlotID][i].GetComponent<RectTransform>().anchorMin = self._shieldEffect.GetComponent<RectTransform>().anchorMin;
+                        MoldFool[self.SlotID][i].GetComponent<RectTransform>().anchorMax = self._shieldEffect.GetComponent<RectTransform>().anchorMax;
+                        MoldFool[self.SlotID][i].GetComponent<RectTransform>().position = self._shieldEffect.GetComponent<RectTransform>().position;
+                    }
+                }
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("failed to instantiate mold");
+            }
+            try
+            {
+                foreach (GameObject obj in MoldFool[self.SlotID]) obj.SetActive(flag);
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("failed to activate/deactivate mold");
+            }
+
+            orig(self, effects, icons, texts);
+        }
+
+        public static void UpdateFieldListModdedLayout(
+          Action<EnemySlotLayout, List<SlotStatusEffectInfoSO>, Sprite[], string[]> orig,
+          EnemySlotLayout self,
+          List<SlotStatusEffectInfoSO> effects,
+          Sprite[] icons,
+          string[] texts)
+        {
+            self.SlotUI.UpdateFieldListLayout(self.SlotID, icons, texts);
+            bool flag = false;
+            using (List<SlotStatusEffectInfoSO>.Enumerator enumerator = effects.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (enumerator.Current.slotStatusEffectType == (SlotStatusEffectType)862351)
+                        flag = true;
+                }
+                if (Enemy == null) Enemy = SaltEnemies.assetBundle.LoadAsset<GameObject>("Assets/Moldy/MoldEnemy.prefab");
+                GameObject original = Enemy;
+                if ((UnityEngine.Object)MoldEnemy[self.SlotID] == (UnityEngine.Object)null)
+                {
+                    MoldEnemy[self.SlotID] = UnityEngine.Object.Instantiate<GameObject>(original, self.transform.localPosition, self.transform.localRotation, self.transform);
+                    MoldEnemy[self.SlotID].transform.localPosition = Vector3.zero;
+                    MoldEnemy[self.SlotID].transform.localRotation = Quaternion.identity;
+                }
+                if (flag)
+                {
+                    MoldEnemy[self.SlotID].SetActive(true);
+                    MoldEnemy[self.SlotID].transform.GetComponent<ParticleSystem>().Play(true);
+                }
+                else if (!flag)
+                {
+                    MoldEnemy[self.SlotID].transform.GetComponent<ParticleSystem>().Stop(true);
+                }
+                orig(self, effects, icons, texts);
+            }
+        }
+
+        public static void Setup()
+        {
+            IDetour detour10 = (IDetour)new Hook((MethodBase)typeof(EnemySlotLayout).GetMethod("UpdateFieldListLayout", ~BindingFlags.Default), typeof(MoldView).GetMethod("UpdateFieldListModdedLayout", ~BindingFlags.Default));
+            IDetour detour11 = (IDetour)new Hook((MethodBase)typeof(CharacterSlotLayout).GetMethod("UpdateFieldListLayout", ~BindingFlags.Default), typeof(MoldView).GetMethod("UpdateFieldListCharacterModdedLayout", ~BindingFlags.Default));
+        }
+
+    }
 }

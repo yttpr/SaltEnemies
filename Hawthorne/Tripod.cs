@@ -84,10 +84,19 @@ namespace Hawthorne
                 entityID = (EntityIDs)entity,
                 healthColor = Pigments.Gray,
                 priority = 0,
-                prefab = Hawthorne.SaltEnemies.Group4.LoadAsset<GameObject>("assets/group4/" + ID + "/" + ID + "_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.Group4.LoadAsset<GameObject>("assets/group4/" + ID + "/" + ID + "_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             enemy.prefab._gibs = Hawthorne.SaltEnemies.Group4.LoadAsset<GameObject>("assets/group4/" + ID + "/" + ID + "_Gibs.prefab").GetComponent<ParticleSystem>();
             enemy.prefab.SetDefaultParams();
+            (enemy.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                enemy.prefab._locator.transform.Find("Sprite").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").GetChild(0).GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").GetChild(0).GetChild(0).GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").GetChild(0).GetChild(1).GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (1)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (2)").GetComponent<SpriteRenderer>(),
+            };
             enemy.combatSprite = ResourceLoader.LoadSprite(ID + "Icon.png", 32);
             enemy.overworldAliveSprite = ResourceLoader.LoadSprite(ID + "World.png", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
             enemy.overworldDeadSprite = ResourceLoader.LoadSprite(ID + "Dead.png", 32, new Vector2?(new Vector2(0.5f, 0.0f)));

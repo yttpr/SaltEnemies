@@ -260,6 +260,18 @@ namespace Hawthorne
             ModMod.WhimSpoggleOrph();
             ModMod.EvangGard();
             ModMod.EggChoir();
+            ModMod.ChancellorEZ();
+            ModMod.ChancellorMed();
+            ModMod.ChancellorH();
+            ModMod.HogEZ();
+            ModMod.HogMed();
+            ModMod.HogHard();
+            ModMod.JanEZ();
+            ModMod.JanMed();
+            ModMod.JanMed();
+            ModMod.MarbleEZ();
+            ModMod.MarbleMed();
+            ModMod.MarbleHard();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

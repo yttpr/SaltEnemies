@@ -907,9 +907,18 @@ namespace Hawthorne
         public void OnSubActionTrigger(object sender, object args)
         {
         }
-
+        public bool CanReduceDuration
+        {
+            get
+            {
+                BooleanReference booleanReference = new BooleanReference(true);
+                CombatManager.Instance.ProcessImmediateAction(new CheckHasStatusFieldReductionBlockIAction(booleanReference), false);
+                return !booleanReference.value;
+            }
+        }
         public void OnStatusTick(object sender, object args)
         {
+            if (!CanReduceDuration) return;
             int amount = Amount;
             Amount /= 2;
             if (!TryRemoveSlotStatusEffect())

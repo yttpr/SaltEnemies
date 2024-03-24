@@ -1369,7 +1369,7 @@ namespace Hawthorne
                     whi._passiveName = "Whimsy";
                     whi.type = (PassiveAbilityTypes)38381149;
                     whi.passiveIcon = ResourceLoader.LoadSprite("WileyPassive.png", 32);
-                    whi._enemyDescription = "Status and Field effects other than Shield, Constricted, and Stunned, will no longer decrease while this unit is in combat.";
+                    whi._enemyDescription = "Most Status Effects and some Field Effects will no longer decrease while this unit is in combat.";
                     whi._characterDescription = whi._enemyDescription;
                     whi.doesPassiveTriggerInformationPanel = false;
                     whi._triggerOn = new TriggerCalls[] { TriggerCalls.OnBeingDamaged, TriggerCalls.OnRoundFinished, TriggerCalls.OnDeath };
@@ -5203,25 +5203,51 @@ namespace Hawthorne
         public Dictionary<string, string> List;
         public bool UsePreviousExitValueForNewEntry;
         public List<EffectSO> Effects;
+        public static List<PerformRandomEffectsAmongEffects> Selves = new List<PerformRandomEffectsAmongEffects>();
+        public static void GO()
+        {
+            //foreach (PerformRandomEffectsAmongEffects self in Selves) self.Actually();
+        }
         public void Setup()
+        {
+            //Selves.Add(this);
+            Actually();
+        }
+        public void Actually()
         {
             if (List == null) return;
             if (Effects == null) Effects = new List<EffectSO>();
             Type[] types = AnExtension.GetAllDerived(typeof(EffectSO));
+            if (DoDebugs.MiscInfo)
+            {
+                UnityEngine.Debug.LogWarning("WILL READ OUT TYPES NOW");
+                foreach (Type t in types)
+                {
+                    if (t.Name.Contains("Apply")) UnityEngine.Debug.Log(t.Name);
+                }
+            }
             List<string> remove = new List<string>();
             foreach (string name in List.Keys)
             {
                 bool skip = false;
                 foreach (EffectSO e in Effects) if (e.GetType().Name == name) { skip = true; break; }
-                if (skip) continue;
+                if (skip)
+                {
+                    UnityEngine.Debug.LogWarning("already has " + name);
+                    continue;
+                }
                 List<Type> test = new List<Type>();
                 foreach (Type type in types)
                 {
-                    if (type.Name == name) test.Add(type);
-                    if (List[name] == "") break;
-                    else if (List[name] == type.Namespace) break;
+                    if (type.Name == name)
+                    {
+                        test.Add(type);
+                        if (List[name] == "") break;
+                        else if (List[name] == type.Namespace) break;
+                    }
                 }
-                if (test.Count > 0) { Effects.Add(ScriptableObject.CreateInstance(test[test.Count - 1]) as EffectSO); remove.Add(name); }
+                if (test.Count > 0) { Effects.Add(ScriptableObject.CreateInstance(test[test.Count - 1]) as EffectSO); remove.Add(name); if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("added " + name); }
+                else if (DoDebugs.MiscInfo) UnityEngine.Debug.LogWarning(name + " not found");
             }
             foreach (string g in remove) List.Remove(g);
         }
@@ -5246,6 +5272,60 @@ namespace Hawthorne
                 }
             }
             return effectsRan > 0;
+        }
+    }
+    public class AbilitySelector_Satyr : BaseAbilitySelectorSO
+    {
+        [Header("Special Abilities")]
+        [SerializeField]
+        public string flavor = "Bitter Flavor";
+        public string flavour = "Bitter Flavour";
+
+        public override bool UsesRarity => true;
+
+        public override int GetNextAbilitySlotUsage(List<CombatAbility> abilities, IUnit unit)
+        {
+            int maxExclusive1 = 0;
+            int maxExclusive2 = 0;
+            List<int> intList1 = new List<int>();
+            List<int> intList2 = new List<int>();
+            bool hasFleeting = unit.ContainsPassiveAbility(PassiveAbilityTypes.Fleeting);
+            for (int index = 0; index < abilities.Count; ++index)
+            {
+                if (this.ShouldBeIgnored(abilities[index], unit))
+                {
+                    maxExclusive2 += abilities[index].rarity.rarityValue;
+                    intList2.Add(index);
+                }
+                else
+                {
+                    maxExclusive1 += abilities[index].rarity.rarityValue;
+                    intList1.Add(index);
+                }
+            }
+            int num1 = UnityEngine.Random.Range(0, maxExclusive1);
+            int num2 = 0;
+            foreach (int index in intList1)
+            {
+                num2 += abilities[index].rarity.rarityValue;
+                if (num1 < num2)
+                    return index;
+            }
+            int num3 = UnityEngine.Random.Range(0, maxExclusive2);
+            int num4 = 0;
+            foreach (int index in intList2)
+            {
+                num4 += abilities[index].rarity.rarityValue;
+                if (num3 < num4)
+                    return index;
+            }
+            return -1;
+        }
+
+        public bool ShouldBeIgnored(CombatAbility ability, IUnit unit)
+        {
+            string name = ability.ability._abilityName;
+            return CombatManager.Instance._stats.TurnsPassed < 2 && (name == this.flavor || name == this.flavour);
         }
     }
 }

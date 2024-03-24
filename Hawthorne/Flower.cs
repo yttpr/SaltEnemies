@@ -38,10 +38,14 @@ namespace Hawthorne
                 entityID = (EntityIDs)544523,
                 healthColor = Pigments.Red,
                 priority = 0,
-                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Angler_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Angler_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
             angler.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Senis3/Angler_Gibs.prefab").GetComponent<ParticleSystem>();
             angler.prefab.SetDefaultParams();
+            (angler.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                angler.prefab._locator.transform.Find("Sprite").Find("body").GetChild(0).GetChild(0).GetChild(0).GetComponent<SpriteRenderer>(),
+            };
             angler.combatSprite = ResourceLoader.LoadSprite("AnglerIconB", 32);
             angler.overworldAliveSprite = ResourceLoader.LoadSprite("AnglerIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
             angler.overworldDeadSprite = ResourceLoader.LoadSprite("AnglerDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
