@@ -39,7 +39,7 @@ using MonoMod.Cil;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.30")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.3.31")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {

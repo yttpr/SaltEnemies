@@ -35595,7 +35595,7 @@ namespace Hawthorne
             string main = "UnculturedSwine_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_01"))._easyEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
@@ -35666,15 +35666,6 @@ namespace Hawthorne
             string main = "UnculturedSwine_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
-            {
-                if (e._bundleName == bundle)
-                {
-                    e._priority /= 3;
-                    e._priority *= 2;
-                    break;
-                }
-            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
             for (int i = 0; i < 3; i++)
             {
@@ -35741,7 +35732,7 @@ namespace Hawthorne
             string main = "UnculturedSwine_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
@@ -35889,15 +35880,6 @@ namespace Hawthorne
             string main = "Jansuli_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
-            {
-                if (e._bundleName == bundle)
-                {
-                    e._priority /= 3;
-                    e._priority *= 2;
-                    break;
-                }
-            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
             for (int i = 0; i < 3; i++)
             {
@@ -35966,15 +35948,6 @@ namespace Hawthorne
             string main = "Jansuli_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
-            {
-                if (e._bundleName == bundle)
-                {
-                    e._priority /= 3;
-                    e._priority *= 2;
-                    break;
-                }
-            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
             for (int i = 0; i < 3; i++)
             {

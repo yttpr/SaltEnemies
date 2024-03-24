@@ -128,6 +128,7 @@ namespace Hawthorne
             CheckEnemy("Indicator_EN");
             CheckEnemy("Maw_EN");
             CheckEnemy("Clione_EN");
+            CheckEnemy("Children_EN");
         }
         public static void CheckEnemy(string enemy)
         {
@@ -140,11 +141,13 @@ namespace Hawthorne
                     Debug.LogError("BOOOO YOU SUCK. Disabling enemy " + enemy);
                     if (enemy == "AFlower_EN") enemy = "A'Flower'_EN";
                     if (enemy == "Windle_EN") enemy = "Windle1_EN";
+                    if (enemy == "Children_EN") enemy = "Children6_EN";
                     DisableEnemy(enemy);
                     if (enemy == "Something_EN") { DisableEnemy("Derogatory_EN"); DisableEnemy("Denial_EN"); }
                     if (enemy == "Postmodern_EN") DisableEnemy("War_EN");
                     if (enemy == "Windle1_EN") { DisableEnemy("Windle2_EN"); DisableEnemy("Windle3_EN"); }
                     if (enemy == "BlackStar_EN") DisableEnemy("Singularity_EN");
+                    if (enemy == "Windle1_EN") { DisableEnemy("Children5_EN"); DisableEnemy("Children4_EN"); DisableEnemy("Children3_EN"); DisableEnemy("Children2_EN"); DisableEnemy("Children1_EN"); DisableEnemy("Children0_EN"); DisableEnemy("ChildrenPrayer_EN"); }
                 }
             }
             catch
