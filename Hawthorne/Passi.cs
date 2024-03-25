@@ -1399,6 +1399,79 @@ namespace Hawthorne
                 return _fakeDecay;
             }
         }
+        static BasePassiveAbilitySO _appointment;
+        public static BasePassiveAbilitySO Appointment
+        {
+            get
+            {
+                if (_appointment == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    DoubleExtraAttackPassiveAbility point = ScriptableObject.CreateInstance<DoubleExtraAttackPassiveAbility>();
+                    point.conditions = baseExtra.conditions;
+                    point.passiveIcon = baseExtra.passiveIcon;
+                    point.specialStoredValue = baseExtra.specialStoredValue;
+                    point.doesPassiveTriggerInformationPanel = baseExtra.doesPassiveTriggerInformationPanel;
+                    point.type = baseExtra.type;
+                    point._extraAbility = new ExtraAbilityInfo();
+                    point._extraAbility.rarity = baseExtra._extraAbility.rarity;
+                    point._extraAbility.cost = baseExtra._extraAbility.cost;
+                    point._secondExtraAbility = new ExtraAbilityInfo();
+                    point._secondExtraAbility.rarity = point._extraAbility.rarity;
+                    point._secondExtraAbility.cost = point._extraAbility.cost;
+                    point._passiveName = "Appointment";
+                    point._enemyDescription = "This enemy will perforn an extra ability \"Appointment\" each turn.";
+                    PerformRandomEffectsAmongEffects posi = ScriptableObject.CreateInstance<PerformRandomEffectsAmongEffects>();
+                    posi.List = new Dictionary<string, string>();
+                    posi.List.Add(nameof(ApplySpotlightEffect), "");
+                    posi.List.Add(nameof(ApplyFocusedEffect), "");
+                    posi.List.Add(nameof(ApplyDivineProtectionEffect), "");
+                    posi.List.Add(nameof(ApplyPowerEffect), nameof(THE_DEAD));
+                    posi.List.Add(nameof(ApplyHasteEffect), nameof(Hawthorne));
+                    posi.List.Add(nameof(ApplyDodgeEffect), nameof(PYMN4));
+                    posi.List.Add(nameof(ApplyAnestheticsEffect), nameof(THE_DEAD));
+                    posi.List.Add(nameof(ApplyDeterminedEffect), nameof(THE_DEAD));
+                    posi.List.Add(nameof(ApplyPhotoSynthesisEffect), nameof(Hawthorne));
+                    posi.List.Add(nameof(ApplyFavorEffect), nameof(Hawthorne));
+                    posi.List.Add("ApplyInvigoratedEffect", "DigiMisfits");
+                    posi.List.Add("ApplyAdrenalineEffect", "ChillyBonezMod");
+                    posi.List.Add("ApplyHexedEffect", "ChillyBonezMod");
+                    posi.List.Add("ApplyGrowthEffect", "MFoolModOne");
+                    posi.List.Add("ApplyWildCardEffect", "MFoolModOne");
+                    posi.List.Add("ApplyHellfireEffect", "Abbadon");
+                    posi.List.Add("ApplyBerserkEffect", "BOSpecialItems.Content.Effects");
+                    posi.List.Add("ApplyFuryEffect", "BOSpecialItems.Content.Effects");
+                    posi.List.Add("ApplyPoweredUpEffect", "BOSpecialItems.Content.Effects");
+                    posi.List.Add("ApplySurviveEffect", "BOSpecialItems.Content.Effects");
+                    posi.List.Add("ApplyBlessEffect", "");
+                    posi.List.Add("ApplySpiritualEnergyEffect", "FiendishFools");
+
+                    Ability bonus = new Ability();
+                    bonus.name = "Appointment";
+                    bonus.description = "If there is no Opposing party member, queue \"Procedure\" as an additional action next turn.";
+                    bonus.effects = new Effect[3];
+                    bonus.effects[0] = new Effect(ScriptableObject.CreateInstance<IsUnitEffect>(), 1, IntentType.Misc_Hidden, Slots.Front);
+                    bonus.effects[1] = new Effect(BasicEffects.GetVisuals("Weep_A", false, Slots.Self), 1, null, Slots.Front, BasicEffects.DidThat(true));
+                    bonus.effects[2] = new Effect(BasicEffects.SetStoreValue(DoubleExtraAttackPassiveAbility.value), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(true, 2));
+                    bonus.visuals = null;
+                    bonus.animationTarget = Slots.Front;
+                    point._extraAbility.ability = bonus.CharacterAbility().ability;
+
+                    Ability bins = new Ability();
+                    bins.name = "Procedure";
+                    bins.description = "Apply 5 random Positive Status Effects on every enemy.";
+                    bins.effects = new Effect[]
+                    {
+                        new Effect(posi, 5, IntentType.Misc, Targetting.AllAlly),
+                    };
+                    bins.visuals = LoadedAssetsHandler.GetCharacterAbility("Absolve_1_A").visuals;
+                    bins.animationTarget = Targetting.AllAlly;
+                    point._secondExtraAbility.ability = bins.CharacterAbility().ability;
+                    _appointment = point;
+                }
+                return _appointment;
+            }
+        }
 
     }
 
@@ -1549,6 +1622,7 @@ namespace Hawthorne
                 }
             }
             NobodyMoveHandler.NotifCheck(notificationName, sender, args);
+            ReplacementHandler.NotifCheck(notificationName, sender, args);
             if (notificationName == TriggerCalls.OnMoved.ToString() && BadDogHandler.IsPlayerTurn()) BadDogHandler.RunCheckFunction();
         }
 
@@ -5289,7 +5363,6 @@ namespace Hawthorne
             int maxExclusive2 = 0;
             List<int> intList1 = new List<int>();
             List<int> intList2 = new List<int>();
-            bool hasFleeting = unit.ContainsPassiveAbility(PassiveAbilityTypes.Fleeting);
             for (int index = 0; index < abilities.Count; ++index)
             {
                 if (this.ShouldBeIgnored(abilities[index], unit))
@@ -5326,6 +5399,87 @@ namespace Hawthorne
         {
             string name = ability.ability._abilityName;
             return CombatManager.Instance._stats.TurnsPassed < 2 && (name == this.flavor || name == this.flavour);
+        }
+    }
+    public class DoubleExtraAttackPassiveAbility : ExtraAttackPassiveAbility
+    {
+        [Header("ExtraAttack Data")]
+        [SerializeField]
+        public ExtraAbilityInfo _secondExtraAbility;
+        public static UnitStoredValueNames value => (UnitStoredValueNames)21007348;
+
+        public override void TriggerPassive(object sender, object args)
+        {
+            if (args is List<string> list && sender is IUnit unit && unit.GetStoredValue(value) > 0)
+            {
+                list.Add(_secondExtraAbility.ability?.name);
+                unit.SetStoredValue(value, 0);
+            }
+            base.TriggerPassive(sender, args);
+        }
+
+        public override void OnPassiveConnected(IUnit unit)
+        {
+            base.OnPassiveConnected(unit);
+            unit.AddExtraAbility(_secondExtraAbility);
+        }
+
+        public override void OnPassiveDisconnected(IUnit unit)
+        {
+            base.OnPassiveDisconnected(unit);
+            unit.TryRemoveExtraAbility(_secondExtraAbility);
+        }
+    }
+    public class AbilitySelector_YNL : BaseAbilitySelectorSO
+    {
+        [Header("Special Abilities")]
+        [SerializeField]
+        public string replace = Abili.Replacement.name;
+
+        public override bool UsesRarity => true;
+
+        public override int GetNextAbilitySlotUsage(List<CombatAbility> abilities, IUnit unit)
+        {
+            int maxExclusive1 = 0;
+            int maxExclusive2 = 0;
+            List<int> intList1 = new List<int>();
+            List<int> intList2 = new List<int>();
+            for (int index = 0; index < abilities.Count; ++index)
+            {
+                if (this.ShouldBeIgnored(abilities[index], unit))
+                {
+                    maxExclusive2 += abilities[index].rarity.rarityValue;
+                    intList2.Add(index);
+                }
+                else
+                {
+                    maxExclusive1 += abilities[index].rarity.rarityValue;
+                    intList1.Add(index);
+                }
+            }
+            int num1 = UnityEngine.Random.Range(0, maxExclusive1);
+            int num2 = 0;
+            foreach (int index in intList1)
+            {
+                num2 += abilities[index].rarity.rarityValue;
+                if (num1 < num2)
+                    return index;
+            }
+            int num3 = UnityEngine.Random.Range(0, maxExclusive2);
+            int num4 = 0;
+            foreach (int index in intList2)
+            {
+                num4 += abilities[index].rarity.rarityValue;
+                if (num3 < num4)
+                    return index;
+            }
+            return -1;
+        }
+
+        public bool ShouldBeIgnored(CombatAbility ability, IUnit unit)
+        {
+            string name = ability.ability._abilityName;
+            return CombatManager.Instance._stats.TurnsPassed < 1 && (name == this.replace);
         }
     }
 }

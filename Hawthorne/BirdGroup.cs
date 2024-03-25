@@ -3275,7 +3275,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 1,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Mung_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/TeachFishTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Mung_Easy_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Hard
             };

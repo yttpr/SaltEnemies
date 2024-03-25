@@ -28,6 +28,9 @@ using System.Collections.ObjectModel;
 using EnemyPack.Effects;
 using static Hawthorne.CustomIntentIconSystem;
 using Tools;
+using FMOD.Studio;
+using System.Xml.Linq;
+using MUtility;
 
 namespace Hawthorne
 {
@@ -3323,6 +3326,79 @@ namespace Hawthorne
                 return _skitter;
             }
         }
+        static Ability _shockTherapy;
+        public static Ability ShockTherapy
+        {
+            get
+            {
+                if (_shockTherapy == null)
+                {
+                    _shockTherapy = new Ability()
+                    {
+                        name = "Shock Therapy",
+                        description = "Transform the Opposing party member into a random party member. \nIf the Opposing party member has already been transformed by this ability, lower their level and deal a Painful amount of damage to them.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ShockTherapyEffect>(), 3, IntentType.Misc, Slots.Front),
+                            new Effect(BasicEffects.Empty, 3, IntentType.Damage_3_6, Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Conversion_1_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _shockTherapy;
+            }
+        }
+        static Ability _illuminate;
+        public static Ability Illuminate
+        {
+            get
+            {
+                if (_illuminate == null)
+                {
+                    _illuminate = new Ability()
+                    {
+                        name = "Illuminate",
+                        description = "Remove all Status Effects from the Opposing party member. If no Status Effects were removed, inflict 3 Stunned and deal a Painful amount of damage to them.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RemoveAllStatusEffectsEffect>(), 3, IntentType.Misc, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 3, (IntentType)988896, Slots.Front, BasicEffects.DidThat(false)),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front, BasicEffects.DidThat(false, 2))
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crescendo_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _illuminate;
+            }
+        }
+        static Ability _replacement;
+        public static Ability Replacement
+        {
+            get
+            {
+                if (_replacement == null)
+                {
+                    _replacement = new Ability()
+                    {
+                        name = "Replacement",
+                        description = "Apply 3 Power on the Opposing party member. \nIf the Opposing party member has killed during this combat, deal an Agonizing amount of damage to them.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 3, (IntentType)987895, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ReplacementDamageEffect>(), 8, IntentType.Damage_7_10, Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entwined_1_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _replacement;
+            }
+        }
 
     }
 
@@ -6467,6 +6543,110 @@ namespace Hawthorne
                 }
             }
             return exitAmount > 0;
+        }
+    }
+    public static class ShockTherapyHandler
+    {
+        public static void TransformCharacterLowerLevel(this CharacterCombat self, CharacterSO character, bool fullyHeal, bool maintainMaxHealth, bool currentToMaxHealth)
+        {
+            self.RemoveAndDisconnectAllPassiveAbilities();
+            self.Character = character;
+            self.Name = self.Character.GetName();
+            self.ClampedRank = self.Character.ClampRank(self.Rank + self.CharacterWearableModifiers.RankModifier - 1);
+            self.CurrencyMultiplier = self.CharacterWearableModifiers.CurrencyMultiplierModifier;
+            if (!maintainMaxHealth)
+            {
+                self.MaximumHealth = self.Character.GetMaxHealth(self.ClampedRank);
+            }
+
+            if (currentToMaxHealth)
+            {
+                self.MaximumHealth = Mathf.Max(self.CurrentHealth, 1);
+            }
+
+            self.MaximumHealth = Mathf.Max(1, self.CharacterWearableModifiers.MaximumHealthModifier + self.MaximumHealth);
+            self.HealthColor = (self.CharacterWearableModifiers.HasHealthColorModifier ? self.CharacterWearableModifiers.HealthColorModifier : self.Character.healthColor);
+            self.CurrentHealth = (fullyHeal ? self.MaximumHealth : Mathf.Min(self.CurrentHealth, self.MaximumHealth));
+            self.SetUpDefaultAbilities(updateUI: true);
+            self.UnitType = self.Character.unitType;
+            self.Size = 1;
+            self.DefaultPassiveAbilityInitialization();
+        }
+        public static bool TryTransformCharacterLowerLevel(this CombatStats self, int id, CharacterSO transformation, bool fullyHeal, bool maintainMaxHealth, bool currentToMaxHealth)
+        {
+            if (transformation == null || transformation.Equals(null))
+            {
+                return false;
+            }
+
+            if (!self.Characters.ContainsKey(id))
+            {
+                return false;
+            }
+
+            CharacterCombat characterCombat = self.Characters[id];
+            if (!characterCombat.IsAlive)
+            {
+                return false;
+            }
+
+            characterCombat.TransformCharacterLowerLevel(transformation, fullyHeal, maintainMaxHealth, currentToMaxHealth);
+            CombatManager.Instance.AddUIAction(new CharacterTransformUIAction(characterCombat, characterCombat.HealthColor, characterCombat.CurrentHealth, characterCombat.MaximumHealth));
+            characterCombat.ConnectPassives();
+            return true;
+        }
+    }
+    public class ShockTherapyEffect : DamageEffect
+    {
+        public static UnitStoredValueNames HasTransformed => (UnitStoredValueNames)7207237;
+        public static CharacterSO getRandom()
+        {
+            return new List<CharacterSO>(LoadedAssetsHandler.LoadedCharacters.Values).GetRandom();
+        }
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit && target.Unit is CharacterCombat chara)
+                {
+                    if (chara.GetStoredValue(HasTransformed) > 0)
+                    {
+                        CharacterSO c = getRandom();
+                        for (int i = 0; i < 144 && (!c.HasRankedData|| c.rankedData.Length < chara.Rank); i++) c = getRandom();
+                        if (stats.TryTransformCharacterLowerLevel(chara.ID, c, false, false, false)) exitAmount++;
+                        base.PerformEffect(stats, caster, target.SelfArray(), areTargetSlots, entryVariable, out int exi);
+                    }
+                    else 
+                    {
+                        CharacterSO c = getRandom();
+                        for (int i = 0; i < 144 && (!c.HasRankedData || c.rankedData.Length <= chara.Rank); i++) c = getRandom();
+                        if (stats.TryTransformCharacter(chara.ID, c, false, false, false)) exitAmount++;
+                        chara.SetStoredValue(HasTransformed, 1);
+                    }
+                }
+            }
+            return exitAmount > 0;
+        }
+    }
+    public static class ReplacementHandler
+    {
+        public static UnitStoredValueNames Value => (UnitStoredValueNames)2088994;
+        public static void NotifCheck(string notificationName, object sender, object args)
+        {
+            if (notificationName == TriggerCalls.OnKill.ToString() && sender is IUnit unit)
+            {
+                unit.SetStoredValue(Value, unit.GetStoredValue(Value) + 1);
+            }
+        }
+    }
+    public class ReplacementDamageEffect : DamageEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            List<TargetSlotInfo> newTarg = new List<TargetSlotInfo>();
+            foreach (TargetSlotInfo target in targets) if (target.HasUnit && target.Unit.GetStoredValue(ReplacementHandler.Value) > 0) newTarg.Add(target);
+            return base.PerformEffect(stats, caster, newTarg.ToArray(), areTargetSlots, entryVariable, out exitAmount);
         }
     }
 }

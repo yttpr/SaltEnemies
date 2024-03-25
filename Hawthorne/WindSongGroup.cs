@@ -298,7 +298,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = UnityEngine.Random.Range(4, 9),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_MusicMan_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/SkyloftSong",
                 roarEvent = LoadedAssetsHandler.GetCharcater("Mordrake_CH").dxSound,
                 difficulty = EncounterDifficulty.Medium
             };

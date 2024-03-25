@@ -74,11 +74,11 @@ namespace Hawthorne
             UnMungGroup.Add(6559);
             SomethingSong.Add(2467406);
             FreudGroup.Modify();
-            FreudGroup.Add(6329);//doesnt has music
+            FreudGroup.Add(6329);
             GreyGroup.ModifyRust();
             GreyGroup.ModifyStone();
             DeepSong.Add(2467407);
-            IllusionGroup.Add(2467408);//doesnt has music
+            IllusionGroup.Add(2467408);
             FlowerSong.PurpleOrph(2467409);
             FlowerSong.PurpleGard(2467409);
             FlowerSong.YellowOrph(2367409);
@@ -104,7 +104,7 @@ namespace Hawthorne
             WarbirdGroup.Add(2467422);//doesnt has music
             WindSongGroup.Add(2467423);
             SolventGroup.Add(2467424);
-            SkyloftGroup.Add(2467425);//doesnt has music
+            SkyloftGroup.Add(2467425);
             ButterflyGroup.Add(2467426);//doesnt has music
             GrandfatherGroup.Add(2467427);//doesnt has music
             ReaperGroup.Add(2467428);//doesnt has music

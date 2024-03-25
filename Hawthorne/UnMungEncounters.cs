@@ -47,7 +47,7 @@ namespace Hawthorne
             }
             enemyEncounter.variations = new FieldEnemy[11][];
             enemyEncounter.signType = (SignType)6559;
-            enemyEncounter.musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Mung_Easy_EnemyBundle")._musicEventReference;
+            enemyEncounter.musicEvent = "event:/Hawthorne/TeachFishTheme";
             enemyEncounter.roarEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Mung_Easy_EnemyBundle")._roarReference.roarEvent;
             enemyEncounter.variations[0] = new FieldEnemy[1];
             enemyEncounter.variations[0][0] = new FieldEnemy()
