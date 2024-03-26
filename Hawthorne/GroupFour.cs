@@ -66,7 +66,7 @@ namespace Hawthorne
         {
             PixelSong.Add(2467402);
             EnigmaSong.Add(2467403);
-            AnglerGroup.Add(2467404);//doesnt has music
+            AnglerGroup.Add(2467404);
             CameraSong.Add(35788);
             CameraSong.Modify();
             BirdGroup.Add(2467405);
@@ -97,7 +97,7 @@ namespace Hawthorne
             RabiesGroup.Add(2467417);
             LonelyFlummox.Add();
             RedoManiskins.Add();
-            SnakeGroup.Add(2467418);//doesnt has music
+            SnakeGroup.Add(2467418);
             HunterGroup.Add(2467419);
             FirebirdGroup.Add(2467420);//doesnt has music
             BeakGroup.Add(2467421);

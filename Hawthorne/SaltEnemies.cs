@@ -158,7 +158,7 @@ namespace Hawthorne
             try { EnemyRefresher.Setup(); }
             catch { Debug.LogError("enemy refreshser failed to set up :("); }
             Hawthorne.MultiSpriteEnemyLayout.Setup();
-            
+            Hawthorne.FieldEffectFixHook.Setup();
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
             return;
@@ -2770,6 +2770,17 @@ namespace Hawthorne
             {
                 File.WriteAllText(SavePath + "Update_1_3_30.txt", "Updatd pages !");
                 PageCollector.UpdatePage("DontTouchMePage.png");
+            }
+        }
+        public static void U1_4_0()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_0.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_0.txt", "Updatd pages !");
+                PageCollector.UpdatePage("UnmungPage.png");
+                PageCollector.UpdatePage("SkyloftPage.png");
+                PageCollector.UpdatePage("SnakeGodPage.png");
+                PageCollector.UpdatePage("AnglerPage.png");
             }
         }
     }

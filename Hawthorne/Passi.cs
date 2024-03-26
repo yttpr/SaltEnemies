@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using THE_DEAD;
@@ -1581,6 +1582,7 @@ namespace Hawthorne
         }
         public static void PostNotification(Action<CombatManager, string, object, object> orig, CombatManager self, string notificationName, object sender, object args)
         {
+            AnglerHandler.NotifCheck(notificationName, sender, args);
             orig(self, notificationName, sender, args);
             if (sender is IUnit unit)
             {
@@ -2240,6 +2242,7 @@ namespace Hawthorne
             {
                 CombatManager.Instance.AddRootAction(new ArmorAction(self.SlotID, self.IsCharacter, self.Unit.ID));
             }
+            AnglerHandler.Check();
             return ret;
         }
         public static int TryRemoveSlotStatusEffect(Func<CombatSlot, SlotStatusEffectType, int> orig, CombatSlot self, SlotStatusEffectType type)
@@ -5480,6 +5483,145 @@ namespace Hawthorne
         {
             string name = ability.ability._abilityName;
             return CombatManager.Instance._stats.TurnsPassed < 1 && (name == this.replace);
+        }
+    }
+    public static class AnglerHandler
+    {
+        public static bool Awaken;
+        public static UnitStoredValueNames value => (UnitStoredValueNames)8282494;
+        public static void Check()
+        {
+            bool newAwake = false;
+            if (!Hawthorne.Check.EnemyExist("A'Flower'_EN")) return;
+            foreach (CombatSlot slot in CombatManager.Instance._stats.combatSlots.EnemySlots)
+            {
+                if (slot.HasUnit && slot.Unit.CurrentHealth > 0 && slot.Unit is EnemyCombat enemy && enemy.Enemy == LoadedAssetsHandler.GetEnemy("A'Flower'_EN"))
+                {
+                    bool Personal = false;
+                    foreach (CombatSlot plot in CombatManager.Instance._stats.combatSlots.CharacterSlots)
+                    {
+                        if (plot.SlotID == slot.SlotID)
+                        {
+                            if (plot.ContainsStatusEffect(SlotStatusEffectType.Constricted) && plot.HasUnit && plot.Unit.CurrentHealth > 0)
+                            {
+                                newAwake = true;
+                                Personal = true;
+                            }
+                            break;
+                        }
+                    }
+                    if (Personal)
+                    {
+                        if (enemy.GetStoredValue(value) == 0)
+                        {
+                            CombatManager.Instance._stats.combatUI.TrySetEnemyAnimatorParameter(enemy.ID, "HasFacing", true);
+                            TrySpawnSandEffect(CombatManager.Instance._stats.combatUI, enemy.ID);
+                        }
+                        enemy.SetStoredValue(value, 1);
+                    }
+                    else
+                    {
+                        if (enemy.GetStoredValue(value) != 0)
+                        {
+                            CombatManager.Instance._stats.combatUI.TrySetEnemyAnimatorParameter(enemy.ID, "HasFacing", false);
+                            TrySpawnSandEffect(CombatManager.Instance._stats.combatUI, enemy.ID);
+                        }
+                        enemy.SetStoredValue(value, 0);
+                    }
+                }
+            }
+            if (newAwake != Awaken)
+            {
+                Awaken = newAwake;
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("HasFront", Awaken ? 1 : 0);
+            }
+        }
+        public static void NotifCheck(string notificationName, object sender, object args)
+        {
+            if (notificationName == TriggerCalls.OnMoved.ToString() || notificationName == TriggerCalls.OnDeath.ToString()) Check();
+        }
+        public static void TrySpawnSandEffect(CombatVisualizationController UI, int id)
+        {
+            if (UI._enemiesInCombat.TryGetValue(id, out var value))
+            {
+                TrySpawnEffectInEnemy(UI._enemyZone, value.FieldID);
+            }
+        }
+        public static void TrySpawnEffectInEnemy(EnemyZoneHandler zone, int fieldID)
+        {
+            SpawnEffect(zone._enemies[fieldID].FieldEntity);
+        }
+        public static void SpawnEffect(EnemyInFieldLayout field)
+        {
+            //RuntimeManager.PlayOneShot(field._gibsEvent, field.Position);
+            UnityEngine.Object.Instantiate(Sand, field.transform.position, field.transform.rotation);
+        }
+        static ParticleSystem _sand;
+        public static ParticleSystem Sand
+        {
+            get
+            {
+                if (_sand == null)
+                {
+                    _sand = SaltEnemies.assetBundle.LoadAsset<GameObject>("Assets/Senis3/0FuckFolder/Sand.prefab").GetComponent<ParticleSystem>();
+                }
+                return _sand;
+            }
+        }
+    }
+    public class ChangeAnglerMusicUIAction : CombatAction
+    {
+        public bool Awake;
+        public ChangeAnglerMusicUIAction(bool awake)
+        {
+            Awake = awake;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("HasFront", Awake ? 1 : 0);
+            yield return null;
+        }
+    }
+    public class SetAnglerAnimationParameterUIAction : CombatAction
+    {
+        public int _id;
+
+        public bool _isCharacter;
+
+        public string _parameterName;
+
+        public bool _parameterValue;
+
+        public SetAnglerAnimationParameterUIAction(int id, bool isCharacter, string parameterName, bool parameterValue)
+        {
+            _id = id;
+            _isCharacter = isCharacter;
+            _parameterName = parameterName;
+            _parameterValue = parameterValue;
+        }
+
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            if (_isCharacter)
+            {
+                stats.combatUI.TrySetCharacterAnimatorParameter(_id, _parameterName, _parameterValue);
+            }
+            else
+            {
+                stats.combatUI.TrySetEnemyAnimatorParameter(_id, _parameterName, _parameterValue);
+                AnglerHandler.TrySpawnSandEffect(stats.combatUI, _id);
+            }
+
+            yield break;
+        }
+    }
+    public class AnglerCheckEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            AnglerHandler.Check();
+            return true;
         }
     }
 }

@@ -1641,7 +1641,7 @@ namespace Hawthorne
     }
     public static class AnglerGroup
     {
-        public static int rarity
+        public static int rar
         {
             get
             {
@@ -1649,6 +1649,7 @@ namespace Hawthorne
                 else return UnityEngine.Random.Range(10, 16);
             }
         }
+        public static int rarity => rar * 999;
 
         public static void Add(int sign)
         {
@@ -1662,7 +1663,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_Scrungie_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/AnglerTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone01_Voboola_Hard_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -2013,7 +2014,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_Scrungie_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/AnglerTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone01_Voboola_Hard_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Hard
             };
