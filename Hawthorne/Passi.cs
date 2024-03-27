@@ -1422,6 +1422,8 @@ namespace Hawthorne
                     point._secondExtraAbility.cost = point._extraAbility.cost;
                     point._passiveName = "Appointment";
                     point._enemyDescription = "This enemy will perforn an extra ability \"Appointment\" each turn.";
+                    point._characterDescription = baseExtra._characterDescription;
+                    point._triggerOn = baseExtra._triggerOn;
                     PerformRandomEffectsAmongEffects posi = ScriptableObject.CreateInstance<PerformRandomEffectsAmongEffects>();
                     posi.List = new Dictionary<string, string>();
                     posi.List.Add(nameof(ApplySpotlightEffect), "");
@@ -1446,14 +1448,15 @@ namespace Hawthorne
                     posi.List.Add("ApplySurviveEffect", "BOSpecialItems.Content.Effects");
                     posi.List.Add("ApplyBlessEffect", "");
                     posi.List.Add("ApplySpiritualEnergyEffect", "FiendishFools");
+                    posi.Setup();
 
                     Ability bonus = new Ability();
                     bonus.name = "Appointment";
                     bonus.description = "If there is no Opposing party member, queue \"Procedure\" as an additional action next turn.";
                     bonus.effects = new Effect[3];
                     bonus.effects[0] = new Effect(ScriptableObject.CreateInstance<IsUnitEffect>(), 1, IntentType.Misc_Hidden, Slots.Front);
-                    bonus.effects[1] = new Effect(BasicEffects.GetVisuals("Weep_A", false, Slots.Self), 1, null, Slots.Front, BasicEffects.DidThat(true));
-                    bonus.effects[2] = new Effect(BasicEffects.SetStoreValue(DoubleExtraAttackPassiveAbility.value), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(true, 2));
+                    bonus.effects[1] = new Effect(BasicEffects.GetVisuals("Weep_A", false, Slots.Self), 1, null, Slots.Front, BasicEffects.DidThat(false));
+                    bonus.effects[2] = new Effect(BasicEffects.SetStoreValue(DoubleExtraAttackPassiveAbility.value), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(false, 2));
                     bonus.visuals = null;
                     bonus.animationTarget = Slots.Front;
                     point._extraAbility.ability = bonus.CharacterAbility().ability;
@@ -5338,14 +5341,17 @@ namespace Hawthorne
             exitAmount = 0;
             int effectsRan = 0;
             if (Effects == null || Effects.Count <= 0) return false;
-            for (int i = 0; i < entryVariable; i++)
+            foreach (TargetSlotInfo target in targets)
             {
-                EffectSO run = GrabRand();
-                if (run != null)
+                for (int i = 0; i < entryVariable; i++)
                 {
-                    if (run.PerformEffect(stats, caster, targets, areTargetSlots, UsePreviousExitValueForNewEntry ? PreviousExitValue : 1, out int exi))
-                        exitAmount += exi;
-                    effectsRan++;
+                    EffectSO run = GrabRand();
+                    if (run != null)
+                    {
+                        if (run.PerformEffect(stats, caster, new TargetSlotInfo[] { target }, areTargetSlots, UsePreviousExitValueForNewEntry ? PreviousExitValue : 1, out int exi))
+                            exitAmount += exi;
+                        effectsRan++;
+                    }
                 }
             }
             return effectsRan > 0;

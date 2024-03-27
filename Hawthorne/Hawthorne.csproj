@@ -282,6 +282,10 @@
 	  <None Remove="ItemSprites\TwoBullet.png" />
 	  <None Remove="itswings.png" />
 	  <None Remove="Lightweight.png" />
+	  <None Remove="Lobotomize\LobotomyDead.png" />
+	  <None Remove="Lobotomize\LobotomyIcon.png" />
+	  <None Remove="Lobotomize\LobotomyPortal.png" />
+	  <None Remove="Lobotomize\LobotomyWorld.png" />
 	  <None Remove="LookAtMe.png" />
 	  <None Remove="MODD.png" />
 	  <None Remove="moreStatus\aderlineIcon.png" />
@@ -700,6 +704,10 @@
 	  <EmbeddedResource Include="ItemSprites\TwoBullet.png" />
 	  <EmbeddedResource Include="itswings.png" />
 	  <EmbeddedResource Include="Lightweight.png" />
+	  <EmbeddedResource Include="Lobotomize\LobotomyDead.png" />
+	  <EmbeddedResource Include="Lobotomize\LobotomyIcon.png" />
+	  <EmbeddedResource Include="Lobotomize\LobotomyPortal.png" />
+	  <EmbeddedResource Include="Lobotomize\LobotomyWorld.png" />
 	  <EmbeddedResource Include="LookAtMe.png" />
 	  <EmbeddedResource Include="MODD.png" />
 	  <EmbeddedResource Include="moreStatus\aderlineIcon.png" />

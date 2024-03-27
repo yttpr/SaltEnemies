@@ -745,9 +745,10 @@ namespace Hawthorne
             addSepulchrePool("Indicator_EN");
             addSepulchrePool("Maw_EN");
             addSepulchrePool("Clione_EN");
+            addSepulchrePool("Children6_EN");
+            addSepulchrePool("YNL_EN");
             AddScrungiePool("LostSheep_EN");
             AddScrungiePool("Derogatory_EN");
-            addSepulchrePool("Children6_EN");
             AddScrungiePool("Denial_EN");
             AddScrungiePool("DeadPixel_EN");
             AddScrungiePool("LittleAngel_EN");
@@ -790,6 +791,7 @@ namespace Hawthorne
             addFountainPool("Indicator_EN");
             addFountainPool("Clione_EN");
             addFountainPool("Children1_EN");
+            addFountainPool("YNL_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -851,6 +853,7 @@ namespace Hawthorne
             addBronzoPool("Maw_EN");
             addBronzoPool("Clione_EN");
             addBronzoPool("Children6_EN");
+            addBronzoPool("YNL_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1940,6 +1943,7 @@ namespace Hawthorne
                 if (!red && EnemyExist("BlackStar_EN")) list.Add("BlackStar_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Indicator_EN")) list.Add("Indicator_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
+                if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("YNL_EN")) list.Add("YNL_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -1999,6 +2003,7 @@ namespace Hawthorne
             if (harder && EnemyExist("Children6_EN")) for (int i = 0; i < 3; i++) list.Add("Children6_EN");
             if (EnemyExist("Children6_EN")) for (int i = 0; i < 2; i++) list.Add("Children6_EN");
             if (harder && EnemyExist("MarbleMaw_EN")) for (int i = 0; i < 5; i++) list.Add("MarbleMaw_EN");
+            if (harder && EnemyExist("YNL_EN")) for (int i = 0; i < 4; i++) list.Add("YNL_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2580,6 +2585,7 @@ namespace Hawthorne
                 if (EnemyExist("HowlingAvian_EN") && Half) list.Add("HowlingAvian_EN");
                 if (!Red && EnemyExist("TripodFish_EN") && Quarter) list.Add("TripodFish_EN");
                 if (!Red && EnemyExist("MarbleMaw_EN") && Half) list.Add("MarbleMaw_EN");
+                if (!Red && EnemyExist("YNL_EN") && Half) list.Add("YNL_EN");
                 string ret = list.GetRandom();
                 if (ret == "InHisImage_EN" || ret == "InHerImage_EN") ChunkDoubleable = true;
                 else ChunkDoubleable = false;

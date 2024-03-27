@@ -61,6 +61,7 @@ namespace Hawthorne
             Maw.Add(544471);
             Clione.Add(544470);
             Children.Add(544469);
+            Lobotomy.Add(544468);
         }
         public static void AddEncounters()
         {
@@ -107,7 +108,7 @@ namespace Hawthorne
             SkyloftGroup.Add(2467425);
             ButterflyGroup.Add(2467426);//doesnt has music
             GrandfatherGroup.Add(2467427);//doesnt has music
-            ReaperGroup.Add(2467428);//doesnt has music
+            ReaperGroup.Add(2467428);//EMBER IS WORKING ON IT
             ShuaGroup.Add(2467429);
             BlackStarGroup.Add(2467430);//doesnt has music
             IndicatorGroup.Add(2467431);

@@ -3337,7 +3337,7 @@ namespace Hawthorne
                     {
                         name = "Shock Therapy",
                         description = "Transform the Opposing party member into a random party member. \nIf the Opposing party member has already been transformed by this ability, lower their level and deal a Painful amount of damage to them.",
-                        rarity = 5,
+                        rarity = 10,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ShockTherapyEffect>(), 3, IntentType.Misc, Slots.Front),
@@ -3386,7 +3386,7 @@ namespace Hawthorne
                     {
                         name = "Replacement",
                         description = "Apply 3 Power on the Opposing party member. \nIf the Opposing party member has killed during this combat, deal an Agonizing amount of damage to them.",
-                        rarity = 5,
+                        rarity = 3,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 3, (IntentType)987895, Slots.Front),

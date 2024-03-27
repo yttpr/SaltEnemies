@@ -93,4 +93,49 @@ namespace Hawthorne
             IDetour hook = new Hook(typeof(Enemy).GetMethod(nameof(Enemy.AddEnemy), ~BindingFlags.Default), typeof(Wysteria).GetMethod(nameof(AddEnemy), ~BindingFlags.Default));
         }
     }
+    public static class Lobotomy
+    {
+        public static string ID = "Lobotomy";
+        public static void Add(int entity)
+        {
+            Enemy enemy = new Enemy()
+            {
+                name = "Your New Life!",
+                health = 35,
+                size = 1,
+                entityID = (EntityIDs)entity,
+                healthColor = Pigments.Gray,
+                priority = 0,
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/" + ID + "/" + ID + "_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
+            };
+            enemy.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/" + ID + "/" + ID + "_Gibs.prefab").GetComponent<ParticleSystem>();
+            enemy.prefab.SetDefaultParams();
+            (enemy.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (1)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (2)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (3)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (4)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (5)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (6)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (7)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (8)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (9)").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite (10)").GetComponent<SpriteRenderer>(),
+            };
+            enemy.combatSprite = ResourceLoader.LoadSprite(ID + "Icon.png", 32);
+            enemy.overworldAliveSprite = ResourceLoader.LoadSprite(ID + "World.png", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
+            enemy.overworldDeadSprite = ResourceLoader.LoadSprite(ID + "Dead.png", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
+            enemy.hurtSound = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").damageSound;
+            enemy.deathSound = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound;
+            enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_YNL>();
+            enemy.passives = new BasePassiveAbilitySO[]
+            {
+                Passi.Appointment
+            };
+            enemy.abilities = new Ability[] { Abili.ShockTherapy, Abili.Illuminate, Abili.Replacement };
+            enemy.enemyID = "YNL_EN";
+            enemy.AddEnemy();
+        }
+    }
 }
