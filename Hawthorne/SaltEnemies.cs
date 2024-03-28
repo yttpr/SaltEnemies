@@ -71,6 +71,15 @@ namespace Hawthorne
             Group4 = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("group4"));
             SoundClass.Setup();
 
+            try
+            {
+                CustomVisuals.Setup();
+            }
+            catch
+            {
+                Debug.LogError("custom attack animations failed.");
+            }
+
             foreach (CharacterSO vanillaChar in BrutalAPI.BrutalAPI.vanillaChars)
                 BaseChara.Add(vanillaChar);
             if (!Directory.Exists(SavePath) || !File.Exists(SavePath + "Hawthorne.config"))
@@ -159,6 +168,7 @@ namespace Hawthorne
             catch { Debug.LogError("enemy refreshser failed to set up :("); }
             Hawthorne.MultiSpriteEnemyLayout.Setup();
             Hawthorne.FieldEffectFixHook.Setup();
+            try { ShuaHandler.Setup(); } catch { Debug.LogError("SHUA HANDLER EPIC FAILURE"); }
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
             return;

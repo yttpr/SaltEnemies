@@ -24,9 +24,9 @@ namespace Hawthorne
                 area = 2,
                 randomPlacement = true,
                 hardmodeEncounter = true,
-                rarity = 7,
+                rarity = 7 * 1,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_WrigglingSacrifice_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/BlackStarTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Easy
             };

@@ -86,11 +86,13 @@ namespace Hawthorne
             PreviousEffectCondition didThat = ScriptableObject.CreateInstance<PreviousEffectCondition>();
             didThat.wasSuccessful = true;
             AnimationVisualsEffect homonDomin = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
-            homonDomin._visuals = LoadedAssetsHandler.GetEnemyAbility("Domination_A").visuals;
+            //homonDomin._visuals = LoadedAssetsHandler.GetEnemyAbility("Domination_A").visuals;
             homonDomin._animationTarget = Slots.Front;
+            homonDomin._visuals = CustomVisuals.GetVisuals("Salt/Decapitate");
             AnimationVisualsEffect talons = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
-            talons._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
+            //talons._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
             talons._animationTarget = Slots.Front;
+            talons._visuals = CustomVisuals.GetVisuals("Salt/Gaze");
             Ability counting = new Ability();
             counting.name = "Count";
             counting.description = "Increase \"Count\" by 1. If this counter reaches 3 or higher, reset the counter and deal a Deadly amount of damage to the opposing party member.";

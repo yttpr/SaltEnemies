@@ -1649,7 +1649,7 @@ namespace Hawthorne
                 else return UnityEngine.Random.Range(10, 16);
             }
         }
-        public static int rarity => rar * 999;
+        public static int rarity => rar * 1;
 
         public static void Add(int sign)
         {

@@ -96,7 +96,7 @@ namespace Hawthorne
             dance.rarity = 15;
             dance.effects = new Effect[1];
             dance.effects[0] = new Effect(infestationUp, 1, IntentType.Misc, Slots.Self);
-            dance.visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+            dance.visuals = CustomVisuals.GetVisuals("Salt/Stars");
             dance.animationTarget = Slots.Self;
             Ability finished = new Ability();
             finished.name = "Abrupt Finish";

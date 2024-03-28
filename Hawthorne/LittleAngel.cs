@@ -94,7 +94,7 @@ namespace Hawthorne
             tenderness.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, new IntentType?((IntentType)666888), Slots.FrontLeftRight);
             tenderness.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, new IntentType?((IntentType)666888), Slots.Self);
             tenderness.effects[2] = new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self);
-            tenderness.visuals = LoadedAssetsHandler.GetCharacterAbility("Cacophony_1_A").visuals;
+            tenderness.visuals = CustomVisuals.GetVisuals("Salt/Needle");
             tenderness.animationTarget = Slots.FrontLeftRight;
             AnimationVisualsEffect homonDomin = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
             homonDomin._animationTarget = Slots.Front;
@@ -118,7 +118,7 @@ namespace Hawthorne
             adoration.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, new IntentType?((IntentType)666888), Slots.Self);
             adoration.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, new IntentType?((IntentType)666888), Slots.Front);
             adoration.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 2, IntentType.Status_Ruptured, Slots.Self, didThat);
-            adoration.visuals = LoadedAssetsHandler.GetEnemyAbility("Crescendo_A").visuals;
+            adoration.visuals = CustomVisuals.GetVisuals("Salt/Hung");
             adoration.animationTarget = Slots.Front;
 
 

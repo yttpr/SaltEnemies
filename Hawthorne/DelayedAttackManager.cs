@@ -16,7 +16,7 @@ namespace Hawthorne
     public static class DelayedAttackManager
     {
         public static List<DelayedAttack> Attacks = new List<DelayedAttack>();
-        public static AttackVisualsSO CrushAnim => LoadedAssetsHandler.GetEnemyAbility("Crush_A").visuals;
+        public static AttackVisualsSO CrushAnim => CustomVisuals.GetVisuals("Salt/Cannon");
         public static TargetSlotInfo[] Targets(bool playerTurn)
         {
             List<TargetSlotInfo> targets = new List<TargetSlotInfo>();
@@ -98,6 +98,7 @@ namespace Hawthorne
             Attacks.Clear();
             if (DoDebugs.MiscInfo) Debug.Log("Clearing");
             ButterflyUnboxer.Boxeds.Clear();
+            BlackHoleEffect.Reset();
         }
 
         public static void Setup()

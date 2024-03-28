@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -5628,6 +5629,140 @@ namespace Hawthorne
             exitAmount = 0;
             AnglerHandler.Check();
             return true;
+        }
+    }
+    public static class ShuaHandler
+    {
+        static ParticleSystem hits;
+        public static ParticleSystem Hits
+        {
+            get
+            {
+                if (hits == null)
+                {
+                    hits = SaltEnemies.Group4.LoadAsset<GameObject>("Assets/group4/Shua/Shua_HitEffect.prefab").GetComponent<ParticleSystem>();
+                }
+                return hits;
+            }
+        }
+        public static void DamageEnemy(Action<EnemyInFieldLayout> orig, EnemyInFieldLayout self)
+        {
+            if (CombatManager.Instance._stats.combatUI._enemiesInCombat.TryGetValue(self.EnemyID, out var value))
+            {
+                if (Check.EnemyExist("Shua_EN") && value.EnemyBase == LoadedAssetsHandler.GetEnemy("Shua_EN"))
+                {
+                    UnityEngine.Object.Instantiate(Hits, self.transform.position, self.transform.rotation);
+                }
+            }
+            orig(self);
+        }
+        public static IEnumerator PlayEnemyDeathAnimation(Func<EnemyInFieldLayout, string, IEnumerator> orig, EnemyInFieldLayout self, string deathSound)
+        {
+            bool IS = false;
+            if (CombatManager.Instance._stats.combatUI._enemiesInCombat.TryGetValue(self.EnemyID, out var value))
+            {
+                if (Check.EnemyExist("BlackStar_EN") && value.EnemyBase == LoadedAssetsHandler.GetEnemy("BlackStar_EN"))
+                {
+                    IS = true;
+                }
+                else if (Check.EnemyExist("Singularity_EN") && value.EnemyBase == LoadedAssetsHandler.GetEnemy("Singularity_EN"))
+                {
+                    IS = true;
+                }
+            }
+            if (!IS)
+            {
+                yield return orig(self, deathSound);
+            }
+            else
+            {
+                self.FinishedAnimation = false;
+                self._animator.SetTrigger("Dying");
+                if (deathSound != "")
+                {
+                    RuntimeManager.PlayOneShot(deathSound, self.Position);
+                    RuntimeManager.PlayOneShot("event:/Hawthorne/Misc/RingingSound", self.Position);
+                }
+
+                float saveCounter = self.saveAnimationTime;
+                while (!self.FinishedAnimation)
+                {
+                    yield return null;
+                    saveCounter -= Time.deltaTime;
+                    if (saveCounter <= 0f)
+                    {
+                        break;
+                    }
+                }
+
+                self.FinishedAnimation = true;
+            }
+        }
+        public static void Setup()
+        {
+            IDetour hook = new Hook(typeof(EnemyInFieldLayout).GetMethod(nameof(EnemyInFieldLayout.DamageEnemy), ~BindingFlags.Default), typeof(ShuaHandler).GetMethod(nameof(DamageEnemy), ~BindingFlags.Default));
+            IDetour hack = new Hook(typeof(EnemyInFieldLayout).GetMethod(nameof(EnemyInFieldLayout.PlayEnemyDeathAnimation), ~BindingFlags.Default), typeof(ShuaHandler).GetMethod(nameof(PlayEnemyDeathAnimation), ~BindingFlags.Default));
+        }
+    }
+    public class BlackHoleEffect : EffectSO
+    {
+        public static int Amount = 0;
+        public static void Reset() => Amount = 0;
+        public bool Add = true;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            bool GOING = Amount > 0;
+            if (Add) Amount++;
+            else Amount--;
+            if ((Amount > 0) == GOING) return Amount > 0;
+            if (Amount > 0)
+            {
+                if (changeMusic != null)
+                {
+                    try { changeMusic.Abort(); } catch { UnityEngine.Debug.LogWarning("black star thread failed to shut down."); }
+                }
+                changeMusic = new System.Threading.Thread(GO);
+                changeMusic.Start();
+            }
+            else
+            {
+                if (changeMusic != null)
+                {
+                    try { changeMusic.Abort(); } catch { UnityEngine.Debug.LogWarning("black star thread failed to shut down."); }
+                }
+                changeMusic = new System.Threading.Thread(STOP);
+                changeMusic.Start();
+            }
+            return Amount > 0;
+        }
+
+        public static System.Threading.Thread changeMusic;
+        public static void GO()
+        {
+            int start = 0;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("BlackHole", out float num) == RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i <= 100 && Amount > 0; i++)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("BlackHole", i);
+                System.Threading.Thread.Sleep(20);
+                //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
+        }
+        public static void STOP()
+        {
+            int start = 0;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("BlackHole", out float num) == RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i >= 0 && Amount <= 0; i--)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("BlackHole", i);
+                System.Threading.Thread.Sleep(20);
+                //if (i < 5) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
         }
     }
 }

@@ -117,7 +117,7 @@ namespace Hawthorne
             baiting.effects[10] = new Effect(ScriptableObject.CreateInstance<IfTargetApplyConstrictedSlotEffect>(), 3, IntentType.Field_Constricted, Slots.Front);
             baiting.effects[8] = new Effect(ScriptableObject.CreateInstance<ExitValueSetterEffect>(), 10, IntentType.Swap_Right, Slots.SlotTarget(new int[4] { -1, -2, -3, -4 }, false));
             baiting.effects[9] = new Effect(ScriptableObject.CreateInstance<ExitValueSetterEffect>(), 10, IntentType.Swap_Left, Slots.SlotTarget(new int[4] { 1, 2, 3, 4 }, false));
-            baiting.visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+            baiting.visuals = CustomVisuals.GetVisuals("Salt/Rose");
             baiting.animationTarget = Slots.Self;
             angler.passives[1] = UnityEngine.Object.Instantiate<BasePassiveAbilitySO>(angler.passives[1]);
             angler.passives[1]._passiveName = "Allure";

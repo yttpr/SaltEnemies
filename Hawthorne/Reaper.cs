@@ -97,12 +97,10 @@ namespace Hawthorne
             {
                 Passi.Jumpy, Passives.Unstable, Passives.Constricting
             };
-            ChangeMusicParameterEffect add = ScriptableObject.CreateInstance<ChangeMusicParameterEffect>();
-            add._addition = true;
-            add._parameter = MusicParameter.Ungod;
-            ChangeMusicParameterEffect minu = ScriptableObject.CreateInstance<ChangeMusicParameterEffect>();
-            minu._addition = false;
-            minu._parameter = MusicParameter.Ungod;
+            BlackHoleEffect add = ScriptableObject.CreateInstance<BlackHoleEffect>();
+            add.Add = true;
+            BlackHoleEffect minu = ScriptableObject.CreateInstance<BlackHoleEffect>();
+            minu.Add = false;
             enemy.enterEffects = new Effect[]
             {
                 new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, null, Slots.Self, ScriptableObject.CreateInstance<IsPlayerTurnEffectCondition>()),

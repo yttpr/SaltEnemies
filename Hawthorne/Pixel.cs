@@ -121,7 +121,8 @@ namespace Hawthorne
             Multicolors.effects[0] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front);
             Multicolors.effects[1] = new Effect(ScriptableObject.CreateInstance<GenerateFullBarManaEffect>(), 1, IntentType.Mana_Generate, Slots.Self);
             Multicolors.effects[2] = new Effect(randomize, 1, IntentType.Misc, Slots.Self);
-            Multicolors.visuals = LoadedAssetsHandler.GetEnemy("UnfinishedHeir_BOSS").abilities[2].ability.visuals; ;
+            //Multicolors.visuals = LoadedAssetsHandler.GetEnemy("UnfinishedHeir_BOSS").abilities[2].ability.visuals;
+            Multicolors.visuals = CustomVisuals.GetVisuals("Salt/Gaze");
             Multicolors.animationTarget = Slots.Self;
 
             IncreaseStatusEffectsEffect increaseAllStatus = ScriptableObject.CreateInstance<IncreaseStatusEffectsEffect>();
@@ -144,8 +145,9 @@ namespace Hawthorne
             interference.effects[8] = new Effect(BasicEffects.Empty, 1, IntentType.Status_Cursed, Targetting.AllEnemy);
             interference.effects[9] = new Effect(BasicEffects.Empty, 1, (IntentType)666888, Targetting.AllEnemy);
             interference.effects[10] = new Effect(BasicEffects.Empty, 1, (IntentType)846749, Targetting.AllEnemy);
-            interference.visuals = LoadedAssetsHandler.GetCharacterAbility("Entwined_1_A").visuals;
-            interference.animationTarget = Slots.Self;
+            //nterference.visuals = LoadedAssetsHandler.GetCharacterAbility("Entwined_1_A").visuals;
+            interference.visuals = CustomVisuals.GetVisuals("Salt/Class");
+            interference.animationTarget = MultiTargetting.Create(Slots.SlotTarget(new int[] {-4, -3, -2, -1, 0, 1, 2, 3, 4}, true), Slots.SlotTarget(new int[] {-4, -3, -2, -1, 0, 1, 2, 3, 4}, false));
             if (DoDebugs.GenInfo) Debug.Log("Abilities");
 
             pixel.abilities = new Ability[3] { theStatic, Multicolors, interference };
@@ -194,7 +196,8 @@ namespace Hawthorne
                 int hitHere = targetSlotInfo2.SlotID - caster.SlotID;
                 AnimationVisualsEffect animIS = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
                 animIS._animationTarget = Slots.SlotTarget(new int[1] { hitHere }, true);
-                animIS._visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+                //animIS._visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+                animIS._visuals = CustomVisuals.GetVisuals("Salt/Class");
                 Effect animYAY = new Effect(animIS, 1, new IntentType?(), Slots.Self);
 
                 ChangeToRandomHealthColorEffect greyYAY = ScriptableObject.CreateInstance<ChangeToRandomHealthColorEffect>();

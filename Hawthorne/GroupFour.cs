@@ -115,6 +115,7 @@ namespace Hawthorne
             MawGroup.Add(2467432);//doesnt has music
             Iconoclast2Group.Add();
             ClioneSong.Add(2467433);
+            //make lobotomy encounters and add music
         }
         public static void ModifyEncounters()
         {

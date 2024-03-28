@@ -117,7 +117,7 @@ namespace Hawthorne
             sour.effects = new Effect[2];
             sour.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyDeterminedEffect>(), 7, new IntentType?((IntentType)987896), Slots.Sides);
             sour.effects[1] = new Effect(indirect, 15, IntentType.Damage_11_15, Slots.Sides, didThat);
-            sour.visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals;
+            sour.visuals = CustomVisuals.GetVisuals("Salt/Sprout");
             sour.animationTarget = Slots.Sides;
             Extra1Or2LootOptionsEffect TApple = ScriptableObject.CreateInstance<Extra1Or2LootOptionsEffect>();
             TApple._itemName = "TaintedApple_TW";
