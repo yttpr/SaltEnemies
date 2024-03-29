@@ -2108,6 +2108,7 @@ namespace Hawthorne
             }
             if (Hawthorne.Check.Half) CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Cheese!\""));
             else CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Smile for the Camera!"));
+            CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             if (caster.MaximizeHealth(targets[0].Unit.MaximumHealth))
             {
@@ -3500,6 +3501,7 @@ namespace Hawthorne
             CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[]
             {
                 new Effect(ScriptableObject.CreateInstance<MoveToClosestTargetEffect>(), 1, IntentType.Swap_Sides, Slots.SlotTarget(new int[9] {-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
+                new Effect(BasicEffects.GetVisuals("Salt/Lens", false, Slots.Front), 1, null, Slots.Front),
                 new Effect(ScriptableObject.CreateInstance<SayCheeseEffect>(), 1, IntentType.Misc, Slots.Front, didThat)
             }), caster));
             return true;

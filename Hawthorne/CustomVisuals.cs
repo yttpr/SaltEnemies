@@ -83,6 +83,28 @@ namespace Hawthorne
             LoadVisuals("Salt/Keyhole", SaltEnemies.assetBundle, "assets/Attack2/KeyholeAnim.anim", "event:/Hawthorne/Attack2/Blink");
             LoadVisuals("Salt/Notif", SaltEnemies.assetBundle, "assets/Attack2/AlertAnim.anim", "event:/Hawthorne/Attack2/Quest");
             LoadVisuals("Salt/Wheel", SaltEnemies.assetBundle, "assets/Attack2/Sail.anim", "event:/Hawthorne/Attack2/Wheel");
+            LoadVisuals("Salt/Swirl", SaltEnemies.assetBundle, "assets/Attack2/Waves1Anim.anim", "event:/Hawthorne/Attack2/Waves1");
+            LoadVisuals("Salt/Pop", SaltEnemies.assetBundle, "assets/Attack2/Waves2Anim.anim", "event:/Hawthorne/Attack2/Waves2");
+            LoadVisuals("Salt/Smile", SaltEnemies.assetBundle, "assets/Attack2/SmileScare.anim", "event:/Hawthorne/Attack2/Smiley");
+            LoadVisuals("Salt/Fog", SaltEnemies.assetBundle, "assets/Attack2/FoggyLens.anim", "event:/Hawthorne/Attack2/Fog");
+            LoadVisuals("Salt/Ash", SaltEnemies.assetBundle, "assets/Attack2/AshAnim.anim", "event:/Hawthorne/Attack2/Ash");
+            LoadVisuals("Salt/Four", SaltEnemies.assetBundle, "assets/Attack2/FourAnim.anim", "event:/Hawthorne/Attack2/Four");
+            LoadVisuals("Salt/Ribbon", SaltEnemies.assetBundle, "assets/Attack2/Ribbon.anim", "event:/Hawthorne/Attack2/Ribbon");
+            LoadVisuals("Salt/Bullet", SaltEnemies.assetBundle, "assets/Attack2/BulletsAnim.anim", "event:/Hawthorne/Attack2/Gun");
+            LoadVisuals("Salt/Shatter", SaltEnemies.assetBundle, "assets/Attack2/ShatterAnim.anim", "event:/Hawthorne/Attack2/Shatter");
+            LoadVisuals("Salt/Insta/Shatter", SaltEnemies.assetBundle, "assets/Attack2/ImmediateShatter.anim", "event:/Hawthorne/Attack2/Shatter");
+            LoadVisuals("Salt/Zap", SaltEnemies.assetBundle, "assets/Attack2/Electric.anim", "event:/Hawthorne/Attack2/Zap");
+            LoadVisuals("Salt/Alarm", SaltEnemies.assetBundle, "assets/Attack2/ClockAnim.anim", "event:/Hawthorne/Attack2/WakeUp");
+            LoadVisuals("Salt/Piano", SaltEnemies.assetBundle, "assets/Attack2/HammerKeys.anim", "event:/Hawthorne/Attack2/Piano");
+            LoadVisuals("Salt/Think", SaltEnemies.assetBundle, "assets/Attack2/IdeaAnim.anim", "event:/Hawthorne/Attack2/Thought");
+            LoadVisuals("Salt/Whisper", SaltEnemies.assetBundle, "assets/Attack2/Speak.anim", "event:/Hawthorne/Attack2/Whisper");
+            LoadVisuals("Salt/Cube", SaltEnemies.assetBundle, "assets/Attack2/CubeAnim.anim", "event:/Hawthorne/Attack2/Construct");
+            LoadVisuals("Salt/Snap", SaltEnemies.assetBundle, "assets/Attack2/SnapRose.anim", "event:/Hawthorne/Attack2/Snaps");
+            LoadVisuals("Salt/Rain", SaltEnemies.assetBundle, "assets/Attack2/RainingAnim.anim", "event:/Hawthorne/Attack2/Rainy");
+            LoadVisuals("Salt/Coda", SaltEnemies.assetBundle, "assets/Attack2/CodaAnim.anim", "event:/Hawthorne/Attack2/Coda");
+            LoadVisuals("Salt/Forest", SaltEnemies.assetBundle, "assets/Attack2/TheForest.anim", "event:/Hawthorne/Attack2/Forest", true);
+            LoadVisuals("Salt/Shush", SaltEnemies.assetBundle, "assets/Attack2/ShushAnim.anim", "event:/Hawthorne/Attack2/Shush");
+            LoadVisuals("Salt/Lens", SaltEnemies.assetBundle, "assets/Attack2/Picture.anim", "event:/Hawthorne/Attack2/Shutter");
 
         }
     }

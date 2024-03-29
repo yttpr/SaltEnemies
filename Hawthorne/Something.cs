@@ -136,10 +136,11 @@ namespace Hawthorne
             convo.name = "Conversation";
             convo.description = "Apply 1 Stunned to the opposing party member. If successful, apply 2 Stunned to self.";
             convo.rarity = 10;
-            convo.effects = new Effect[3];
-            convo.effects[0] = new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, new IntentType?(), Slots.Self);
-            convo.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 1, new IntentType?((IntentType)988896), Slots.Front);
-            convo.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 2, new IntentType?((IntentType)988896), Slots.Self, didThat);
+            convo.effects = new Effect[4];
+            convo.effects[0] = new Effect(BasicEffects.GetVisuals("Salt/Ads", false, Slots.Front), 1, null, Slots.Front, ScriptableObject.CreateInstance<AnimationsOnEffectCondition>());
+            convo.effects[1] = new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, new IntentType?(), Slots.Self, ScriptableObject.CreateInstance<AnimationsOffEffectCondition>());
+            convo.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 1, new IntentType?((IntentType)988896), Slots.Front);
+            convo.effects[3] = new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 2, new IntentType?((IntentType)988896), Slots.Self, didThat);
             convo.visuals = null;
             convo.animationTarget = Slots.Self;
 
@@ -401,5 +402,19 @@ namespace Hawthorne
         }
 
 
+    }
+    public class AnimationsOnEffectCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            return CombatManager.Instance._stats.combatUI._animations.CanTriggerAnimations;
+        }
+    }
+    public class AnimationsOffEffectCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            return !CombatManager.Instance._stats.combatUI._animations.CanTriggerAnimations;
+        }
     }
 }

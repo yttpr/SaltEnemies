@@ -100,7 +100,7 @@ namespace Hawthorne
             leftHit.rarity = 7;
             leftHit.effects = new Effect[1];
             leftHit.effects[0] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 7, IntentType.Damage_7_10, Slots.Left);
-            leftHit.visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals; ;
+            leftHit.visuals = CustomVisuals.GetVisuals("Salt/Four");
             leftHit.animationTarget = Slots.Left;
 
             Ability rightHit = new Ability();
@@ -109,7 +109,7 @@ namespace Hawthorne
             rightHit.rarity = 7;
             rightHit.effects = new Effect[1];
             rightHit.effects[0] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 7, IntentType.Damage_7_10, Slots.Right);
-            rightHit.visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals; ;
+            rightHit.visuals = CustomVisuals.GetVisuals("Salt/Four");
             rightHit.animationTarget = Slots.Right;
 
             Ability wrath = new Ability();
@@ -119,8 +119,8 @@ namespace Hawthorne
             wrath.effects = new Effect[2];
             wrath.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 3, IntentType.Status_Ruptured, Slots.Front);
             wrath.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Front);
-            wrath.visuals = LoadedAssetsHandler.GetEnemyAbility("InhumanRoar_A").visuals;
-            wrath.animationTarget = Slots.Self;
+            wrath.visuals = CustomVisuals.GetVisuals("Salt/Keyhole");
+            wrath.animationTarget = Slots.Front;
 
             cage.abilities = new Ability[4] { crusher, leftHit, rightHit, wrath };
             cage.AddEnemy();

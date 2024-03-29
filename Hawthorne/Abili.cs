@@ -204,7 +204,7 @@ namespace Hawthorne
                             new Effect(random, 3, IntentType.Mana_Generate, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Sides)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -245,7 +245,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.SetStoreValue(IllusionHandler.State), 2, null, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<SpawnEnemyCopySelfEffect>(), 1, IntentType.Other_Spawn, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Repent_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Cube"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -271,7 +271,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.SetStoreValue(IllusionHandler.State), 1, null, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<SpawnEnemyCopySelfEffect>(), 1, IntentType.Other_Spawn, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Gnaw_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Notif"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -365,7 +365,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Sides),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Malpractice_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Snap"),
                         animationTarget = Slots.Front
                     };
                 }
@@ -396,8 +396,8 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<HealEffect>(), 5, IntentType.Heal_5_10, Targetting.Closer(true, true)),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Weep_A").visuals,
-                        animationTarget = Slots.Front
+                        visuals = CustomVisuals.GetVisuals("Salt/Rain"),
+                        animationTarget = MultiTargetting.Create(Slots.Front, Targetting.Closer(true, true))
                     };
                 }
                 return _cry4U;
@@ -427,7 +427,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ExitValueSetterEffect>(), 1, (IntentType)988896, allEnemy),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Blush_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Smile"),
                         animationTarget = Slots.Front
                     };
                 }
@@ -457,7 +457,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.GenPigment(Pigments.Purple), 4, IntentType.Mana_Generate, Slots.Self, BasicEffects.DidThat(false, 2)),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Flood_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Whisper"),
                         animationTarget = Slots.Front
                     };
                 }
@@ -496,7 +496,7 @@ namespace Hawthorne
                             }), 1, IntentType.Mana_Randomize, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crush_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Hung"),
                         animationTarget = Slots.Self
                     };
                 }
@@ -577,7 +577,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.Empty, 1, IntentType.Status_Frail, Slots.Self),
                             new Effect(BasicEffects.Empty, 1, IntentType.Swap_Sides, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Weep_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Door"),
                         animationTarget = Slots.Self
                     };
                 }
@@ -703,7 +703,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyFocusedEffect>(), 1, IntentType.Status_Focused, Slots.Front, BasicEffects.DidThat(true, 3)),
                             new Effect(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, IntentType.Status_Cursed, Slots.Front, BasicEffects.DidThat(true, 4))
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Piano"),
                         animationTarget = Slots.Front
                     };
                 }
@@ -728,7 +728,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, CustomIntentIconSystem.GetIntent("Coda"), Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<WindSongEffect>(), 1, null, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("StrikeAChord_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Coda"),
                         animationTarget = Slots.Self
                     };
                 }
@@ -1072,7 +1072,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 6, IntentType.Field_Shield, Slots.Sides),
                             new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 3, IntentType.Status_Ruptured, Slots.Self),
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entrenched_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Shatter"),
                         animationTarget = Targetting.AllSelfSlots,
                     };
                 }
@@ -1144,7 +1144,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ConsumeAllManaEffect>(), 1, IntentType.Mana_Consume, Slots.Self),
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("WrigglingWrath_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Claws"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -1167,7 +1167,7 @@ namespace Hawthorne
                         {
                             new Effect(BasicEffects.ShieldPierce, 1, IntentType.Damage_1_2, Slots.Self),
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Claws"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Zap"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -1241,6 +1241,7 @@ namespace Hawthorne
             {
                 if (_loseControl == null)
                 {
+                    new CustomIntentInfo("Wheel", (IntentType)38305973, LoadedAssetsHandler.GetWearable("WheelOfFortune_TW").wearableImage, IntentType.Misc);
                     _loseControl = new Ability()
                     {
                         name = "Lose Control",
@@ -1248,10 +1249,10 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<PerformRandomAbilityEffect>(), 1, IntentType.Misc, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<PerformRandomAbilityEffect>(), 1, GetIntent("Wheel"), Slots.Front),
                         },
-                        visuals = null,
-                        animationTarget = Slots.Self,
+                        visuals = CustomVisuals.GetVisuals("Salt/Wheel"),
+                        animationTarget = Slots.Front,
                     };
                 }
                 return _loseControl;
@@ -1399,7 +1400,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<SwapRandomZoneEffectHideIntent>(), 1, IntentType.Swap_Mass, Slots.Self),
                             new Effect(SubActionEffect.Create(new Effect[]
                             {
-                                new Effect(BasicEffects.GetVisuals("Salt/Hung", false, Slots.Front), 1, null, Slots.Self),
+                                new Effect(BasicEffects.GetVisuals("Salt/Bullet", false, Slots.Front), 1, null, Slots.Self),
                                 new Effect(ScriptableObject.CreateInstance<AddDelayedAttackEffect>(), 99, null, Slots.Front)
                             }), 1, null, Slots.Self),
                             new Effect(BasicEffects.Empty, 0, IntentType.Damage_Death, Slots.Front)
@@ -1425,7 +1426,7 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(BasicEffects.GetVisuals("Wriggle_A", false, Targetting.Reverse(Targetting.GetColors(Pigments.Blue, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Blue, true)), HasHealthColorCondition.Create(Pigments.Blue, false)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Gaze", false, Targetting.Reverse(Targetting.GetColors(Pigments.Blue, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Blue, true)), HasHealthColorCondition.Create(Pigments.Blue, false)),
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, null, Targetting.Reverse(Targetting.GetColors(Pigments.Blue, true)), HasHealthColorCondition.Create(Pigments.Blue, false)),
                             new Effect(BasicEffects.GetVisuals("Wriggle_A", false, Targetting.Closer(true, true)), 1, null, Targetting.Closer(true, true), BasicEffects.DidThat(false)),
                             new Effect(ChangeHealthColorEffect.Create(Pigments.Blue), 1, IntentType.Mana_Modify, Targetting.Closer(true, true), BasicEffects.DidThat(false, 2))
@@ -1451,7 +1452,7 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(BasicEffects.GetVisuals("Wriggle_A", false, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
+                            new Effect(BasicEffects.GetVisuals("Oil_1_A", false, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, null, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
                             new Effect(BasicEffects.GetVisuals("WholeAgain_1_A", true, Slots.Self), 1, null, Slots.Self, BasicEffects.DidThat(false)),
                             new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(false, 2))
@@ -1483,7 +1484,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                             new Effect(effect, 1, IntentType.Mana_Modify, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Showdown_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Class"),
                         animationTarget = Slots.Front,
                     };
                 }
@@ -1510,7 +1511,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.ExitDamage, 1, IntentType.Damage_3_6, Slots.SlotTarget(new int[]{-3, 3 }, false)),
                             new Effect(BasicEffects.ExitDamage, 1, IntentType.Damage_3_6, Slots.SlotTarget(new int[]{-4, 4 }, false)),
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Expire_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Four"),
                         animationTarget = Targetting.Everything(false),
                     };
                 }
@@ -1538,7 +1539,7 @@ namespace Hawthorne
                             new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-3, 3 }, false)),
                             new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-4, 4 }, false)),
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Needle"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
                         animationTarget = Targetting.Everything(false),
                     };
                 }
@@ -1586,7 +1587,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<AllEnemyMaxHealthExitCollectEffect>(), 1, IntentType.Misc, Targetting.AllAlly),
                             new Effect(ScriptableObject.CreateInstance<DivideUpDamageExitValueEffect>(), 1, IntentType.Damage_16_20, ScriptableObject.CreateInstance<AllTargetsTouchingFrontSingleSizeOnly>())
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Clobber_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Crush"),
                         animationTarget = ScriptableObject.CreateInstance<AllTargetsTouchingFrontSingleSizeOnly>(),
                     };
                 }
@@ -1616,12 +1617,13 @@ namespace Hawthorne
                             }), 1, null, Slots.Front),
                             new Effect(CasterSubActionEffect.Create(new Effect[]
                             {
+                                new Effect(BasicEffects.GetVisuals("Salt/Bullet", false, Slots.Front), 1, null, Slots.Front),
                                 new Effect(ScriptableObject.CreateInstance<CountAllStatusEffect>(), 1, null, MultiTargetting.Create(Targetting.AllEnemy, Targetting.AllAlly)),
                                 new Effect(BasicEffects.ExitDamage, 1, null, Slots.Front)
                             }), 1, IntentType.Damage_21, Slots.Front)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entwined_1_A").visuals,
-                        animationTarget = MultiTargetting.Create(Slots.Self, Slots.Front),
+                        visuals = null,
+                        animationTarget = Slots.Self,
                     };
                 }
                 return _descriptions;
@@ -1721,7 +1723,7 @@ namespace Hawthorne
                                 }), 1, null, Slots.Self)
                             }), 1, IntentType.Other_Spawn, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("WrigglingWrath_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Door"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -1735,6 +1737,7 @@ namespace Hawthorne
             {
                 if (_waver == null)
                 {
+                    EffectSO ads = BasicEffects.GetVisuals("Salt/Ads", false, Slots.Front);
                     _waver = new Ability()
                     {
                         name = "Waver",
@@ -1745,10 +1748,11 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             new Effect(CasterSubActionEffect.Create(new Effect[]
                             {
+                                new Effect(ads, 1, null, Slots.Front),
                                 new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             }), 1, IntentType.Swap_Sides, Slots.Front),
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Ads"),
                         animationTarget = Slots.Front,
                     };
                 }
@@ -1769,6 +1773,9 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
+                            new Effect(ScriptableObject.CreateInstance<IsUnitEffect>(), 1, null, Slots.Front),
+                            new Effect(BasicEffects.GetVisuals("Salt/Door", false, Slots.Front), 1, null, Slots.Front, BasicEffects.DidThat(true)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Door", false, Slots.Self), 1, null, Slots.Front, BasicEffects.DidThat(false, 2)),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.SetStoreValue(UnitStoredValueNames.DemonCoreW), 1, null, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, IntentType.Misc, Slots.Front, ScriptableObject.CreateInstance<IsFrontTargetCondition>()),
@@ -1777,8 +1784,8 @@ namespace Hawthorne
                                 new Effect(BasicEffects.SetStoreValue(UnitStoredValueNames.DemonCoreW), 0, null, Slots.Self),
                             }), 1, null, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
-                        animationTarget = MultiTargetting.Create(Slots.Self, Slots.Front),
+                        visuals = null,
+                        animationTarget = Slots.Self,
                     };
                 }
                 return _wanderlust;
@@ -1802,7 +1809,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.PlaySound(SaltEnemies.CursedNoise), 1, null, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 3, IntentType.Damage_3_6, Slots.Front),
                         },
-                        visuals = null,
+                        visuals = CustomVisuals.GetVisuals("Salt/Whisper"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -1904,7 +1911,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplySpotlightEffect>(), 1, IntentType.Status_Spotlight, Slots.Self, HasConfusionCondition.Create(true)),
                             new Effect(BasicEffects.AddPassive(Passives.Confusion), 1, IntentType.Misc_Hidden, Slots.Self, HasConfusionCondition.Create(false))
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Vanish_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Fog"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2002,7 +2009,7 @@ namespace Hawthorne
                         {
                             new Effect(ScriptableObject.CreateInstance<RemoveAllStatusEffectsEffect>(), 1, IntentType.Misc, Targetting.Closer(true, true)),
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Weave_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Swirl"),
                         animationTarget = Targetting.Closer(true, true),
                     };
                 }
@@ -2026,7 +2033,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<WoodChipsEffect>(), 1, IntentType.Misc, Targetting.AllEnemy),
                             new Effect(BasicEffects.Empty, 1, IntentType.Other_Spawn, Slots.Self)
                          },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("OfDeath_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Shatter"),
                         animationTarget = TargettingUnitsUnderHealth.Create(5, false),
                     };
                 }
@@ -2049,7 +2056,7 @@ namespace Hawthorne
                         {
                             new Effect(ScriptableObject.CreateInstance<PainStarEffect>(), 1, IntentType.Other_Transform_Instument, Slots.Self),
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crescendo_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Coda"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2129,7 +2136,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.ChangeValue(DrowningManager.Saline, true), 1, IntentType.Misc, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<IncreaseLuckyBluePercentageEffect>(), 15, IntentType.Misc, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Flood_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Swirl"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2226,7 +2233,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.LeftRight),
                             new Effect(ScriptableObject.CreateInstance<TargetStoredValueChangeEffect>(), 2, IntentType.Misc, Slots.Front)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("FlayTheFlesh_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Alarm"),
                         animationTarget = Slots.LeftRight,
                     };
                 }
@@ -2276,8 +2283,8 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<TargetStoredValueChangeEffect>(), 1, IntentType.Misc, Slots.FrontLeftRight),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Absolve_1_A").visuals,
-                        animationTarget = Slots.Self,
+                        visuals = CustomVisuals.GetVisuals("Salt/Class"),
+                        animationTarget = Slots.FrontLeftRight,
                     };
                 }
                 return _splatterBlood;
@@ -2327,7 +2334,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 2, IntentType.Field_Fire, Targetting_BySnakeGod.Create(false)),
                             new Effect(BasicEffects.GenPigment(Pigments.Red), 2, IntentType.Mana_Generate, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("UglyOnTheInside_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Shush"),
                         animationTarget = Targetting_BySnakeGod.Create(false),
                     };
                 }
@@ -2376,7 +2383,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyMutedEffect>(), 1, (IntentType)846750, Targetting.AllEnemy),
                             new Effect(BasicEffects.GenPigment(Pigments.Red), 2, IntentType.Mana_Generate, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("UglyOnTheInside_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Shush"),
                         animationTarget = Targetting.AllEnemy,
                     };
                 }
@@ -2425,7 +2432,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Targetting.LowestEnemy),
                             new Effect(BasicEffects.GenPigment(Pigments.Red), 4, IntentType.Mana_Generate, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("ThePact_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Forest"),
                         animationTarget = Targetting.LowestEnemy,
                     };
                 }
@@ -2473,8 +2480,8 @@ namespace Hawthorne
                             new Effect(BasicEffects.ChangeValue(UnitStoredValueNames.FleetingPA, false), 1, IntentType.Misc, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ApplyFrailEffect>(), 2, IntentType.Status_Frail, Slots.Self)
                          },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entrenched_1_A").visuals,
-                        animationTarget = Slots.Self,
+                        visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
+                        animationTarget = MultiTargetting.Create(Slots.Self, Slots.LeftRight),
                     };
                 }
                 return _nest;
@@ -2597,7 +2604,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<FireUpToPlusOneEffect>(), 1, IntentType.Field_Fire, Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4 }, false)),
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Sear_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Ash"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2715,7 +2722,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, IntentType.Field_Constricted, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 1, IntentType.Field_Shield, Slots.Self)
                         },
-                        visuals = null,
+                        visuals = CustomVisuals.GetVisuals("Salt/Cube"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2769,7 +2776,7 @@ namespace Hawthorne
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
                             new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Sob_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2798,7 +2805,7 @@ namespace Hawthorne
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
                             new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Sob_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2827,7 +2834,7 @@ namespace Hawthorne
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
                             new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Sob_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2874,7 +2881,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.Empty, 1, IntentType.Misc, Targetting.AllAlly),
                             new Effect(ScriptableObject.CreateInstance<GeneratePigmentAllEnemies>(), 1, IntentType.Mana_Generate, Slots.Self),
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Wheel"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -2923,7 +2930,7 @@ namespace Hawthorne
                         {
                             new Effect(ScriptableObject.CreateInstance<LinkedDamageEffect>(), 3, IntentType.Status_Linked, Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Quills_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -3028,7 +3035,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, null, Slots.SlotTarget(new int[]{1 }, true), BasicEffects.DidThat(true)),
                             new Effect(BasicEffects.GoLeft, 1, null, Slots.Self, m),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, null, Slots.SlotTarget(new int[]{-1 }, true), BasicEffects.DidThat(true)),
-                            new Effect(BasicEffects.GetVisuals("Parry_1_A", true, Slots.Front), 1, null, Slots.Self),
+                            new Effect(BasicEffects.GetVisuals("Salt/Four", true, Slots.Front), 1, null, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                         },
@@ -3204,7 +3211,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Front), 2, IntentType.Misc_Hidden, Slots.Front, BasicEffects.DidThat(true)),
                             new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 4, null, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self, BasicEffects.DidThat(false, 3)),
-                            new Effect(BasicEffects.GetVisuals("Mend_1_A", true, Slots.Self), 2, null, Slots.Self, BasicEffects.DidThat(false, 4)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Wheel", true, Slots.Self), 2, null, Slots.Self, BasicEffects.DidThat(false, 4)),
                             new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 3, GetIntent("Water"), Slots.Self, BasicEffects.DidThat(false, 5))
                         },
                         visuals = null,
@@ -3329,7 +3336,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
                         },
-                        visuals = null,
+                        visuals = CustomVisuals.GetVisuals("Salt/Notif"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -3353,7 +3360,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ShockTherapyEffect>(), 3, IntentType.Misc, Slots.Front),
                             new Effect(BasicEffects.Empty, 3, IntentType.Damage_3_6, Slots.Front)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Conversion_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Zap"),
                         animationTarget = Slots.Front,
                     };
                 }
@@ -3402,7 +3409,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 3, (IntentType)987895, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<ReplacementDamageEffect>(), 8, IntentType.Damage_7_10, Slots.Front)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entwined_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Crush"),
                         animationTarget = Slots.Front,
                     };
                 }

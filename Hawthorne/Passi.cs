@@ -349,6 +349,7 @@ namespace Hawthorne
                     allEnemy.getAllUnitSlots = false;
                     acceleration.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
                     {
+                        new Effect(BasicEffects.GetVisuals("Salt/Alarm", false, Slots.Self), 1, null, Slots.Self),
                     new Effect(ScriptableObject.CreateInstance<ApplyEntropyEffect>(), 6, null, allEnemy)
                     });
                     acceleration.specialStoredValue = ClockTowerManager.Acceleration;
@@ -825,7 +826,7 @@ namespace Hawthorne
                     allEnemy.getAllUnitSlots = false;
                     parental.effects = new Effect[1];
                     parental.effects[0] = new Effect(incNoise, 1, IntentType.Misc, allEnemy);
-                    parental.visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+                    parental.visuals = LoadedAssetsHandler.GetEnemyAbility("Weep_A").visuals;
                     parental.animationTarget = allEnemy;
                     AbilitySO ability = parental.CharacterAbility().ability;
                     pathetic._parentalAbility.ability = parental.CharacterAbility().ability = ability;
@@ -904,7 +905,7 @@ namespace Hawthorne
                     parental.effects = new Effect[2];
                     parental.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, IntentType.Field_Constricted, Slots.Front);
                     parental.effects[1] = new Effect(ScriptableObject.CreateInstance<SwapRandomZoneEffectHideIntent>(), 1, IntentType.Swap_Mass, Slots.Self);
-                    parental.visuals = null;
+                    parental.visuals = CustomVisuals.GetVisuals("Salt/Keyhole");
                     parental.animationTarget = Slots.Front;
                     AbilitySO ability = parental.CharacterAbility().ability;
                     abandon._parentalAbility.ability = parental.CharacterAbility().ability = ability;
@@ -2018,7 +2019,7 @@ namespace Hawthorne
                     }
                 }
                 if (IDs.Count > 0) CombatManager.Instance.AddUIAction(new ShowMultiplePassiveInformationUIAction(IDs.ToArray(), chara.ToArray(), cracking.ToArray(), face.ToArray()));
-                CombatManager.Instance.AddUIAction(new PlayAbilityAnimationNoCasterAction(LoadedAssetsHandler.GetEnemyAbility("RapturousReverberation_A").visuals, targets));
+                CombatManager.Instance.AddUIAction(new PlayAbilityAnimationNoCasterAction(CustomVisuals.GetVisuals("Salt/Alarm"), targets));
                 CombatManager.Instance.AddPrioritySubAction(new Apply12EntropyAction(targets));
                 CrackingHandler.Threads.Remove(ID);
             }
