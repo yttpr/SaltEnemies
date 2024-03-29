@@ -89,6 +89,7 @@ namespace Hawthorne
             Attacks.Clear();
             ThreadCleaner.CleanThreads();
             ButterflyUnboxer.Boxeds.Clear();
+            BlackHoleEffect.Reset();
             WaterView.Reset();
         }
 
@@ -99,6 +100,7 @@ namespace Hawthorne
             if (DoDebugs.MiscInfo) Debug.Log("Clearing");
             ButterflyUnboxer.Boxeds.Clear();
             BlackHoleEffect.Reset();
+            WaterView.Reset();
         }
 
         public static void Setup()

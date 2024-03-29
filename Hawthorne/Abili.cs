@@ -1908,6 +1908,7 @@ namespace Hawthorne
                         name = "Foggy Lens",
                         description = "Apply Confusion as a passive to this enemy. \nIf this enemy already had Confusion, give this enemy Spotlight.",
                         rarity = 3,
+                        priority = -5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplySpotlightEffect>(), 1, IntentType.Status_Spotlight, Slots.Self, HasConfusionCondition.Create(true)),
