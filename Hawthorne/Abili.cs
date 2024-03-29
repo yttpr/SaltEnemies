@@ -1748,7 +1748,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             new Effect(CasterSubActionEffect.Create(new Effect[]
                             {
-                                new Effect(ads, 1, null, Slots.Front),
+                                new Effect(ads, 1, null, Slots.Front, ScriptableObject.CreateInstance<IsFrontTargetCondition>()),
                                 new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             }), 1, IntentType.Swap_Sides, Slots.Front),
                         },
@@ -4016,10 +4016,14 @@ namespace Hawthorne
         {
             exitAmount = 0;
             Vector3 loc = default(Vector3);
-            if (!caster.IsUnitCharacter)
+            try
             {
-                loc = stats.combatUI._enemyZone._enemies[caster.ID].FieldEntity.Position;
+                if (!caster.IsUnitCharacter)
+                {
+                    loc = stats.combatUI._enemyZone._enemies[caster.FieldID].FieldEntity.Position;
+                }
             }
+            catch { }
             RuntimeManager.PlayOneShot(Audio, loc);
 
             return true;

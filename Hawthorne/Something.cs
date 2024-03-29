@@ -217,7 +217,7 @@ namespace Hawthorne
             spawn.rarity = 5;
             spawn.effects = new Effect[1];
             spawn.effects[0] = new Effect(spawnDerogatory, 1, IntentType.Other_Spawn, Slots.Self);
-            spawn.visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals;
+            spawn.visuals = CustomVisuals.GetVisuals("Salt/Think");
             spawn.animationTarget = Slots.Self;
 
             something.abilities = new Ability[2] { bore, spawn };
