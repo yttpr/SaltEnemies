@@ -2227,7 +2227,7 @@ namespace Hawthorne
         {
             exitAmount = 0;
 
-            CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "*Snap*"));
+            //CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "*Snap*"));
             CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
             List<CombatAbility> abilToAdd = new List<CombatAbility>();
 

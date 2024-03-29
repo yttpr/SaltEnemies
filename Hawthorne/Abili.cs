@@ -5781,7 +5781,7 @@ namespace Hawthorne
                 if (targetSlotInfo.HasUnit)
                 {
                     int targetSlotOffset = (areTargetSlots ? (targetSlotInfo.SlotID - targetSlotInfo.Unit.SlotID) : (-1));
-                    int amount = entryVariable;
+                    int amount = Math.Max(0, entryVariable);
                     DamageInfo damageInfo;
                     if (_indirect)
                     {
