@@ -95,12 +95,12 @@ namespace Hawthorne
 
         public static void UIInitialization(Action<CombatStats> orig, CombatStats self)
         {
+            WaterView.Reset();
             orig(self);
             Attacks.Clear();
             if (DoDebugs.MiscInfo) Debug.Log("Clearing");
             ButterflyUnboxer.Boxeds.Clear();
             BlackHoleEffect.Reset();
-            WaterView.Reset();
         }
 
         public static void Setup()
