@@ -2228,7 +2228,7 @@ namespace Hawthorne
             exitAmount = 0;
 
             CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "*Snap*"));
-
+            CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
             List<CombatAbility> abilToAdd = new List<CombatAbility>();
 
             foreach (TargetSlotInfo target in targets)
@@ -2380,7 +2380,8 @@ namespace Hawthorne
             PreviousEffectCondition didThat = ScriptableObject.CreateInstance<PreviousEffectCondition>();
             didThat.wasSuccessful = true;
             Effect effort1 = new Effect(ScriptableObject.CreateInstance<StealAbilityEffect>(), 1, null, Slots.Front);
-            CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { effort1 }), caster));
+            Effect effort2 = new Effect(ScriptableObject.CreateInstance<PlayHealthColorSoundEffect>(), 1, null, Slots.Front);
+            CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { effort1, effort2 }), caster));
 
 
             return exitAmount > 0;
@@ -3501,7 +3502,7 @@ namespace Hawthorne
             CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[]
             {
                 new Effect(ScriptableObject.CreateInstance<MoveToClosestTargetEffect>(), 1, IntentType.Swap_Sides, Slots.SlotTarget(new int[9] {-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
-                new Effect(BasicEffects.GetVisuals("Salt/Lens", false, Slots.Front), 1, null, Slots.Front),
+                //new Effect(BasicEffects.GetVisuals("Salt/Lens", false, Slots.Front), 1, null, Slots.Front),
                 new Effect(ScriptableObject.CreateInstance<SayCheeseEffect>(), 1, IntentType.Misc, Slots.Front, didThat)
             }), caster));
             return true;

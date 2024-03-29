@@ -817,7 +817,7 @@ namespace Hawthorne
                         {
                             new Effect(sigil, 3, CustomIntentIconSystem.GetIntent("Spectral"), Slots.Self)
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("OfDeath_1_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = Slots.Self,
                     };
                 }
@@ -1738,6 +1738,8 @@ namespace Hawthorne
                 if (_waver == null)
                 {
                     EffectSO ads = BasicEffects.GetVisuals("Salt/Ads", false, Slots.Front);
+                    IsFrontTargetCondition yeah = ScriptableObject.CreateInstance<IsFrontTargetCondition>();
+                    yeah.returnTrue = true;
                     _waver = new Ability()
                     {
                         name = "Waver",
@@ -1748,7 +1750,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             new Effect(CasterSubActionEffect.Create(new Effect[]
                             {
-                                new Effect(ads, 1, null, Slots.Front, ScriptableObject.CreateInstance<IsFrontTargetCondition>()),
+                                new Effect(ads, 1, null, Slots.Front, yeah),
                                 new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             }), 1, IntentType.Swap_Sides, Slots.Front),
                         },
@@ -1778,7 +1780,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.GetVisuals("Salt/Door", false, Slots.Self), 1, null, Slots.Front, BasicEffects.DidThat(false, 2)),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.SetStoreValue(UnitStoredValueNames.DemonCoreW), 1, null, Slots.Self),
-                            new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, IntentType.Misc, Slots.Front, ScriptableObject.CreateInstance<IsFrontTargetCondition>()),
+                            new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, IntentType.Misc, Slots.Self, ScriptableObject.CreateInstance<IsFrontTargetCondition>()),
                             new Effect(RootActionEffect.Create(new Effect[]
                             {
                                 new Effect(BasicEffects.SetStoreValue(UnitStoredValueNames.DemonCoreW), 0, null, Slots.Self),

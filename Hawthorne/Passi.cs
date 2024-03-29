@@ -3580,8 +3580,8 @@ namespace Hawthorne
             {
                 if (!mana.IsEmpty && mana.ManaColor == Pigments.Blue) pigs++;
             }
-            UnityEngine.Debug.Log("Blue pigment: " + pigs);
-            UnityEngine.Debug.Log("Ability: " + name);
+            if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Blue pigment: " + pigs);
+            if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Ability: " + name);
             return pigs <= 2 && name == this.eatTear;
         }
     }

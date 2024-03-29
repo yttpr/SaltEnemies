@@ -98,11 +98,11 @@ namespace Hawthorne
             {
                 decay25P, detectWither
             };
-            SpawnEnemyAnywhereEffect spawnDenial = ScriptableObject.CreateInstance<SpawnEnemyAnywhereEffect>();
+            SpawnEnemyInSlotFromEntryEffect spawnDenial = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryEffect>();
             spawnDenial.enemy = LoadedAssetsHandler.GetEnemy("Denial_EN");
             decay.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1]
             {
-                new Effect(spawnDenial, 1, new IntentType?(), Slots.Self)
+                new Effect(spawnDenial, 0, new IntentType?(), Slots.Self)
             });
             if (DoDebugs.GenInfo) Debug.Log("passive");
 
