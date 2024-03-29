@@ -1048,8 +1048,8 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
                         },
-                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entrenched_1_A").visuals,
-                        animationTarget = Targetting.AllSelfSlots,
+                        visuals = CustomVisuals.GetVisuals("Salt/Crush"),
+                        animationTarget = Slots.Front,
                     };
                 }
                 return _hurdle;
