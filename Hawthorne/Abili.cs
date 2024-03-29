@@ -1452,7 +1452,7 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(BasicEffects.GetVisuals("Oil_1_A", false, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
+                            new Effect(BasicEffects.GetVisuals("Oil_1_A", true, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true))), 1, IntentType.Field_Constricted, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, null, Targetting.Reverse(Targetting.GetColors(Pigments.Red, true)), HasHealthColorCondition.Create(Pigments.Red, false)),
                             new Effect(BasicEffects.GetVisuals("WholeAgain_1_A", true, Slots.Self), 1, null, Slots.Self, BasicEffects.DidThat(false)),
                             new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(false, 2))
