@@ -104,7 +104,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.LeftRight),
                             new Effect(healPrev, 2, IntentType.Heal_1_4, Slots.Self, BasicEffects.DidThat(true)),
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Siphon_A").visuals,
+                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = Slots.LeftRight
                     };
                 }
@@ -204,7 +204,7 @@ namespace Hawthorne
                             new Effect(random, 3, IntentType.Mana_Generate, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Sides)
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Think"),
                         animationTarget = Slots.Self,
                     };
                 }

@@ -2228,129 +2228,137 @@ namespace Hawthorne
             exitAmount = 0;
 
             //CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "*Snap*"));
-            CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
-            List<CombatAbility> abilToAdd = new List<CombatAbility>();
-
-            foreach (TargetSlotInfo target in targets)
+            try
             {
-                if (target.HasUnit)
+                CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
+                List<CombatAbility> abilToAdd = new List<CombatAbility>();
+
+                foreach (TargetSlotInfo target in targets)
                 {
-                    if (target.Unit is CharacterCombat character)
+                    if (target.HasUnit)
                     {
-                        if (character.CombatAbilities.Count > 0)
+                        if (target.Unit is CharacterCombat character)
                         {
-                            for (int i = 0; i < entryVariable; i++)
+                            if (character.CombatAbilities.Count > 0)
                             {
-                                CombatAbility addThis = character.CombatAbilities[UnityEngine.Random.Range(0, character.CombatAbilities.Count)];
-                                while (addThis.ability == null) addThis = character.CombatAbilities[UnityEngine.Random.Range(0, character.CombatAbilities.Count)];
-                                if (addThis.ability.priority == null)
+                                for (int i = 0; i < entryVariable; i++)
                                 {
-                                    addThis.ability.priority = ScriptableObject.CreateInstance<PrioritySO>();
-                                    addThis.ability.priority.priorityValue = 0;
+                                    CombatAbility addThis = character.CombatAbilities[UnityEngine.Random.Range(0, character.CombatAbilities.Count)];
+                                    while (addThis.ability == null) addThis = character.CombatAbilities[UnityEngine.Random.Range(0, character.CombatAbilities.Count)];
+                                    if (addThis.ability.priority == null)
+                                    {
+                                        addThis.ability.priority = ScriptableObject.CreateInstance<PrioritySO>();
+                                        addThis.ability.priority.priorityValue = 0;
+                                    }
+                                    RaritySO rarity1 = ScriptableObject.CreateInstance<RaritySO>();
+                                    rarity1.rarityValue = 10;
+                                    rarity1.canBeRerolled = true;
+                                    CombatAbility newThis = new CombatAbility(addThis.ability, rarity1);
+                                    abilToAdd.Add(newThis);
                                 }
-                                RaritySO rarity1 = ScriptableObject.CreateInstance<RaritySO>();
-                                rarity1.rarityValue = 10;
-                                rarity1.canBeRerolled = true;
-                                CombatAbility newThis = new CombatAbility(addThis.ability, rarity1);
-                                abilToAdd.Add(newThis);
+                            }
+                        }
+                        if (target.Unit is EnemyCombat enemy)
+                        {
+                            if (enemy.Abilities.Count > 0)
+                            {
+                                for (int i = 0; i < entryVariable; i++)
+                                {
+                                    CombatAbility addThis = enemy.Abilities[UnityEngine.Random.Range(0, enemy.Abilities.Count)];
+                                    while (addThis.ability == null) addThis = enemy.Abilities[UnityEngine.Random.Range(0, enemy.Abilities.Count)];
+                                    if (addThis.ability.priority == null)
+                                    {
+                                        addThis.ability.priority = ScriptableObject.CreateInstance<PrioritySO>();
+                                        addThis.ability.priority.priorityValue = 0;
+                                    }
+                                    RaritySO rarity1 = ScriptableObject.CreateInstance<RaritySO>();
+                                    rarity1.rarityValue = 10;
+                                    rarity1.canBeRerolled = true;
+                                    CombatAbility newThis = new CombatAbility(addThis.ability, rarity1);
+                                    abilToAdd.Add(newThis);
+                                }
                             }
                         }
                     }
-                    if (target.Unit is EnemyCombat enemy)
+                }
+                if (abilToAdd.Count <= 0)
+                {
+                    return false;
+                }
+                if (caster is EnemyCombat unitEN)
+                {
+
+                    CombatAbility lens = abilToAdd[0];
+                    foreach (CombatAbility ability in (caster as EnemyCombat).Abilities)
                     {
-                        if (enemy.Abilities.Count > 0)
+                        if (ability.ability._abilityName == "Lens Flash")
                         {
-                            for (int i = 0; i < entryVariable; i++)
+                            lens = ability;
+                        }
+                    }
+                    List<CombatAbility> abilities = unitEN.Abilities;
+                    foreach (CombatAbility removeLens in abilities)
+                    {
+                        if (removeLens.ability._abilityName == "Lens Flash")
+                        {
+                            abilities.Remove(removeLens);
+                            break;
+                        }
+                    }
+                    foreach (CombatAbility ability in abilToAdd)
+                    {
+                        abilities.Add(ability);
+                    }
+                    if (lens != abilToAdd[0] && abilities.Count > 0)
+                    {
+                        List<CombatAbility> newList = new List<CombatAbility>();
+                        //newList.Add(abilities[0]);
+                        newList.Add(lens);
+                        exitAmount++;
+                        for (int i = 0; i < abilities.Count; i++)
+                        {
+                            newList.Add(abilities[i]);
+                            exitAmount++;
+                        }
+                        unitEN.Abilities = newList;
+                        foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
+                        {
+                            EnemyCombatUIInfo enemyInfo;
+                            if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
                             {
-                                CombatAbility addThis = enemy.Abilities[UnityEngine.Random.Range(0, enemy.Abilities.Count)];
-                                while (addThis.ability == null) addThis = enemy.Abilities[UnityEngine.Random.Range(0, enemy.Abilities.Count)];
-                                if (addThis.ability.priority == null)
+                                if (enemyInfo.SlotID == unitEN.SlotID)
                                 {
-                                    addThis.ability.priority = ScriptableObject.CreateInstance<PrioritySO>();
-                                    addThis.ability.priority.priorityValue = 0;
+                                    enemyInfo.Abilities = newList;
+                                    enemyInfo.UpdateAttacks(enemyInfo.Abilities.ToArray());
+                                    stats.combatUI.TryUpdateEnemyIDInformation(enID);
                                 }
-                                RaritySO rarity1 = ScriptableObject.CreateInstance<RaritySO>();
-                                rarity1.rarityValue = 10;
-                                rarity1.canBeRerolled = true;
-                                CombatAbility newThis = new CombatAbility(addThis.ability, rarity1);
-                                abilToAdd.Add(newThis);
                             }
                         }
                     }
-                }
-            }
-            if (abilToAdd.Count <= 0)
-            {
-                return false;
-            }
-            if (caster is EnemyCombat unitEN)
-            {
 
-                CombatAbility lens = abilToAdd[0];
-                foreach (CombatAbility ability in (caster as EnemyCombat).Abilities)
-                {
-                    if (ability.ability._locAbilityData.text == "Lens Flash")
+                    UnityEngine.Debug.Log(unitEN._currentName);
+                    foreach (CombatAbility ability in unitEN.Abilities)
                     {
-                        lens = ability;
+                        UnityEngine.Debug.Log(ability.ability._abilityName);
                     }
+
                 }
-                List<CombatAbility> abilities = unitEN.Abilities;
-                foreach (CombatAbility removeLens in abilities)
+                if (caster is CharacterCombat unitCH)
                 {
-                    if (removeLens.ability._locAbilityData.text == "Lens Flash")
+                    foreach (CombatAbility ability in abilToAdd)
                     {
-                        abilities.Remove(removeLens);
-                        break;
-                    }
-                }
-                foreach (CombatAbility ability in abilToAdd)
-                {
-                    abilities.Add(ability);
-                }
-                if (lens != abilToAdd[0] && abilities.Count > 0)
-                {
-                    List<CombatAbility> newList = new List<CombatAbility>();
-                    //newList.Add(abilities[0]);
-                    newList.Add(lens);
-                    exitAmount++;
-                    for (int i = 0; i < abilities.Count; i++)
-                    {
-                        newList.Add(abilities[i]);
+                        unitCH.CombatAbilities.Add(ability);
                         exitAmount++;
                     }
-                    unitEN.Abilities = newList;
-                    foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
-                    {
-                        EnemyCombatUIInfo enemyInfo;
-                        if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
-                        {
-                            if (enemyInfo.SlotID == unitEN.SlotID)
-                            {
-                                enemyInfo.Abilities = newList;
-                                enemyInfo.UpdateAttacks(enemyInfo.Abilities.ToArray());
-                                stats.combatUI.TryUpdateEnemyIDInformation(enID);
-                            }
-                        }
-                    }
                 }
 
-                UnityEngine.Debug.Log(unitEN._currentName);
-                foreach (CombatAbility ability in unitEN.Abilities)
-                {
-                    UnityEngine.Debug.Log(ability.ability._abilityName);
-                }
-
+                return exitAmount > 0;
             }
-            if (caster is CharacterCombat unitCH)
+            catch
             {
-                foreach (CombatAbility ability in abilToAdd)
-                {
-                    unitCH.CombatAbilities.Add(ability);
-                    exitAmount++;
-                }
+                CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Somehow it broke. Whooops"));
+                return false;
             }
-
-            return exitAmount > 0;
         }
     }
     public class SayCheeseEffect : EffectSO
