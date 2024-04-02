@@ -361,6 +361,12 @@ namespace Hawthorne
             SaltMod.ClioneGard();
             SaltMod.YNLEZ();
             SaltMod.YNLMed();
+            SaltMod.PinanoEZ();
+            SaltMod.PinanoMed();
+            SaltMod.PinanoHard();
+            SaltMod.MinanaEZ();
+            SaltMod.SpitatoEZ();
+            SaltMod.SpitatoMed();
         }
     }
 }

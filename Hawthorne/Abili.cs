@@ -1743,7 +1743,7 @@ namespace Hawthorne
                     _waver = new Ability()
                     {
                         name = "Waver",
-                        description = "Move the Opposing party member to the Left or Right twice.",
+                        description = "Move the Opposing party member to the Left or Right. Repeat this.",
                         rarity = 5,
                         effects = new Effect[]
                         {

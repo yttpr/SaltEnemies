@@ -187,7 +187,7 @@ namespace Hawthorne
         {
             BrutalAPI.EnemyEncounter store = new BrutalAPI.EnemyEncounter()
             {
-                encounterName = "PinorHard",
+                encounterName = "PianoHard",
                 area = 0,
                 randomPlacement = true,
                 hardmodeEncounter = true,

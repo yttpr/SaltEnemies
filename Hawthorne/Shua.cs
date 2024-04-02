@@ -56,6 +56,7 @@ namespace Hawthorne
                 entityID = (EntityIDs)entity,
                 healthColor = Pigments.Gray,
                 priority = 3,
+                prefab = LoadedAssetsHandler.GetEnemy("Mung_EN").enemyTemplate
                 //prefab = Hawthorne.SaltEnemies.Group4.LoadAsset<GameObject>("assets/group4/" + ID + "/" + ID + "_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
             };
             //enemy.prefab._gibs = Hawthorne.SaltEnemies.Group4.LoadAsset<GameObject>("assets/group4/" + ID + "/" + ID + "_Gibs.prefab").GetComponent<ParticleSystem>();
@@ -68,9 +69,12 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.Jumpy, Passi.Incomprehensible, Passi.Illusory, Passi.Armor, Passi.Unbreakable, Passi.Lock, Passi.Steel, Passi.Preserved, Passi.Coda, Passi.Survival, Passi.Multiattack(6), Passives.Formless, Passives.Obscured, Passi.Acceleration, Passives.Infestation, Passives.Pure, Passives.Unstable
+                Passi.Jumpy, Passi.Incomprehensible, Passi.Illusory, Passi.Armor, Passi.Unbreakable, Passi.Lock, Passi.Steel, Passi.Preserved, Passi.Coda, Passi.Survival, 
+                Passi.Multiattack(6), Passives.Formless, Passives.Obscured, Passi.Acceleration, Passives.Infestation, Passives.Pure, Passives.Unstable, Passi.Violent(8), 
+                Passi.Turbulent, Passi.Waves, Passi.Whimsy
             };
-            enemy.abilities = new Ability[] { Abili.CrashYourGame, Abili.Throttle, Abili.Die4U, Abili.DieWithYou, Abili.Gross, Abili.DeepBreaths, Abili.Crucify, Abili.Shredding, Abili.CrazyBlood, Abili.Lie4U, Abili.NobodyMoves, Abili.PsychoDreams, Abili.Presence, Abili.ScareFeeble };
+            enemy.abilities = new Ability[] { Abili.CrashYourGame, Abili.Throttle, Abili.Die4U, Abili.DieWithYou, Abili.Gross, Abili.DeepBreaths, Abili.Crucify, Abili.Shredding, 
+                Abili.CrazyBlood, Abili.Lie4U, Abili.NobodyMoves, Abili.PsychoDreams, Abili.Presence, Abili.ScareFeeble, Abili.Seek, Abili.Hide, Abili.Swallow, Abili.Wanderlust };
             enemy.AddEnemy();
         }
     }

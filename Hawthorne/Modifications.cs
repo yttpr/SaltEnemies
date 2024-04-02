@@ -462,6 +462,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "SkinningHomunculus_EN",
+                        Half ? RandomEncounters.Garden.RandomChunk() : RandomSupport(2, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified " + bundle);
@@ -1145,6 +1157,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "SkinningHomunculus_EN",
+                        RandomEncounters.Garden.RandomWhore(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -1633,6 +1657,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "InHerImage_EN",
+                        "InHisImage_EN",
+                        RandomSupport(2, false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "InHerImage_EN",
+                        "InHisImage_EN",
+                        RandomColor(2),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -1805,6 +1855,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        "InHisImage_EN",
+                        "NextOfKin_EN",
+                        "NextOfKin_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         "InHisImage_EN",
                         "NextOfKin_EN",
                         "NextOfKin_EN",
@@ -2249,6 +2312,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "InHisImage_EN",
+                        "InHerImage_EN",
+                        RandomColor(2)
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "InHisImage_EN",
+                        "InHerImage_EN",
+                        RandomSupport(2, false, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2552,6 +2641,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "GigglingMinister_EN",
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2764,6 +2865,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        RandomSupport(2),
+                        "NextOfKin_EN",
+                        "InHerImage_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         RandomSupport(2),
                         "NextOfKin_EN",
                         "InHerImage_EN",
@@ -3135,6 +3249,31 @@ namespace Hawthorne
                         "GigglingMinister_EN",
                         "ChoirBoy_EN",
                         "LittleAngel_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "GigglingMinister_EN",
+                        RandomEncounters.Garden.RandomWhore(),
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        "Spitato_EN",
+                        "GigglingMinister_EN",
+                        RandomEncounters.Garden.RandomWhore(),
                     }
                 });
             }
@@ -3597,6 +3736,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "YNL_EN",
+                        "ChoirBoy_EN",
+                        RandomSupport(2, true, false),
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         "ChoirBoy_EN",
                         RandomSupport(2, true, false),
                     }
@@ -7249,6 +7400,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Voboola_EN",
+                        ShoreSlop(),
+                        "Pinano_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Voboola_EN",
+                        RandomShoreMidget(false),
+                        "Pinano_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7786,6 +7961,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Spoggle_Spitfire_EN",
+                        RainBaseColor(false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Spoggle_Spitfire_EN",
+                        ShoreSlop(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -8001,6 +8200,28 @@ namespace Hawthorne
                         "Spoggle_Ruminating_EN",
                         RainBaseWeighted(false, false, true, "Spoggle_Ruminating_EN"),
                         RandomSupport(0, true, false)
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Spoggle_Ruminating_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Spoggle_Ruminating_EN",
+                        RainBaseWeighted(false, false, true, "Spoggle_Ruminating_EN"),
+                        RandomSupport(0, false, false)
                     }
                 });
             }
@@ -8286,6 +8507,27 @@ namespace Hawthorne
                     {
                         RandomColor(0),
                         "Clione_EN",
+                        "MunglingMudLung_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        "Pinano_EN",
+                        "MunglingMudLung_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(0),
+                        "Pinano_EN",
                         "MunglingMudLung_EN",
                     }
                 });
@@ -8685,6 +8927,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        RandomShoreMidget(false),
+                        "MudLung_EN",
+                        "MudLung_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9016,6 +9271,17 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Kekastle_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9340,6 +9606,28 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "JumbleGuts_Waning_EN",
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Waning_EN")
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "JumbleGuts_Waning_EN",
+                        RandomSupport(0),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Waning_EN")
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9591,6 +9879,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "JumbleGuts_Hollowing_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9808,6 +10108,28 @@ namespace Hawthorne
                         "Clione_EN",
                         "JumbleGuts_Clotted_EN",
                         RandomSupport(0),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Clotted_EN")
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "JumbleGuts_Clotted_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        RainBaseWeighted(true, false, true, "JumbleGuts_Clotted_EN")
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "JumbleGuts_Clotted_EN",
                         RainBaseWeighted(true, false, true, "JumbleGuts_Clotted_EN")
                     }
                 });
@@ -10537,6 +10859,48 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(0),
+                        "Flarb_EN",
+                        "Pinano_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        "Flarb_EN",
+                        "Pinano_EN",
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomShoreMidget(false),
+                        "Flarb_EN",
+                        "Pinano_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        "Flarb_EN",
+                        "Pinano_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -10726,6 +11090,27 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        "FlaMinGoa_EN",
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "FlaMinGoa_EN",
+                        Half ? RandomShoreMidget() : RandomEncounters.Shore.FarShoreSlop()
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         "FlaMinGoa_EN",
                         RandomColor(0)
                     }
@@ -11072,6 +11457,40 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        "FlaMinGoa_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        Half ? RandomEncounters.Shore.FarShoreSlop() : RandomShoreMidget(false)
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "FlaMinGoa_EN",
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "FlaMinGoa_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         "FlaMinGoa_EN",
                         RandomEncounters.Shore.RandomShoreWhore(),
                         Half ? RandomEncounters.Shore.FarShoreSlop() : RandomShoreMidget(false)
@@ -11893,6 +12312,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? RandomEncounters.Shore.FarShoreSlop() : RandomColor(0),
+                            enemySlot = 1
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -12561,6 +13004,35 @@ namespace Hawthorne
                         new SpecificEnemyInfo
                         {
                             enemyName = "Clione_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 3
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0, false, false),
+                            enemySlot = 4
+                        },
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
                             enemySlot = 2,
                         },
                         new SpecificEnemyInfo
@@ -13305,6 +13777,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Spitato_EN",
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? RandomEncounters.Garden.RandomChunk() : RandomColor(2),
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -13873,6 +14369,35 @@ namespace Hawthorne
                         new SpecificEnemyInfo
                         {
                             enemyName = "Clione_EN",
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0),
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
                             enemySlot = 3,
                         },
                         new SpecificEnemyInfo
@@ -14698,6 +15223,61 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? ShoreSlop() : RandomColor(0),
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                    }
+                });
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(0, false, false),
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -15109,7 +15689,19 @@ namespace Hawthorne
                         Half ? RandomEncounters.Shore.FarShoreSlop() : RandomColor(0)
                     }
                 });
-            }
+                }
+            for (int i = 0; i < 2; i++) if (EnemyExist("Pinano_EN"))
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                        main,
+                        "Pinano_EN",
+                        Half ? RandomEncounters.Shore.FarShoreSlop() : RandomColor(0)
+                        }
+                    });
+                }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -15323,6 +15915,30 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        "DrySimian_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        RandomColor(0),
+                        "DrySimian_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         RandomEncounters.Shore.FarShoreSlop(),
                         "DrySimian_EN",
                     }
@@ -15782,6 +16398,46 @@ namespace Hawthorne
                 });
                 ResetColor();
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "DrySimian_EN",
+                        RandomEncounters.Shore.FarShoreSlop(),
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "DrySimian_EN",
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "DrySimian_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -16181,6 +16837,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        Half ? "Pinano_EN" : (Half ? ShoreSlop() : RandomColor(0)),
                         main,
                     }
                 });
@@ -16634,6 +17302,33 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        "Nephilim_EN",
+                        Half ? RandomEncounters.Shore.RandomShoreWhore() : RandomEncounters.Shore.RandomShoreBigGuy()
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Nephilim_EN",
+                        SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         "Nephilim_EN",
                         Half ? RandomEncounters.Shore.RandomShoreWhore() : RandomEncounters.Shore.RandomShoreBigGuy()
                     }
@@ -18988,6 +19683,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19069,6 +19776,18 @@ namespace Hawthorne
                         "BlackStar_EN",
                         main,
                         "NextOfKin_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        main,
+                        main,
                     }
                 });
             }
@@ -19274,6 +19993,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         RandomEncounters.Garden.RandomChunk(),
                     }
@@ -19523,6 +20254,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         RandomEncounters.Garden.RandomWhore(),
                     }
@@ -19829,6 +20572,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        Third ? "Spitato_EN" : main,
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        main,
+                        Half ? RandomSupport(2, false, false) : RandomEncounters.Garden.RandomChunk()
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20078,6 +20845,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "YNL_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore()
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         RandomEncounters.Garden.RandomWhore()
                     }
@@ -20377,6 +21156,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Spitato_EN",
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? "Spitato_EN" : RandomColor(2),
+                            enemySlot = 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "ImpenetrableAngler_EN",
+                            enemySlot = 3
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -20634,6 +21437,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(true, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20705,6 +21520,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(true, false)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20773,6 +21600,18 @@ namespace Hawthorne
                         main,
                         "DeadPixel_EN",
                         RandomRedColor(true, false, false)
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(true, false)
                     }
                 });
             }
@@ -20921,6 +21760,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        RainBaseColor(true, false),
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         main,
                         RainBaseColor(true, false),
                     }
@@ -21077,6 +21928,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(true, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -21225,6 +22088,18 @@ namespace Hawthorne
                         main,
                         RainBaseColor(true, false),
                         "Mung_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(true, false),
                     }
                 });
             }
@@ -21391,6 +22266,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -21554,6 +22441,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RainBaseColor(false, false),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -21711,6 +22610,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        RainBaseColor(false, false),
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         main,
                         RainBaseColor(false, false),
                     }
@@ -24253,6 +25164,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk()
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24598,6 +25521,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomSupport(2, false, Half)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24894,6 +25830,18 @@ namespace Hawthorne
                         main,
                         main,
                         "YNL_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Third ? "Spitato_EN" : main,
+                        "Spitato_EN",
                     }
                 });
             }
@@ -25200,6 +26148,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(2),
+                        "Spitato_EN",
+                        Half ? main : RandomEncounters.Garden.RandomChunk()
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "Spitato_EN",
+                        RandomEncounters.Garden.RandomWhore()
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25452,6 +26425,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "YNL_EN",
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true)
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         RandomEncounters.Garden.RandomChunk(),
                         RandomEncounters.Garden.RandomChunk(false, true)
@@ -25779,6 +26765,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "YNL_EN",
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomSupport(2, false, false)
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         RandomEncounters.Garden.RandomWhore(),
                         RandomSupport(2, false, false)
@@ -26442,6 +27441,31 @@ namespace Hawthorne
                         "Clione_EN",
                         main,
                         SmartColor(0, true),
+                        SmartColor(0)
+                    }
+                });
+                ResetColor();
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        Half ? ShoreSlop() : RandomColor(0),
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        Half ? SmartColor(0, true) : ShoreSlop(),
                         SmartColor(0)
                     }
                 });
@@ -28377,6 +29401,57 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        ShoreSlop(),
+                        main,
+                        sub,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        ShoreSlop(),
+                        main,
+                        RandomSupport(0, false, false),
+                    }
+                });
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Half)
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                                "Pinano_EN",
+                                RandomEncounters.Shore.RandomShoreWhore(),
+                                main,
+                            }
+                        });
+                    }
+                }
+                if (Half)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            "Pinano_EN",
+                            RandomEncounters.Shore.RandomShoreWhore(),
+                            main,
+                            RandomSupport(0, false, false),
+                        }
+                    });
+                }
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -28902,6 +29977,57 @@ namespace Hawthorne
                         main,
                     }
                 });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        ShoreSlop(),
+                        main,
+                        sub,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        ShoreSlop(),
+                        main,
+                        RandomSupport(0, false, false),
+                    }
+                });
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Half)
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                                "Pinano_EN",
+                                RandomEncounters.Shore.RandomShoreWhore(),
+                                main,
+                            }
+                        });
+                    }
+                }
+                if (Half)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            "Pinano_EN",
+                            RandomEncounters.Shore.RandomShoreWhore(),
+                            main,
+                            RandomSupport(0, false, false),
+                        }
+                    });
+                }
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -30290,6 +31416,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? RandomEncounters.Shore.RandomShoreWhore() : RandomEncounters.Shore.RandomShoreBigGuy(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -31501,6 +32651,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 3
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Spligs.Exclude(main).GetRandom(),
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -31983,6 +33162,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.FarShoreSlop(),
+                            enemySlot = 3
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Spligs.Exclude(main).GetRandom(),
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -32233,6 +33441,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        Spligs.Exclude(main).GetRandom(),
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         main,
                         Spligs.Exclude(main).GetRandom(),
                         RandomEncounters.Shore.RandomShoreWhore()
@@ -32513,6 +33734,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        Half ? RandomColor(0) : ShoreSlop(),
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         main,
                         Half ? RandomColor(0) : ShoreSlop(),
                     }
@@ -32923,6 +34156,31 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Pinano_EN",
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Half ? RandomColor(0) : ShoreSlop(),
+                            enemySlot = 1
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -33165,6 +34423,32 @@ namespace Hawthorne
                         "Clione_EN",
                         main,
                         RandomEncounters.Shore.RandomShoreWhore(),
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        main
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        "Pinano_EN",
                         main
                     }
                 });
@@ -33445,6 +34729,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        main,
+                        RandomShoreMidget()
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -33664,6 +34961,32 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        main,
+                        RandomColor(0)
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -33797,6 +35120,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        main,
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -33925,6 +35260,18 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        main,
+                        RandomEncounters.Shore.FarShoreSlop(),
+                    }
+                });
+            }
+            if (EnemyExist("Pinano_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
                         main,
                         RandomEncounters.Shore.FarShoreSlop(),
                     }
@@ -35499,6 +36846,35 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "Spitato_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Garden.RandomWhore(),
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomSupport(2, false, false),
+                            enemySlot = 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 1
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -35677,6 +37053,18 @@ namespace Hawthorne
                     {
                         "Clione_EN",
                         "ShiveringHomunculus_EN",
+                        main,
+                        sub,
+                    }
+                });
+            }
+            if (EnemyExist("Spitato_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Spitato_EN",
                         main,
                         sub,
                     }
@@ -36763,6 +38151,18 @@ namespace Hawthorne
                         "MechanicalLens_EN",
                         main,
                         "MechanicalLens_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Shua_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Shua_EN",
+                        main,
+                        Half ? "Shua_EN" : main,
                     }
                 });
             }

@@ -33,7 +33,7 @@ namespace Hawthorne
             invinible._passiveName = "Illusory";
             invinible.passiveIcon = ResourceLoader.LoadSprite("StarPassive", 32);
             invinible.type = (PassiveAbilityTypes)544521;
-            invinible._enemyDescription = "This character is immune to both direct and indirect damage.";
+            invinible._enemyDescription = "This enemy is immune to both direct and indirect damage.";
             invinible._characterDescription = "This character is immune to both direct and indirect damage.";
             invinible.doesPassiveTriggerInformationPanel = false;
             invinible._triggerOn = new TriggerCalls[1] { TriggerCalls.OnBeingDamaged };

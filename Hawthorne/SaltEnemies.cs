@@ -2632,6 +2632,24 @@ namespace Hawthorne
                 if (EnemyExist("FrowningChancellor_EN") && Half) list.Add("FrowningChancellor_EN");
                 return list.GetRandom();
             }
+            public static string RandomTwoSizeFag()
+            {
+                List<string> list = new List<string>();
+                if (EnemyExist("Iconoclast_EN")) list.Add("Iconoclast_EN");
+                if (EnemyExist("Metatron_EN")) list.Add("Metatron_EN");
+                if (EnemyExist("Psychopomp_EN")) list.Add("Psychopomp_EN");
+                if (list.Count <= 0) list.Add("ChoirBoy_EN");
+                return list.GetRandom();
+            }
+            public static string RandomTwoSizeFuck()
+            {
+                List<string> list = new List<string>();
+                if (EnemyExist("RealisticTank_EN")) list.Add("RealisticTank_EN");
+                if (EnemyExist("StalwartTortoise_EN")) list.Add("StalwartTortoise_EN");
+                if (EnemyExist("ImpenetrableAngler_EN")) list.Add("ImpenetrableAngler_EN");
+                if (list.Count <= 0) list.Add("SkinningHomunculus_EN");
+                return list.GetRandom();
+            }
         }
     }
 
