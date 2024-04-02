@@ -45,7 +45,7 @@ namespace Hawthorne
                 enemyEncounter.rarity *= 11;
             }
             enemyEncounter.signType = (SignType)6331;
-            enemyEncounter.musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_JumbleGuts_Hollowing_Medium_EnemyBundle")._musicEventReference;
+            enemyEncounter.musicEvent = "event:/Hawthorne/StarSong";
             enemyEncounter.roarEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_JumbleGuts_Hollowing_Medium_EnemyBundle")._roarReference.roarEvent;
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
             fields.Add(new FieldEnemy[]

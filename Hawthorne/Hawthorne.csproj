@@ -8,11 +8,6 @@
 		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="CoffeeUIParticleIDIDNTMAKETHIS\**" />
-	  <EmbeddedResource Remove="CoffeeUIParticleIDIDNTMAKETHIS\**" />
-	  <None Remove="CoffeeUIParticleIDIDNTMAKETHIS\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Achievement\ClockAch.png" />
@@ -262,6 +257,16 @@
 	  <None Remove="groupof4enemie\YellowFlowerWorld.png" />
 	  <None Remove="HideShitIcon.png" />
 	  <None Remove="IconBStars.png" />
+	  <None Remove="IconsPinan\MinanaDead.png" />
+	  <None Remove="IconsPinan\MinanaIcon.png" />
+	  <None Remove="IconsPinan\MinanaWorld.png" />
+	  <None Remove="IconsPinan\PinanoDead.png" />
+	  <None Remove="IconsPinan\PinanoIcon.png" />
+	  <None Remove="IconsPinan\PinanoWorld.png" />
+	  <None Remove="IconsPinan\SpitatoDead.png" />
+	  <None Remove="IconsPinan\SpitatoIcon.png" />
+	  <None Remove="IconsPinan\SpitatoWorld.png" />
+	  <None Remove="IconsPinan\ViolentPassive.png" />
 	  <None Remove="IconStars.png" />
 	  <None Remove="Icon_Satyr.png" />
 	  <None Remove="Icon_Satyr_B.png" />
@@ -683,6 +688,16 @@
 	  <EmbeddedResource Include="groupof4enemie\YellowFlowerPortal.png" />
 	  <EmbeddedResource Include="groupof4enemie\YellowFlowerWorld.png" />
 	  <EmbeddedResource Include="HideShitIcon.png" />
+	  <EmbeddedResource Include="IconsPinan\MinanaDead.png" />
+	  <EmbeddedResource Include="IconsPinan\MinanaIcon.png" />
+	  <EmbeddedResource Include="IconsPinan\MinanaWorld.png" />
+	  <EmbeddedResource Include="IconsPinan\PinanoDead.png" />
+	  <EmbeddedResource Include="IconsPinan\PinanoIcon.png" />
+	  <EmbeddedResource Include="IconsPinan\PinanoWorld.png" />
+	  <EmbeddedResource Include="IconsPinan\SpitatoDead.png" />
+	  <EmbeddedResource Include="IconsPinan\SpitatoIcon.png" />
+	  <EmbeddedResource Include="IconsPinan\SpitatoWorld.png" />
+	  <EmbeddedResource Include="IconsPinan\ViolentPassive.png" />
 	  <EmbeddedResource Include="IconStars.png" />
 	  <EmbeddedResource Include="IconBStars.png" />
 	  <EmbeddedResource Include="Icon_Satyr.png" />

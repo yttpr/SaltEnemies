@@ -797,25 +797,6 @@ namespace Hawthorne
                 new FieldEnemy(){enemyName = "SilverSuckle_EN", enemySlot=4},
                 });
             }
-            if (EnemyExist("Ophanim_EN"))
-            {
-                fields.Add(new FieldEnemy[]
-                {
-                new FieldEnemy(){enemyName = "TheCrow_EN", enemySlot=0},
-                new FieldEnemy(){enemyName = "Ophanim_EN", enemySlot=1},
-                new FieldEnemy(){enemyName = "Scrungie_EN", enemySlot=3},
-                new FieldEnemy(){enemyName = "Spoggle_Spitfire_EN", enemySlot=4},
-                });
-                if (EnemyExist("Seraphim_EN"))
-                {
-                    fields.Add(new FieldEnemy[]
-                    {
-                    new FieldEnemy(){enemyName = "TheCrow_EN", enemySlot=0},
-                    new FieldEnemy(){enemyName = "Ophanim_EN", enemySlot=1},
-                    new FieldEnemy(){enemyName = "Seraphim_EN", enemySlot=3},
-                    });
-                }
-            }
             if (EnemyExist("Seraphim_EN") && SaltEnemies.trolling > 82)
             {
                 fields.Add(new FieldEnemy[]
@@ -4343,17 +4324,6 @@ namespace Hawthorne
                     }
                 });
             }
-            if (EnemyExist("Ophanim_EN") && SaltEnemies.trolling > 67)
-            {
-                list.Add(new RandomEnemyGroup
-                {
-                    _enemyNames = new string[]
-                    {
-                        "Freud_EN",
-                        "Ophanim_EN",
-                    }
-                });
-            }
             else if (EnemyExist("Seraphim_EN"))
             {
                 list.Add(new RandomEnemyGroup
@@ -4505,18 +4475,6 @@ namespace Hawthorne
                     {
                         "Freud_EN",
                         "RealisticTank_EN",
-                    }
-                });
-            }
-            if (MultiENExist("ClockTower_EN", "Shua_EN"))
-            {
-                list.Add(new RandomEnemyGroup
-                {
-                    _enemyNames = new string[]
-                    {
-                        "Freud_EN",
-                        "ClockTower_EN",
-                        "Shua_EN"
                     }
                 });
             }

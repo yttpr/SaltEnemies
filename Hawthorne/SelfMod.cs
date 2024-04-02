@@ -791,6 +791,30 @@ namespace Hawthorne
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
         }
+        public static void Stars()
+        {
+            string bundle = "StarGazers_Hard";
+            string main = "StarGazer_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("FesteringMusicMan_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "FesteringMusicMan_EN",
+                        main,
+                        RandomOrph,
+                        RandomSupport(1, false, false)
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
         public static void FreudOrph()
         {
             string bundle = "DontTouchMe_Hard";
@@ -2234,6 +2258,17 @@ namespace Hawthorne
                         "Clione_EN",
                         main,
                         GreyScaleRedSource()
+                    }
+                });
+            }
+            if (EnemyExist("Errant_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Errant_EN",
+                        main,
                     }
                 });
             }
@@ -5209,6 +5244,52 @@ namespace Hawthorne
         {
             string bundle = "FuckWithYou";
             string main = "Clione_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YNLEZ()
+        {
+            string bundle = "TOOL_blahblehblah";
+            string main = "YNL_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YNLMed()
+        {
+            string bundle = "lobotomiteMed";
+            string main = "YNL_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);

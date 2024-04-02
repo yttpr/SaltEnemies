@@ -1,32 +1,19 @@
-﻿using BepInEx;
-using BrutalAPI;
+﻿using BrutalAPI;
 using FMOD;
 using FMODUnity;
 using Hawthorne.NewFolder;
-using JetBrains.Annotations;
 using MonoMod.RuntimeDetour;
 using PYMN4;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
 using THE_DEAD;
 using Tools;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Yarn;
 using Yarn.Unity;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace Hawthorne
 {
@@ -95,6 +82,29 @@ namespace Hawthorne
                     new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), amount, null, Slots.Self)
             });
             return burn;
+        }
+        public static BasePassiveAbilitySO Violent(int amount)
+        {
+            PerformEffectPassiveAbility vil = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            vil._passiveName = "Violent (" + amount.ToString() + ")";
+            vil.passiveIcon = ResourceLoader.LoadSprite("ViolentPassive.png");
+            vil._enemyDescription = "On receiving direct damage, deal " + amount.ToString() + " damage to the Opposing position.";
+            vil._characterDescription = vil._enemyDescription;
+            vil.type = (PassiveAbilityTypes)27201882;
+            vil.doesPassiveTriggerInformationPanel = false;
+            vil._triggerOn = new TriggerCalls[] { TriggerCalls.OnDirectDamaged };
+            ShowViolentPassiveEffect e = ScriptableObject.CreateInstance<ShowViolentPassiveEffect>();
+            e.image = vil.passiveIcon;
+            vil.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+            {
+                    new Effect(CasterRootActionEffect.Create(new Effect[]
+                    {
+                        new Effect(e, amount, null, Slots.Self, ScriptableObject.CreateInstance<HasHealthEffectCondition>()),
+                        new Effect(ScriptableObject.CreateInstance<DamageEffect>(), amount, null, Slots.Front, ScriptableObject.CreateInstance<HasHealthEffectCondition>())
+                    }), 1, null, Slots.Self)
+            });
+            vil.conditions = new EffectorConditionSO[] {ScriptableObject.CreateInstance<IsAliveCondition>() };
+            return vil;
         }
 
         static BasePassiveAbilitySO _jumpy;
@@ -1476,6 +1486,33 @@ namespace Hawthorne
                     _appointment = point;
                 }
                 return _appointment;
+            }
+        }
+        static BasePassiveAbilitySO _miinoDecay;
+        public static BasePassiveAbilitySO MiinoDecay
+        {
+            get
+            {
+                if (_miinoDecay == null)
+                {
+                    PerformEffectPassiveAbility decay = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    decay._passiveName = "Decay";
+                    decay.type = PassiveAbilityTypes.Decay;
+                    decay.passiveIcon = Passives.Decay.passiveIcon;
+                    decay._enemyDescription = "On death, 40% chance to spawn a Minana.";
+                    decay._characterDescription = decay._enemyDescription;
+                    decay.doesPassiveTriggerInformationPanel = true;
+                    PercentageEffectorCondition p40 = ScriptableObject.CreateInstance<PercentageEffectorCondition>();
+                    p40.triggerPercentage = 40;
+                    decay.conditions = new EffectorConditionSO[] { p40 };
+                    decay._triggerOn = new TriggerCalls[] { TriggerCalls.OnDeath };
+                    SpawnEnemyInSlotFromEntryStringNameEffect si = ScriptableObject.CreateInstance<SpawnEnemyInSlotFromEntryStringNameEffect>();
+                    si.en = "Minana_EN";
+                    si.trySpawnAnywhereIfFail = true;
+                    decay.effects = ExtensionMethods.ToEffectInfoArray(new Effect(si, 0, null, Slots.Self).SelfArray());
+                    _miinoDecay = decay;
+                }
+                return _miinoDecay;
             }
         }
 
@@ -5168,6 +5205,8 @@ namespace Hawthorne
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
+            exitAmount = 0;
+            if (!Check.EnemyExist(en)) return false;
             EnemySO enemy = LoadedAssetsHandler.GetEnemy(en);
             for (int num = targets.Length - 1; num >= 0; num--)
             {
@@ -5764,6 +5803,23 @@ namespace Hawthorne
                 //if (i < 5) UnityEngine.Debug.Log("we;re getting there properly");
             }
             //UnityEngine.Debug.Log("done");
+        }
+    }
+    public class HasHealthEffectCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            return caster.CurrentHealth > 0;
+        }
+    }
+    public class ShowViolentPassiveEffect : EffectSO
+    {
+        public Sprite image;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(caster.ID, caster.IsUnitCharacter, "Violent (" + entryVariable.ToString() + ")", image));
+            return true;
         }
     }
 }

@@ -129,6 +129,10 @@ namespace Hawthorne
             CheckEnemy("Maw_EN");
             CheckEnemy("Clione_EN");
             CheckEnemy("Children_EN");
+            CheckEnemy("YNL_EN");
+            CheckEnemy("Spitato_EN");
+            CheckEnemy("Pinano_EN");
+            CheckEnemy("Minana_EN");
         }
         public static void CheckEnemy(string enemy)
         {

@@ -3419,6 +3419,151 @@ namespace Hawthorne
                 return _replacement;
             }
         }
+        static Ability _burp;
+        public static Ability Burp
+        {
+            get
+            {
+                if (_burp == null)
+                {
+                    _burp = new Ability()
+                    {
+                        name = "Burp",
+                        description = "Produce 2 Yellow Pigment.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(BasicEffects.GenPigment(Pigments.Yellow), 2, IntentType.Mana_Generate, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _burp;
+            }
+        }
+        static Ability _flail;
+        public static Ability Flail
+        {
+            get
+            {
+                if (_flail == null)
+                {
+                    _flail = new Ability()
+                    {
+                        name = "Flail",
+                        description = "Move to the Left or Right.\nMove the Opposing party member to the Left or Right.",
+                        rarity = 5,
+                        priority = -3,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _flail;
+            }
+        }
+        static Ability _swallow;
+        public static Ability Swallow
+        {
+            get
+            {
+                if (_swallow == null)
+                {
+                    _swallow = new Ability()
+                    {
+                        name = "Swallow",
+                        description = "Deal a Painful amount of damage and inflict 4 Deep Water on the Opposing position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 4, GetIntent("Water"), Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Devour_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _swallow;
+            }
+        }
+        static Ability _lubricate;
+        public static Ability Lubricate
+        {
+            get
+            {
+                if (_lubricate == null)
+                {
+                    _lubricate = new Ability()
+                    {
+                        name = "Lubricate",
+                        description = "Inflict 4 Oil-Slicked and 1 Scar on this enemy. Apply 10 Shield to self.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyOilSlickedEffect>(), 4, IntentType.Status_OilSlicked, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 10, IntentType.Field_Shield, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Swirl"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _lubricate;
+            }
+        }
+        static Ability _suffocate;
+        public static Ability Suffocate
+        {
+            get
+            {
+                if (_suffocate == null)
+                {
+                    _suffocate = new Ability()
+                    {
+                        name = "Suffocate",
+                        description = "Inflict 1 Scar on this enemy. Deal a Little damage to this enemy, this damage ignores Shield.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self),
+                            new Effect(BasicEffects.ShieldPierce, 2, IntentType.Damage_1_2, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _suffocate;
+            }
+        }
+        static Ability _thrash;
+        public static Ability Thrash
+        {
+            get
+            {
+                if (_thrash == null)
+                {
+                    _thrash = new Ability()
+                    {
+                        name = "Thrash",
+                        description = "Deal a Little damage to the Opposing party member and a Little damage to this enemy.",
+                        rarity = 12,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crush_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _thrash;
+            }
+        }
 
     }
 

@@ -1721,4 +1721,215 @@ namespace Hawthorne
             jarden.AddEncounter();
         }
     }
+    public static class YNLSong
+    {
+        public static void Add(int sign)
+        {
+            if (!EnemyExist("YNL_EN")) return;
+
+            BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("LobotomyPortal.png"));
+
+            gardEZ(sign);
+            gardMed(sign);
+        }
+        public static void gardEZ(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "TOOL_blahblehblah",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = 10,
+                signType = (SignType)sign,
+                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference,
+                roarEvent = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound,
+                difficulty = EncounterDifficulty.Easy
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("YNL_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=4},
+                });
+            }
+            if (EnemyExist("YNL_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "ShiveringHomunculus_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ShiveringHomunculus_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "ShiveringHomunculus_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("EyePalm_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "EyePalm_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "EyePalm_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "EyePalm_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("Enigma_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Enigma_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "Enigma_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "Enigma_EN", enemySlot=3},
+                });
+            }
+            if (MultiENExist("DeadPixel_EN", "MechanicalLens_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "DeadPixel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "DeadPixel_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MechanicalLens_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("EggKeeper_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "EggKeeper_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("Romantic_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Romantic_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "InHisImage_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "InHisImage_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("Grandfather_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Grandfather_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=2},
+                });
+            }
+            if (MultiENExist("LittleAngel_EN", "SterileBud_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "SterileBud_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=2},
+                });
+            }
+            if (EnemyExist("Shua_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=2},
+                });
+            }
+            if (GreyScale)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(true), enemySlot=1},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    });
+                }
+            }
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void gardMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "lobotomiteMed",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = 10,
+                signType = (SignType)sign,
+                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference,
+                roarEvent = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound,
+                difficulty = EncounterDifficulty.Easy
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("YNL_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "InHerImage_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "InHerImage_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomChunk(true), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomChunk(false, true), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                }); 
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomWhore(true), enemySlot=1},
+                new FieldEnemy(){enemyName = Half ? RandomSupport(2, false, false) : RandomColor(2), enemySlot=3},
+                });
+            }
+            if (GreyScale)
+            {
+
+                for (int i = 0; i < 3; i++)
+                {
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=1},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=2},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(true), enemySlot=3},
+                    new FieldEnemy(){enemyName = GreyScaleSupport(true), enemySlot=4},
+                    });
+                    fields.Add(new FieldEnemy[]
+                    {
+                    new FieldEnemy(){enemyName = "YNL_EN", enemySlot=0},
+                    new FieldEnemy(){enemyName = "Illusion_EN", enemySlot=1},
+                    new FieldEnemy(){enemyName = GreyScaleSupport(true), enemySlot=2},
+                    new FieldEnemy(){enemyName = GreyScaleRedSource(true), enemySlot=3},
+                    new FieldEnemy(){enemyName = GreyScaleSupport(true), enemySlot=4},
+                    });
+                }
+            }
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+    }
 }

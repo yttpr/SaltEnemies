@@ -757,6 +757,9 @@ namespace Hawthorne
             addSepulchrePool("Clione_EN");
             addSepulchrePool("Children6_EN");
             addSepulchrePool("YNL_EN");
+            addSepulchrePool("Spitato_EN");
+            addSepulchrePool("Pinano_EN");
+            addSepulchrePool("Minana_EN");
             AddScrungiePool("LostSheep_EN");
             AddScrungiePool("Derogatory_EN");
             AddScrungiePool("Denial_EN");
@@ -766,6 +769,7 @@ namespace Hawthorne
             AddScrungiePool("Windle1_EN");
             AddScrungiePool("BlackStar_EN");
             AddScrungiePool("Children6_EN");
+            AddScrungiePool("Minana_EN");
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -802,6 +806,9 @@ namespace Hawthorne
             addFountainPool("Clione_EN");
             addFountainPool("Children1_EN");
             addFountainPool("YNL_EN");
+            addFountainPool("Spitato_EN");
+            addFountainPool("Pinano_EN");
+            addFountainPool("Minana_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -864,6 +871,9 @@ namespace Hawthorne
             addBronzoPool("Clione_EN");
             addBronzoPool("Children6_EN");
             addBronzoPool("YNL_EN");
+            addBronzoPool("Spitato_EN");
+            addBronzoPool("Pinano_EN");
+            addBronzoPool("Minana_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1080,6 +1090,11 @@ namespace Hawthorne
             //Marmo
             DontAddPool("Romantic_EN");
             DontAddPool("Mungbert_EN");
+            DontAddPool("Errant_EN");
+            addFountainPool("Romantic_EN");
+            addFountainPool("Errant_EN");
+            //H_M_Zone02_Errant_Hard_EnemyBundle
+            //H_M_Zone02_Errant_Medium_EnemyBundle
 
             //wogwo
             addSepulchrePool("RolliUngbun_EN");
@@ -1886,11 +1901,10 @@ namespace Hawthorne
                 list.Add("Mung_EN");
                 if (!red) list.Add("Flarblet_EN");
                 if (!red && EnemyExist("Flarbleft_EN")) list.Add("Flarbleft_EN");
+                if (EnemyExist("Minana_EN")) list.Add("Minana_EN");
                 if (!red && EnemyExist("LipBug_EN")) list.Add("LipBug_EN");
                 if (Supporting) list.Add("LostSheep_EN");
-                if (!mustSmall && !movable && UnityEngine.Random.Range(0, 100) < 33) list.Add("Keko_EN");
                 if (!red && !movable && UnityEngine.Random.Range(0, 100) < 10 && EnemyExist("Boulder_EN")) list.Add("Boulder_EN");
-                if (!mustSmall && !movable && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Teto_EN")) list.Add("Teto_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Skyloft_EN")) list.Add("Skyloft_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 10) list.Add("Wringle_EN");
                 if (!mustSmall && !red && !movable && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Monck_EN")) list.Add("Monck_EN");
@@ -1903,7 +1917,6 @@ namespace Hawthorne
                 if (Gizos) list.Add("NakedGizo_EN");
                 if (Supporting) { list.Add("LostSheep_EN"); if (UnityEngine.Random.Range(0, 100) < 33) list.Add("Enigma_EN"); };
                 if (EnemyExist("Pacemaker_EN")) list.Add("Pacemaker_EN");
-                if (MultiENExist("FakeAngel_EN", "Illusion_EN")) { list.Add("FakeAngel_EN"); if (!red && !mustSmall) list.Add("Illusion_EN"); };
                 if (!red && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Skyloft_EN")) list.Add("Skyloft_EN");
                 if (!mustSmall && EnemyExist("Seraphim_EN") && UnityEngine.Random.Range(0, 100) < 50) list.Add("Seraphim_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("WindSong_EN")) list.Add("WindSong_EN");
@@ -2231,10 +2244,11 @@ namespace Hawthorne
                 if (!flarbOnly && SaltEnemies.rando < 10) list.Add("Mung_EN");
                 list.Add("Flarblet_EN");
                 if (EnemyExist("Flarbleft_EN")) list.Add("Flarbleft_EN");
-                if (!flarbOnly && EnemyExist("LipBug_EN")) list.Add("LipBug_EN");
+                if (!flarbOnly && EnemyExist("LipBug_EN") && Half) list.Add("LipBug_EN");
                 if (!flarbOnly && EnemyExist("LostSheep_EN") && Third) list.Add("LostSheep_EN");
                 if (EnemyExist("Boulder_EN") && !flarbOnly && Rando(0)) list.Add("Boulder_EN");
                 if (EnemyExist("Skyloft_EN") && !flarbOnly && Fifth) list.Add("Skyloft_EN");
+                if (EnemyExist("Minana_EN") && !flarbOnly && Half) list.Add("Minana_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
             public static string FarShoreSlop(bool doubleAble = false, bool red = false)
@@ -2248,6 +2262,7 @@ namespace Hawthorne
                 }
                 List<string> ret = new List<string>();
                 for (int i = 0; i < 15; i++) ret.Add("MudLung_EN");
+                for (int i = 0; i < 3; i++) ret.Add("Pinano_EN");
                 if (Rando(22)) ret.Add("Wringle_EN");
                 if (EnemyExist("Monck_EN") && !red) for (int i = 0; i < 2; i++) ret.Add("Monck_EN");
                 if (EnemyExist("Lymphropod_EN")) for (int i = 0; i < 3; i++) ret.Add("Lymphropod_EN");
@@ -2435,6 +2450,7 @@ namespace Hawthorne
                 if (EnemyExist("Windle1_EN") && Quarter) list.Add("Windle1_EN");
                 if (EnemyExist("Clione_EN") && Half) list.Add("Clione_EN");
                 if (EnemyExist("UnculturedSwine_EN") && Half) list.Add("UnculturedSwine_EN");
+                if (EnemyExist("Pinano_EN")) list.Add("UnculturedSwine_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -2590,6 +2606,7 @@ namespace Hawthorne
                     ChunkDoubleable = false;
                     return list.GetRandom();
                 }
+                if (EnemyExist("Spitato_EN")) list.Add("Spitato_EN");
                 if (EnemyExist("SterileBud_EN")) list.Add("SterileBud_EN");
                 if (EnemyExist("Harbinger_EN")) list.Add("Harbinger_EN");
                 if (EnemyExist("HowlingAvian_EN") && Half) list.Add("HowlingAvian_EN");

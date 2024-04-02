@@ -2431,7 +2431,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 10,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/RabieSong",
+                musicEvent = "event:/Hawthorne/Redo/RabiesTheme",
                 roarEvent = LoadedAssetsHandler.GetCharcater("Pearl_CH").deathSound,
                 difficulty = EncounterDifficulty.Easy
             };
@@ -2520,7 +2520,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 15,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/RabieSong",
+                musicEvent = "event:/Hawthorne/Redo/RabiesTheme",
                 roarEvent = LoadedAssetsHandler.GetCharcater("Pearl_CH").deathSound,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -2840,7 +2840,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 15,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/RabieSong",
+                musicEvent = "event:/Hawthorne/Redo/RabiesTheme",
                 roarEvent = LoadedAssetsHandler.GetCharcater("Pearl_CH").deathSound,
                 difficulty = EncounterDifficulty.Hard
             };

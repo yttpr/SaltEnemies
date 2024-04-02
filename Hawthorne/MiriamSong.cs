@@ -28,7 +28,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 7,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/MiriamTheme",
+                musicEvent = "event:/Hawthorne/Redo/MiriamSong",
                 roarEvent = LoadedAssetsHandler.GetCharcater("Bimini_CH").damageSound,
                 difficulty = EncounterDifficulty.Hard
             };

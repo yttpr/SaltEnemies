@@ -62,6 +62,9 @@ namespace Hawthorne
             Clione.Add(544470);
             Children.Add(544469);
             Lobotomy.Add(544468);
+            Pinano.Add(544467);
+            Spitato.Add(544466);
+            Minana.Add(544465);
         }
         public static void AddEncounters()
         {
@@ -115,7 +118,10 @@ namespace Hawthorne
             MawGroup.Add(2467432);//doesnt has music
             Iconoclast2Group.Add();
             ClioneSong.Add(2467433);
-            //make lobotomy encounters and add music
+            YNLSong.Add(2467434);
+            PinanoSong.Add(2467435);
+            MinanaSong.Add(2467436);
+            SpitatoSong.Add(2467437);
         }
         public static void ModifyEncounters()
         {
@@ -274,6 +280,8 @@ namespace Hawthorne
             ModMod.MarbleEZ();
             ModMod.MarbleMed();
             ModMod.MarbleHard();
+            ModMod.ErrantMed();
+            ModMod.ErrantHard();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();
@@ -290,6 +298,7 @@ namespace Hawthorne
             SaltMod.UnmungGard();
             SaltMod.SomethingMed();
             SaltMod.SomethingHard();
+            SaltMod.Stars();
             SaltMod.FreudOrph();
             SaltMod.FreudGard();
             SaltMod.RusticHard();
@@ -350,6 +359,8 @@ namespace Hawthorne
             SaltMod.ClioneShoreH();
             SaltMod.ClioneOrph();
             SaltMod.ClioneGard();
+            SaltMod.YNLEZ();
+            SaltMod.YNLMed();
         }
     }
 }

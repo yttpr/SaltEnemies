@@ -18651,6 +18651,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("Errant_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Errant_EN",
+                        RandomSupport(1),
+                        main,
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -36608,6 +36620,292 @@ namespace Hawthorne
                         }
                     });
                 }
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void ErrantHard()
+        {
+            string bundle = "H_M_Zone02_Errant_Hard_EnemyBundle";
+            string main = "Errant_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            if (EnemyExist("Skyloft_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Skyloft_EN",
+                        main,
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Clione_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Clione_EN",
+                        main,
+                        RandomColor(1),
+                    }
+                });
+            }
+            if (EnemyExist("Sigil_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Sigil_EN",
+                        main,
+                        RandomOrph,
+                    }
+                });
+            }
+            if (EnemyExist("Hunter_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Hunter_EN",
+                        main,
+                        RandomOrph,
+                    }
+                });
+            }
+            if (EnemyExist("EyePalm_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "EyePalm_EN",
+                        main,
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("OsseousClad_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "OsseousClad_EN",
+                        main,
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Enigma_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Enigma_EN",
+                        main,
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Enigma_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Enigma_EN",
+                        main,
+                        "Enigma_EN",
+                        "Enigma_EN"
+                    }
+                });
+            }
+            if (EnemyExist("Warbird_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Warbird_EN",
+                        main,
+                        RandomOrph,
+                    }
+                });
+            }
+            if (EnemyExist("MechanicalLens_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "MechanicalLens_EN",
+                        main,
+                        "MechanicalLens_EN",
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void ErrantMed()
+        {
+            string bundle = "H_M_Zone02_Errant_Medium_EnemyBundle";
+            string main = "Errant_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            if (EnemyExist("Skyloft_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Skyloft_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("LittleBeak_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "LittleBeak_EN",
+                        main,
+                        RandomSupport(1)
+                    }
+                });
+            }
+            if (EnemyExist("EyePalm_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "EyePalm_EN",
+                        main,
+                        "EyePalm_EN"
+                    }
+                });
+            }
+            if (EnemyExist("OsseousClad_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "OsseousClad_EN",
+                        main,
+                        RandomSupport(1)
+                    }
+                });
+            }
+            if (EnemyExist("Enigma_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Enigma_EN",
+                        main,
+                        "Enigma_EN",
+                    }
+                });
+            }
+            if (EnemyExist("Enigma_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Enigma_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("LivingSolvent_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "LivingSolvent_EN",
+                        main,
+                    }
+                });
+            }
+            if (EnemyExist("Windle2_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Windle2_EN",
+                        main,
+                        RandomSupport(1)
+                    }
+                });
+            }
+            if (EnemyExist("Illusion_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Illusion_EN",
+                        main,
+                        "Illusion_EN"
+                    }
+                });
+            }
+            if (Flowering)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Half ? "YellowFlower_EN" : "PurpleFlower_EN",
+                        main,
+                        "MusicMan_EN"
+                    }
+                });
             }
             if (BundleRandom(bundle))
             {

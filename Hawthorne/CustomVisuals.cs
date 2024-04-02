@@ -86,7 +86,7 @@ namespace Hawthorne
             LoadVisuals("Salt/Swirl", SaltEnemies.assetBundle, "assets/Attack2/Waves1Anim.anim", "event:/Hawthorne/Attack2/Waves1");
             LoadVisuals("Salt/Pop", SaltEnemies.assetBundle, "assets/Attack2/Waves2Anim.anim", "event:/Hawthorne/Attack2/Waves2");
             LoadVisuals("Salt/Smile", SaltEnemies.assetBundle, "assets/Attack2/SmileScare.anim", "event:/Hawthorne/Attack2/Smiley");
-            LoadVisuals("Salt/Fog", SaltEnemies.assetBundle, "assets/Attack2/FoggyLens.anim", "event:/Hawthorne/Attack2/Fog");
+            LoadVisuals("Salt/Fog", SaltEnemies.assetBundle, "assets/Attack2/FoggyLens.anim", "event:/Hawthorne/Attack2/Fog", true);
             LoadVisuals("Salt/Ash", SaltEnemies.assetBundle, "assets/Attack2/AshAnim.anim", "event:/Hawthorne/Attack2/Ash");
             LoadVisuals("Salt/Four", SaltEnemies.assetBundle, "assets/Attack2/FourAnim.anim", "event:/Hawthorne/Attack2/Four");
             LoadVisuals("Salt/Ribbon", SaltEnemies.assetBundle, "assets/Attack2/Ribbon.anim", "event:/Hawthorne/Attack2/Ribbon");
