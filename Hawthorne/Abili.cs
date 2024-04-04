@@ -4988,10 +4988,19 @@ namespace Hawthorne
 
     public static class FallImageryHandler
     {
+        static IntentInfoDamage d;
         public static void Setup()
         {
             IDetour hook1 = new Hook(typeof(TimelineIntentListLayout).GetMethod(nameof(TimelineIntentListLayout.SetInformation), ~BindingFlags.Default), typeof(FallImageryHandler).GetMethod(nameof(SetInformation), ~BindingFlags.Default));
             IDetour hook2 = new Hook(typeof(TargetIntentListLayout).GetMethod(nameof(TargetIntentListLayout.AddInformation), ~BindingFlags.Default), typeof(FallImageryHandler).GetMethod(nameof(AddInformation), ~BindingFlags.Default));
+            try
+            {
+                TrainHandler.Setup();
+            }
+            catch
+            {
+                Debug.LogError("TRAIN HANDLER FUCKING BROKE");
+            }
         }
 
         public static void SetInformation(Action<TimelineIntentListLayout, Sprite[], Color[]> orig, TimelineIntentListLayout self, Sprite[] icons, Color[] colors)
@@ -5082,7 +5091,7 @@ namespace Hawthorne
             public Color[] colors;
 
             public Thread thread;
-
+            /*
             public IntentLayoutAnimator(TimelineIntentLayout target, Sprite[] Icons, Color[] Colors)
             {
                 if (DoDebugs.MiscInfo) Debug.Log("timeline");
@@ -5105,7 +5114,7 @@ namespace Hawthorne
                 thread = newThread;
                 fullSet.Add(this);
             }
-
+            */
             int currentSprite = -1;
             public bool IsActive = true;
             public void Animate()
@@ -5160,34 +5169,259 @@ namespace Hawthorne
             public void Update()
             {
                 if (!IsActive) return;
+                try
+                {
+                    if (!fullSet.Contains(this)) fullSet.Add(this);
+                }
+                catch
+                {
+                    Debug.LogError("failed to add self to fullset");
+                    Debug.LogError(this);
+                }
                 //if (mutilate != null && !mutilate.Equals(null) && mutilate.isActiveAndEnabled) { }
                 //else if (animate != null && !animate.Equals(null) && animate.isActiveAndEnabled) { }
                 //else { this.enabled = false; IsActive = false; }
                 time += Time.deltaTime;
                 if (time >= limit)
                 {
-                    time = 0f;
-                    if (animate != null && !animate.Equals(null) && animate.isActiveAndEnabled)
+                    try
                     {
-                        int cap = Math.Min(icons.Length, colors.Length);
-                        int index = UnityEngine.Random.Range(0, cap);
-                        while (colors[index] == new Color(28f, 78f, 128f) || index == currentSprite) index = UnityEngine.Random.Range(0, cap);
-                        animate.SetInformation(icons[index], colors[index]);
-                        currentSprite = index;
+                        Sprite[] icons = this.icons;
+                        Color[] colors = this.colors;
+                        if (ForceTrainColors)
+                        {
+                            if (HitAllies)
+                            {
+                                icons = EnemyDamage;
+                                colors = new Color[icons.Length];
+                                for (int i = 0; i < colors.Length; i++) colors[i] = RedColor;
+                            }
+                            else
+                            {
+                                icons = CharacterDamage;
+                                colors = new Color[icons.Length];
+                                for (int i = 0; i < colors.Length; i++) colors[i] = PurpleColor;
+                            }
+                        }
+                        time = 0f;
+                        if (animate != null && !animate.Equals(null) && animate.isActiveAndEnabled)
+                        {
+                            int cap = Math.Min(icons.Length, colors.Length);
+                            int index = UnityEngine.Random.Range(0, cap);
+                            while (colors[index] == new Color(28f, 78f, 128f) || index == currentSprite) index = UnityEngine.Random.Range(0, cap);
+                            animate.SetInformation(icons[index], colors[index]);
+                            currentSprite = index;
+                        }
+                        if (mutilate != null && !mutilate.Equals(null) && mutilate.isActiveAndEnabled)
+                        {
+                            int cap = Math.Min(icons.Length, colors.Length);
+                            int index = UnityEngine.Random.Range(0, cap);
+                            while (colors[index] == new Color(28f, 78f, 128f) || index == currentSprite) index = UnityEngine.Random.Range(0, cap);
+                            mutilate.SetInformation(icons[index], colors[index]);
+                            currentSprite = index;
+                        }
                     }
-                    if (mutilate != null && !mutilate.Equals(null) && mutilate.isActiveAndEnabled)
+                    catch
                     {
-                        int cap = Math.Min(icons.Length, colors.Length);
-                        int index = UnityEngine.Random.Range(0, cap);
-                        while (colors[index] == new Color(28f, 78f, 128f) || index == currentSprite) index = UnityEngine.Random.Range(0, cap);
-                        mutilate.SetInformation(icons[index], colors[index]);
-                        currentSprite = index;
+                        Debug.LogError("intent icon sprite changer FUCKING BROKE");
                     }
+                }
+            }
+
+            public bool ForceTrainColors;
+            public bool HitAllies;
+            public Color RedColor;
+            public Color PurpleColor;
+            public Sprite[] EnemyDamage;
+            public Sprite[] CharacterDamage;
+            public void CheckIsTrain(int numb)
+            {
+                try
+                {
+                    if (animate != null)
+                    {
+                        TrainHandler.TimelineIntentIDHolder yeah = animate.gameObject.GetComponent<TrainHandler.TimelineIntentIDHolder>();
+                        if (yeah != null)
+                        {
+                            int timeline = yeah.ID;
+                            TimelineInfo boo = CombatManager.Instance._stats.combatUI._timelineSlotInfo[timeline];
+                            if (CombatManager.Instance._stats.combatUI._enemiesInCombat.TryGetValue(boo.enemyID, out EnemyCombatUIInfo value))
+                            {
+                                foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values)
+                                {
+                                    if (enemy.ID == value.ID)
+                                    {
+                                        ForceTrainColors = enemy.ContainsPassiveAbility(TrainHandler.Practical);
+                                        HitAllies = numb > 0;
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                ForceTrainColors = false;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            ForceTrainColors = false;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        ForceTrainColors = false;
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ForceTrainColors = false;
+                    Debug.LogError("train handler broke");
+                    Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+                }
+                try
+                {
+                    IntentHandlerSO intents = CombatManager.Instance._stats.combatUI._intentHandler;
+                    IntentInfoDamage one = intents._intentDB[IntentType.Damage_1_2] as IntentInfoDamage;
+                    IntentInfoDamage three = intents._intentDB[IntentType.Damage_3_6] as IntentInfoDamage;
+                    IntentInfoDamage seven = intents._intentDB[IntentType.Damage_7_10] as IntentInfoDamage;
+                    IntentInfoDamage eleven = intents._intentDB[IntentType.Damage_11_15] as IntentInfoDamage;
+                    IntentInfoDamage sixteen = intents._intentDB[IntentType.Damage_16_20] as IntentInfoDamage;
+                    IntentInfoDamage twentyone = intents._intentDB[IntentType.Damage_21] as IntentInfoDamage;
+                    RedColor = one.GetColor(false);
+                    PurpleColor = one.GetColor(true);
+                    EnemyDamage = new Sprite[]
+                    {
+                        one.GetSprite(false),
+                        three.GetSprite(false),
+                        seven.GetSprite(false),
+                        eleven.GetSprite(false),
+                        sixteen.GetSprite(false),
+                        twentyone.GetSprite(false),
+                    };
+                    CharacterDamage = new Sprite[]
+                    {
+                        one.GetSprite(true),
+                        three.GetSprite(true),
+                        seven.GetSprite(true),
+                        eleven.GetSprite(true),
+                        sixteen.GetSprite(true),
+                        twentyone.GetSprite(true),
+                    };
+                }
+                catch (Exception ex)
+                {
+                    ForceTrainColors = false;
+                    Debug.LogError("get colors for train handler broke");
+                    Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+                }
+                if (HitAllies && (EnemyDamage == null || EnemyDamage.Length <= 0)) ForceTrainColors = false;
+                if (!HitAllies && (CharacterDamage == null || CharacterDamage.Length <= 0)) ForceTrainColors = false;
+            }
+        }
+    }
+    public static class TrainHandler
+    {
+        public static PassiveAbilityTypes Practical => (PassiveAbilityTypes)7950742;
+        public static UnitStoredValueNames HitParty => (UnitStoredValueNames)7950742;
+        public static void SetInformation(Action<TimelineSlotGroup, int, Sprite, Sprite[], Color[]> orig, TimelineSlotGroup self, int timelineSlotID, Sprite enemy, Sprite[] intents, Color[] intentColors)
+        {
+            TimelineIntentIDHolder yeah = self.intent.gameObject.GetComponent<TimelineIntentIDHolder>();
+            if (yeah != null) yeah.ID = timelineSlotID;
+            else
+            {
+                yeah = self.intent.gameObject.AddComponent<TimelineIntentIDHolder>();
+                yeah.ID = timelineSlotID;
+            }
+            orig(self, timelineSlotID, enemy, intents, intentColors);
+        }
+        public static void Setup()
+        {
+            IDetour hook1 = new Hook(typeof(TimelineSlotGroup).GetMethod(nameof(TimelineSlotGroup.SetInformation), ~BindingFlags.Default), typeof(TrainHandler).GetMethod(nameof(SetInformation), ~BindingFlags.Default));
+        }
+        public class TimelineIntentIDHolder : MonoBehaviour
+        {
+            public int ID;
+        }
+        public static void SwitchTrainTargetting()
+        {
+            try
+            {
+                foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values)
+                {
+                    if (enemy.ContainsPassiveAbility(Practical))
+                    {
+                        if (enemy.GetStoredValue(HitParty) > 0)
+                        {
+                            enemy.SetStoredValue(HitParty, 0);
+                            CombatManager.Instance.AddUIAction(new SetUnitAnimationParameterUIAction(enemy.ID, enemy.IsUnitCharacter, "party", false));
+                            ChangeIntents(enemy, 0);
+                        }
+                        else
+                        {
+                            enemy.SetStoredValue(HitParty, 1);
+                            CombatManager.Instance.AddUIAction(new SetUnitAnimationParameterUIAction(enemy.ID, enemy.IsUnitCharacter, "party", true));
+                            ChangeIntents(enemy, 1);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Debug.LogError("probably not in combat - train handler");
+            }
+        }
+        public static void ChangeIntents(EnemyCombat self, int num)
+        {
+            foreach (FallImageryHandler.IntentLayoutAnimator anim in FallImageryHandler.fullSet)
+            {
+                try
+                {
+                    if (anim != null && !anim.Equals(null))
+                    {
+                        if (anim.animate != null)
+                        {
+                            TrainHandler.TimelineIntentIDHolder yeah = anim.animate.gameObject.GetComponent<TrainHandler.TimelineIntentIDHolder>();
+                            if (yeah != null)
+                            {
+                                int timeline = yeah.ID;
+                                TimelineInfo boo = CombatManager.Instance._stats.combatUI._timelineSlotInfo[timeline];
+                                if (CombatManager.Instance._stats.combatUI._enemiesInCombat.TryGetValue(boo.enemyID, out EnemyCombatUIInfo value))
+                                {
+                                    if (self.ID == value.ID)
+                                    {
+                                        CombatManager.Instance.AddUIAction(new TrainIntentsUpdateUIAction(anim, num));
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    Debug.LogError("i think the animatorinator is null");
                 }
             }
         }
     }
-
+    public class TrainIntentsUpdateUIAction : CombatAction
+    {
+        public FallImageryHandler.IntentLayoutAnimator Anim;
+        public int Num;
+        public TrainIntentsUpdateUIAction(FallImageryHandler.IntentLayoutAnimator anim, int num)
+        {
+            Anim = anim;
+            Num = num;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            Anim.CheckIsTrain(Num);
+            yield return null;
+        }
+    }
     public class CrashesYourGameEffect : EffectSO
     {
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)

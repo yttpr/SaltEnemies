@@ -1181,6 +1181,7 @@ namespace Hawthorne
         }
         Texture2D GetTexture(Sprite sprite)
         {
+            Texture2D ret = sprite.texture;
             //CharacterCombat FOOL = CombatManager.Instance._stats.TryGetCharacterOnField(fieldLayout.CharacterID);
             if (!(sprite.texture.isReadable))
             {
@@ -1188,11 +1189,27 @@ namespace Hawthorne
                 //{
                 //if (FOOL.Character == chara)
                 //{
-                return SlicedBaseTexture(sprite);
+                ret = SlicedBaseTexture(sprite);
                 //}
                 //}
             }
-            return sprite.texture;
+            try
+            {
+                ret.GetPixels(0, 0, 1, 1);
+            }
+            catch
+            {
+                Debug.LogError("failed getpixels!");
+                RenderTexture temp = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
+                Graphics.Blit(sprite.texture, temp);
+                RenderTexture previous = RenderTexture.active;
+                Texture2D newer = new Texture2D(sprite.texture.width, sprite.texture.height);
+                newer.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
+                newer.Apply();
+                RenderTexture.active = previous;
+                ret = newer;
+            }
+            return ret;
         }
         Texture2D SlicedBaseTexture(Sprite sprite)
         {
@@ -1227,11 +1244,19 @@ namespace Hawthorne
             {
                 if (array[i].name == "AttackImage")
                 {
-                    Sprite oldSprite = array[i].sprite;
-                    Texture2D newTex = PixelateImage(GetTexture(oldSprite), gap);
-                    Sprite newSprite = Sprite.Create(newTex, new Rect(0, 0, oldSprite.rect.width, oldSprite.rect.height), new Vector2(0.5f, 0.5f), oldSprite.pixelsPerUnit);
-                    array[i].sprite = newSprite;
-                    exitAmount++;
+                    try
+                    {
+                        Sprite oldSprite = array[i].sprite;
+                        Texture2D newTex = PixelateImage(GetTexture(oldSprite), gap);
+                        Sprite newSprite = Sprite.Create(newTex, new Rect(0, 0, oldSprite.rect.width, oldSprite.rect.height), new Vector2(0.5f, 0.5f), oldSprite.pixelsPerUnit);
+                        array[i].sprite = newSprite;
+                        exitAmount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError("pixelating image MEGA FAILED");
+                        Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+                    }
                 }
             }
 

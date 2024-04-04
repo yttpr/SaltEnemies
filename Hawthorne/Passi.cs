@@ -1668,6 +1668,7 @@ namespace Hawthorne
             NobodyMoveHandler.NotifCheck(notificationName, sender, args);
             ReplacementHandler.NotifCheck(notificationName, sender, args);
             if (notificationName == TriggerCalls.OnMoved.ToString() && BadDogHandler.IsPlayerTurn()) BadDogHandler.RunCheckFunction();
+            if (notificationName == TriggerCalls.OnAbilityUsed.ToString()) TrainHandler.SwitchTrainTargetting();
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -2564,7 +2565,7 @@ namespace Hawthorne
             if (self._isUnitCharacter)
             {
                 CharacterCombat characterCombat = stats.TryGetCharacterOnField(self._unitID);
-                if (characterCombat.CurrentHealth > 0)
+                if (characterCombat != null && characterCombat.CurrentHealth > 0)
                 {
                     if (characterCombat != null && characterCombat.ContainsPassiveAbility(ButterflyPassive))
                     {
@@ -2581,7 +2582,7 @@ namespace Hawthorne
             else
             {
                 EnemyCombat enemyCombat = stats.TryGetEnemyOnField(self._unitID);
-                if (enemyCombat.CurrentHealth > 0)
+                if (enemyCombat != null && enemyCombat.CurrentHealth > 0)
                 {
                     if (enemyCombat != null && enemyCombat.ContainsPassiveAbility(ButterflyPassive))
                     {
