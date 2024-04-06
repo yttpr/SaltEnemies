@@ -1742,7 +1742,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 10,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/LobotomyTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound,
                 difficulty = EncounterDifficulty.Easy
             };
@@ -1872,7 +1872,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 10,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/LobotomyTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound,
                 difficulty = EncounterDifficulty.Easy
             };

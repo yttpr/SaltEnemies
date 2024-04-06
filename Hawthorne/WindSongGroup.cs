@@ -188,7 +188,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = UnityEngine.Random.Range(5, 11),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_WrigglingSacrifice_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/SolventTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("WrigglingSacrifice_EN").damageSound,
                 difficulty = EncounterDifficulty.Easy
             };

@@ -133,6 +133,8 @@ namespace Hawthorne
             CheckEnemy("Spitato_EN");
             CheckEnemy("Pinano_EN");
             CheckEnemy("Minana_EN");
+            CheckEnemy("Arceles_EN");
+            CheckEnemy("Stoplight_EN");
         }
         public static void CheckEnemy(string enemy)
         {

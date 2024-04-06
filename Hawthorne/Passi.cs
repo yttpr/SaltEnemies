@@ -1361,7 +1361,7 @@ namespace Hawthorne
                     turb._passiveName = "Waves";
                     turb.type = (PassiveAbilityTypes)7648910;
                     turb.passiveIcon = ResourceLoader.LoadSprite("WavesPassive.png", 32);
-                    turb._enemyDescription = "On moving, inflict 2 Deep Water on the Opposing position..";
+                    turb._enemyDescription = "On moving, inflict 2 Deep Water on the Opposing position.";
                     turb._characterDescription = turb._enemyDescription;
                     turb.doesPassiveTriggerInformationPanel = true;
                     turb.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 2, null, Slots.Front) });
@@ -1513,6 +1513,100 @@ namespace Hawthorne
                     _miinoDecay = decay;
                 }
                 return _miinoDecay;
+            }
+        }
+        static BasePassiveAbilitySO _knock;
+        public static BasePassiveAbilitySO Knock
+        {
+            get
+            {
+                if (_knock == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    ExtraAttackPassiveAbility pressure = ScriptableObject.Instantiate<ExtraAttackPassiveAbility>(baseExtra);
+                    pressure._passiveName = "Knock";
+                    pressure._enemyDescription = "This enemy will perforn an extra ability \"Knock\" each turn.";
+                    Ability bonus = new Ability();
+                    bonus.name = "Knock";
+                    bonus.description = "Deal a Little damage to the Opposing party member and move them to the Left or Right.";
+                    bonus.priority = -3;
+                    bonus.effects = new Effect[2];
+                    bonus.effects[0] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Front);
+                    bonus.effects[1] = new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front);
+                    bonus.visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals;
+                    bonus.animationTarget = Slots.Front;
+                    bonus.rarity = 0;
+                    AbilitySO ability = bonus.EnemyAbility().ability;
+                    pressure._extraAbility.ability = ability;
+                    _knock = pressure;
+                }
+                return _knock;
+            }
+        }
+        static BasePassiveAbilitySO _practical;
+        public static BasePassiveAbilitySO Practical
+        {
+            get
+            {
+                if (_practical == null)
+                {
+                    PerformEffectPassiveAbility prac = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    prac._passiveName = "Practical";
+                    prac.type = TrainHandler.Practical;
+                    prac.passiveIcon = ResourceLoader.LoadSprite("PracticalPassive.png", 32);
+                    prac._enemyDescription = "On taking direct damage, shift one Light phase backwards. " +
+                        "\nOn any ability being used other than by this enemy, 50% chance to toggle the Crosswalk phase.";
+                    prac._characterDescription = prac._enemyDescription;
+                    prac.doesPassiveTriggerInformationPanel = false;
+                    prac.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<TrainEffect>(), -1, null, Slots.Self) });
+                    prac._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDirectDamaged };
+                    _practical = prac;
+                }
+                return _practical;
+            }
+        }
+        static BasePassiveAbilitySO _trolley;
+        public static BasePassiveAbilitySO Trolley
+        {
+            get
+            {
+                if (_trolley == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    //ExtraAttackPassiveAbility pressure = ScriptableObject.Instantiate<ExtraAttackPassiveAbility>(baseExtra);
+                    //pressure._passiveName = "Trolley";
+                    //pressure._enemyDescription = "This enemy will perforn an extra ability \"Trolley\" each turn.";
+                    InstantiateExtraAttackPassiveAbility pressure = ScriptableObject.CreateInstance<InstantiateExtraAttackPassiveAbility>();
+                    pressure.conditions = baseExtra.conditions;
+                    pressure.passiveIcon = baseExtra.passiveIcon;
+                    pressure.specialStoredValue = baseExtra.specialStoredValue;
+                    pressure.doesPassiveTriggerInformationPanel = baseExtra.doesPassiveTriggerInformationPanel;
+                    pressure.type = baseExtra.type;
+                    pressure._extraAbility = new ExtraAbilityInfo();
+                    pressure._extraAbility.rarity = baseExtra._extraAbility.rarity;
+                    pressure._extraAbility.cost = baseExtra._extraAbility.cost;
+                    pressure._passiveName = "Trolley";
+                    pressure._enemyDescription = "This enemy will perforn an extra ability \"Trolley\" each turn.";
+                    pressure._characterDescription = baseExtra._characterDescription;
+                    pressure._triggerOn = baseExtra._triggerOn;
+                    Ability bonus = new Ability();
+                    bonus.name = "Trolley";
+                    bonus.description = "If the Light phase is Green, deal 0-20 damage to either all enemies or all party members.";
+                    bonus.effects = new Effect[7];
+                    bonus.effects[0] = new Effect(BasicEffects.GetVisuals("Salt/Train", false, TrainTargetting.Create(false)), 0, IntentType.Damage_21, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
+                    bonus.effects[1] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_1_2 , TrainTargetting.Create(true));
+                    bonus.effects[2] = new Effect(ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>(), 20, IntentType.Damage_3_6, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
+                    bonus.effects[3] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_7_10, TrainTargetting.Create(true));
+                    bonus.effects[4] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_11_15, TrainTargetting.Create(true));
+                    bonus.effects[5] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_16_20, TrainTargetting.Create(true));
+                    bonus.effects[6] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, CustomIntentIconSystem.GetIntent("FallColor"), TrainTargetting.Create(true));
+                    bonus.visuals = null;
+                    bonus.animationTarget = Slots.Self;
+                    AbilitySO ability = bonus.CharacterAbility().ability;
+                    pressure._extraAbility.ability = ability;
+                    _trolley = pressure;
+                }
+                return _trolley;
             }
         }
 
@@ -1668,7 +1762,8 @@ namespace Hawthorne
             NobodyMoveHandler.NotifCheck(notificationName, sender, args);
             ReplacementHandler.NotifCheck(notificationName, sender, args);
             if (notificationName == TriggerCalls.OnMoved.ToString() && BadDogHandler.IsPlayerTurn()) BadDogHandler.RunCheckFunction();
-            if (notificationName == TriggerCalls.OnAbilityUsed.ToString()) TrainHandler.SwitchTrainTargetting();
+            if (notificationName == TriggerCalls.OnAbilityUsed.ToString()) TrainHandler.SwitchTrainTargetting(sender);
+            if (notificationName == TriggerCalls.OnDeath.ToString() && sender is ITurn) TrainHandler.CheckAll();
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -5821,6 +5916,66 @@ namespace Hawthorne
             exitAmount = 0;
             CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(caster.ID, caster.IsUnitCharacter, "Violent (" + entryVariable.ToString() + ")", image));
             return true;
+        }
+    }
+    public class InstantiateExtraAttackPassiveAbility : ExtraAttackPassiveAbility
+    {
+        public Dictionary<IUnit, ExtraAbilityInfo> units;
+        public override void TriggerPassive(object sender, object args)
+        {
+            if (args is List<string> list && units != null)
+            {
+                try
+                {
+                    if (units.TryGetValue(sender as IUnit, out var val))
+                    {
+                        list.Add(val.ability?.name);
+                    }
+                }
+                catch
+                {
+                    UnityEngine.Debug.LogError("failed to add extra abilitu lo");
+                }
+            }
+        }
+        public override void OnPassiveConnected(IUnit unit)
+        {
+            try
+            {
+                AbilitySO abil = ScriptableObject.Instantiate(_extraAbility.ability);
+                abil.intents[0].targets = ScriptableObject.Instantiate(_extraAbility.ability.intents[0].targets);
+                ExtraAbilityInfo add = new ExtraAbilityInfo()
+                {
+                    rarity = _extraAbility.rarity,
+                    cost = _extraAbility.cost,
+                    ability = abil
+                };
+                unit.AddExtraAbility(add);
+                if (units == null) units = new Dictionary<IUnit, ExtraAbilityInfo>();
+                units.Add(unit, add);
+            }
+            catch
+            {
+                UnityEngine.Debug.LogError("womp womp instantiateextraattackPA failed connect");
+            }
+        }
+
+        public override void OnPassiveDisconnected(IUnit unit)
+        {
+            try
+            {
+                if (units != null)
+                {
+                    if (units.TryGetValue(unit, out var add))
+                    {
+                        unit.TryRemoveExtraAbility(add);
+                    }
+                }
+            }
+            catch
+            {
+                UnityEngine.Debug.LogError("womp womp instantiateextraattackPA failed disconnec");
+            }
         }
     }
 }

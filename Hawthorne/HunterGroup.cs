@@ -5121,7 +5121,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / UnityEngine.Random.Range(2, 4),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_WrigglingSacrifice_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/WarbirdTheme",
                 roarEvent = "event:/Hawthorne/Roar/HunterRoar",
                 difficulty = EncounterDifficulty.Hard
             };
@@ -5159,7 +5159,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / UnityEngine.Random.Range(2, 4),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_WrigglingSacrifice_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/WarbirdTheme",
                 roarEvent = "event:/Hawthorne/Roar/HunterRoar",
                 difficulty = EncounterDifficulty.Medium
             };

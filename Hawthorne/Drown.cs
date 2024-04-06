@@ -336,6 +336,14 @@ namespace Hawthorne
             IDetour addMoldEffectIDetour = new Hook(typeof(CombatManager).GetMethod(nameof(CombatManager.InitializeCombat), ~BindingFlags.Default), typeof(WaterInfo).GetMethod(nameof(AddRootsSlotEffect), ~BindingFlags.Default));
             new CustomIntentInfo("Water", (IntentType)Water, ResourceLoader.LoadSprite("DeepFieldIcon.png"), IntentType.Status_OilSlicked);
             WaterView.Setup();
+            try
+            {
+                SlipInfo.Setup();
+            }
+            catch
+            {
+                Debug.LogError("SLIP FUCKING FAILED");
+            }
         }
     }
     public static class WaterView

@@ -760,6 +760,8 @@ namespace Hawthorne
             addSepulchrePool("Spitato_EN");
             addSepulchrePool("Pinano_EN");
             addSepulchrePool("Minana_EN");
+            addSepulchrePool("Arceles_EN");
+            addSepulchrePool("Stoplight_EN");
             AddScrungiePool("LostSheep_EN");
             AddScrungiePool("Derogatory_EN");
             AddScrungiePool("Denial_EN");
@@ -770,6 +772,7 @@ namespace Hawthorne
             AddScrungiePool("BlackStar_EN");
             AddScrungiePool("Children6_EN");
             AddScrungiePool("Minana_EN");
+            AddScrungiePool("Arceles_EN");
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -809,6 +812,8 @@ namespace Hawthorne
             addFountainPool("Spitato_EN");
             addFountainPool("Pinano_EN");
             addFountainPool("Minana_EN");
+            addFountainPool("Arceles_EN");
+            addFountainPool("Stoplight_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -874,6 +879,8 @@ namespace Hawthorne
             addBronzoPool("Spitato_EN");
             addBronzoPool("Pinano_EN");
             addBronzoPool("Minana_EN");
+            addBronzoPool("Arceles_EN");
+            addBronzoPool("Stoplight_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1909,6 +1916,7 @@ namespace Hawthorne
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 10) list.Add("Wringle_EN");
                 if (!mustSmall && !red && !movable && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Monck_EN")) list.Add("Monck_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Windle1_EN")) list.Add("Windle1_EN");
+                if (!red && EnemyExist("Arceles_EN")) list.Add("Arceles_EN");
             }
             if (zone == 1)
             {
@@ -1934,6 +1942,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 5 && EnemyExist("Windle2_EN")) list.Add("Windle2_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
                 if (!red && !killable && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Children6_EN")) list.Add("Children6_EN");
+                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
             }
             if (zone == 2)
             {
@@ -1967,6 +1976,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Indicator_EN")) list.Add("Indicator_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("YNL_EN")) list.Add("YNL_EN");
+                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2027,6 +2037,8 @@ namespace Hawthorne
             if (EnemyExist("Children6_EN")) for (int i = 0; i < 2; i++) list.Add("Children6_EN");
             if (harder && EnemyExist("MarbleMaw_EN")) for (int i = 0; i < 5; i++) list.Add("MarbleMaw_EN");
             if (harder && EnemyExist("YNL_EN")) for (int i = 0; i < 4; i++) list.Add("YNL_EN");
+            if (EnemyExist("Stoplight_EN")) for (int i = 0; i < 1; i++) list.Add("Stoplight_EN");
+            if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 2; i++) list.Add("Stoplight_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2043,6 +2055,8 @@ namespace Hawthorne
             if (harder && EnemyExist("Enigma_EN")) for (int i = 0; i < 2; i++) ret.Add("Enigma_EN");
             if (EnemyExist("LostSheep_EN")) for (int i = 0; i < 1; i++) ret.Add("LostSheep_EN");
             if (!harder && Colophoning) for (int i = 0; i < 2; i++) ret.Add(Colophon[0]);
+            if (EnemyExist("Stoplight_EN")) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
+            if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
             return ret.GetRandom();
         }
 
@@ -2249,6 +2263,7 @@ namespace Hawthorne
                 if (EnemyExist("Boulder_EN") && !flarbOnly && Rando(0)) list.Add("Boulder_EN");
                 if (EnemyExist("Skyloft_EN") && !flarbOnly && Fifth) list.Add("Skyloft_EN");
                 if (EnemyExist("Minana_EN") && !flarbOnly && Half) list.Add("Minana_EN");
+                if (EnemyExist("Arceles_EN") && !flarbOnly && UnityEngine.Random.Range(0, 100) < 85) list.Add("Arceles_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
             public static string FarShoreSlop(bool doubleAble = false, bool red = false)
@@ -2630,6 +2645,7 @@ namespace Hawthorne
                 if (!Red && EnemyExist("TheCrow_EN") && Half) list.Add("TheCrow_EN");
                 if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
                 if (EnemyExist("FrowningChancellor_EN") && Half) list.Add("FrowningChancellor_EN");
+                if (Quarter && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 return list.GetRandom();
             }
             public static string RandomTwoSizeFag()
