@@ -1443,7 +1443,6 @@ namespace Hawthorne
                     posi.List.Add(nameof(ApplyDivineProtectionEffect), "");
                     posi.List.Add(nameof(ApplyPowerEffect), nameof(THE_DEAD));
                     posi.List.Add(nameof(ApplyHasteEffect), nameof(Hawthorne));
-                    posi.List.Add(nameof(ApplyDodgeEffect), nameof(PYMN4));
                     posi.List.Add(nameof(ApplyAnestheticsEffect), nameof(THE_DEAD));
                     posi.List.Add(nameof(ApplyDeterminedEffect), nameof(THE_DEAD));
                     posi.List.Add(nameof(ApplyPhotoSynthesisEffect), nameof(Hawthorne));
@@ -1461,6 +1460,7 @@ namespace Hawthorne
                     posi.List.Add("ApplyBlessEffect", "");
                     posi.List.Add("ApplySpiritualEnergyEffect", "FiendishFools");
                     posi.Setup();
+                    posi.Effects.Add(ScriptableObject.CreateInstance<ApplyDodgeEffect>());
 
                     Ability bonus = new Ability();
                     bonus.name = "Appointment";
@@ -3113,8 +3113,15 @@ namespace Hawthorne
             {
                 if (target.HasUnit)
                 {
-                    target.Unit.GenerateHealthMana(entryVariable);
-                    exitAmount += entryVariable;
+                    try
+                    {
+                        target.Unit.GenerateHealthMana(entryVariable);
+                        exitAmount += entryVariable;
+                    }
+                    catch
+                    {
+                        UnityEngine.Debug.LogError("generate target health mana fail, prob target unit null");
+                    }
                 }
             }
             return exitAmount > 0;

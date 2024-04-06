@@ -39,6 +39,7 @@ namespace Hawthorne
                 Passives.Slippery, Passi.Violent(3), Passi.MiinoDecay
             };
             enemy.abilities = new Ability[] { Abili.Chomp, Abili.Burp, Abili.Flail };
+            enemy.unitType = UnitType.Fish;
             enemy.AddEnemy();
         }
     }
@@ -53,7 +54,7 @@ namespace Hawthorne
                 health = 24,
                 size = 1,
                 entityID = (EntityIDs)entity,
-                healthColor = Pigments.Red,
+                healthColor = Pigments.Blue,
                 priority = 0,
                 prefab = SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/pinano/" + ID + "_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
             };
@@ -75,6 +76,7 @@ namespace Hawthorne
                 Passives.Slippery, Passi.Violent(5), Passives.TwoFaced, Passi.MiinoDecay
             };
             enemy.abilities = new Ability[] { Abili.Swallow, Abili.Lubricate, Abili.Suffocate };
+            enemy.unitType = UnitType.Fish;
             enemy.AddEnemy();
         }
     }
@@ -111,6 +113,7 @@ namespace Hawthorne
                 Passives.Slippery, Passi.Violent(1)
             };
             enemy.abilities = new Ability[] { Abili.Thrash, Abili.Burp };
+            enemy.unitType = UnitType.Fish;
             enemy.AddEnemy();
         }
     }

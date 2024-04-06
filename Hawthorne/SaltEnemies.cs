@@ -1905,10 +1905,9 @@ namespace Hawthorne
             List<string> list = new List<string>();
             if (zone == 0)
             {
-                list.Add("Mung_EN");
                 if (!red) list.Add("Flarblet_EN");
                 if (!red && EnemyExist("Flarbleft_EN")) list.Add("Flarbleft_EN");
-                if (EnemyExist("Minana_EN")) list.Add("Minana_EN");
+                if (!red && EnemyExist("Minana_EN")) list.Add("Minana_EN");
                 if (!red && EnemyExist("LipBug_EN")) list.Add("LipBug_EN");
                 if (Supporting) list.Add("LostSheep_EN");
                 if (!red && !movable && UnityEngine.Random.Range(0, 100) < 10 && EnemyExist("Boulder_EN")) list.Add("Boulder_EN");
@@ -1917,6 +1916,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && !movable && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Monck_EN")) list.Add("Monck_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Windle1_EN")) list.Add("Windle1_EN");
                 if (!red && EnemyExist("Arceles_EN")) list.Add("Arceles_EN");
+                if (list.Count <= 0) list.Add("Mung_EN");
             }
             if (zone == 1)
             {
@@ -2255,7 +2255,7 @@ namespace Hawthorne
             public static string RandomShoreMidget(bool flarbOnly = true)
             {
                 List<string> list = new List<string>();
-                if (!flarbOnly && SaltEnemies.rando < 10) list.Add("Mung_EN");
+                if (!flarbOnly && SaltEnemies.rando < 3) list.Add("Mung_EN");
                 list.Add("Flarblet_EN");
                 if (EnemyExist("Flarbleft_EN")) list.Add("Flarbleft_EN");
                 if (!flarbOnly && EnemyExist("LipBug_EN") && Half) list.Add("LipBug_EN");
@@ -2844,10 +2844,65 @@ namespace Hawthorne
             if (!File.Exists(SavePath + "Update_1_4_0.txt"))
             {
                 File.WriteAllText(SavePath + "Update_1_4_0.txt", "Updatd pages !");
-                PageCollector.UpdatePage("UnmungPage.png");
+                PageCollector.UpdatePage("AnglerPage.png");
+                PageCollector.UpdatePage("ArcelesPage.png");
+                PageCollector.UpdatePage("BeakPage.png");
+                PageCollector.UpdatePage("BlackStarPage.png");
+                PageCollector.UpdatePage("BlueFlowerPage.png");
+                PageCollector.UpdatePage("ButterflyPage.png");
+                PageCollector.UpdatePage("CameraPage.png");
+                PageCollector.UpdatePage("ChildrenPage.png");
+                PageCollector.UpdatePage("ClionePage.png");
+                PageCollector.UpdatePage("ClockPage.png");
+                PageCollector.UpdatePage("CNSPage.png");
+                PageCollector.UpdatePage("CoffinPage.png");
+                PageCollector.UpdatePage("CrowPage.png");
+                PageCollector.UpdatePage("DamoclesPage.png");
+                PageCollector.UpdatePage("DeadGodPage.png");
+                PageCollector.UpdatePage("DeadPixelPage.png");
+                PageCollector.UpdatePage("DelusionPage.png");
+                PageCollector.UpdatePage("DontTouchMePage.png");
+                PageCollector.UpdatePage("EnigmaPage.png");
+                PageCollector.UpdatePage("FakeAngelPage.png");
+                PageCollector.UpdatePage("FirebirdPage.png");
+                PageCollector.UpdatePage("GlassPage.png");
+                PageCollector.UpdatePage("GospelPage.png");
+                PageCollector.UpdatePage("GreyFlowerPage.png");
+                PageCollector.UpdatePage("HuntingPage.png");
+                PageCollector.UpdatePage("IndicatorPage.png");
+                PageCollector.UpdatePage("LittleAngelPage.png");
+                PageCollector.UpdatePage("MawPage.png");
+                PageCollector.UpdatePage("MedamaudePage.png");
+                PageCollector.UpdatePage("MercedPage.png");
+                PageCollector.UpdatePage("MiriamPage.png");
+                PageCollector.UpdatePage("NamelessPage.png");
+                PageCollector.UpdatePage("PinanoPage.png");
+                PageCollector.UpdatePage("PostmodernPage.png");
+                PageCollector.UpdatePage("PurpleFlowerPage.png");
+                PageCollector.UpdatePage("RabiesPage.png");
+                PageCollector.UpdatePage("ReaperPage.png");
+                PageCollector.UpdatePage("RedFlowerPage.png");
+                PageCollector.UpdatePage("RusticPage.png");
+                PageCollector.UpdatePage("SatyrPage.png");
+                PageCollector.UpdatePage("ShuaPage.png");
+                PageCollector.UpdatePage("SigilPage.png");
+                PageCollector.UpdatePage("SingularityPage.png");
                 PageCollector.UpdatePage("SkyloftPage.png");
                 PageCollector.UpdatePage("SnakeGodPage.png");
-                PageCollector.UpdatePage("AnglerPage.png");
+                PageCollector.UpdatePage("SolventPage.png");
+                PageCollector.UpdatePage("SomethingPage.png");
+                PageCollector.UpdatePage("StarGazerPage.png");
+                PageCollector.UpdatePage("StoplightPage.png");
+                PageCollector.UpdatePage("TankPage.png");
+                PageCollector.UpdatePage("TheDeepPage.png");
+                PageCollector.UpdatePage("TortoisePage.png");
+                PageCollector.UpdatePage("TripodPage.png");
+                PageCollector.UpdatePage("UnmungPage.png");
+                PageCollector.UpdatePage("WarbirdPage.png");
+                PageCollector.UpdatePage("WindlePage.png");
+                PageCollector.UpdatePage("WindSongPage.png");
+                PageCollector.UpdatePage("YellowFlowerPage.png");
+                PageCollector.UpdatePage("YNLPage.png");
             }
         }
     }

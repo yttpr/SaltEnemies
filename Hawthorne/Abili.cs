@@ -5307,7 +5307,7 @@ namespace Hawthorne
                                             //Debug.Log("found the enemy " + enemy.ID);
                                             ForceTrainColors = enemy.ContainsPassiveAbility(TrainHandler.Practical);
                                             HitAllies = numb > -1 ? numb == 0 : enemy.GetStoredValue(TrainHandler.HitParty) == 0;
-                                            Debug.Log("all good; timelineposition: " + yeah.ID + "; enemy's ID: " + value.ID + "; enemy slot: " + enemy.SlotID + "; is train: " + ForceTrainColors + "; hit enemies: " + HitAllies);
+                                            //Debug.Log("all good; timelineposition: " + yeah.ID + "; enemy's ID: " + value.ID + "; enemy slot: " + enemy.SlotID + "; is train: " + ForceTrainColors + "; hit enemies: " + HitAllies);
                                             //Debug.Log("force train " + ForceTrainColors);
                                             //Debug.Log("hit ally" + HitAllies);
                                             break;
@@ -5317,14 +5317,14 @@ namespace Hawthorne
                                 else
                                 {
                                     ForceTrainColors = false;
-                                    Debug.Log("DIDNT get enemy");
+                                    //Debug.Log("DIDNT get enemy");
                                     RunFirstCheck = true;
                                     //return;
                                 }
                             }
                             else
                             {
-                                Debug.LogError("out of range!");
+                                //Debug.LogError("out of range!");
                                 ForceTrainColors = false;
                                 RunFirstCheck = true;
                             }
@@ -5333,7 +5333,7 @@ namespace Hawthorne
                         {
                             ForceTrainColors = false;
                             RunFirstCheck = true;
-                            Debug.Log("timeline intent id holder null");
+                            //Debug.Log("timeline intent id holder null");
                             //return;
                         }
                     }
@@ -5341,7 +5341,7 @@ namespace Hawthorne
                     {
                         ForceTrainColors = false;
                         RunFirstCheck = true;
-                        Debug.Log("animate null");
+                        //Debug.Log("animate null");
                         //return;
                     }
                 }

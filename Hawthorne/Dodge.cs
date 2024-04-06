@@ -7,7 +7,6 @@ using System.Collections;
 using MonoMod.RuntimeDetour.HookGen;
 using System.Collections.Generic;
 using Hawthorne;
-using BrutalAPI;
 using static UnityEngine.UI.CanvasScaler;
 
 namespace PYMN4
@@ -430,7 +429,7 @@ namespace Hawthorne
 
         public static IntentType Intent = (IntentType)terror;
 
-        public static Sprite terrorSprite = ResourceLoader.LoadSprite("terror.png", 32);
+        public static Sprite terrorSprite = Hawthorne.ResourceLoader.LoadSprite("terror.png", 32);
 
         public static string name = "Terror";
 
@@ -662,7 +661,7 @@ namespace Hawthorne
         public AttackVisualsSO _visuals = LoadedAssetsHandler.GetEnemyAbility("Chomp_A").visuals;
 
         [SerializeField]
-        public BaseCombatTargettingSO _animationTarget = Slots.Self;
+        public BaseCombatTargettingSO _animationTarget = BrutalAPI.Slots.Self;
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
@@ -778,7 +777,7 @@ namespace Hawthorne
                         unit.MaximizeHealth((int)Math.Floor(gap));
                         if (unit.IsUnitCharacter)
                         {
-                            ScriptableObject.CreateInstance<ApplyStunnedEffect>().PerformEffect(CombatManager.Instance._stats, unit, Slots.Self.GetTargets(CombatManager.Instance._stats.combatSlots, unit.SlotID, unit.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int graggler);
+                            ScriptableObject.CreateInstance<ApplyStunnedEffect>().PerformEffect(CombatManager.Instance._stats, unit, BrutalAPI.Slots.Self.GetTargets(CombatManager.Instance._stats.combatSlots, unit.SlotID, unit.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int graggler);
                         }
                         else
                         {
@@ -786,7 +785,7 @@ namespace Hawthorne
                         }
                     }
                 }
-                ScriptableObject.CreateInstance<ApplyFireSlotEffect>().PerformEffect(CombatManager.Instance._stats, unit, Slots.Self.GetTargets(CombatManager.Instance._stats.combatSlots, unit.SlotID, unit.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int exit);
+                ScriptableObject.CreateInstance<ApplyFireSlotEffect>().PerformEffect(CombatManager.Instance._stats, unit, BrutalAPI.Slots.Self.GetTargets(CombatManager.Instance._stats.combatSlots, unit.SlotID, unit.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int exit);
             }
         }
 
@@ -969,22 +968,22 @@ namespace Hawthorne
             bool righting = (Right != null && Right.HasUnit && Right.Unit.ContainsStatusEffect(Terror.Type));
             if (Lefting && righting)
             {
-                ScriptableObject.CreateInstance<SwapToSidesEffect>().PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int grag);
+                ScriptableObject.CreateInstance<SwapToSidesEffect>().PerformEffect(stats, caster, BrutalAPI.Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int grag);
                 return true;
             }
             else if (Lefting)
             {
-                BasicEffects.GoLeft.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int grag);
+                BasicEffects.GoLeft.PerformEffect(stats, caster, BrutalAPI.Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int grag);
                 return true;
             }
             else if (righting)
             {
-                BasicEffects.GoRight.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int grag);
+                BasicEffects.GoRight.PerformEffect(stats, caster, BrutalAPI.Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int grag);
                 return true;
             }
             else
             {
-                ScriptableObject.CreateInstance<SwapToSidesEffect>().PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int grag);
+                ScriptableObject.CreateInstance<SwapToSidesEffect>().PerformEffect(stats, caster, BrutalAPI.Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), BrutalAPI.Slots.Self.AreTargetSlots, 1, out int grag);
                 return false;
             }
         }

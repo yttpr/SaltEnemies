@@ -237,7 +237,7 @@ namespace Hawthorne
                     Favor_StatusEffect statuseffect = new Favor_StatusEffect();
 
                     statuseffect.SetEffectInformation(effectInfo);
-                    IStatusEffector effector = targets[index].Unit as IStatusEffector;
+                    /*IStatusEffector effector = targets[index].Unit as IStatusEffector;
                     bool hasItAlready = false;
                     int thisIndex = 999;
                     for (int i = 0; i < effector.StatusEffects.Count; i++)
@@ -252,9 +252,16 @@ namespace Hawthorne
                     {
                         CombatManager.Instance.AddUIAction(new PlayStatusEffectPopupUIAction(targets[index].Unit.ID, targets[index].Unit.IsUnitCharacter, 0, effector.StatusEffects[thisIndex].EffectInfo, StatusFieldEffectPopUpType.Sign));
                         exitAmount ++;
+                    }*/
+                    try
+                    {
+                        if (targets[index].Unit.ApplyStatusEffect((IStatusEffect)statuseffect, 0))
+                            ++exitAmount;
                     }
-                    else if (targets[index].Unit.ApplyStatusEffect((IStatusEffect)statuseffect, 0))
-                        ++exitAmount;
+                    catch
+                    {
+                        Debug.LogError("apply favor broke");
+                    }
                 }
             }
 
@@ -295,32 +302,40 @@ namespace Hawthorne
             }
             int choosing = UnityEngine.Random.Range(0, reTargets.Count);
 
-            
-                if (reTargets[choosing].HasUnit)
-                {
-                    int amount = this._randomBetweenPrevious ? UnityEngine.Random.Range(this.PreviousExitValue, entryVariable + 1) : entryVariable;
-                    Favor_StatusEffect statuseffect = new Favor_StatusEffect();
 
-                    statuseffect.SetEffectInformation(effectInfo);
-                    IStatusEffector effector = reTargets[choosing].Unit as IStatusEffector;
-                    bool hasItAlready = false;
-                    int thisIndex = 999;
-                    for (int i = 0; i < effector.StatusEffects.Count; i++)
+            if (reTargets[choosing].HasUnit)
+            {
+                int amount = this._randomBetweenPrevious ? UnityEngine.Random.Range(this.PreviousExitValue, entryVariable + 1) : entryVariable;
+                Favor_StatusEffect statuseffect = new Favor_StatusEffect();
+
+                statuseffect.SetEffectInformation(effectInfo);
+                /*IStatusEffector effector = reTargets[choosing].Unit as IStatusEffector;
+                bool hasItAlready = false;
+                int thisIndex = 999;
+                for (int i = 0; i < effector.StatusEffects.Count; i++)
+                {
+                    if (effector.StatusEffects[i].EffectType == statuseffect.EffectType)
                     {
-                        if (effector.StatusEffects[i].EffectType == statuseffect.EffectType)
-                        {
-                            thisIndex = i;
-                            hasItAlready = true;
-                        }
+                        thisIndex = i;
+                        hasItAlready = true;
                     }
-                    if (hasItAlready == true)
-                    {
-                        CombatManager.Instance.AddUIAction(new PlayStatusEffectPopupUIAction(reTargets[choosing].Unit.ID, reTargets[choosing].Unit.IsUnitCharacter, 0, effector.StatusEffects[thisIndex].EffectInfo, StatusFieldEffectPopUpType.Sign));
-                        exitAmount++;
-                    }
-                    else if (reTargets[choosing].Unit.ApplyStatusEffect((IStatusEffect)statuseffect, 0))
+                }
+                if (hasItAlready == true)
+                {
+                    CombatManager.Instance.AddUIAction(new PlayStatusEffectPopupUIAction(reTargets[choosing].Unit.ID, reTargets[choosing].Unit.IsUnitCharacter, 0, effector.StatusEffects[thisIndex].EffectInfo, StatusFieldEffectPopUpType.Sign));
+                    exitAmount++;
+                }
+                else */
+                try 
+                { 
+                    if (reTargets[choosing].Unit.ApplyStatusEffect((IStatusEffect)statuseffect, 0))
                         ++exitAmount;
                 }
+                catch
+                {
+                    Debug.LogError("apply favor fail");
+                }
+            }
             
 
             return exitAmount > 0;

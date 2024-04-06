@@ -323,6 +323,7 @@
 	  <None Remove="newitem\NineKey.png" />
 	  <None Remove="newitem\WoodSign.png" />
 	  <None Remove="Pages\AnglerPage.png" />
+	  <None Remove="Pages\ArcelesPage.png" />
 	  <None Remove="Pages\BeakPage.png" />
 	  <None Remove="Pages\BlackStarPage.png" />
 	  <None Remove="Pages\BlueFlowerPage.png" />
@@ -354,6 +355,7 @@
 	  <None Remove="Pages\MercedPage.png" />
 	  <None Remove="Pages\MiriamPage.png" />
 	  <None Remove="Pages\NamelessPage.png" />
+	  <None Remove="Pages\PinanoPage.png" />
 	  <None Remove="Pages\PostmodernPage.png" />
 	  <None Remove="Pages\PurpleFlowerPage.png" />
 	  <None Remove="Pages\RabiesPage.png" />
@@ -369,6 +371,7 @@
 	  <None Remove="Pages\SolventPage.png" />
 	  <None Remove="Pages\SomethingPage.png" />
 	  <None Remove="Pages\StarGazerPage.png" />
+	  <None Remove="Pages\StoplightPage.png" />
 	  <None Remove="Pages\SuperbossPage.png" />
 	  <None Remove="Pages\TankPage.png" />
 	  <None Remove="Pages\TheDeepPage.png" />
@@ -379,6 +382,7 @@
 	  <None Remove="Pages\WindlePage.png" />
 	  <None Remove="Pages\WindSongPage.png" />
 	  <None Remove="Pages\YellowFlowerPage.png" />
+	  <None Remove="Pages\YNLPage.png" />
 	  <None Remove="PaleStatus.png" />
 	  <None Remove="ParanoidEscape.png" />
 	  <None Remove="PickPocketIcon.png" />
@@ -763,6 +767,7 @@
 	  <EmbeddedResource Include="newitem\NineKey.png" />
 	  <EmbeddedResource Include="newitem\WoodSign.png" />
 	  <EmbeddedResource Include="Pages\AnglerPage.png" />
+	  <EmbeddedResource Include="Pages\ArcelesPage.png" />
 	  <EmbeddedResource Include="Pages\BeakPage.png" />
 	  <EmbeddedResource Include="Pages\BlackStarPage.png" />
 	  <EmbeddedResource Include="Pages\BlueFlowerPage.png" />
@@ -794,6 +799,7 @@
 	  <EmbeddedResource Include="Pages\MercedPage.png" />
 	  <EmbeddedResource Include="Pages\MiriamPage.png" />
 	  <EmbeddedResource Include="Pages\NamelessPage.png" />
+	  <EmbeddedResource Include="Pages\PinanoPage.png" />
 	  <EmbeddedResource Include="Pages\PostmodernPage.png" />
 	  <EmbeddedResource Include="Pages\PurpleFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\RabiesPage.png" />
@@ -809,6 +815,7 @@
 	  <EmbeddedResource Include="Pages\SolventPage.png" />
 	  <EmbeddedResource Include="Pages\SomethingPage.png" />
 	  <EmbeddedResource Include="Pages\StarGazerPage.png" />
+	  <EmbeddedResource Include="Pages\StoplightPage.png" />
 	  <EmbeddedResource Include="Pages\SuperbossPage.png" />
 	  <EmbeddedResource Include="Pages\TankPage.png" />
 	  <EmbeddedResource Include="Pages\TheDeepPage.png" />
@@ -819,6 +826,7 @@
 	  <EmbeddedResource Include="Pages\WindlePage.png" />
 	  <EmbeddedResource Include="Pages\WindSongPage.png" />
 	  <EmbeddedResource Include="Pages\YellowFlowerPage.png" />
+	  <EmbeddedResource Include="Pages\YNLPage.png" />
 	  <EmbeddedResource Include="PaleStatus.png" />
 	  <EmbeddedResource Include="ParanoidEscape.png" />
 	  <EmbeddedResource Include="PickPocketIcon.png" />

@@ -120,7 +120,7 @@ namespace Hawthorne
             MawGroup.Add(2467432);//doesnt has music
             Iconoclast2Group.Add();
             ClioneSong.Add(2467433);
-            YNLSong.Add(2467434);//ZLD1 IS WORKING ON IT
+            YNLSong.Add(2467434);
             PinanoSong.Add(2467435);
             MinanaSong.Add(2467436);
             SpitatoSong.Add(2467437);
