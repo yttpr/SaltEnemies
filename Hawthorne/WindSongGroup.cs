@@ -794,7 +794,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 5,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone01_Spoggle_Resonant_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/ReaperTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyAbility("FlayTheFlesh_A").visuals.audioReference,
                 difficulty = EncounterDifficulty.Medium
             };

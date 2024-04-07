@@ -113,7 +113,7 @@ namespace Hawthorne
             SkyloftGroup.Add(2467425);
             ButterflyGroup.Add(2467426);//doesnt has music
             GrandfatherGroup.Add(2467427);//doesnt has music
-            ReaperGroup.Add(2467428);//EMBER IS WORKING ON IT
+            ReaperGroup.Add(2467428);
             ShuaGroup.Add(2467429);
             BlackStarGroup.Add(2467430);
             IndicatorGroup.Add(2467431);
