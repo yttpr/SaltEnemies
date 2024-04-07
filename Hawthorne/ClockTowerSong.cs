@@ -1118,7 +1118,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / 2,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Keko_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/TripodTheme",
                 roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
                 difficulty = EncounterDifficulty.Hard
             };
@@ -2088,7 +2088,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone01_Keko_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/TripodTheme",
                 roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
                 difficulty = EncounterDifficulty.Medium
             };

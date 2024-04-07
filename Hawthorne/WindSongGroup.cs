@@ -391,7 +391,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = UnityEngine.Random.Range(2, 5),
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/ButterflyTheme",
                 roarEvent = "",
                 difficulty = EncounterDifficulty.Easy
             };

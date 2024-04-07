@@ -13,6 +13,7 @@ using THE_DEAD;
 using Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Yarn;
 using Yarn.Unity;
 
 namespace Hawthorne
@@ -1764,6 +1765,7 @@ namespace Hawthorne
             if (notificationName == TriggerCalls.OnMoved.ToString() && BadDogHandler.IsPlayerTurn()) BadDogHandler.RunCheckFunction();
             if (notificationName == TriggerCalls.OnAbilityUsed.ToString()) TrainHandler.SwitchTrainTargetting(sender);
             if (notificationName == TriggerCalls.OnDeath.ToString() && sender is ITurn) TrainHandler.CheckAll();
+            SigilSongHandler.NotifCheck(notificationName, sender, args);
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -5983,6 +5985,55 @@ namespace Hawthorne
             {
                 UnityEngine.Debug.LogError("womp womp instantiateextraattackPA failed disconnec");
             }
+        }
+    }
+    public static class SigilSongHandler
+    {
+        public static int Spectre = 0;
+        public static void Check()
+        {
+            int news = 0;
+            if (!Hawthorne.Check.EnemyExist("Sigil_EN")) return;
+            foreach (EnemyCombat EN in CombatManager.Instance._stats.EnemiesOnField.Values)
+            {
+                if (SigilManager.GetSigilPassive(EN) != null && SigilManager.GetSigilPassive(EN)._sigil == SigilType.Spectral && EN.CurrentHealth > 0)
+                {
+                    news++;
+                }
+            }
+            foreach (CharacterCombat CH in CombatManager.Instance._stats.CharactersOnField.Values)
+            {
+                if (SigilManager.GetSigilPassive(CH) != null && SigilManager.GetSigilPassive(CH)._sigil == SigilType.Spectral && CH.CurrentHealth > 0)
+                {
+                    news++;
+                }
+            }
+            if (news != Spectre)
+            {
+                Spectre = news;
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("Spectral", Spectre > 0 ? 1 : 0);
+            }
+        }
+        public static void NotifCheck(string notificationName, object sender, object args)
+        {
+            if (notificationName == TriggerCalls.OnFleetingEnd.ToString() || notificationName == TriggerCalls.OnDeath.ToString()) Check();
+        }
+    }
+    public class SigilSongCheckUIAction : CombatAction
+    {
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            SigilSongHandler.Check();
+            yield return null;
+        }
+    }
+    public class SigilSongCheckEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            CombatManager.Instance.AddUIAction(new SigilSongCheckUIAction());
+            return true;
         }
     }
 }

@@ -759,7 +759,8 @@ namespace Hawthorne
                         effects = new Effect[]
                         {
                             new Effect(sigil, 1, CustomIntentIconSystem.GetIntent("DefTxt"), allAlly),
-                            new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("UpArrow"), allAlly)
+                            new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("UpArrow"), allAlly),
+                            new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, allAlly),
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Resolve_1_A").visuals,
                         animationTarget = allAlly,
@@ -790,7 +791,8 @@ namespace Hawthorne
                         effects = new Effect[]
                         {
                             new Effect(sigil, 2, CustomIntentIconSystem.GetIntent("AtkTxt"), allAlly),
-                            new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("OtherUpAlt"), allAlly)
+                            new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("OtherUpAlt"), allAlly),
+                            new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, allAlly),
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals,
                         animationTarget = allAlly,
@@ -816,7 +818,8 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(sigil, 3, CustomIntentIconSystem.GetIntent("Spectral"), Slots.Self)
+                            new Effect(sigil, 3, CustomIntentIconSystem.GetIntent("Spectral"), Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, Slots.Self),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = Slots.Self,
@@ -842,7 +845,8 @@ namespace Hawthorne
                         rarity = 1,
                         effects = new Effect[]
                         {
-                            new Effect(sigil, 4, IntentType.Misc, Slots.Self)
+                            new Effect(sigil, 4, IntentType.Misc, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, Slots.Self),
                         },
                         visuals = null,
                         animationTarget = Slots.Self,

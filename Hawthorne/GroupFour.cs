@@ -99,20 +99,20 @@ namespace Hawthorne
             SigilGroup.Add(2467413);//doesnt has music
             TortoiseSong.Add(2467414);
             ClockTowerSong.Add(2467415);
-            TripodGroup.Add(2467416);//doesnt has music
+            TripodGroup.Add(2467416);
             RabiesGroup.Add(2467417);
             LonelyFlummox.Add();
             RedoManiskins.Add();
             SnakeGroup.Add(2467418);
             HunterGroup.Add(2467419);
-            FirebirdGroup.Add(2467420);//doesnt has music
+            FirebirdGroup.Add(2467420);//EMBERCORAL IS WORKING ON IT
             BeakGroup.Add(2467421);
             WarbirdGroup.Add(2467422);
             WindSongGroup.Add(2467423);
             SolventGroup.Add(2467424);
             SkyloftGroup.Add(2467425);
-            ButterflyGroup.Add(2467426);//doesnt has music
-            GrandfatherGroup.Add(2467427);//doesnt has music
+            ButterflyGroup.Add(2467426);
+            GrandfatherGroup.Add(2467427);//WOGWO IS WORKING ON IT
             ReaperGroup.Add(2467428);
             ShuaGroup.Add(2467429);
             BlackStarGroup.Add(2467430);

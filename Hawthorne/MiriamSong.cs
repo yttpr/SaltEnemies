@@ -2345,9 +2345,10 @@ namespace Hawthorne
         {
             get
             {
-                return UnityEngine.Random.Range(20, 30);
+                return UnityEngine.Random.Range(20, 30) * mod;
             }
         }
+        static int mod = 999;
 
         public static void orphMed(int sign)
         {
@@ -2360,7 +2361,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_Spoggle_Writhing_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/SigilSong",
                 roarEvent = LoadedAssetsHandler.GetEnemy("Spoggle_Resonant_EN").deathSound,
                 difficulty = EncounterDifficulty.Hard
             };
@@ -2820,7 +2821,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("Zone02_Spoggle_Writhing_Medium_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/SigilSong",
                 roarEvent = LoadedAssetsHandler.GetEnemy("Spoggle_Resonant_EN").deathSound,
                 difficulty = EncounterDifficulty.Hard
             };
