@@ -133,7 +133,7 @@ namespace Hawthorne
             paradox.animationTarget = Slots.Self;
             gone.passives[2] = UnityEngine.Object.Instantiate<BasePassiveAbilitySO>(gone.passives[2]);
             gone.passives[2]._passiveName = "Paradox";
-            gone.passives[2]._enemyDescription = "False Truth will perforn an extra ability \"Paradox\" each turn.";
+            gone.passives[2]._enemyDescription = "This enemy will perform an extra ability \"Paradox\" each turn.";
             ((ExtraAttackPassiveAbility)gone.passives[2])._extraAbility.ability = paradox.EnemyAbility().ability;
 
             gone.abilities = new Ability[2] { terrorize, paranoia };

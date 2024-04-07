@@ -107,7 +107,7 @@ namespace Hawthorne
             HunterGroup.Add(2467419);
             FirebirdGroup.Add(2467420);//doesnt has music
             BeakGroup.Add(2467421);
-            WarbirdGroup.Add(2467422);//doesnt has music
+            WarbirdGroup.Add(2467422);
             WindSongGroup.Add(2467423);
             SolventGroup.Add(2467424);
             SkyloftGroup.Add(2467425);
@@ -371,6 +371,9 @@ namespace Hawthorne
             SaltMod.MinanaEZ();
             SaltMod.SpitatoEZ();
             SaltMod.SpitatoMed();
+            SaltMod.BoatEZ();
+            SaltMod.BoatMed();
+            SaltMod.StoplightHard();
         }
     }
 }

@@ -2467,6 +2467,7 @@ namespace Hawthorne
                 fields.Add(new FieldEnemy[]
                 {
                 new FieldEnemy(){enemyName = "Lyssa_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Lyssa_EN", enemySlot=2},
                 new FieldEnemy(){enemyName = RandomSupport(1), enemySlot=1},
                 });
             }
@@ -3036,7 +3037,7 @@ namespace Hawthorne
                 area = 1,
                 randomPlacement = true,
                 hardmodeEncounter = true,
-                rarity = UnityEngine.Random.Range(3, 6),
+                rarity = UnityEngine.Random.Range(3, 11),
                 signType = SignType.ManicMan,
                 musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._musicEventReference,
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._roarReference.roarEvent,
@@ -3324,6 +3325,45 @@ namespace Hawthorne
                 new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=3},
                 new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=4},
                 });
+            }
+            warpheum.variations = fields.ToArray();
+            warpheum.CheckEncounters();
+            warpheum.AddEncounter();
+            Two();
+        }
+        public static void Two()
+        {
+            BrutalAPI.EnemyEncounter warpheum = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "ManicMenThird",
+                area = 1,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(1, 9),
+                signType = SignType.ManicMan,
+                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._musicEventReference,
+                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._roarReference.roarEvent,
+                difficulty = EncounterDifficulty.Hard
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=4},
+                });
+            if (Trolling(71))
+            {
+
+                fields.Add(new FieldEnemy[]
+                    {
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "ManicMan_EN", enemySlot=4},
+                    });
             }
             warpheum.variations = fields.ToArray();
             warpheum.CheckEncounters();
