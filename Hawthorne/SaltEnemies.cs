@@ -2465,7 +2465,7 @@ namespace Hawthorne
                 if (EnemyExist("Windle1_EN") && Quarter) list.Add("Windle1_EN");
                 if (EnemyExist("Clione_EN") && Half) list.Add("Clione_EN");
                 if (EnemyExist("UnculturedSwine_EN") && Half) list.Add("UnculturedSwine_EN");
-                if (EnemyExist("Pinano_EN")) list.Add("UnculturedSwine_EN");
+                if (EnemyExist("Pinano_EN")) list.Add("Pinano_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -2720,7 +2720,7 @@ namespace Hawthorne
         public static bool All => false;
         public static bool EnemyNull => true && All;
         public static bool SpriteNull => false && All;
-        public static bool GenInfo => true && All;
+        public static bool GenInfo => false && All;
         public static bool MiscInfo => false && All;
     }
 

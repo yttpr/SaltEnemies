@@ -7245,7 +7245,13 @@ namespace Hawthorne
         public static UnitStoredValueNames HasTransformed => (UnitStoredValueNames)7207237;
         public static CharacterSO getRandom()
         {
-            return new List<CharacterSO>(LoadedAssetsHandler.LoadedCharacters.Values).GetRandom();
+            CharacterSO ret = new List<CharacterSO>(LoadedAssetsHandler.LoadedCharacters.Values).GetRandom();
+            for (int i = 0; i < 144; i++)
+            {
+                if (ret == null || ret.Equals(null)) ret = new List<CharacterSO>(LoadedAssetsHandler.LoadedCharacters.Values).GetRandom();
+                else break;
+            }
+            return ret;
         }
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {

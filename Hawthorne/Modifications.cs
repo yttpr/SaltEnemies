@@ -5077,7 +5077,7 @@ namespace Hawthorne
                     }
                 });
             }
-            if (EnemyExist("Clione_EN"))
+            if (EnemyExist("Clione_EN") && Half)
             {
                 list.Add(new RandomEnemyGroup
                 {
@@ -5098,6 +5098,19 @@ namespace Hawthorne
                         "Revola_EN",
                         RandomOrph,
                         "Clione_EN",
+                    }
+                });
+            }
+            if (EnemyExist("WindSong_EN") && Third)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Revola_EN",
+                        "WindSong_EN",
+                        "WindSong_EN",
+                        "WindSong_EN"
                     }
                 });
             }

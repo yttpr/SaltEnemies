@@ -361,6 +361,7 @@ namespace Hawthorne
             WaterFool = new GameObject[5][];
             WaterEnemy = new GameObject[5];
             MoldView.Reset();
+            SlipView.Reset();
         }
 
         public static GameObject[] Fool;

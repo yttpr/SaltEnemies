@@ -43,6 +43,12 @@ namespace Hawthorne
         public static GameObject[][] SlipFool = new GameObject[5][];
         public static GameObject[] SlipEnemy = new GameObject[5];
 
+        public static void Reset()
+        {
+            SlipFool = new GameObject[5][];
+            SlipEnemy = new GameObject[5];
+        }
+
         public static GameObject[] Fool;
         public static GameObject Enemy;
 
@@ -58,7 +64,10 @@ namespace Hawthorne
             foreach (SlotStatusEffectInfoSO effect in effects)
             {
                 if (effect.slotStatusEffectType == (SlotStatusEffectType)SlipInfo.Slip)
+                {
                     flag = true;
+                    //Debug.Log("slippy: " + self.SlotID);
+                }
             }
             try
             {

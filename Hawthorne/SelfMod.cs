@@ -4817,6 +4817,15 @@ namespace Hawthorne
                         main,
                     }
                 });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Pinano_EN",
+                        "Pinano_EN",
+                        main,
+                    }
+                });
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
