@@ -792,7 +792,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 10,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_InHerImage_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/MawSong",
                 roarEvent = LoadedAssetsHandler.GetCharcater("LongLiver_CH").deathSound,
                 difficulty = EncounterDifficulty.Hard
             };

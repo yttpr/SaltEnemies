@@ -1839,10 +1839,16 @@ namespace Hawthorne
         {
             get
             {
-                if (Actor == null) return 0;
+                if (Actor == null)
+                {
+                    if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("null Actor");
+                    return 0;
+                }
                 else
                 {
-                    return (SigilType)Actor.GetStoredValue(SigilManager.Sigil);
+                    SigilType ret = (SigilType)Actor.GetStoredValue(SigilManager.Sigil);
+                    if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("unit: " + Actor.ID + " slot: " + Actor.SlotID + " sigil: " + ret.ToString());
+                    return ret;
                 }
             }
         }
@@ -1854,9 +1860,17 @@ namespace Hawthorne
                 unit.SetStoredValue(SigilManager.Sigil, 4);
             }
         }
-
+        public bool Added = false;
+        public bool ReplaceAdd = false;
         public override void OnPassiveConnected(IUnit unit)
         {
+            if (Added)
+            {
+                CombatManager.Instance.AddPrioritySubAction(new NewSigilSubAction(unit, this));
+                if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Nah bruh we skipp: unit: " + unit.ID + " slot: " + unit.SlotID + " Added: " + Added);
+                if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Actor: unit: " + Actor.ID + " slot: " + Actor.SlotID);
+                return;
+            }
             Effect[] array = new Effect[]
             {
                 new Effect(BasicEffects.SetStoreValue(SigilManager.Sigil), 4, null, Slots.Self)
@@ -1870,11 +1884,65 @@ namespace Hawthorne
                 new Effect(RootActionEffect.Create(root), 1, null, Slots.Self)
             }), unit));
             Actor = unit;
+            if (DoDebugs.MiscInfo)
+            {
+                if (ReplaceAdd)
+                    UnityEngine.Debug.Log("Replace Add: unit: " + unit.ID + " slot: " + unit.SlotID + " Added: " + Added);
+                else
+                    UnityEngine.Debug.Log("Fresh Add: unit: " + unit.ID + " slot: " + unit.SlotID + " Added: " + Added);
+            }
+            Added = true;
+            if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Actor: unit: " + Actor.ID + " slot: " + Actor.SlotID);
         }
+        public bool KeepActor = false;
         public override void OnPassiveDisconnected(IUnit unit)
         {
             unit.SetStoredValue(SigilManager.Sigil, 0);
-            Actor = null;
+            if (!KeepActor) Actor = null;
+            else
+            {
+                if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("keeping actor");
+                KeepActor = false;
+            }
+        }
+    }
+    public class NewSigilSubAction : CombatAction
+    {
+        public IUnit unit;
+        public SigilPassiveAbility pass;
+        public NewSigilSubAction(IUnit unit, SigilPassiveAbility pass)
+        {
+            this.unit = unit;
+            this.pass = pass;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            if (unit.IsAlive || unit.CurrentHealth > 0)
+            {
+                pass.KeepActor = true;
+                unit.TryRemovePassiveAbility(pass.type);
+                if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Old Passive Actor: unit: " + pass.Actor.ID + " slot: " + pass.Actor.SlotID + " Added: " + pass.Added);
+                SigilPassiveAbility add = ScriptableObject.Instantiate(pass);
+                add.Added = false;
+                add.Actor = null;
+                add.ReplaceAdd = true;
+                if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("Try Replace Add: unit: " + unit.ID + " slot: " + unit.SlotID + " Added: " + add.Added);
+                unit.AddPassiveAbility(add);
+                /*if (Check.EnemyExist("Sigil_EN"))
+                {
+                    if (LoadedAssetsHandler.GetEnemy("Sigil_EN").passiveAbilities[0] is SigilPassiveAbility p && p.Added)
+                    {
+                        SigilPassiveAbility n = ScriptableObject.Instantiate(pass);
+                        n.Added = false;
+                        n.Actor = null;
+                        LoadedAssetsHandler.GetEnemy("Sigil_EN").passiveAbilities = new BasePassiveAbilitySO[]
+                        {
+                            n, Passives.Formless, Passives.Withering
+                        };
+                    }
+                }*/
+            }
+            yield return null;
         }
     }
     public enum SigilType

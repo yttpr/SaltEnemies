@@ -537,7 +537,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 8,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone01_Flarb_Hard_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/CoffinTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("Visage_MyOwn_EN").deathSound,
                 difficulty = EncounterDifficulty.Medium
             };

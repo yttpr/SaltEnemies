@@ -3032,7 +3032,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ChoirBoy_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/FirebirdTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_GigglingMinister_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };
@@ -3381,7 +3381,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ChoirBoy_Easy_EnemyBundle")._musicEventReference,
+                musicEvent = "event:/Hawthorne/FirebirdTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_GigglingMinister_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Hard
             };
