@@ -2348,7 +2348,7 @@ namespace Hawthorne
                 return UnityEngine.Random.Range(20, 30) * mod;
             }
         }
-        static int mod = 999;
+        static int mod = 1;
 
         public static void orphMed(int sign)
         {
