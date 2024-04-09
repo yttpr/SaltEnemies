@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using THE_DEAD;
 using Tools;
 using UnityEngine;
@@ -1903,6 +1904,14 @@ namespace Hawthorne
             {
                 if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("keeping actor");
                 KeepActor = false;
+            }
+            if (unit.IsUnitCharacter)
+            {
+                CombatManager.Instance._stats.combatUI.TrySetCharacterAnimatorParameterInt(unit.ID, "color", 0);
+            }
+            else
+            {
+                CombatManager.Instance._stats.combatUI.TrySetEnemyAnimatorParameterInt(unit.ID, "color", 0);
             }
         }
     }

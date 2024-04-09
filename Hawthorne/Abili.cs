@@ -761,6 +761,7 @@ namespace Hawthorne
                             new Effect(sigil, 1, CustomIntentIconSystem.GetIntent("DefTxt"), allAlly),
                             new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("UpArrow"), allAlly),
                             new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, allAlly),
+                            new Effect(ScriptableObject.CreateInstance<SigilEffect>(), 0, null, allAlly)
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Resolve_1_A").visuals,
                         animationTarget = allAlly,
@@ -793,6 +794,7 @@ namespace Hawthorne
                             new Effect(sigil, 2, CustomIntentIconSystem.GetIntent("AtkTxt"), allAlly),
                             new Effect(BasicEffects.Empty, 1, CustomIntentIconSystem.GetIntent("OtherUpAlt"), allAlly),
                             new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, allAlly),
+                            new Effect(ScriptableObject.CreateInstance<SigilEffect>(), 1, null, allAlly)
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals,
                         animationTarget = allAlly,
@@ -820,6 +822,7 @@ namespace Hawthorne
                         {
                             new Effect(sigil, 3, CustomIntentIconSystem.GetIntent("Spectral"), Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SigilEffect>(), 2, null, Slots.Self)
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = Slots.Self,
@@ -847,6 +850,7 @@ namespace Hawthorne
                         {
                             new Effect(sigil, 4, IntentType.Misc, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<SigilSongCheckEffect>(), 1, null, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SigilEffect>(), 3, null, Slots.Self)
                         },
                         visuals = null,
                         animationTarget = Slots.Self,

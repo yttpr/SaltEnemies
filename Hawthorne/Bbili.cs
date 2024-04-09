@@ -398,4 +398,13 @@ namespace Hawthorne
             return ret;
         }
     }
+    public class SigilEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = entryVariable;
+            CombatManager.Instance.AddUIAction(new AnimationParameterSetterIntUIAction(caster.ID, caster.IsUnitCharacter, "color", entryVariable));
+            return true;
+        }
+    }
 }

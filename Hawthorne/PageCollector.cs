@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using static Hawthorne.Check;
 
 namespace Hawthorne
 {
@@ -26,7 +27,19 @@ namespace Hawthorne
             {
                 if (DoDebugs.GenInfo)
                 {
-                    Debug.LogError("Whoopsies!" + self._currentName);
+                    Debug.LogError("(Paging) Whoopsies!" + self._currentName);
+                    Debug.LogError(e + e.Message + e.StackTrace);
+                }
+            }
+            try
+            {
+                self.Naming();
+            }
+            catch (Exception e)
+            {
+                if (DoDebugs.GenInfo)
+                {
+                    Debug.LogError("(Naming) Whoopsies!" + self._currentName);
                     Debug.LogError(e + e.Message + e.StackTrace);
                 }
             }
@@ -166,6 +179,148 @@ namespace Hawthorne
                 {
                     Debug.LogError("Epic File Failure " + pageName);
                     Debug.LogError(e + e.Message + e.StackTrace);
+                }
+            }
+        }
+    }
+
+    public static class NameChanger
+    {
+        public static void Naming(this EnemyCombat self)
+        {
+            self.DeadPixel(self.Enemy);
+            self.Illusion(self.Enemy);
+            self.Minana(self.Enemy);
+            self.ClockTower(self.Enemy);
+            self.Nameless(self.Enemy);
+            self.GlassFigurine(self.Enemy);
+        }
+
+        public static void DeadPixel(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("DeadPixel_EN") && self == LoadedAssetsHandler.GetEnemy("DeadPixel_EN"))
+            {
+                if (Third)
+                {
+                    if (Third)
+                    {
+                        string[] names = new string[]
+                        {
+                            "FFF740+9C983D",
+                            "01000100 01100101 01100001 01100100 00100000 01010000 01101001 01111000 01100101 01101100",
+                            "???? ?????"
+                        };
+                        enemy.Name = names.GetRandom();
+                    }
+                    else
+                    {
+                        string[] names = new string[]
+                        {
+                            "DEAD PIXEL",
+                            "dead pixel"
+                        };
+                        enemy.Name = names.GetRandom();
+                    }
+                }
+            }
+        }
+        public static void Illusion(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("Illusion_EN") && self == LoadedAssetsHandler.GetEnemy("Illusion_EN"))
+            {
+                if (Third)
+                {
+                    string[] names = new string[]
+                    {
+                        "Ddelusion",
+                        "Deelusion",
+                        "Dellusion",
+                        "Deluusion",
+                        "Delussion",
+                        "Delusiion",
+                        "Delusioon",
+                        "Delusionn"
+                    };
+                    enemy.Name = names.GetRandom();
+                }
+            }
+        }
+        public static void Minana(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("Minana_EN") && self == LoadedAssetsHandler.GetEnemy("Minana_EN"))
+            {
+                if (Trolling(22))
+                {
+                    enemy.Name = "Miino";
+                }
+                else if (Trolling(63))
+                {
+                    enemy.Name = "Princess";
+                }
+            }
+        }
+        public static void ClockTower(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("ClockTower_EN") && self == LoadedAssetsHandler.GetEnemy("ClockTower_EN"))
+            {
+                if (Trolling(32))
+                {
+                    enemy.Name = "- .... .   . -. -..   --- ..-.   - .. -- .";
+                }
+            }
+        }
+        public static void Nameless(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("Nameless_EN") && self == LoadedAssetsHandler.GetEnemy("Nameless_EN"))
+            {
+                if (Trolling(82))
+                {
+                    enemy.Name = "Nameless";
+                }
+            }
+        }
+        public static void GlassFigurine(this EnemyCombat enemy, EnemySO self)
+        {
+            if (EnemyExist("GlassFigurine_EN") && self == LoadedAssetsHandler.GetEnemy("GlassFigurine_EN"))
+            {
+                if (Half)
+                {
+                    string[] names = new string[]
+                    {
+                        "Glass Figurine",
+                        "How You Move About The Scene",
+                        "How You Twist, How You Bend",
+                        "To A Song With No Beginning Or End",
+                        "Pulled By The Strings",
+                        "Color Absent From The Scene",
+                        "But I Hear A Small Cry",
+                        "\"Just Let Me Die\"",
+                        "In A Dream State",
+                        "They're Rearranging Your Face",
+                        "Lingering, Warm And Sweet",
+                        "Fingers Feeling Where Your Eyes Used To Be",
+                        "Once, We Were Friends",
+                        "Now We'll Never Meet Again",
+                        "So Adieu, So Adieu",
+                        "I Still Love You",
+                        "Comely Puppet Oh Comely Puppet",
+                        "I'm Searching For That Smile Of Yours",
+                        "But Your Head Is Filled Up With Cotton",
+                        "All Your Pleasant Features Have Been Forgotten",
+                        "Comely Puppet Oh Comely Puppet",
+                        "I'm Wating For The Big Encore",
+                        "While The Ash Builds Up In The Ash Tray",
+                        "You Can Run Away, It All Stays In Place",
+                        "Hey, Mom And Dad",
+                        "I Can See I Made You Mad",
+                        "Run Away, Run Away",
+                        "I Can Feel The Cracks Spread Across My Face",
+                        "I'm Right On Time",
+                        "A Doll Enters At Stage Right",
+                        "Lines I've Learned, Songs I've Heard",
+                        "So Familiar"
+                    };
+                    enemy.Name = names.GetRandom();
                 }
             }
         }

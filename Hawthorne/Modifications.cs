@@ -38337,5 +38337,282 @@ namespace Hawthorne
                 if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
             }
         }
+        public static void FrostEZ()
+        {
+            string bundle = "is cold";
+            string main = "Frostbite_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 3;
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 4; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        main
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        main
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        RandomOrph
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void FrostMed()
+        {
+            string bundle = "still kinda cold";
+            string main = "Frostbite_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        main,
+                       RandomOrph
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        main,
+                        RandomOrph
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        RandomOrph,
+                        RandomOrph
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        main,
+                        main
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        main,
+                        main 
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        main,
+                        RandomOrph
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                        main
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void FrostHard()
+        {
+            string bundle = "is very cold";
+            string main = "Frostbite_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 2;
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                        Half ? RandomOrph : RandomColor(1)
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        main,
+                        main,
+                        RandomOrph,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        RandomOrph,
+                        RandomOrph,
+                        main
+                    }
+                });
+                string a = RandomOrph;
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        a,
+                        a,
+                        main
+                    }
+                });
+                string b = RandomOrph;
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomSupport(1, false, false),
+                        b,
+                        b,
+                        main
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        SmartColor(1, true),
+                        SmartColor(1),
+                        main
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        SmartColor(1, true),
+                        SmartColor(1),
+                        RandomSupport(1, false, false)
+                    }
+                });
+                ResetColor();
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
     }
 }

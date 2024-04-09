@@ -39,7 +39,7 @@ using MonoMod.Cil;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.0")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.1")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -169,6 +169,7 @@ namespace Hawthorne
             Hawthorne.MultiSpriteEnemyLayout.Setup();
             Hawthorne.FieldEffectFixHook.Setup();
             try { ShuaHandler.Setup(); } catch { Debug.LogError("SHUA HANDLER EPIC FAILURE"); }
+            try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
             return;
@@ -1113,14 +1114,18 @@ namespace Hawthorne
             addSepulchrePool("UnculturedSwine_EN");
             addSepulchrePool("FrowningChancellor_EN");
             addSepulchrePool("Jansuli_EN");
+            addSepulchrePool("Frostbite_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
             addFountainPool("FrowningChancellor_EN");
             addFountainPool("Jansuli_EN");
+            addFountainPool("Frostbite_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
             addBronzoPool("FrowningChancellor_EN");
             addBronzoPool("Jansuli_EN");
+            addBronzoPool("Frostbite_EN");
+            addBronzoPool("Giles_EN");
 
             /*
             Marble Maw and the lads
@@ -1744,6 +1749,7 @@ namespace Hawthorne
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("LittleBeak_EN")) list.Add("LittleBeak_EN");
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
                 else if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Jansuli_EN")) list.Add("Jansuli_EN");
+                else if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
         }
@@ -1943,6 +1949,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
                 if (!red && !killable && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Children6_EN")) list.Add("Children6_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
+                if (!mustSmall && !killable && UnityEngine.Random.Range(0, 100) < 75 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
             }
             if (zone == 2)
             {

@@ -71,14 +71,6 @@ namespace Hawthorne
             {
                 new Effect(ScriptableObject.CreateInstance<LockedBoxEffect>(), 1, new IntentType?(), Slots.Self, Conditions.Chance(4))
             };
-            
-            AnimationVisualsEffect talons = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
-            talons._animationTarget = Slots.Right;
-            talons._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
-            //talons._visuals = CustomVisuals.GetVisuals("Salt/Cannon");
-            AnimationVisualsEffect talons2 = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
-            talons2._animationTarget = Slots.Left;
-            talons2._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
             //talons2._visuals = CustomVisuals.GetVisuals("Salt/Cannon");
             AnimationVisualsEffect headshot = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
             headshot._animationTarget = Slots.Right;
@@ -88,6 +80,13 @@ namespace Hawthorne
             headshot2._animationTarget = Slots.Left;
             //headshot2._visuals = LoadedAssetsHandler.GetEnemy("TriggerFingers_BOSS").abilities[0].ability.visuals;
             headshot2._visuals = CustomVisuals.GetVisuals("Salt/Gaze");
+
+            AnimationVisualsEffect talons = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
+            talons._animationTarget = Slots.Right;
+            talons._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
+            AnimationVisualsEffect talons2 = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
+            talons2._animationTarget = Slots.Left;
+            talons2._visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals;
             PreviousEffectCondition didntThat = ScriptableObject.CreateInstance<PreviousEffectCondition>();
             didntThat.wasSuccessful = false;
             PreviousEffectCondition didThat = ScriptableObject.CreateInstance<PreviousEffectCondition>();
@@ -101,9 +100,9 @@ namespace Hawthorne
             terrorize.rarity = 3;
             terrorize.effects = new Effect[4];
             terrorize.effects[0] = new Effect(talons, 1, new IntentType?(), Slots.Right, Conditions.Chance(50));
-            terrorize.effects[1] = new Effect(ScriptableObject.CreateInstance<DamageAlwaysTrueEffect>(), 6, IntentType.Damage_3_6, Slots.Right, didThat);
+            terrorize.effects[1] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Right, didThat);
             terrorize.effects[2] = new Effect(talons2, 1, new IntentType?(), Slots.Left, didnt2That);
-            terrorize.effects[3] = new Effect(ScriptableObject.CreateInstance<DamageAlwaysTrueEffect>(), 6, IntentType.Damage_3_6, Slots.Left, didThat);
+            terrorize.effects[3] = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Left, didThat);
             terrorize.visuals = null;
             terrorize.animationTarget = Slots.Self;
 

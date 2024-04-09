@@ -284,6 +284,9 @@ namespace Hawthorne
             ModMod.MarbleEZ();
             ModMod.MarbleMed();
             ModMod.MarbleHard();
+            ModMod.FrostEZ();
+            ModMod.FrostMed();
+            ModMod.FrostHard();
             ModMod.ErrantMed();
             ModMod.ErrantHard();
             SaltMod.PixelShore();

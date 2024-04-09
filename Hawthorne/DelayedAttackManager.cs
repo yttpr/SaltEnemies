@@ -75,6 +75,7 @@ namespace Hawthorne
             CombatManager.Instance.AddRootAction(new BadDogTurnStartAction());
             CombatManager.Instance.AddRootAction(new PerformDelayedAttacksAction(true));
             CombatManager.Instance.AddRootAction(new ButterflyAction());
+            CombatStarterPastCombatStart.Start();
         }
 
         public static void PlayerTurnEnd(Action<CombatStats> orig, CombatStats self)
@@ -95,6 +96,7 @@ namespace Hawthorne
 
         public static void UIInitialization(Action<CombatStats> orig, CombatStats self)
         {
+            CombatStarterPastCombatStart.Reset();
             WaterView.Reset();
             orig(self);
             Attacks.Clear();
