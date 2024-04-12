@@ -280,7 +280,7 @@ namespace Hawthorne
             ModMod.HogHard();
             ModMod.JanEZ();
             ModMod.JanMed();
-            ModMod.JanMed();
+            ModMod.JanHard();
             ModMod.MarbleEZ();
             ModMod.MarbleMed();
             ModMod.MarbleHard();

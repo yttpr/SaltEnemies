@@ -2253,6 +2253,11 @@ namespace Hawthorne
             }
             return ret;
         }
+        public static string OrphWhore(bool red = false) => RandomEncounters.Orpheum.Whore(red);
+        public static string Either(string one, string two)
+        {
+            return Half ? one : two;
+        }
     }
 
     public static class RandomEncounters
@@ -2613,6 +2618,34 @@ namespace Hawthorne
                 }
                 ResetIntelligentColor();
                 return ret.ToArray();
+            }
+        }
+        public static class Orpheum
+        {
+            public static string Whore(bool red = false)
+            {
+                List<string> list = new List<string>();
+                list.Add("WrigglingSacrifice_EN");
+                if (!red && EnemyExist("MechanicalLens_EN")) list.Add("MechanicalLens_EN");
+                if (!red && EnemyExist("Warbird_EN")) list.Add("Warbird_EN");
+                if (EnemyExist("Gizo_EN") && Half) list.Add("Gizo_EN");
+                if (EnemyExist("ReflectedHound_EN") && Half) list.Add("ReflectedHound_EN");
+                if (EnemyExist("Shua_EN")) list.Add("Shua_EN");
+                if (!red && EnemyExist("TheCrow_EN")) list.Add("TheCrow_EN");
+                if (!red && EnemyExist("FumeFactory_EN")) list.Add("FumeFactory_EN");
+                if (EnemyExist("Freud_EN")) list.Add("Freud_EN");
+                if (!red && EnemyExist("Hunter_EN")) list.Add("Hunter_EN");
+                if (EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
+                if (EnemyExist("Errant_EN") && Half) list.Add("Errant_EN");
+                return list.GetRandom();
+            }
+            public static string Fag(bool red = false)
+            {
+                List<string> list = new List<string>();
+                list.Add("WrigglingSacrifice_EN");
+                list.Add("Conductor_EN");
+                if (EnemyExist("Errant_EN")) list.Add("Errant_EN");
+                return list.GetRandom();
             }
         }
         public static class Garden

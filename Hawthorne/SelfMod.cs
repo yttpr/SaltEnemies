@@ -343,6 +343,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        OrphWhore(Half),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -470,6 +482,19 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                bool H = Half;
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        OrphWhore(H),
+                        RandomSupport(1, !H)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -504,6 +529,18 @@ namespace Hawthorne
                         main,
                         RandomSupport(1, false, false),
                         RandomSupport(1, true)
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        OrphWhore(),
+                        Either(RandomSupport(1, true, false), RandomRedColor(false, true))
                     }
                 });
             }
@@ -798,6 +835,17 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -833,6 +881,18 @@ namespace Hawthorne
                         main,
                         Half ? a : RandomColor(1),
                         Half ? RandomOrph : a
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        RandomColor(1),
+                        main
                     }
                 });
             }
@@ -894,6 +954,18 @@ namespace Hawthorne
                         main,
                         Half ? RandomOrph : "Clione_EN",
                         Half ? RandomColor(1) : "Clione_EN",
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(RandomOrph, RandomColor(1))
                     }
                 });
             }
@@ -1209,6 +1281,49 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                if (Half)
+                {
+                    if (Half)
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                            OrphWhore(true),
+                            main,
+                            sub
+                            }
+                        });
+                    }
+                    else
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                            OrphWhore(),
+                            main,
+                            sub,
+                            RandomSupport(1, true)
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                            {
+                            OrphWhore(),
+                            main,
+                            RandomOrph
+                            }
+                    });
+                }
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -1244,6 +1359,49 @@ namespace Hawthorne
                         RandomOrph
                     }
                 });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (Half)
+                {
+                    if (Half)
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                            OrphWhore(true),
+                            main,
+                            sub
+                            }
+                        });
+                    }
+                    else
+                    {
+                        list.Add(new RandomEnemyGroup
+                        {
+                            _enemyNames = new string[]
+                            {
+                            OrphWhore(),
+                            main,
+                            sub,
+                            RandomSupport(1, true)
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                            {
+                            OrphWhore(),
+                            main,
+                            RandomOrph
+                            }
+                    });
+                }
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -2134,6 +2292,19 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(main, RandomColor(1)),
+                        Either(main, RandomOrph)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2468,6 +2639,19 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(RandomOrph, RandomColor(1)),
+                        RandomSupport(1)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -2641,6 +2825,17 @@ namespace Hawthorne
                         "Clione_EN",
                         main,
                         RandomOrph
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main
                     }
                 });
             }
@@ -3629,6 +3824,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(main, RandomOrph),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3667,6 +3874,19 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main, 
+                        main,
+                        Either(RandomColor(1), RandomSupport(1, false, false))
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3702,6 +3922,139 @@ namespace Hawthorne
                         main,
                         main,
                         "Clione_EN"
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        RandomOrph,
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        RandomColor(1),
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(1),
+                        RandomOrph,
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        RandomOrph,
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(1, true),
+                        SmartColor(1),
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        RandomSupport(1, false, false),
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(1, false, false),
+                        OrphWhore(),
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        RandomOrph,
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        RandomColor(1),
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        main,
+                        main,
                     }
                 });
             }
@@ -4001,6 +4354,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        RandomSupport(1, true)
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4034,6 +4399,18 @@ namespace Hawthorne
                         "Clione_EN",
                         main,
                         RandomOrph
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(RandomOrph, RandomRedColor(false, true))
                     }
                 });
             }
@@ -4589,6 +4966,19 @@ namespace Hawthorne
                     }
                 });
             }
+            if (EnemyExist("DeadPixel_EN"))
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "DeadPixel_EN",
+                        main,
+                        "DeadPixel_EN",
+                        main
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4623,6 +5013,19 @@ namespace Hawthorne
                         main,
                         RandomOrph,
                         RandomSupport(1, false, false)
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(RandomOrph, RandomColor(1))
                     }
                 });
             }
@@ -4713,6 +5116,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        Either(RandomOrph, RandomSupport(1, true, false))
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4758,6 +5173,18 @@ namespace Hawthorne
                         main,
                         RandomOrph,
                         RandomOrph
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        OrphWhore(),
+                        main,
+                        RandomOrph,
                     }
                 });
             }
@@ -5343,18 +5770,46 @@ namespace Hawthorne
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
-            /*if (EnemyExist("Satyr_EN") && Half)
+            if (EnemyExist("DeadPixel_EN"))
             {
                 list.Add(new RandomEnemyGroup
                 {
                     _enemyNames = new string[]
                     {
-                        "Satyr_EN",
+                        "DeadPixel_EN",
                         main,
-                        "ShiveringHomunculus_EN",
+                        "DeadPixel_EN",
+                        RandomOrph
                     }
                 });
-            }*/
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (Half)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            OrphWhore(),
+                            main,
+                            Either(RandomOrph, Either(RandomRedColor(false, true), RandomSupport(1, true, false)))
+                        }
+                    });
+                }
+                else
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            OrphWhore(true),
+                            main,
+                            Either(RandomColor(1), Either(RandomOrph, RandomSupport(1, false, false)))
+                        }
+                    });
+                }
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
