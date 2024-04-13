@@ -129,13 +129,13 @@ namespace Hawthorne
             bitter.name = "Bitter Flavour";
             if (UnityEngine.Random.Range(0, 100) < 50)
                 bitter.name = "Bitter Flavor";
-            bitter.description = "Instantly kill the opposing party member. If successful, give 1-2 Tainted Apples and instantly kill the left and right enemies.";
+            bitter.description = "Instantly kill the opposing party member. If successful, give 1-2 Tainted Apples and instantly kill this enemy.";
             bitter.rarity = 4;
             bitter.effects = new Effect[4];
             bitter.effects[0] = new Effect(bitterAnim, 1, new IntentType?(), Slots.Front);
             bitter.effects[1] = new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Front);
             bitter.effects[2] = new Effect(TApple, 1, IntentType.Misc, Slots.Self, didThat);
-            bitter.effects[3] = new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Sides, BasicEffects.DidThat(true, 2));
+            bitter.effects[3] = new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Self, BasicEffects.DidThat(true, 2));
             bitter.visuals = null;
             bitter.animationTarget = Slots.Self;
             //make custom tainted apples effect for bitter flavor

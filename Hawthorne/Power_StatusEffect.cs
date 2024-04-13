@@ -259,8 +259,17 @@ namespace THE_DEAD
                     }
 
                     powerStatusEffect.SetEffectInformation(effectInfo);
-                    if (targets[index].Unit.ApplyStatusEffect((IStatusEffect)powerStatusEffect, amount))
-                        ++exitAmount;
+                    try
+                    {
+                        if (targets[index].Unit.ApplyStatusEffect(powerStatusEffect, amount))
+                            ++exitAmount;
+                    }
+                    catch (Exception ex)
+                    {
+                        CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(targets[index].Unit.ID, targets[index].Unit.IsUnitCharacter, "so uh Power was attempted to be applied to this character but it failed and wouldve softlocked normally. so erm. just pretend this didnt happen!"));
+                        Debug.LogError(ex.ToString());
+                        Debug.LogError(ex.Message + ex.StackTrace);
+                    }
                 }
             }
 

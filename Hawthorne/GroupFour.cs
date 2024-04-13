@@ -289,6 +289,10 @@ namespace Hawthorne
             ModMod.FrostHard();
             ModMod.ErrantMed();
             ModMod.ErrantHard();
+            ModMod.StatueEZ();
+            ModMod.StatueMed();
+            ModMod.StatueHard();
+            ModMod.BolerOrph();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

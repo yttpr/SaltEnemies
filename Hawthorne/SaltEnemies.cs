@@ -1112,12 +1112,12 @@ namespace Hawthorne
             //AG
             addSepulchrePool("MarbleMaw_EN");
             addSepulchrePool("UnculturedSwine_EN");
-            addSepulchrePool("FrowningChancellor_EN");
+            //addSepulchrePool("FrowningChancellor_EN");
             addSepulchrePool("Jansuli_EN");
             addSepulchrePool("Frostbite_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
-            addFountainPool("FrowningChancellor_EN");
+            //addFountainPool("FrowningChancellor_EN");
             addFountainPool("Jansuli_EN");
             addFountainPool("Frostbite_EN");
             addBronzoPool("MarbleMaw_EN");
@@ -1127,6 +1127,33 @@ namespace Hawthorne
             addBronzoPool("Frostbite_EN");
             addBronzoPool("Giles_EN");
 
+            //furyball
+            addSepulchrePool("SweatingNosestone_EN");//yellow
+            addSepulchrePool("ProlificNosestone_EN ");//red
+            addSepulchrePool("ScatterbrainedNosestone_EN");//blue
+            addSepulchrePool("MesmerizingNosestone_EN");//purple
+            addSepulchrePool("UninspiredNosestone_EN");//gray
+            addFountainPool("SweatingNosestone_EN");
+            addFountainPool("ProlificNosestone_EN ");
+            addFountainPool("ScatterbrainedNosestone_EN");
+            addFountainPool("MesmerizingNosestone_EN");
+            addFountainPool("UninspiredNosestone_EN");
+            addBronzoPool("Inequity_EN");
+            addBronzoPool("SweatingNosestone_EN");
+            addBronzoPool("ProlificNosestone_EN ");
+            addBronzoPool("ScatterbrainedNosestone_EN");
+            addBronzoPool("MesmerizingNosestone_EN");
+            addBronzoPool("UninspiredNosestone_EN");
+            addBronzoPool("Boler_EN");
+            /*
+            inequity
+            InequityEncountersHard
+            InequityEncountersMedium
+            InequityEncountersEasy
+            
+            boler
+            BolerEncountersHard
+             */
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1733,6 +1760,8 @@ namespace Hawthorne
         public static bool BowSpogging => MultiENExistInternal(BowSpogs);
         public static bool GreyScale => MultiENExist("Illusion_EN", "FakeAngel_EN");
         public static bool BirdScale => MultiENExist("LittleBeak_EN", "Warbird_EN", "TheCrow_EN", "Hunter_EN", "Firebird_EN");
+        public static string[] Noses => new string[] { "SweatingNosestone_EN", "ProlificNosestone_EN", "ScatterbrainedNosestone_EN", "MesmerizingNosestone_EN", "UninspiredNosestone_EN" };
+        public static bool Nosing => MultiENExistInternal(Noses);
 
         public static string RandomOrph
         {
@@ -1782,10 +1811,11 @@ namespace Hawthorne
             if (zone == 2)
             {
                 list.Clear();
-                list = new List<string>(Flowers);
+                if (Flowering) list = new List<string>(Flowers);
                 if (EnemyExist("RusticJumbleguts_EN")) list.Add("RusticJumbleguts_EN");
                 if (!killable && EnemyExist("MortalSpoggle_EN")) list.Add("MortalSpoggle_EN");
                 if (list.Count <= 0 || UnityEngine.Random.Range(0, 100) == 0) list.Add("JumbleGuts_Flummoxing_EN");
+                if (Nosing) for (int i = 0; i < 5; i++) list.Add(Noses[i]);
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -1984,6 +2014,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("Clione_EN")) list.Add("Clione_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("YNL_EN")) list.Add("YNL_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
+                if (!mustSmall && !red && !killable && UnityEngine.Random.Range(0, 100) < 13 && EnemyExist("Inequity_EN")) list.Add("Inequity_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2364,6 +2395,11 @@ namespace Hawthorne
                         ret = Flowers.UpTo(limiter).GetRandom();
                         if (forceRed) ret = "RedFlower_EN";
                     }
+                    else if (Coloring == ColorType.Noses)
+                    {
+                        ret = Noses.GetRandom();
+                        if (forceRed) ret = "ProlificNosestone_EN";
+                    }
                     else ret = RandomColor(area);
                     if (reroll > 5 || forceRed)
                     {
@@ -2375,7 +2411,14 @@ namespace Hawthorne
                     return ret;
 
                 }
-                if (!doubleAble && forceRed) return RandomRedColor(false, true, area > 0);
+                if (!doubleAble && forceRed && area == 2)
+                {
+                    List<string> ret = new List<string>();
+                    if (Flowering) ret.Add("RedFlower_EN");
+                    if (Nosing) ret.Add("ProlificNosestone_EN");
+                    return ret.GetRandom();
+                }
+                else if (!doubleAble && forceRed) return RandomRedColor(false, true, area > 0);
                 if (!doubleAble) return RandomColor(area);
                 else
                 {
@@ -2389,6 +2432,7 @@ namespace Hawthorne
                         if (Spligging) picking.Add(ColorType.Splig);
                     }
                     if (area > 0 && Flowering && (area > 1 || !forceRed)) picking.Add(ColorType.Flower);
+                    if (area == 2 && Nosing) picking.Add(ColorType.Noses);
                     ColorType picked = picking[UnityEngine.Random.Range(0, picking.Count)];
                     Coloring = picked;
                     if (picked == ColorType.Jumble)
@@ -2442,6 +2486,11 @@ namespace Hawthorne
                         if (area > 1) limiter = 5;
                         ColorLastDouble = Flowers.UpTo(limiter).GetRandom();
                         if (forceRed) ColorLastDouble = "RedFlower_EN";
+                    }
+                    else if (picked == ColorType.Noses)
+                    {
+                        ColorLastDouble = Noses.GetRandom();
+                        if (forceRed) ColorLastDouble = "ProlificNosestone_EN";
                     }
                     else
                     {
@@ -2661,6 +2710,7 @@ namespace Hawthorne
                     ChunkDoubleable = false;
                     return list.GetRandom();
                 }
+                else if (tryDouble) list.Clear();
                 if (EnemyExist("Spitato_EN")) list.Add("Spitato_EN");
                 if (EnemyExist("SterileBud_EN")) list.Add("SterileBud_EN");
                 if (EnemyExist("Harbinger_EN")) list.Add("Harbinger_EN");
@@ -2668,6 +2718,15 @@ namespace Hawthorne
                 if (!Red && EnemyExist("TripodFish_EN") && Quarter) list.Add("TripodFish_EN");
                 if (!Red && EnemyExist("MarbleMaw_EN") && Half) list.Add("MarbleMaw_EN");
                 if (!Red && EnemyExist("YNL_EN") && Half) list.Add("YNL_EN");
+                if (EnemyExist("EyePalm_EN") && Half) list.Add("EyePalm_EN");
+                if (tryDouble || Half)
+                {
+                    if (!Red && EnemyExist("Maw_EN") && Half) list.Add("Maw_EN");
+                    if (!Red && EnemyExist("TheCrow_EN") && Half) list.Add("TheCrow_EN");
+                    if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
+                    if (!Red && Half) list.Add("ChoirBoy_EN");
+                    if (EnemyExist("Shua_EN") && Half) list.Add("Shua_EN");
+                }
                 string ret = list.GetRandom();
                 if (ret == "InHisImage_EN" || ret == "InHerImage_EN") ChunkDoubleable = true;
                 else ChunkDoubleable = false;
@@ -2686,6 +2745,7 @@ namespace Hawthorne
                 if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
                 if (EnemyExist("FrowningChancellor_EN") && Half) list.Add("FrowningChancellor_EN");
                 if (Quarter && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
+                if (!Red && Third && EnemyExist("ClockTower_EN")) list.Add("ClockTower_EN");
                 return list.GetRandom();
             }
             public static string RandomTwoSizeFag()
@@ -2772,6 +2832,7 @@ namespace Hawthorne
         Colophon = 3,
         Splig = 4,
         Flower = 5,
+        Noses = 6,
     }
     public enum Weight
     {

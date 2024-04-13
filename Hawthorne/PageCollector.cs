@@ -192,7 +192,7 @@ namespace Hawthorne
             self.Illusion(self.Enemy);
             self.Minana(self.Enemy);
             self.ClockTower(self.Enemy);
-            self.Nameless(self.Enemy);
+            //self.Nameless(self.Enemy);
             self.GlassFigurine(self.Enemy);
         }
 

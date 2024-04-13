@@ -84,7 +84,8 @@ namespace Hawthorne
             kindness.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, new IntentType?((IntentType)666888), Slots.Front);
             kindness.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 1, IntentType.Status_Ruptured, Slots.Front);
             kindness.effects[3] = new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self, Conditions.Chance(60));
-            kindness.visuals = LoadedAssetsHandler.GetEnemy("HeavensGateRed_BOSS").abilities[1].ability.visuals;
+            kindness.visuals = //LoadedAssetsHandler.GetEnemy("HeavensGateRed_BOSS").abilities[1].ability.visuals;
+                CustomVisuals.GetVisuals("Salt/Four");
             kindness.animationTarget = Slots.Front;
             Ability tenderness = new Ability();
             tenderness.name = "Tenderness";
@@ -94,11 +95,12 @@ namespace Hawthorne
             tenderness.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, new IntentType?((IntentType)666888), Slots.FrontLeftRight);
             tenderness.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, new IntentType?((IntentType)666888), Slots.Self);
             tenderness.effects[2] = new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self);
-            tenderness.visuals = CustomVisuals.GetVisuals("Salt/Needle");
+            tenderness.visuals = //CustomVisuals.GetVisuals("Salt/Needle");
+                LoadedAssetsHandler.GetCharacterAbility("Cacophony_1_A").visuals;
             tenderness.animationTarget = Slots.FrontLeftRight;
             AnimationVisualsEffect homonDomin = ScriptableObject.CreateInstance<AnimationVisualsEffect>();
             homonDomin._animationTarget = Slots.Front;
-            homonDomin._visuals = LoadedAssetsHandler.GetEnemyAbility("Domination_A").visuals;
+            homonDomin._visuals = LoadedAssetsHandler.GetCharacterAbility("Expire_1_A").visuals;
             Ability devotion = new Ability();
             devotion.name = "Devotion";
             devotion.description = "Move Left or Right. Apply 30 Pale to the Opposing party member and 30 Pale to self.";
@@ -118,7 +120,8 @@ namespace Hawthorne
             adoration.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, new IntentType?((IntentType)666888), Slots.Self);
             adoration.effects[1] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, new IntentType?((IntentType)666888), Slots.Front);
             adoration.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 2, IntentType.Status_Ruptured, Slots.Self, didThat);
-            adoration.visuals = CustomVisuals.GetVisuals("Salt/Hung");
+            adoration.visuals = //CustomVisuals.GetVisuals("Salt/Hung");
+                LoadedAssetsHandler.GetEnemyAbility("Domination_A").visuals;
             adoration.animationTarget = Slots.Front;
 
 

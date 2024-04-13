@@ -357,13 +357,14 @@ namespace Hawthorne
                     _love4U = new Ability()
                     {
                         name = "Love for You",
-                        description = "Apply 4 Power on the Opposing party member. Apply 20 Shield to this enemy's position, and 5 to it's left and right. \nApply 1 Photosynthesis to this enemy.",
+                        description = "Apply 4 Power on the Opposing party member. Apply 20 Shield to this enemy's position, and 5 to it's Let and Right. \nApply 1 Photosynthesis to this enemy.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 4, (IntentType)987895, Slots.Front),
-                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 20, IntentType.Field_Shield, Slots.Self),
-                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Sides),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 20, null, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, null, Slots.Sides),
+                            new Effect(BasicEffects.Empty, 0, IntentType.Field_Shield, Slots.SlotTarget(new int[]{-1, 0, 1}, true)),
                             new Effect(ScriptableObject.CreateInstance<ApplyPhotoSynthesisEffect>(), 1, GetIntent("Photo"), Slots.Self)
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Snap"),
@@ -4704,6 +4705,14 @@ namespace Hawthorne
                             StringPairData abilityLocData = abilityBySlotID.GetAbilityLocData();
                             header = abilityLocData.text;
                             content = "Move all party members with Terror closer to this enemy. If there are no party members with Terror, apply it to the party member farthest from this enemy.";
+                            self._tooltip.DelayShow(content, header, "");
+                            return;
+                        }
+                        if (abilityBySlotID._abilityName == Abili.Thrash.name)
+                        {
+                            StringPairData abilityLocData = abilityBySlotID.GetAbilityLocData();
+                            header = abilityLocData.text;
+                            content = "Deal a Little damge to the Opposing enemy and deal a LIttle damage to self.";
                             self._tooltip.DelayShow(content, header, "");
                             return;
                         }

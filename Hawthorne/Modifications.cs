@@ -1169,6 +1169,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomColor(2), RandomSupport(2, false, false)),
+                        "SkinningHomunculus_EN",
+                        RandomEncounters.Garden.RandomWhore(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3297,6 +3309,27 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    Either(RandomSupport(2, false, false), RandomColor(2)),
+                    "GigglingMinister_EN",
+                    RandomEncounters.Garden.RandomWhore(),
+                }
+            });
+            ResetColor();
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    "GigglingMinister_EN",
+                    SmartColor(2, true),
+                    SmartColor(2),
+                    RandomSupport(2, false, !Third)
+                }
+            });
+            ResetColor();
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -5715,6 +5748,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomSupport(1, false, false), RandomOrph),
+                        "MusicMan_EN",
+                        "MusicMan_EN",
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -6648,6 +6693,18 @@ namespace Hawthorne
                         OrphWhore(H),
                         "JumbleGuts_Hollowing_EN",
                         H ? Either(RainBaseWeighted(true, true, true, "JumbleGuts_Hollowing_EN"), RandomSupport(1, false, false)) : RandomOrph
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        "JumbleGuts_Hollowing_EN",
+                        Half ? Either(RainBaseWeighted(true, true, true, "JumbleGuts_Hollowing_EN"), RandomSupport(1, false, false)) : RandomOrph
                     }
                 });
             }
@@ -8938,6 +8995,28 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(ShoreSlop(), RandomSupport(0, false, false)),
+                        "Spoggle_Resonant_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                    }
+                });
+            }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        ShoreSlop(true),
+                        ShoreSlop(),
+                        "Spoggle_Resonant_EN",
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                }
+            });
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -9396,6 +9475,19 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         "Clione_EN",
+                        "Keko_EN",
+                        "Keko_EN",
+                        "Keko_EN",
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomColor(0), RandomEncounters.Shore.RandomShoreWhore()),
                         "Keko_EN",
                         "Keko_EN",
                         "Keko_EN",
@@ -11125,6 +11217,18 @@ namespace Hawthorne
                         RandomEncounters.Shore.RandomShoreWhore(),
                         "Flarb_EN",
                         "Pinano_EN",
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Flarb_EN",
+                        ShoreSlop(Half),
+                        ShoreSlop()
                     }
                 });
             }
@@ -13280,6 +13384,35 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Either(ShoreSlop(), RandomColor(0)),
+                            enemySlot = Half ? 0 : 1,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 4
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = 3
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomShoreMidget(Third),
+                            enemySlot = 2
+                        },
+                    }
+                });
+            }
             if (BundleStatic(bundle))
             {
                 List<SpecificEnemyGroup> lost = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -14027,6 +14160,34 @@ namespace Hawthorne
                         },
                     }
                 });
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    bool H = Half;
+                    list.Add(new SpecificEnemyGroup
+                    {
+                        _enemyGroup = new SpecificEnemyInfo[]
+                        {
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = Noses.GetRandom(),
+                                enemySlot = H ? 4 : 0,
+                            },
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = Half ? RandomEncounters.Garden.RandomChunk(true) : RandomEncounters.Garden.RandomWhore(true),
+                                enemySlot = H ? 3 : 1,
+                            },
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = main,
+                                enemySlot = H ? 0 : 3,
+                            },
+                        }
+                    });
+                }
             }
 
             if (BundleStatic(bundle))
@@ -15929,6 +16090,18 @@ namespace Hawthorne
                         }
                     });
                 }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Half ? RandomEncounters.Shore.FarShoreSlop(!Third) : RandomColor(0),
+                        ShoreSlop(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -18714,6 +18887,16 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    Either(RandomColor(1), RandomOrph),
+                    main,
+                    RandomOrph,
+                    RandomSupport(1, false, false)
+                }
+            });
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19451,6 +19634,16 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        RandomSupport(1, false, false),
+                        main,
+                        main,
+                        Either(Either(main, Either(main, RandomOrph)), RandomColor(1))
+                }
+            });
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20068,6 +20261,26 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        main,
+                        RandomEncounters.Garden.RandomChunk(true),
+                        RandomEncounters.Garden.RandomChunk(false, true)
+                }
+            });
+            ResetColor();
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        main,
+                        SmartColor(2, true, true),
+                        SmartColor(2),
+                }
+            });
+            ResetColor();
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20078,6 +20291,15 @@ namespace Hawthorne
             string main = "TitteringPeon_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 2;
+
+                    break;
+                }
+            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
             if (EnemyExist("DeadPixel_EN") && Half)
             {
@@ -20383,6 +20605,21 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            RandomEncounters.Garden.RandomChunk(true),
+                            main,
+                            Noses.GetRandom(),
+                        }
+                    });
+                }
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -20643,6 +20880,21 @@ namespace Hawthorne
                         RandomEncounters.Garden.RandomWhore(),
                     }
                 });
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            RandomEncounters.Garden.RandomWhore(true),
+                            main,
+                            Noses.GetRandom(),
+                        }
+                    });
+                }
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -20969,6 +21221,33 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                    {
+                        Noses.GetRandom(),
+                        Third ? Either(RandomEncounters.Garden.RandomChunk(), Noses.GetRandom()) : main,
+                        main
+                    }
+                    });
+                }
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        Either(RandomColor(2), RandomSupport(2, false, false))
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -21234,6 +21513,21 @@ namespace Hawthorne
                         RandomEncounters.Garden.RandomWhore()
                     }
                 });
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                    {
+                        Noses.GetRandom(),
+                        RandomEncounters.Garden.RandomWhore(),
+                        main
+                    }
+                    });
+                }
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -21552,6 +21846,33 @@ namespace Hawthorne
                         },
                     }
                 });
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new SpecificEnemyGroup
+                    {
+                        _enemyGroup = new SpecificEnemyInfo[]
+                        {
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = Noses.GetRandom(),
+                                enemySlot = 0,
+                            },
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = Either(RandomEncounters.Garden.RandomChunk(), RandomEncounters.Garden.RandomWhore()),
+                                enemySlot = 1,
+                            },
+                            new SpecificEnemyInfo
+                            {
+                                enemyName = "ImpenetrableAngler_EN",
+                                enemySlot = 3
+                            },
+                        }
+                    });
+                }
             }
 
             if (BundleStatic(bundle))
@@ -21985,6 +22306,18 @@ namespace Hawthorne
                         "Pinano_EN",
                         main,
                         RainBaseColor(true, false)
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(ShoreSlop(!Third), RainBaseColor(true, false)),
+                        ShoreSlop()
                     }
                 });
             }
@@ -23769,6 +24102,19 @@ namespace Hawthorne
                         IsRed  ? RainBaseWeighted(jumble, true, true, main) : RandomRedColor(jumble)
 
                         }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        main,
+                        Either(RainBaseWeighted(jumble, true, true, main), RandomOrph),
+                        RandomSupport(1)
+                    }
                 });
             }
             list.CheckEncounters();
@@ -25662,6 +26008,15 @@ namespace Hawthorne
             string main = "InfernalDrummer_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 2;
+
+                    break;
+                }
+            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
             if (EnemyExist("Sigil_EN") && Half)
             {
@@ -26321,6 +26676,21 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                    {
+                        main,
+                        Third ? RandomEncounters.Garden.RandomChunk() : main,
+                        Noses.GetRandom(),
+                    }
+                    });
+                }
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -26648,6 +27018,21 @@ namespace Hawthorne
                         RandomEncounters.Garden.RandomWhore()
                     }
                 });
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                    {
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        Noses.GetRandom(),
+                    }
+                    });
+                }
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -27260,6 +27645,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                    {
+                        main,
+                        Third ? RandomEncounters.Garden.RandomChunk() : main,
+                        Noses.GetRandom(),
+                    }
+                    });
+                }
+            }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    main,
+                    Either(RandomColor(2), RandomEncounters.Garden.RandomWhore()),
+                    RandomEncounters.Garden.RandomTwoSizeFag()
+                }
+            });
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -27364,6 +27773,15 @@ namespace Hawthorne
             string main = "Scuttlerunt_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 3;
+
+                    break;
+                }
+            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
             if (EnemyExist("Satyr_EN"))
             {
@@ -27623,6 +28041,18 @@ namespace Hawthorne
                     }
                 });
             }
+            ResetColor();
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        main,
+                        ShoreSlop(),
+                        SmartColor(0, true),
+                        SmartColor(0)
+                }
+            });
+            ResetColor();
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -28722,6 +29152,15 @@ namespace Hawthorne
             string main = "Gordo_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 4;
+
+                    break;
+                }
+            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
             for (int i = 0; i < 10; i++)
             {
@@ -28770,6 +29209,15 @@ namespace Hawthorne
             string main = "Gordo_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 4;
+
+                    break;
+                }
+            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
             for (int i = 0; i < 10; i++)
             {
@@ -29274,6 +29722,18 @@ namespace Hawthorne
                     {
                         "Teto_EN",
                         "Teto_EN",
+                        main,
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        ShoreSlop(),
+                        RandomShoreMidget(false),
                         main,
                     }
                 });
@@ -31085,6 +31545,25 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        RandomOrph,
+                        main,
+                        sub,
+                }
+            });
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        RandomOrph,
+                        main,
+                        sub,
+                        Either(RandomSupport(1, false, false), RandomOrph)
+                }
+            });
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -32583,6 +33062,18 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        ShoreSlop(),
+                        main,
+                        Spligs.Exclude(main).GetRandom(),
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -33262,6 +33753,32 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new SpecificEnemyGroup
+            {
+                _enemyGroup = new SpecificEnemyInfo[]
+                {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Shore.RandomShoreWhore(),
+                            enemySlot = Half ? 4 : 0
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Spligs.Exclude(main).GetRandom(),
+                            enemySlot = 1
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = ShoreSlop(),
+                            enemySlot = 3
+                        },
+                }
+            });
 
             if (BundleStatic(bundle))
             {
@@ -34789,6 +35306,31 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = ShoreSlop(),
+                            enemySlot = Half ? 1 : 4,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomColor(0),
+                            enemySlot = Half ? 0 : 3
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -35591,6 +36133,19 @@ namespace Hawthorne
                         "Pinano_EN",
                         main,
                         main,
+                        RandomEncounters.Shore.RandomShoreWhore()
+                    }
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(0),
+                        main,
+                        Either(ShoreSlop(), main),
                         RandomEncounters.Shore.RandomShoreWhore()
                     }
                 });
@@ -36943,6 +37498,15 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        main,
+                        Either(RandomOrph, RandomColor(1))
+                    }
+            });
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37725,6 +38289,30 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = Noses.GetRandom(),
+                            enemySlot = 0,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = RandomEncounters.Garden.RandomWhore(),
+                            enemySlot = 3,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 2
+                        },
+                    }
+                });
+            }
 
             if (BundleStatic(bundle))
             {
@@ -37920,6 +38508,18 @@ namespace Hawthorne
                     }
                 });
             }
+            if (Nosing)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Noses.GetRandom(),
+                        main,
+                        sub,
+                    }
+                });
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -38019,6 +38619,17 @@ namespace Hawthorne
                         RandomEncounters.Garden.RandomWhore(),
                         }
                 });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(2, true),
+                        main,
+                        SmartColor(2)
+                    }
+                });
+                ResetColor();
             }
             if (BundleRandom(bundle))
             {
@@ -38112,6 +38723,18 @@ namespace Hawthorne
                             }
                     });
                 }
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(2, true),
+                        main,
+                        SmartColor(2),
+                        RandomSupport(2, false, false)
+                    }
+                });
+                ResetColor();
             }
             if (BundleRandom(bundle))
             {
@@ -38326,6 +38949,15 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        main,
+                        RandomEncounters.Shore.RandomShoreWhore(),
+                        RandomColor(0),
+                }
+            });
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -39081,6 +39713,15 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    main,
+                    main,
+                    RandomColor(1)
+                }
+            });
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -39573,6 +40214,325 @@ namespace Hawthorne
                     }
                 });
             }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                        main,
+                        main,
+                        main,
+                        "ManicMan_EN",
+                        "ManicMan_EN",
+                }
+            });
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void StatueEZ()
+        {
+            string bundle = "InequityEncountersEasy";
+            string main = "Inequity_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    e._priority /= 2;
+
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomEncounters.Garden.RandomChunk(true), RandomSupport(2, true, false, false, true)),
+                        Either(RandomEncounters.Garden.RandomChunk(false, true), SmartColor(2, false, Half))
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void StatueMed()
+        {
+            string bundle = "InequityEncountersMedium";
+            string main = "Inequity_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomEncounters.Garden.RandomChunk(true), RandomSupport(2, true, false, false, true)),
+                        Either(RandomEncounters.Garden.RandomWhore(), RandomColor(2, true))
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomEncounters.Garden.RandomChunk(true), RandomSupport(2, true, false, false, true)),
+                        Either(RandomEncounters.Garden.RandomChunk(false, true), RandomColor(2, true)),
+                        RandomSupport(2, false, true, false, true)
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void StatueHard()
+        {
+            string bundle = "InequityEncountersHard";
+            string main = "Inequity_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomEncounters.Garden.RandomWhore(true), RandomSupport(2, false, false, false, true)),
+                        Either(RandomEncounters.Garden.RandomWhore(), RandomColor(2, true))
+                    }
+                });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomEncounters.Garden.RandomChunk(true), RandomSupport(2, false, false, false, true)),
+                        Either(RandomEncounters.Garden.RandomChunk(false, true), RandomColor(2, true)),
+                        RandomSupport(2, false, false, false, true)
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void BolerOrph()
+        {
+            string bundle = "BolerEncountersHard";
+            string main = "Boler_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    if (e.Priority > 25) e._priority = 10;
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            if (Colophoning)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Colophon[0],
+                        Colophon[1],
+                        Colophon[2],
+                        Colophon[3],
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        Colophon[1],
+                        Colophon[2],
+                        Colophon[3],
+                    }
+                });
+            }
+            if (Flowering)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "YellowFlower_EN",
+                        "PurpleFlower_EN",
+                        OrphWhore()
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "YellowFlower_EN",
+                        "PurpleFlower_EN",
+                        RandomColor(1),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        "YellowFlower_EN",
+                        "PurpleFlower_EN",
+                        Either(RandomOrph, RandomColor(1)),
+                        RandomSupport(1, false, false)
+                    }
+                });
+            }
+            if (Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(1),
+                        RandomColor(1),
+                        RandomColor(1),
+                        RandomColor(1)
+                    }
+                });
+            }
+            if (Half)
+            {
+                string a = RainBaseColor(true);
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        a,
+                        RainBaseColor(true, true, true, a),
+                        RainBaseColor(true, true, true, a),
+                        RainBaseWeighted(true, true, true, a)
+                    }
+                });
+            }
+            else
+            {
+                string b = RainBaseColor(false);
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        b,
+                        RainBaseColor(false, true, true, b),
+                        RainBaseColor(false, true, true, b),
+                        RainBaseWeighted(false, true, true, b)
+                    }
+                });
+            }
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    main,
+                    OrphWhore(),
+                    RandomOrph,
+                    RandomOrph
+                }
+            });
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    main,
+                    OrphWhore(),
+                    RandomOrph,
+                    Either(RandomOrph, RandomSupport(1, false, false))
+                }
+            });
+            list.Add(new RandomEnemyGroup
+            {
+                _enemyNames = new string[]
+                {
+                    main,
+                    RandomEncounters.Orpheum.Fag(),
+                    RandomOrph,
+                    Either(RandomColor(1), Either(RandomOrph, RandomSupport(1, false, false)))
+                }
+            });
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
