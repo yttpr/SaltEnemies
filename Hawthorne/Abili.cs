@@ -1286,11 +1286,11 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
+                            new Effect(BasicEffects.PlaySound("event:/Hawthorne/Hurt/BirdSound"), 1, null, lowest),
                             new Effect(ScriptableObject.CreateInstance<ApplySpotlightEffect>(), 1, IntentType.Status_Spotlight, lowest),
-                            //new Effect(BasicEffects.PlaySound("event:/Hawthorne/Hurt/BirdSound"), 1, null, lowest),
                             new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 1, GetIntent("Haste"), lowest)
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Skyloft/Stars"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Spotlight"),
                         animationTarget = lowest,
                     };
                 }
@@ -1747,7 +1747,7 @@ namespace Hawthorne
             {
                 if (_waver == null)
                 {
-                    EffectSO ads = BasicEffects.GetVisuals("Salt/Ads", false, Slots.Front);
+                    EffectSO ads = BasicEffects.GetVisuals("Salt/Censor", false, Slots.Front);
                     IsFrontTargetCondition yeah = ScriptableObject.CreateInstance<IsFrontTargetCondition>();
                     yeah.returnTrue = true;
                     _waver = new Ability()
@@ -1764,7 +1764,7 @@ namespace Hawthorne
                                 new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
                             }), 1, IntentType.Swap_Sides, Slots.Front),
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Ads"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Censor"),
                         animationTarget = Slots.Front,
                     };
                 }
@@ -2246,7 +2246,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.LeftRight),
                             new Effect(ScriptableObject.CreateInstance<TargetStoredValueChangeEffect>(), 2, IntentType.Misc, Slots.Front)
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Alarm"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Censor"),
                         animationTarget = Slots.LeftRight,
                     };
                 }
@@ -3399,7 +3399,7 @@ namespace Hawthorne
                             new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 3, (IntentType)988896, Slots.Front, BasicEffects.DidThat(false)),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front, BasicEffects.DidThat(false, 2))
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Gaze"),
+                        visuals = CustomVisuals.GetVisuals("Salt/Spotlight"),
                         animationTarget = Slots.Front,
                     };
                 }
@@ -4196,9 +4196,25 @@ namespace Hawthorne
                 }
             }
             catch { }
-            RuntimeManager.PlayOneShot(Audio, loc);
+            //RuntimeManager.PlayOneShot(Audio, loc);
+            CombatManager.Instance.AddUIAction(new PlaySoundUIAction(Audio, loc));
 
             return true;
+        }
+    }
+    public class PlaySoundUIAction : CombatAction
+    {
+        public string Audio;
+        public Vector3 Location;
+        public PlaySoundUIAction(string audio, Vector3 loc)
+        {
+            Audio = audio;
+            Location = loc;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            RuntimeManager.PlayOneShot(Audio, Location);
+            yield return null;
         }
     }
 

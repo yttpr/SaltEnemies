@@ -101,7 +101,7 @@ namespace Hawthorne
             savory.rarity = 5;
             savory.effects = new Effect[1];
             savory.effects[0] = new Effect(ScriptableObject.CreateInstance<ReviveReKillEnemyEffect>(), 1, IntentType.Misc, Slots.Self);
-            savory.visuals = CustomVisuals.GetVisuals("Salt/Zap");
+            savory.visuals = CustomVisuals.GetVisuals("Salt/Unlock");
             savory.animationTarget = Slots.Self;
 
             IncreaseStatusEffectsEffect increaseAllStatus = ScriptableObject.CreateInstance<IncreaseStatusEffectsEffect>();

@@ -917,7 +917,7 @@ namespace Hawthorne
                     parental.effects = new Effect[2];
                     parental.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 1, IntentType.Field_Constricted, Slots.Front);
                     parental.effects[1] = new Effect(ScriptableObject.CreateInstance<SwapRandomZoneEffectHideIntent>(), 1, IntentType.Swap_Mass, Slots.Self);
-                    parental.visuals = CustomVisuals.GetVisuals("Salt/Keyhole");
+                    parental.visuals = CustomVisuals.GetVisuals("Salt/Alarm");
                     parental.animationTarget = Slots.Front;
                     AbilitySO ability = parental.CharacterAbility().ability;
                     abandon._parentalAbility.ability = parental.CharacterAbility().ability = ability;
@@ -1448,7 +1448,6 @@ namespace Hawthorne
                     posi.List.Add(nameof(ApplyAnestheticsEffect), nameof(THE_DEAD));
                     posi.List.Add(nameof(ApplyDeterminedEffect), nameof(THE_DEAD));
                     posi.List.Add(nameof(ApplyPhotoSynthesisEffect), nameof(Hawthorne));
-                    posi.List.Add(nameof(ApplyFavorEffect), nameof(Hawthorne));
                     posi.List.Add("ApplyInvigoratedEffect", "DigiMisfits");
                     posi.List.Add("ApplyAdrenalineEffect", "ChillyBonezMod");
                     posi.List.Add("ApplyHexedEffect", "ChillyBonezMod");
@@ -1461,6 +1460,7 @@ namespace Hawthorne
                     posi.List.Add("ApplySurviveEffect", "BOSpecialItems.Content.Effects");
                     posi.List.Add("ApplyBlessEffect", "");
                     posi.List.Add("ApplySpiritualEnergyEffect", "FiendishFools");
+                    posi.List.Add("ApplyBoostedEffect", "");
                     posi.Setup();
                     posi.Effects.Add(ScriptableObject.CreateInstance<ApplyDodgeEffect>());
 
@@ -1477,10 +1477,10 @@ namespace Hawthorne
 
                     Ability bins = new Ability();
                     bins.name = "Procedure";
-                    bins.description = "Apply 5 random Positive Status Effects on every enemy.";
+                    bins.description = "Apply 10 random Positive Status Effects on every enemy.";
                     bins.effects = new Effect[]
                     {
-                        new Effect(posi, 5, IntentType.Misc, Targetting.AllAlly),
+                        new Effect(posi, 10, IntentType.Misc, Targetting.AllAlly),
                     };
                     bins.visuals = LoadedAssetsHandler.GetCharacterAbility("Absolve_1_A").visuals;
                     bins.animationTarget = Targetting.AllAlly;

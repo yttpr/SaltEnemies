@@ -227,7 +227,7 @@ namespace Hawthorne
             bleeding.icon = ResourceLoader.LoadSprite("BleedingIcon", 32);
             bleeding._statusName = "Bleeding";
             bleeding.statusEffectType = (StatusEffectType)846746;
-            bleeding._description = "Upon taking any Ruptured damage, increase it by 1 for each stack of this, and reduce this effect by 1. Upon dealing damage higher than half of this character and reduce this effect by 1. \nReduce by 1 at the end of each turn.";
+            bleeding._description = "Upon taking any Ruptured damage, increase it by 1 for each stack of this, and reduce this effect by 1. Upon dealing damage higher than half of this character's current health, take 1 Ruptured damage and reduce this effect by 1. \nReduce by 1 at the end of each turn.";
             bleeding._applied_SE_Event = self._stats.statusEffectDataBase[StatusEffectType.Ruptured].AppliedSoundEvent;
             bleeding._updated_SE_Event = self._stats.statusEffectDataBase[StatusEffectType.Ruptured].UpdatedSoundEvent;
             bleeding._removed_SE_Event = self._stats.statusEffectDataBase[StatusEffectType.Ruptured].RemovedSoundEvent;

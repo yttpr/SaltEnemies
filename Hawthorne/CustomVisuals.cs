@@ -106,6 +106,9 @@ namespace Hawthorne
             LoadVisuals("Salt/Shush", SaltEnemies.assetBundle, "assets/Attack2/ShushAnim.anim", "event:/Hawthorne/Attack2/Shush");
             LoadVisuals("Salt/Lens", SaltEnemies.assetBundle, "assets/Attack2/Picture.anim", "event:/Hawthorne/Attack2/Shutter");
             LoadVisuals("Salt/Train", SaltEnemies.assetBundle, "assets/train/HitAndRun.anim", "event:/Hawthorne/Attack3/FUCKINGTRAIN");
+            LoadVisuals("Salt/Censor", SaltEnemies.assetBundle, "assets/Attack3/CensoredAnimation.anim", "event:/Hawthorne/Attack3/Censored");
+            LoadVisuals("Salt/Unlock", SaltEnemies.assetBundle, "assets/Attack3/UnlockAnim.anim", "event:/Hawthorne/Attack3/Unlocking");
+            LoadVisuals("Salt/Spotlight", SaltEnemies.assetBundle, "assets/Attack3/SpotlightAnim.anim", "event:/Hawthorne/Attack3/Spotlight");
 
         }
     }
