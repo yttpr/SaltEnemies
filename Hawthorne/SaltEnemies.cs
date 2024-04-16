@@ -1129,18 +1129,18 @@ namespace Hawthorne
 
             //furyball
             addSepulchrePool("SweatingNosestone_EN");//yellow
-            addSepulchrePool("ProlificNosestone_EN ");//red
+            addSepulchrePool("ProlificNosestone_EN");//red
             addSepulchrePool("ScatterbrainedNosestone_EN");//blue
             addSepulchrePool("MesmerizingNosestone_EN");//purple
             addSepulchrePool("UninspiredNosestone_EN");//gray
             addFountainPool("SweatingNosestone_EN");
-            addFountainPool("ProlificNosestone_EN ");
+            addFountainPool("ProlificNosestone_EN");
             addFountainPool("ScatterbrainedNosestone_EN");
             addFountainPool("MesmerizingNosestone_EN");
             addFountainPool("UninspiredNosestone_EN");
             addBronzoPool("Inequity_EN");
             addBronzoPool("SweatingNosestone_EN");
-            addBronzoPool("ProlificNosestone_EN ");
+            addBronzoPool("ProlificNosestone_EN");
             addBronzoPool("ScatterbrainedNosestone_EN");
             addBronzoPool("MesmerizingNosestone_EN");
             addBronzoPool("UninspiredNosestone_EN");

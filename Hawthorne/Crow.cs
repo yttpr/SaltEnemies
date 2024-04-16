@@ -137,7 +137,9 @@ namespace Hawthorne
 
             birb.abilities = new Ability[3] { counting, waiting, serenity };
             birb.AddEnemy();
-            LoadedAssetsHandler.GetEnemy("TheCrow_EN").enemyTemplate.SetCrowParams();
+            EnemyInFieldLayout e = LoadedAssetsHandler.GetEnemy("TheCrow_EN").enemyTemplate;
+            e._renderer = e._locator.transform.Find("Sprite").Find("Head").GetComponent<SpriteRenderer>();
+            
         }
     }
     public class CountCountEffect : EffectSO

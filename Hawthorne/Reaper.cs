@@ -145,7 +145,8 @@ namespace Hawthorne
             enemy.abilities = new Ability[] { Abili.TransPain, Abili.TransSen, Abili.TransEmo, Abili.TransHung };
             //enemy.enemyID = "Indicator_EN";
             enemy.AddEnemy();
-            LoadedAssetsHandler.GetEnemy("Indicator_EN").enemyTemplate.SetNerveParams();
+            EnemyInFieldLayout e = LoadedAssetsHandler.GetEnemy("Indicator_EN").enemyTemplate;
+            e._renderer = e._locator.transform.Find("Sprite").Find("Sprite").Find("Sprite").Find("Sprite").Find("Sprite").GetComponent<SpriteRenderer>();
         }
     }
     public static class Maw

@@ -38534,7 +38534,7 @@ namespace Hawthorne
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 4;
+                    if (e.Priority > 15) e._priority /= 4;
                     break;
                 }
             }
@@ -38579,11 +38579,11 @@ namespace Hawthorne
             string main = "FrowningChancellor_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._mediumEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 2;
+                    if (e.Priority > 15) e._priority /= 2;
                     break;
                 }
             }
@@ -38763,7 +38763,7 @@ namespace Hawthorne
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 3;
+                    if (e.Priority > 15) e._priority /= 3;
                     break;
                 }
             }
@@ -38896,12 +38896,15 @@ namespace Hawthorne
             string main = "UnculturedSwine_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._hardEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 3;
-                    e._priority *= 2;
+                    if (e.Priority > 20)
+                    {
+                        e._priority /= 3;
+                        e._priority *= 2;
+                    }
                     break;
                 }
             }
@@ -38985,7 +38988,7 @@ namespace Hawthorne
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 2;
+                    if (e.Priority > 15) e._priority /= 2;
                     break;
                 }
             }
@@ -39190,8 +39193,8 @@ namespace Hawthorne
                         main,
                         SmartColor(1, true),
                         SmartColor(1),
-                        Half ? RandomOrph : RandomSupport(2, false, false),
-                        RandomSupport(2)
+                        Half ? RandomOrph : RandomSupport(1, false, false),
+                        RandomSupport(1)
                     }
                 });
                 ResetColor();
@@ -39201,9 +39204,9 @@ namespace Hawthorne
                     {
                         main,
                         main,
-                        RandomColor(2),
+                        RandomColor(1),
                         RandomOrph,
-                        RandomSupport(2, false, false)
+                        RandomSupport(1, false, false)
                     }
                 });
                 list.Add(new RandomEnemyGroup
@@ -39243,7 +39246,7 @@ namespace Hawthorne
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 4;
+                    if (e.Priority > 15) e._priority /= 4;
                     break;
                 }
             }
@@ -39309,14 +39312,6 @@ namespace Hawthorne
             string main = "MarbleMaw_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
-            {
-                if (e._bundleName == bundle)
-                {
-                    e._priority /= 1;
-                    break;
-                }
-            }
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
             for (int i = 0; i < 3; i++)
             {
@@ -39418,13 +39413,15 @@ namespace Hawthorne
             string main = "MarbleMaw_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._hardEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 5;
-                    e._priority *= 4;
-
+                    if (e.Priority > 20)
+                    {
+                        e._priority /= 5;
+                        e._priority *= 4;
+                    }
                     break;
                 }
             }
@@ -39916,7 +39913,7 @@ namespace Hawthorne
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 3;
+                    if (e.Priority > 15) e._priority /= 3;
                     break;
                 }
             }
@@ -40109,11 +40106,11 @@ namespace Hawthorne
             string main = "Frostbite_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_03"))._hardEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
-                    e._priority /= 2;
+                    if (e.Priority > 20) e._priority /= 2;
                     break;
                 }
             }
@@ -40391,11 +40388,13 @@ namespace Hawthorne
             string main = "Boler_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._hardEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
                     if (e.Priority > 25) e._priority = 10;
+                    else if (e.Priority > 20) e._priority /= 2;
+                    if (DoDebugs.GenInfo) Debug.Log("changed rarity: " + e._bundleName + " " + e.Priority);
                     break;
                 }
             }
