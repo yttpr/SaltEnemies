@@ -11,8 +11,10 @@ namespace Hawthorne
     {
         public static List<EnemySO> ExcludeEnemies;
         public static List<string> ExcludeNames;
+        static bool IsGarden;
         public static void GenerateEnemyCard(Action<ZoneBGDataBaseSO, CardInfo, EnemyEncounterSelectorSO> orig, ZoneBGDataBaseSO self, CardInfo info, EnemyEncounterSelectorSO encounterSelector)
         {
+            IsGarden = self.ZoneName == ZoneType.Garden;
             for (int i = 0; i < 20; i++)
             {
                 try
@@ -35,7 +37,7 @@ namespace Hawthorne
             {
                 try
                 {
-                    for (int j = 0; j < 100; j++)
+                    for (int j = 0; j < 200; j++)
                     {
                         ret = orig(self);
                         if (ExcludeEnemies != null && ExcludeEnemies.Count > 0)
@@ -43,7 +45,8 @@ namespace Hawthorne
                             bool usable = true;
                             foreach (EnemyBundleData enemy in ret.Enemies)
                             {
-                                if (ExcludeEnemies.Contains(enemy.enemy))
+                                if (ExcludeEnemies.Contains(enemy.enemy) || 
+                                    (IsGarden && Check.EnemyExist("Freud_EN") && enemy.enemy == LoadedAssetsHandler.GetEnemy("Freud_EN")))
                                 {
 
                                     if (DoDebugs.MiscInfo) Debug.LogWarning("salt enemies config disables the enemy " + enemy.enemy._enemyName + ". sorry! we are on trial " + j.ToString()); 

@@ -67,9 +67,9 @@ namespace Hawthorne
             birb.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/Blunder/Shiny_Gibs.prefab").GetComponent<ParticleSystem>();
             birb.prefab.SetDefaultParams();
             //Debug.Log("prefabs");
-            birb.combatSprite = ResourceLoader.LoadSprite("CrowIconB", 32);
-            birb.overworldAliveSprite = ResourceLoader.LoadSprite("CrowIcon", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
-            birb.overworldDeadSprite = ResourceLoader.LoadSprite("CrowDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
+            birb.combatSprite = ResourceLoader.LoadSprite("ShinyIcon.png", 32);
+            birb.overworldAliveSprite = ResourceLoader.LoadSprite("ShinyIcon.png", 32, new Vector2?(new Vector2(0.5f, 0.05f)));
+            birb.overworldDeadSprite = ResourceLoader.LoadSprite("ButterflyDead", 32, new Vector2?(new Vector2(0.5f, 0.0f)));
             birb.hurtSound = LoadedAssetsHandler.GetEnemy("Scrungie_EN").damageSound;
             birb.deathSound = LoadedAssetsHandler.GetEnemy("Scrungie_EN").deathSound;
             birb.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();

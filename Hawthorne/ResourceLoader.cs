@@ -29,22 +29,30 @@ namespace Hawthorne
     {
         public static Texture2D LoadTexture(string name)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = assembly.GetManifestResourceNames().First(r => r.Contains(name));
-            var resource = assembly.GetManifestResourceStream(resourceName);
-            using var memoryStream = new MemoryStream();
-            var buffer = new byte[16384];
-            int count;
-            while ((count = resource!.Read(buffer, 0, buffer.Length)) > 0)
-                memoryStream.Write(buffer, 0, count);
-            var spriteTexture = new Texture2D(0, 0, TextureFormat.ARGB32, false)
+            try
             {
-                anisoLevel = 1,
-                filterMode = 0
-            };
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = assembly.GetManifestResourceNames().First(r => r.Contains(name));
+                var resource = assembly.GetManifestResourceStream(resourceName);
+                using var memoryStream = new MemoryStream();
+                var buffer = new byte[16384];
+                int count;
+                while ((count = resource!.Read(buffer, 0, buffer.Length)) > 0)
+                    memoryStream.Write(buffer, 0, count);
+                var spriteTexture = new Texture2D(0, 0, TextureFormat.ARGB32, false)
+                {
+                    anisoLevel = 1,
+                    filterMode = 0
+                };
 
-            spriteTexture.LoadImage(memoryStream.ToArray());
-            return spriteTexture;
+                spriteTexture.LoadImage(memoryStream.ToArray());
+                return spriteTexture;
+            }
+            catch (Exception ex)
+            {
+                if (name != "PassivePlaceholder.png") return LoadTexture("PassivePlaceholder.png");
+                else throw ex;
+            }
         }
 
         public static Sprite LoadSprite(string name, int ppu = 32, Vector2? pivot = null)
@@ -81,6 +89,31 @@ namespace Hawthorne
             }
 
             return sprite;
+        }
+        public static MemoryStream LoadMemory(string name)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            try
+            {
+                var resourceName = assembly.GetManifestResourceNames().First(r => r.Contains(name));
+                var resource = assembly.GetManifestResourceStream(resourceName);
+                using var memoryStream = new MemoryStream();
+                var buffer = new byte[16384];
+                int count;
+                while ((count = resource!.Read(buffer, 0, buffer.Length)) > 0)
+                    memoryStream.Write(buffer, 0, count);
+
+                return memoryStream;
+
+            }
+            catch (Exception ex)
+            {
+                if (DoDebugs.SpriteNull) Debug.LogError("Sprite: " + name + " is null");
+                if (DoDebugs.SpriteNull) Debug.LogWarning("Missing Texture! Check for typos when using ResourceLoader.LoadSprite() and that all of your textures have their build action as Embedded Resource.");
+                if (name != "PassivePlaceholder.png") return LoadMemory("PassivePlaceholder.png");
+                else throw ex;
+            }
         }
 
         public static Sprite LoadPassivePlaceholder(string name = "PassivePlaceholder.png", int ppu = 32, Vector2? pivot = null)

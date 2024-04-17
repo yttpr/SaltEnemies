@@ -6,6 +6,7 @@ using System.Text;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using static Hawthorne.Check;
+using UnityEngine.PlayerLoop;
 
 namespace Hawthorne
 {
@@ -47,6 +48,7 @@ namespace Hawthorne
 
         public static void Paging(this EnemyCombat self)
         {
+            StampHandler.PageCheck(self);
             if (self.IsEnemy("A'Flower'_EN")) AddPage("AnglerPage.png");
             if (self.IsEnemy("LittleBeak_EN")) AddPage("BeakPage.png");
             if (self.IsEnemy("BlueFlower_EN")) AddPage("BlueFlowerPage.png");
@@ -138,6 +140,7 @@ namespace Hawthorne
 
         public static void AddPage(string pageName, bool overwrite = false)
         {
+            if (pageName == "") return;
             try
             {
                 if (!Directory.Exists(BepInEx.Paths.BepInExRootPath + "\\plugins\\" + "SaltsPages\\"))
@@ -161,6 +164,7 @@ namespace Hawthorne
         }
         public static void UpdatePage(string pageName)
         {
+            if (pageName == "") return;
             try
             {
                 if (!Directory.Exists(BepInEx.Paths.BepInExRootPath + "\\plugins\\" + "SaltsPages\\"))

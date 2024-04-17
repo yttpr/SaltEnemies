@@ -17,7 +17,6 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using JetBrains.Annotations;
 using static UnityEngine.UI.CanvasScaler;
-using System.Drawing;
 using static UnityEngine.EventSystems.EventTrigger;
 using System.Threading;
 using UnityEngine.EventSystems;

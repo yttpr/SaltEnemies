@@ -36,6 +36,7 @@ using THE_DEAD;
 using static Hawthorne.Check;
 using HarmonyLib;
 using MonoMod.Cil;
+using UnityEngine.PlayerLoop;
 
 namespace Hawthorne
 {
@@ -171,7 +172,14 @@ namespace Hawthorne
             try { ShuaHandler.Setup(); } catch { Debug.LogError("SHUA HANDLER EPIC FAILURE"); }
             try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
 
+            StampSaver.LoadAllValues();
+
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
+
+
+            
+
+
             return;
             assetBundle.Unload(false);
             Group4 = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("group4"));
@@ -616,6 +624,7 @@ namespace Hawthorne
         public static void ProcessGameStart(Action<MainMenuController> orig, MainMenuController self)
         {
             orig(self);
+            StampHandler.PrintStampsByGroup();
             //Taco
             addSepulchrePool("Monck_EN");
             addSepulchrePool("Iconoclast_EN");
@@ -1178,6 +1187,8 @@ namespace Hawthorne
             LetsYouIgnoreMissingEnemiesHook.ReadOutDisabled();
             PerformRandomEffectsAmongEffects.GO();
 
+            
+
         }
         public static bool Crossed = false;
         public static void Crossover()
@@ -1242,6 +1253,15 @@ namespace Hawthorne
             GroupFour.ModifyMods();
             FindMH();
             Updater.Update();
+
+            try
+            {
+                StampHandler.PrintStampsByGroup();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+            }
         }
 
         public static void FindMH()
@@ -2817,9 +2837,9 @@ namespace Hawthorne
 
     public static class DoDebugs
     {
-        public static bool All => false;
-        public static bool EnemyNull => true && All;
-        public static bool SpriteNull => false && All;
+        public static bool All => true;
+        public static bool EnemyNull => false && All;
+        public static bool SpriteNull => true && All;
         public static bool GenInfo => false && All;
         public static bool MiscInfo => false && All;
     }
@@ -3005,6 +3025,14 @@ namespace Hawthorne
                 PageCollector.UpdatePage("WindSongPage.png");
                 PageCollector.UpdatePage("YellowFlowerPage.png");
                 PageCollector.UpdatePage("YNLPage.png");
+            }
+        }
+        public static void U1_4_3(string update)
+        {
+            if (!File.Exists(SavePath + update))
+            {
+                if (Stamp.Stamps != null) foreach (Stamp stamp in Stamp.Stamps.Values) stamp.Update(update);
+                File.WriteAllText(SavePath + update, "Updatd stamps !");
             }
         }
     }

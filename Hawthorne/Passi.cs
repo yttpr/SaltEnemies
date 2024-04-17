@@ -16,6 +16,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn;
 using Yarn.Unity;
+using static UnityEngine.UI.CanvasScaler;
 
 namespace Hawthorne
 {
@@ -1767,6 +1768,7 @@ namespace Hawthorne
             if (notificationName == TriggerCalls.OnAbilityUsed.ToString()) TrainHandler.SwitchTrainTargetting(sender);
             if (notificationName == TriggerCalls.OnDeath.ToString() && sender is ITurn) TrainHandler.CheckAll();
             SigilSongHandler.NotifCheck(notificationName, sender, args);
+            StampHandler.NotifCheck(notificationName, sender, args);
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -2793,6 +2795,29 @@ namespace Hawthorne
         public static void Setup()
         {
             IDetour hook = new Hook(typeof(FleetingUnitAction).GetMethod(nameof(FleetingUnitAction.Execute), ~BindingFlags.Default), typeof(ButterflyUnboxer).GetMethod(nameof(Execute), ~BindingFlags.Default));
+        }
+        public static void EndCombatCheck()
+        {
+            CombatStats stats = CombatManager.Instance._stats;
+            foreach (int iD in Boxeds)
+            {
+                try
+                {
+                    if (stats.BoxedEnemies.TryGetValue(iD, out var value))
+                    {
+                        IUnit unit = value.unit;
+                        EnemyCombat enemyCombat = stats.Enemies[unit.ID];
+                        if (Stamp.Stamps != null)
+                        {
+                            foreach (Stamp stamp in Stamp.Stamps.Values) stamp.FleeCheck(enemyCombat);
+                        }
+                    }
+                }
+                catch
+                {
+                    UnityEngine.Debug.LogError("missing enemy from id: " + iD);
+                }
+            }
         }
 
     }

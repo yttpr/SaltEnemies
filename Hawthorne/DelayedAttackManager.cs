@@ -86,12 +86,14 @@ namespace Hawthorne
 
         public static void FinalizeCombat(Action<CombatStats> orig, CombatStats self)
         {
+            ButterflyUnboxer.EndCombatCheck();
             orig(self);
             Attacks.Clear();
             ThreadCleaner.CleanThreads();
             ButterflyUnboxer.Boxeds.Clear();
             BlackHoleEffect.Reset();
             WaterView.Reset();
+            StampHandler.PrintStampsByGroup();
         }
 
         public static void UIInitialization(Action<CombatStats> orig, CombatStats self)

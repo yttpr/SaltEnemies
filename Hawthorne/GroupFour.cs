@@ -80,7 +80,7 @@ namespace Hawthorne
             UnMungGroup.Add(6559);
             SomethingSong.Add(2467406);
             FreudGroup.Modify();
-            FreudGroup.Add(6329);
+            //FreudGroup.Add(6329);
             GreyGroup.ModifyRust();
             GreyGroup.ModifyStone();
             DeepSong.Add(2467407);
