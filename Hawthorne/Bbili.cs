@@ -1,11 +1,15 @@
 ﻿using BrutalAPI;
+using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Drawing;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 using static Hawthorne.CustomIntentIconSystem;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Hawthorne
 {
@@ -132,6 +136,229 @@ namespace Hawthorne
                     };
                 }
                 return _back;
+            }
+        }
+        static Ability _petrify;
+        public static Ability Petrify
+        {
+            get
+            {
+                if (_petrify == null)
+                {
+                    _petrify = new Ability()
+                    {
+                        name = "Petrify",
+                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Left, and change the Right enemy's health color to this enemy's health color.",
+                        rarity = 8,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(BasicEffects.GoLeft, 1, IntentType.Swap_Left, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{1 }, true))
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _petrify;
+            }
+        }
+        static Ability _partition;
+        public static Ability Partition
+        {
+            get
+            {
+                if (_partition == null)
+                {
+                    _partition = new Ability()
+                    {
+                        name = "Partition",
+                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Right, and change the Left enemy's health color to this enemy's health color.",
+                        rarity = 8,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(BasicEffects.GoRight, 1, IntentType.Swap_Right, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{-1 }, true))
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _partition;
+            }
+        }
+        static Ability _postular;
+        public static Ability Postular
+        {
+            get
+            {
+                if (_postular == null)
+                {
+                    _postular = new Ability()
+                    {
+                        name = "Postular",
+                        description = "Inflict 1 Pimple on all other enemies with this enemy's health color.",
+                        rarity = 3,
+                        priority = -20,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyPimplesEffect>(), 1, GetIntent("Pimples"), TargettingBySameHealthColor.Create(true, false, true)),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Pop"),
+                        animationTarget = TargettingBySameHealthColor.Create(true, false, true),
+                    };
+                }
+                return _postular;
+            }
+        }
+        static Ability _politics;
+        public static Ability Politics
+        {
+            get
+            {
+                if (_politics == null)
+                {
+                    _politics = new Ability()
+                    {
+                        name = "Please the Politics",
+                        description = "Inflict 1 Pimple on every party member.",
+                        rarity = 3,
+                        priority = 6,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyPimplesEffect>(), 1, GetIntent("Pimples"), Targetting.AllEnemy),
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Insult_1_A").visuals,
+                        animationTarget = Targetting.AllEnemy,
+                    };
+                }
+                return _politics;
+            }
+        }
+        static Ability _portrait;
+        public static Ability Portrait
+        {
+            get
+            {
+                if (_portrait == null)
+                {
+                    _portrait = new Ability()
+                    {
+                        name = "Please the Portrait",
+                        description = "Inflict 2 Linked on all party members who used Blue pigment last turn.",
+                        rarity = 5,
+                        priority = 0,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 2, IntentType.Status_Linked, TargettingByUsedBlue.Create(false))
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Door"),
+                        animationTarget = TargettingByUsedBlue.Create(false),
+                    };
+                }
+                return _portrait;
+            }
+        }
+        static Ability _point;
+        public static Ability Point
+        {
+            get
+            {
+                if (_point == null)
+                {
+                    _point = new Ability()
+                    {
+                        name = "Please the Point",
+                        description = "Apply 8 Shield to the Left and Right enemy positions. Move to the Left or Right.",
+                        rarity = 8,
+                        priority = 0,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 8, IntentType.Field_Shield, Slots.Sides),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _point;
+            }
+        }
+        static Ability _plight;
+        public static Ability Plight
+        {
+            get
+            {
+                if (_plight == null)
+                {
+                    _plight = new Ability()
+                    {
+                        name = "Please the Plight",
+                        description = "Randomize all non-Purple pigment in the pigment tray into Purple. Randomize all Purple pigment into a random other color.",
+                        rarity = 3,
+                        priority = 0,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RandomizeAllPurpleAndNonPurpleEffect>(), 1, IntentType.Mana_Randomize, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Shatter"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _plight;
+            }
+        }
+        static Ability _pledge;
+        public static Ability Pledge
+        {
+            get
+            {
+                if (_pledge == null)
+                {
+                    _pledge = new Ability()
+                    {
+                        name = "Please the Pledge",
+                        description = "Apply 3 Haste to this enemy.",
+                        rarity = 3,
+                        priority = -3,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 3, GetIntent("Haste"), Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cube"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _pledge;
+            }
+        }
+        static Ability _temper;
+        public static Ability Temper
+        {
+            get
+            {
+                if (_temper == null)
+                {
+                    ChangeMaxHealthEffect add = ScriptableObject.CreateInstance<ChangeMaxHealthEffect>();
+                    add._increase = true;
+                    _temper = new Ability()
+                    {
+                        name = "Temper the Glass",
+                        description = "Randomize this enemy's health color. Increase this enemy's maximum health by 10 and heal it.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RandomizeTargetHealthColorsNotSameEffect>(), 1, IntentType.Mana_Modify, Slots.Self),
+                            new Effect(add, 10, IntentType.Other_MaxHealth, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<HealEffect>(), 10, IntentType.Heal_5_10, Slots.Self)
+                            
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Absolve_1_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _temper;
             }
         }
     }
@@ -405,6 +632,252 @@ namespace Hawthorne
             exitAmount = entryVariable;
             CombatManager.Instance.AddUIAction(new AnimationParameterSetterIntUIAction(caster.ID, caster.IsUnitCharacter, "color", entryVariable));
             return true;
+        }
+    }
+    public static class PigmentUsedCollector
+    {
+        public static List<ManaColorSO> lastUsed;
+        public static int ID;
+        public static List<int> UsedBlue;
+        public static void UseAbility(Action<CharacterCombat, int, FilledManaCost[]> orig, CharacterCombat self, int abilityID, FilledManaCost[] filledCost)
+        {
+            if (lastUsed == null)
+                lastUsed = new List<ManaColorSO>();
+            lastUsed.Clear();
+            ID = self.ID;
+            foreach (FilledManaCost filledManaCost in filledCost)
+                lastUsed.Add(filledManaCost.Mana);
+            if (lastUsed.Contains(Pigments.Blue))
+            {
+                if (UsedBlue == null) UsedBlue = new List<int>();
+                UsedBlue.Add(self.ID);
+            }
+            orig(self, abilityID, filledCost);
+        }
+        public static void FinalizeAbilityActions(Action<CharacterCombat> orig, CharacterCombat self)
+        {
+            orig(self);
+            ID = -1;
+            lastUsed.Clear();
+        }
+        public static void ClearBlueUsers()
+        {
+            if (UsedBlue == null) return;
+            UsedBlue.Clear();
+        }
+        public static void Setup()
+        {
+            IDetour idetour1 = new Hook(typeof(CharacterCombat).GetMethod(nameof(CharacterCombat.UseAbility), ~BindingFlags.Default), typeof(PigmentUsedCollector).GetMethod(nameof(UseAbility), ~BindingFlags.Default));
+            IDetour idetour2 = new Hook(typeof(CharacterCombat).GetMethod(nameof(CharacterCombat.FinalizeAbilityActions), ~BindingFlags.Default), typeof(PigmentUsedCollector).GetMethod(nameof(FinalizeAbilityActions), ~BindingFlags.Default));
+        }
+    }
+    public class TargettingByUsedBlue : Targetting_ByUnit_Side
+    {
+        public override TargetSlotInfo[] GetTargets(SlotsCombat slots, int casterSlotID, bool isCasterCharacter)
+        {
+            if (PigmentUsedCollector.UsedBlue == null) return new TargetSlotInfo[0];
+            TargetSlotInfo[] source = base.GetTargets(slots, casterSlotID, isCasterCharacter);
+            List<TargetSlotInfo> ret = new List<TargetSlotInfo>();
+            foreach (TargetSlotInfo target in source)
+            {
+                if (target.HasUnit && PigmentUsedCollector.UsedBlue.Contains(target.Unit.ID)) ret.Add(target);
+            }
+            return ret.ToArray();
+        }
+        public static TargettingByUsedBlue Create(bool allies, bool allslots = false, bool ignorecast = false)
+        {
+            TargettingByUsedBlue ret = ScriptableObject.CreateInstance<TargettingByUsedBlue>();
+            ret.getAllies = allies;
+            ret.getAllUnitSlots = allslots;
+            ret.ignoreCastSlot = ignorecast;
+            return ret;
+        }
+    }
+    public class TargettingBySameHealthColor : Targetting_ByUnit_Side
+    {
+        public override TargetSlotInfo[] GetTargets(SlotsCombat slots, int casterSlotID, bool isCasterCharacter)
+        {
+            CombatSlot self = null;
+            if (isCasterCharacter)
+            {
+                foreach (CombatSlot slot in slots.CharacterSlots) if (slot.SlotID == casterSlotID)
+                    {
+                        self = slot;
+                        break;
+                    }
+            }
+            else
+            {
+                foreach (CombatSlot slot in slots.EnemySlots) if (slot.SlotID == casterSlotID)
+                    {
+                        self = slot;
+                        break;
+                    }
+            }
+            if (self == null) return new TargetSlotInfo[0];
+            if (!self.HasUnit) return new TargetSlotInfo[0];
+            TargetSlotInfo[] source = base.GetTargets(slots, casterSlotID, isCasterCharacter);
+            List<TargetSlotInfo> ret = new List<TargetSlotInfo>();
+            foreach (TargetSlotInfo target in source)
+            {
+                if (target.HasUnit && target.Unit.HealthColor == self.Unit.HealthColor) ret.Add(target);
+            }
+            return ret.ToArray();
+        }
+        public static TargettingBySameHealthColor Create(bool allies, bool allslots = false, bool ignorecast = false)
+        {
+            TargettingBySameHealthColor ret = ScriptableObject.CreateInstance<TargettingBySameHealthColor>();
+            ret.getAllies = allies;
+            ret.getAllUnitSlots = allslots;
+            ret.ignoreCastSlot = ignorecast;
+            return ret;
+        }
+    }
+    public class ChangeTargetHealthColorIgnorePureEffect : ChangeHealthColorEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            color = caster.HealthColor;
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit)
+                {
+                    bool pure = false;
+                    BasePassiveAbilitySO yeah = null;
+                    if (target.Unit is EnemyCombat enemy && enemy.TryGetPassiveAbility(PassiveAbilityTypes.Pure, out BasePassiveAbilitySO pas))
+                    {
+                        yeah = pas;
+                    }
+                    else if (target.Unit is CharacterCombat chara && chara.TryGetPassiveAbility(PassiveAbilityTypes.Pure, out BasePassiveAbilitySO pis))
+                    {
+                        yeah = pis;
+                    }
+                    if (target.Unit.TryRemovePassiveAbility(PassiveAbilityTypes.Pure)) pure = true;
+                    if (base.PerformEffect(stats, caster, target.SelfArray(), areTargetSlots, entryVariable, out int exi)) exitAmount += exi;
+                    if (pure)
+                    {
+                        if (yeah == null) target.Unit.AddPassiveAbility(Passives.Pure);
+                        else target.Unit.AddPassiveAbility(yeah);
+                    }
+                }
+            }
+            return exitAmount > 0;
+        }
+    }
+    public class ChangeTargetHealthColorCasterHealthColorEffect : ChangeHealthColorEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            color = caster.HealthColor;
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public class RandomizeAllPurpleAndNonPurpleEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            ManaColorSO[] options = new ManaColorSO[] { Pigments.Red, Pigments.Blue, Pigments.Yellow };
+            List<int> list = new List<int>();
+            List<ManaColorSO> list2 = new List<ManaColorSO>();
+            ManaBarSlot[] manaBarSlots = stats.MainManaBar.ManaBarSlots;
+            foreach (ManaBarSlot manaBarSlot in manaBarSlots)
+            {
+                if (!manaBarSlot.IsEmpty && manaBarSlot.ManaColor == Pigments.Purple)
+                {
+                    int num = UnityEngine.Random.Range(0, options.Length);
+                    manaBarSlot.SetMana(options[num]);
+                    list.Add(manaBarSlot.SlotIndex);
+                    list2.Add(options[num]);
+                }
+                else if (!manaBarSlot.IsEmpty && manaBarSlot.ManaColor != Pigments.Purple)
+                {
+                    manaBarSlot.SetMana(Pigments.Purple);
+                    list.Add(manaBarSlot.SlotIndex);
+                    list2.Add(Pigments.Purple);
+                }
+            }
+
+            if (list.Count > 0)
+            {
+                CombatManager.Instance.AddUIAction(new ModifyManaSlotsUIAction(stats.MainManaBar.ID, list.ToArray(), list2.ToArray()));
+            }
+            exitAmount = list.Count;
+            return exitAmount > 0;
+        }
+    }
+    public class RandomizeTargetHealthColorsNotSameEffect : EffectSO
+    {
+        public List<ManaColorSO> options;
+        bool ignorePure;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (options == null)
+            {
+                options = new List<ManaColorSO>() { Pigments.Red, Pigments.Blue, Pigments.Yellow, Pigments.Purple };
+            }
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit && target.Unit.SlotID != caster.SlotID && target.Unit.HealthColor == caster.HealthColor)
+                {
+                    List<ManaColorSO> list = new List<ManaColorSO>(options);
+                    if (list.Contains(target.Unit.HealthColor)) list.Remove(target.Unit.HealthColor);
+                    bool pure = false;
+                    BasePassiveAbilitySO yeah = null;
+                    if (target.Unit is EnemyCombat enemy && enemy.TryGetPassiveAbility(PassiveAbilityTypes.Pure, out BasePassiveAbilitySO pas))
+                    {
+                        yeah = pas;
+                    }
+                    else if (target.Unit is CharacterCombat chara && chara.TryGetPassiveAbility(PassiveAbilityTypes.Pure, out BasePassiveAbilitySO pis))
+                    {
+                        yeah = pis;
+                    }
+                    if (ignorePure && target.Unit.TryRemovePassiveAbility(PassiveAbilityTypes.Pure)) pure = true;
+
+                    if (target.Unit.ChangeHealthColor(list.GetRandom())) exitAmount++;
+                    if (pure)
+                    {
+                        if (yeah == null) target.Unit.AddPassiveAbility(Passives.Pure);
+                        else target.Unit.AddPassiveAbility(yeah);
+                    }
+                }
+            }
+            return exitAmount > 0;
+        }
+        public static RandomizeTargetHealthColorsNotSameEffect Create(bool ignorepure)
+        {
+            RandomizeTargetHealthColorsNotSameEffect ret = ScriptableObject.CreateInstance<RandomizeTargetHealthColorsNotSameEffect>();
+            ret.ignorePure = ignorepure;
+            ret.options = new List<ManaColorSO>() { Pigments.Red, Pigments.Blue, Pigments.Yellow, Pigments.Purple };
+            return ret;
+        }
+    }
+    public class SunColorEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (caster.HealthColor == Pigments.Red) exitAmount = 1;
+            else if (caster.HealthColor == Pigments.Blue) exitAmount = 2;
+            else if (caster.HealthColor == Pigments.Yellow) exitAmount = 3;
+            else if (caster.HealthColor == Pigments.Purple) exitAmount = 4;
+            else if (caster.HealthColor == Pigments.Gray) exitAmount = 5;
+            CombatManager.Instance.AddUIAction(new AnimationParameterSetterIntUIAction(caster.ID, caster.IsUnitCharacter, "light", exitAmount));
+            return exitAmount > 0;
+        }
+    }
+    public class SunColorCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (args is BooleanReference && effector is IUnit unit)
+            {
+                CombatManager.Instance.AddPrioritySubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<SunColorEffect>(), 1, null, Slots.Self) }), unit));
+                return false;
+            }
+            return true; 
         }
     }
 }

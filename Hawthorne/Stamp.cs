@@ -1,4 +1,5 @@
 ﻿using BrutalAPI;
+using MonoMod.RuntimeDetour;
 using MUtility;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.Profiling;
+using System.Reflection;
 
 namespace Hawthorne
 {
@@ -150,6 +152,7 @@ namespace Hawthorne
     public class Stamp
     {
         public static Dictionary<string, Stamp> Stamps;
+        static int Duplicates = 0;
 
         public string StampID;
         public string GroupID;
@@ -168,13 +171,20 @@ namespace Hawthorne
             LockedImage = locked;
             UnlockedImage = unlocked;
             if (Stamps == null) Stamps = new Dictionary<string, Stamp>();
-            try
+            if (!Stamps.Keys.Contains(StampID)) Stamps.Add(StampID, this);
+            else
             {
-                Stamps.Add(StampID, this);
-            }
-            catch
-            {
-                Debug.LogError("Stamp Collector already contains a stamp for " + StampID);
+                if (DoDebugs.MiscInfo) 
+                    Debug.LogError("Stamp Collector already contains a stamp for " + StampID);
+                try
+                {
+                    Stamps.Add(StampID + "Duplicate" + Duplicates.ToString(), this);
+                }
+                catch
+                {
+                    Debug.LogError("Stamp Collector really fucked up " + StampID + "Duplicate" + Duplicates.ToString());
+                }
+                Duplicates++;
             }
         }
 
@@ -196,6 +206,7 @@ namespace Hawthorne
         }
         public void EndcombatCheck(EnemyCombat self)
         {
+            return;
             if (self.IsEnemy(EnemyID))
             {
                 if (StampSaver.Check(StampID) < 2) StampSaver.Set(StampID, 2);
@@ -208,6 +219,7 @@ namespace Hawthorne
         }
         public void FleeCheck(EnemyCombat self)
         {
+            return;
             if (self.IsEnemy(EnemyID))
             {
                 if (StampSaver.Check(StampID) < 3) StampSaver.Set(StampID, 3);
@@ -297,7 +309,7 @@ namespace Hawthorne
         {
             foreach (string id in StampIDs)
             {
-                if (id != "" && Stamp.Stamps != null && Stamp.Stamps.TryGetValue(id, out Stamp stamp) && stamp.GetValue() < 2) return false;
+                if (id != "" && Stamp.Stamps != null && Stamp.Stamps.TryGetValue(id, out Stamp stamp) && stamp.GetValue() < 4) return false;
             }
             PageCollector.AddPage(Compilation);
             return true;
@@ -382,8 +394,10 @@ namespace Hawthorne
             {
                 case 0: return self.Hidden;
                 case 1: return self.Found;
-                case 2: return CreatePNG.AttachTexture(true, self.Found, Endcombat);
-                case 3: return CreatePNG.AttachTexture(true, self.Found, Flee);
+                case 2: goto case 1;
+                case 3: goto case 1;
+                //case 2: return CreatePNG.AttachTexture(true, self.Found, Endcombat);
+                //case 3: return CreatePNG.AttachTexture(true, self.Found, Flee);
                 case 4: return CreatePNG.AttachTexture(true, self.Found, Kill);
                 default: goto case 0;
             }
@@ -428,11 +442,166 @@ namespace Hawthorne
 
         public static void DefaultSetup()
         {
-            new Stamp("Angler", "A'Flower'_EN", "AnglerPage.png", "Group_1", "AnglerLock.png", "AnglerMark.png");
+            try
+            {
+                IDetour hook = new Hook(typeof(OverworldManagerBG).GetMethod(nameof(OverworldManagerBG.Awake), ~BindingFlags.Default), typeof(StampHandler).GetMethod(nameof(WorldAwake), ~BindingFlags.Default));
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("stamp hook failure");
+            }
+            /*try
+            {
+                IDetour hook = new Hook(typeof(CombatStats).GetMethod(nameof(CombatStats.CombatEndTriggered), ~BindingFlags.Default), typeof(StampHandler).GetMethod(nameof(CombatEndTriggered), ~BindingFlags.Default));
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("stamp combatendhook failure");
+            }*/
 
+
+            new Stamp("CNS", "LostSheep_EN", "CNSPage.png", "Group_1", "CNSLock.png", "CNSMark.png");
+            new Stamp("Enigma", "Enigma_EN", "EnigmaPage.png", "Group_1", "EnigmaLock.png", "EnigmaMark.png");
+            new Stamp("Pixel", "DeadPixel_EN", "DeadPixelPage.png", "Group_1", "PixelLock.png", "PixelMark.png");
+            new Stamp("Pale", "LittleAngel_EN", "LittleAngelPage.png", "Group_1", "PaleLock.png", "PaleMark.png");
+            new Stamp("DeadGod", "EmbersofaDeadGod_EN", "DeadGodPage.png", "Group_1", "DeadGodLock.png", "DeadGodMark.png");
+            new StampGroup("Group_1", new string[] { "CNS", "Enigma", "Pixel", "Pale", "DeadGod" }, "", "");
+
+            new Stamp("Satyr", "Satyr_EN", "SatyrPage.png", "Group_2a", "SatyrLock.png", "SatyrMark.png");
+            new Stamp("Something", "Something_EN", "SomethingPage.png", "Group_2a", "SomethingLock.png", "SomethingMark.png");
+            new Stamp("Derogatory", "Derogatory_EN", "SomethingPage.png", "Group_2a", "DerogatoryLock.png", "DerogatoryMark.png");
+            new Stamp("Denial", "Denial_EN", "SomethingPagepng", "Group_2a", "DenialLock.png", "DenialMark.png");
+            new Stamp("Unmung", "TeachaMantoFish_EN", "UnmungPage.png", "Group_2a", "UnmungLock.png", "UnmungMark.png");
+            new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "", "");
+
+            new Stamp("Crow", "TheCrow_EN", "CrowPage.png", "Group_2b", "CrowLock.png", "CrowMark.png");
+            new Stamp("DontTouchMe", "Freud_EN", "DontTouchMePage.png", "Group_2b", "DontTouchMeLock.png", "DontTouchMeMark.png");
+            new Stamp("Angler", "A'Flower'_EN", "AnglerPage.png", "Group_2b", "AnglerLock.png", "AnglerMark.png");
+            new Stamp("StarGazer", "StarGazer_EN", "StarGazerPage.png", "Group_2b", "StarsLock.png", "StarsMark.png");
+            new StampGroup("Group_2b", new string[] { "Crow", "DontTouchMe", "Angler", "StarGazer" }, "", "");
+
+            new Stamp("Shiny", "CoinHunter_EN", "CoinHunterPage.png", "Group_3", "CoinLock.png", "CoinMark.png");
+            new Stamp("Camera", "MechanicalLens_EN", "CameraPage.png", "Group_3", "CameraLock.png", "CameraMark.png");
+            new Stamp("Gospel", "MortalSpoggle_EN", "GospelPage.png", "Group_3", "MortalLock.png", "MortalMark.png");
+            new Stamp("Rustic", "RusticJumbleguts_EN", "RusticPage.png", "Group_3", "RusticLock.png", "RusticMark.png");
+            new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "", "");
+
+            new Stamp("Superboss", "544517_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Superboss", "544516_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Superboss", "544515_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Superboss", "544514_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Superboss", "544513_EN", "SuperbossPage.png", "Group_3_5", "BossLock.png", "BossMark.png");
+            new StampGroup("Group_3_5", new string[] { "Superboss" }, "", "");
+
+            new Stamp("Delusion", "Illusion_EN", "DelusionPage.png", "Group_4a", "DelusionLock.png", "DelusionMark.png");
+            new Stamp("Angel", "FakeAngel_EN", "FakeAngelPage.png", "Group_4a", "AngelLock.png", "AngelMark.png");
+            new Stamp("RedFlower", "RedFlower_EN", "RedFlowerPage.png", "Group_4a", "RedFlowerLock.png", "RedFlowerMark.png");
             new Stamp("BlueFlower", "BlueFlower_EN", "BlueFlowerPage.png", "Group_4a", "BlueFlowerLock.png", "BlueFlowerMark.png");
+            new Stamp("YellowFlower", "YellowFlower_EN", "YellowFlowerPage.png", "Group_4a", "YellowFlowerLock.png", "YellowFlowerMark.png");
+            new Stamp("PurpleFlower", "PurpleFlower_EN", "PurpleFlowerPage.png", "Group_4a", "PurpleFlowerLock.png", "PurpleFlowerMark.png");
+            new StampGroup("Group_4a", new string[] { "Delusion", "Angel", "RedFlower", "BlueFlower", "YellowFlower", "PurpleFlower" }, "", "");
+
+            new Stamp("Postmodern", "Postmodern_EN", "PostmodernPage.png", "Group_4b", "PostmodernLock.png", "PostmodernMark.png");
+            new Stamp("War", "War_EN", "PostmodernPage.png", "Group_4b", "WarLock.png", "WarMark.png");
+            new Stamp("Deep", "TheDeep_EN", "TheDeepPage.png", "Group_4b", "DeepLock.png", "DeepMark.png");
+            new StampGroup("Group_4b", new string[] { "Postmodern", "War", "Deep" }, "", "");
+
+            new Stamp("Sigil", "Sigil_EN", "SigilPage.png", "Group_4c", "SigilLock.png", "SigilMark.png");
+            new Stamp("WindSong", "WindSong_EN", "WindSongPage.png", "Group_4c", "WindSongLock.png", "WindSongMark.png");
+            new Stamp("Solvent", "LivingSolvent_EN", "SolventPage.png", "Group_4c", "SolventLock.png", "SolventMark.png");
+            new Stamp("Tank", "RealisticTank_EN", "TankPage.png", "Group_4c", "TankLock.png", "TankMark.png");
+            new Stamp("ClockTower", "ClockTower_EN", "ClockPage.png", "Group_4c", "ClockLock.png", "ClockMark.png");
+            new StampGroup("Group_4c", new string[] { "Sigil", "WindSong", "Solvent", "Tank", "ClockTower" }, "", "");
+
+            new Stamp("Grandfather", "Grandfather_EN", "CoffinPage.png", "Group_4d", "CoffinLock.png", "CoffinMark.png");
+            new Stamp("Tortoise", "StalwartTortoise_EN", "TortoisePage.png", "Group_4d", "TortoiseLock.png", "TortoiseMark.png");
+            new Stamp("GreyFlower", "GreyFlower_EN", "GreyFlowerPage.png", "Group_4d", "GreyFlowerLock.png", "GreyFlowerMark.png");
+            new Stamp("Butterfly", "Butterfly_EN", "ButterflyPage.png", "Group_4d", "ButterflyLock.png", "ButterflyMark.png");
+            new StampGroup("Group_4d", new string[] { "Grandfather", "Tortoise", "GreyFlower", "Butterfly" }, "", "");
+
+            new Stamp("Reaper", "MiniReaper_EN", "ReaperPage.png", "Group_4e", "ReaperLock.png", "ReaperMark.png");
+            new Stamp("Miriam", "Miriam_EN", "MiriamPage.png", "Group_4e", "MiriamLock.png", "MiriamMark.png");
+            new Stamp("EyePalm", "EyePalm_EN", "MedamaudePage.png", "Group_4e", "EyePalmLock.png", "EyePalmMark.png");
+            new Stamp("Skyloft", "Skyloft_EN", "SkyloftPage.png", "Group_4e", "SkyloftLock.png", "SkyloftMark.png");
+            new Stamp("Merced", "Merced_EN", "MercedPage.png", "Group_4e", "MercedLock.png", "MercedMark.png");
+            new Stamp("Shua", "Shua_EN", "ShuaPage.png", "Group_4e", "ShuaLock.png", "ShuaMark.png");
+            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "", "");
+
+            new Stamp("Nameless", "Nameless_EN", "NamelessPage.png", "Group_4f", "NamelessLock.png", "NamelessMark.png");
+            new Stamp("Tripod", "TripodFish_EN", "TripodPage.png", "Group_4f", "TripodLock.png", "TripodMark.png");
+            new Stamp("Rabies", "Lyssa_EN", "RabiesPage.png", "Group_4f", "RabiesLock.png", "RabiesMark.png");
+            new Stamp("Damocles", "Damocles_EN", "DamoclesPage.png", "Group_4f", "DamoclesLock.png", "DamoclesMark.png");
+            new Stamp("Glass", "GlassFigurine_EN", "GlassPage.png", "Group_4f", "GlassLock.png", "GlassMark.png");
+            new Stamp("SnakeGod", "SnakeGod_EN", "SnakeGodPage.png", "Group_4f", "SnakeGodLock.png", "SnakeGodMark.png");
+            new StampGroup("Group_4f", new string[] { "Nameless", "Tripod", "Rabies", "Damocles", "Glass", "SnakeGod" }, "", "");
 
             new Stamp("Beak", "LittleBeak_EN", "BeakPage.png", "Group_4g", "BeakLock.png", "BeakMark.png");
+            new Stamp("Hunter", "Hunter_EN", "HuntingPage.png", "Group_4g", "HunterLock.png", "HunterMark.png");
+            new Stamp("Firebird", "Firebird_EN", "FirebirdPage.png", "Group_4g", "FirebirdLock.png", "FirebirdMark.png");
+            new Stamp("Warbird", "Warbird_EN", "WarbirdPage.png", "Group_4g", "WarbirdLock.png", "WarbirdMark.png");
+            new StampGroup("Group_4g", new string[] { "Beak", "Hunter", "Firebird", "Warbird" }, "", "");
+
+            new Stamp("Windle", "Windle1_EN", "WindlePage.png", "Group_5a", "WindleLock.png", "WindleMark.png");
+            new Stamp("Windle", "Windle2_EN", "WindlePage.png", "", "WindleLock.png", "WindleMark.png");
+            new Stamp("Windle", "Windle3_EN", "WindlePage.png", "", "WindleLock.png", "WindleMark.png");
+            new Stamp("Blackstar", "BlackStar_EN", "BlackStarPage.png", "Group_5a", "BlackstarLock.png", "BlackstarMark.png");
+            new Stamp("Singularity", "Singularity_EN", "SingularityPage.png", "Group_5a", "SingularityLock.png", "SingularityMark.png");
+            new Stamp("Indicator", "Indicator_EN", "IndicatorPage.png", "Group_5a", "IndicatorLock.png", "IndicatorMark.png");
+            new Stamp("Maw", "Maw_EN", "MawPage.png", "Group_5a", "MawLock.png", "MawMark.png");
+            new StampGroup("Group_5a", new string[] { "Windle", "Blackstar", "Singularity", "Indicator", "Maw" }, "", "");
+
+            new Stamp("Clione", "Clione_EN", "ClionePage.png", "Group_5b", "ClioneLock.png", "ClioneMark.png");
+            new Stamp("Children", "Children6_EN", "ChildrenPage.png", "Group_5b", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children5_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children4_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children3_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children2_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children1_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("Children", "Children0_EN", "ChildrenPage.png", "", "ChildrenLock.png", "ChildrenMark.png");
+            new Stamp("YNL", "YNL_EN", "YNLPage.png", "Group_5b", "YNLLock.png", "YNLMark.png");
+            new Stamp("Pinano", "Pinano_EN", "PinanoPage.png", "Group_5b", "PinanoLock.png", "PinanoMark.png");
+            new Stamp("Spitato", "Spitato_EN", "PinanoPage.png", "Group_5b", "SpitatoLock.png", "SpitatoMark.png");
+            new Stamp("Minana", "Minana_EN", "PinanoPage.png", "Group_5b", "MinanaLock.png", "MinanaMark.png");
+            new Stamp("Boat", "Arceles_EN", "ArcelesPage.png", "Group_5b", "BoatLock.png", "BoatMark.png");
+            new Stamp("Train", "Stoplight_EN", "StoplightPage.png", "Group_5b", "TrainLock.png", "TrainMark.png");
+            new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "", "");
+
+            new Stamp("RedBot", "RedBot_EN", "", "Group_5c", "RedBotLock.png", "RedBotMark.png");
+            new Stamp("BlueBot", "BlueBot_EN", "", "Group_5c", "BlueBotLock.png", "BlueBotMark.png");
+            new Stamp("YellowBot", "YellowBot_EN", "", "Group_5c", "YellowBotLock.png", "YellowBotMark.png");
+            new Stamp("PurpleBot", "PurpleBot_EN", "", "Group_5c", "PurpleBotLock.png", "PurpleBotMark.png");
+            new Stamp("GreyBot", "GreyBot_EN", "", "Group_5c", "GreyBotLock.png", "GreyBotMark.png");
+            new Stamp("Sun", "GlassedSun_EN", "", "Group_5c", "SunLock.png", "SunMark.png");
+            new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "");
+
+        }
+
+        public static void WorldAwake(Action<OverworldManagerBG> orig, OverworldManagerBG self)
+        {
+            try
+            {
+                PrintStampsByGroup();
+            }
+            catch
+            {
+                if (DoDebugs.MiscInfo) Debug.LogError("failed print stamps");
+            }
+            orig(self);
+        }
+        public static void CombatEndTriggered(Action<CombatStats> orig, CombatStats self)
+        {
+            orig(self);
+            foreach (EnemyCombat enemy in self.EnemiesOnField.Values)
+            {
+                try
+                {
+                    CombatManager.Instance.PostNotification(TriggerCalls.OnCombatEnd.ToString(), enemy, null);
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 

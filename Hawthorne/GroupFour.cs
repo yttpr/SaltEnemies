@@ -16,6 +16,8 @@ namespace Hawthorne
             NoiseHandler.Setup();
             SepulchreFix.Setup();
             FleetingHandler.Setup();
+            FlitheringHandler.Setup();
+            PimplesInfo.Setup();
         }
         public static void AddEnemies()
         {
@@ -67,6 +69,18 @@ namespace Hawthorne
             Minana.Add(544465);
             Boat.Add(544464);
             Train.Add(544463);
+            RedBot.Add(544462);
+            BlueBot.Add(544461);
+            YellowBot.Add(544460);
+            PurpleBot.Add(544459);
+            GreyBot.Add(544458);
+            GlassedSun.Add(544457);
+            //event:/Hawthorne/Noise/ApparatusHit
+            //event:/Hawthorne/Noise/ApparatusDie
+            //assets/bot/[Color]Bot_Enemy.prefab
+            //assets/bot/[Color]Bot_Gibs.prefab
+            //assets/sun/Sun_Enemy.prefab
+            //assets/sun/Sun_Gibs.prefab
         }
         public static void AddEncounters()
         {
@@ -76,7 +90,7 @@ namespace Hawthorne
             CameraSong.Add(35788);
             CameraSong.Modify();
             BirdGroup.Add(2467405);
-            SatyrSong.Modify();
+            SatyrSong.Modify();//get a new song
             UnMungGroup.Add(6559);
             SomethingSong.Add(2467406);
             FreudGroup.Modify();
@@ -99,7 +113,7 @@ namespace Hawthorne
             SigilGroup.Add(2467413);
             TortoiseSong.Add(2467414);
             ClockTowerSong.Add(2467415);
-            TripodGroup.Add(2467416);
+            TripodGroup.Add(2467416);//get a new song
             RabiesGroup.Add(2467417);
             LonelyFlummox.Add();
             RedoManiskins.Add();
@@ -114,18 +128,24 @@ namespace Hawthorne
             ButterflyGroup.Add(2467426);
             GrandfatherGroup.Add(2467427);
             ReaperGroup.Add(2467428);
-            ShuaGroup.Add(2467429);
+            ShuaGroup.Add(2467429);//ZLD1 IS WORKING ON IT
             BlackStarGroup.Add(2467430);
             IndicatorGroup.Add(2467431);
-            MawGroup.Add(2467432);
+            MawGroup.Add(2467432);//get a new song
             Iconoclast2Group.Add();
             ClioneSong.Add(2467433);
             YNLSong.Add(2467434);
             PinanoSong.Add(2467435);
             MinanaSong.Add(2467436);
             SpitatoSong.Add(2467437);
-            BoatSong.Add(2467438);
+            BoatSong.Add(2467438);//ZLD1 IS WORKING ON IT
             StoplightSong.Add(2467439);
+            //event:/Hawthorne/ApparatusSong
+            //event:/Hawthorne/SunSong
+            //little angel song 
+            //merced song MILLIEAMP IS WORKING ON IT
+            //glass figurine song
+            //windlesong ZLD1 IS WORKING ON IT
         }
         public static void ModifyEncounters()
         {
@@ -293,6 +313,19 @@ namespace Hawthorne
             ModMod.StatueMed();
             ModMod.StatueHard();
             ModMod.BolerOrph();
+            ModMod.CrabEZ();
+            ModMod.CrabMed();
+            ModMod.CrabHard();
+            ModTwo.NosestoneTemplateMed("SweatingNosestoneEncountersMedium", "SweatingNosestone_EN");
+            ModTwo.NosestoneTemplateMed("ProlificNosestoneEncountersMedium", "ProlificNosestone_EN");
+            ModTwo.NosestoneTemplateMed("ScatterbrainedNosestoneEncountersMedium", "ScatterbrainedNosestone_EN");
+            ModTwo.NosestoneTemplateMed("MesmerizingNosestoneEncountersMedium", "MesmerizingNosestone_EN");
+            ModTwo.NosestoneTemplateMed("UninspiredNosestoneEncountersMedium", "UninspiredNosestone_EN");
+            ModTwo.NosestoneTemplateHard("SweatingNosestoneEncountersHard", "SweatingNosestone_EN");
+            ModTwo.NosestoneTemplateHard("ProlificNosestoneEncountersHard", "ProlificNosestone_EN");
+            ModTwo.NosestoneTemplateHard("ScatterbrainedNosestoneEncountersHard", "ScatterbrainedNosestone_EN");
+            ModTwo.NosestoneTemplateHard("MesmerizingNosestoneEncountersHard", "MesmerizingNosestone_EN");
+            ModTwo.NosestoneTemplateHard("UninspiredNosestoneEncountersHard", "UninspiredNosestone_EN");
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

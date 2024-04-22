@@ -537,7 +537,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 8,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/CoffinTheme",
+                musicEvent = "event:/Hawthorne/NewCoffinTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("Visage_MyOwn_EN").deathSound,
                 difficulty = EncounterDifficulty.Medium
             };

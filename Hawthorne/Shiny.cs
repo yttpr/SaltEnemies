@@ -167,12 +167,30 @@ namespace Hawthorne
         {
             IDetour ForOnTurnStartIDetour = (IDetour)new Hook((MethodBase)typeof(CombatStats).GetMethod("PlayerTurnStart", ~BindingFlags.Default), typeof(Shiny).GetMethod("ForOnTurnStart", ~BindingFlags.Default));
         }
+
+        public static int chance()
+        {
+            int ret = 0;
+            try
+            {
+                if (CombatManager.Instance._stats.TurnsPassed > 1) ret += 4;
+                if (CombatManager.Instance._stats.TurnsPassed > 2) ret /= 2;
+                if (CombatManager.Instance._stats.TurnsPassed > 4) ret /= 2;
+                if (CombatManager.Instance._stats.TurnsPassed > 8) return 0;
+            }
+            catch
+            {
+                Debug.LogError("not in combat");
+                return 0;
+            }
+            return Math.Max(0, ret);
+        }
         public static void ForOnTurnStart(Action<CombatStats> orig, CombatStats self)
         {
             orig(self);
             //Debug.Log("entered");
             if (LetsYouIgnoreMissingEnemiesHook.IsDisabled("CoinHunter_EN")) return;
-            if (UnityEngine.Random.Range(0, 100) < 4 && CombatManager.Instance._stats.PlayerCurrency >= 32 && !enteredCombat)
+            if (UnityEngine.Random.Range(0, 100) < chance() && CombatManager.Instance._stats.PlayerCurrency >= 32 && !enteredCombat)
             {
                 //Debug.Log("a");
                 foreach (ItemInGameData itemData in CombatManager.Instance._informationHolder.Run.playerData._itemList)

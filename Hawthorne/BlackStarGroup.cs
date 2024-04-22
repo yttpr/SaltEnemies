@@ -792,7 +792,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 10,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/MawSong",
+                musicEvent = "event:/Hawthorne/StoplightSong",
                 roarEvent = LoadedAssetsHandler.GetCharcater("LongLiver_CH").deathSound,
                 difficulty = EncounterDifficulty.Hard
             };

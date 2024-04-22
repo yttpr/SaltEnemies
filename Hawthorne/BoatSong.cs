@@ -228,9 +228,9 @@ namespace Hawthorne
                 area = 2,
                 randomPlacement = true,
                 hardmodeEncounter = true,
-                rarity = UnityEngine.Random.Range(15, 25),
+                rarity = UnityEngine.Random.Range(15, 25) * 1,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/StoplightSong",
+                musicEvent = "event:/Hawthorne/NewTrainSong",
                 roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
                 difficulty = EncounterDifficulty.Hard
             };

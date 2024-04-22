@@ -31,7 +31,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.Evasive, Passives.Cashout, Passi.Lazy, Passives.Withering
+                Passi.Evasive, Passives.Cashout, Passi.Lazy, Passi.Flithering
             };
             enemy.abilities = new Ability[] { Abili.LoseControl, Abili.Sing, Abili.TooFarGone };
             enemy.AddEnemy();

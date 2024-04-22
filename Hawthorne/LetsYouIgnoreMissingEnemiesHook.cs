@@ -138,6 +138,12 @@ namespace Hawthorne
             CheckEnemy("Minana_EN");
             CheckEnemy("Arceles_EN");
             CheckEnemy("Stoplight_EN");
+            CheckEnemy("RedBot_EN");
+            CheckEnemy("BlueBot_EN");
+            CheckEnemy("YellowBot_EN");
+            CheckEnemy("PurpleBot_EN");
+            CheckEnemy("GreyBot_EN");
+            CheckEnemy("GlassedSun_EN");
         }
         public static void CheckEnemy(string enemy)
         {
@@ -187,7 +193,7 @@ namespace Hawthorne
                     Debug.LogError("BOOOO YOU SUCK. Disabling enemy " + enemy);
                     EnemySO enemey = LoadedAssetsHandler.GetEnemy(enemy);
                     if (DoDebugs.GenInfo) Debug.Log("config disabling enemy " + enemey._enemyName);
-                    ExcludeEnemies.Add(enemey);
+                    if (!ExcludeEnemies.Contains(enemey)) ExcludeEnemies.Add(enemey);
                 }
                 catch
                 {

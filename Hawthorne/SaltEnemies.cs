@@ -40,7 +40,7 @@ using UnityEngine.PlayerLoop;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.2")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.3")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -173,6 +173,8 @@ namespace Hawthorne
             try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
 
             StampSaver.LoadAllValues();
+            StampHandler.DefaultSetup();
+
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");
 
@@ -567,7 +569,7 @@ namespace Hawthorne
                 if (DoDebugs.EnemyNull) Debug.LogError(name + " failed to add to the Bronzo pool.");
             }
         }
-        public static void AddScrungiePool(string enemy)
+        public static void AddScrungiePool(string enemy, int weight = 1)
         {
             if (LetsYouIgnoreMissingEnemiesHook.IsDisabled(enemy)) return;
             if (!Check.EnemyExist("Scrungie_EN"))
@@ -584,7 +586,7 @@ namespace Hawthorne
             AbilitySO gurg = scrung.abilities[3].ability;
             SpawnRandomEnemyAnywhereEffect babi = gurg.effects[0].effect as SpawnRandomEnemyAnywhereEffect;
             List<EnemySO> enemies = new List<EnemySO>(babi._enemies);
-            enemies.Add(LoadedAssetsHandler.GetEnemy(enemy));
+            for (int i = 0; i < weight; i++) enemies.Add(LoadedAssetsHandler.GetEnemy(enemy));
             babi._enemies = enemies.ToArray();
         }
         public static void addFountainPool(string name)
@@ -636,8 +638,8 @@ namespace Hawthorne
             addFountainPool("Monck_EN");
 
             //TairPeep
-            AddScrungiePool("Flarbleft_EN");
-            AddScrungiePool("LipBug_EN");
+            AddScrungiePool("Flarbleft_EN", 3);
+            AddScrungiePool("LipBug_EN", 2);
             DontAddPool("DrySimian_EN");
             DontAddPool("Unflarb_EN");
             DontAddPool("DavyFlarb_EN");
@@ -772,16 +774,16 @@ namespace Hawthorne
             addSepulchrePool("Minana_EN");
             addSepulchrePool("Arceles_EN");
             addSepulchrePool("Stoplight_EN");
-            AddScrungiePool("LostSheep_EN");
-            AddScrungiePool("Derogatory_EN");
-            AddScrungiePool("Denial_EN");
-            AddScrungiePool("DeadPixel_EN");
-            AddScrungiePool("LittleAngel_EN");
+            AddScrungiePool("LostSheep_EN", 3);
+            AddScrungiePool("Derogatory_EN", 2);
+            AddScrungiePool("Denial_EN", 1);
+            AddScrungiePool("DeadPixel_EN", 2);
+            AddScrungiePool("LittleAngel_EN", 2);
             AddScrungiePool("StarGazer_EN");
             AddScrungiePool("Windle1_EN");
-            AddScrungiePool("BlackStar_EN");
+            AddScrungiePool("BlackStar_EN", 2);
             AddScrungiePool("Children6_EN");
-            AddScrungiePool("Minana_EN");
+            AddScrungiePool("Minana_EN", 3);
             AddScrungiePool("Arceles_EN");
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
@@ -1135,34 +1137,6 @@ namespace Hawthorne
             addBronzoPool("Jansuli_EN");
             addBronzoPool("Frostbite_EN");
             addBronzoPool("Giles_EN");
-
-            //furyball
-            addSepulchrePool("SweatingNosestone_EN");//yellow
-            addSepulchrePool("ProlificNosestone_EN");//red
-            addSepulchrePool("ScatterbrainedNosestone_EN");//blue
-            addSepulchrePool("MesmerizingNosestone_EN");//purple
-            addSepulchrePool("UninspiredNosestone_EN");//gray
-            addFountainPool("SweatingNosestone_EN");
-            addFountainPool("ProlificNosestone_EN");
-            addFountainPool("ScatterbrainedNosestone_EN");
-            addFountainPool("MesmerizingNosestone_EN");
-            addFountainPool("UninspiredNosestone_EN");
-            addBronzoPool("Inequity_EN");
-            addBronzoPool("SweatingNosestone_EN");
-            addBronzoPool("ProlificNosestone_EN");
-            addBronzoPool("ScatterbrainedNosestone_EN");
-            addBronzoPool("MesmerizingNosestone_EN");
-            addBronzoPool("UninspiredNosestone_EN");
-            addBronzoPool("Boler_EN");
-            /*
-            inequity
-            InequityEncountersHard
-            InequityEncountersMedium
-            InequityEncountersEasy
-            
-            boler
-            BolerEncountersHard
-             */
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1181,13 +1155,62 @@ namespace Hawthorne
             I'm running out of \"funny\" names for these
             */
 
+            //furyball
+            addSepulchrePool("SweatingNosestone_EN");//yellow
+            addSepulchrePool("ProlificNosestone_EN");//red
+            addSepulchrePool("ScatterbrainedNosestone_EN");//blue
+            addSepulchrePool("MesmerizingNosestone_EN");//purple
+            addSepulchrePool("UninspiredNosestone_EN");//gray
+            addSepulchrePool("Flatback_EN");
+            addFountainPool("SweatingNosestone_EN");
+            addFountainPool("ProlificNosestone_EN");
+            addFountainPool("ScatterbrainedNosestone_EN");
+            addFountainPool("MesmerizingNosestone_EN");
+            addFountainPool("UninspiredNosestone_EN");
+            addBronzoPool("Inequity_EN");
+            addBronzoPool("SweatingNosestone_EN");//yellow
+            addBronzoPool("ProlificNosestone_EN");//red
+            addBronzoPool("ScatterbrainedNosestone_EN");//blue
+            addBronzoPool("MesmerizingNosestone_EN");//purple
+            addBronzoPool("UninspiredNosestone_EN");//gray
+            addBronzoPool("Boler_EN");
+            addBronzoPool("Flatback_EN");
+            /*
+            inequity
+            InequityEncountersHard
+            InequityEncountersMedium
+            InequityEncountersEasy
+            
+            boler
+            BolerEncountersHard
+
+            flatback
+            FlatbackEncountersHard
+            FlatbackEncountersMedium
+            FlatbackEncountersEasy
+
+            nosestone
+            SweatingNosestoneEncountersHard
+            ProlificNosestoneEncountersHard
+            ScatterbrainedNosestoneEncountersHard
+            MesmerizingNosestoneEncountersHard
+            UninspiredNosestoneEncountersHard
+
+            possible nosestone?
+            SweatingNosestoneEncountersMedium
+            ProlificNosestoneEncountersMedium
+            ScatterbrainedNosestoneEncountersMedium
+            MesmerizingNosestoneEncountersMedium
+            UninspiredNosestoneEncountersMedium
+             */
+
+
             //((LoadedAssetsHandler.GetEnemy("Sepulchre_EN").abilities[0].ability.effects[2].effect) as SpawnMassivelyEverywhereUsingHealthEffect)._possibleEnemies
             //(LoadedAssetsHandler.GetEnemy("Bronzo5_EN").abilities[0].ability.effects[0].effect as SpawnRandomEnemyAnywhereEffect)._enemies
 
             LetsYouIgnoreMissingEnemiesHook.ReadOutDisabled();
             PerformRandomEffectsAmongEffects.GO();
 
-            
 
         }
         public static bool Crossed = false;
@@ -1240,6 +1263,17 @@ namespace Hawthorne
             Hawthorne.DontTouchMeEncountersBoth.Add();//?
             //TairPeepZLD1
             Hawthorne.ZLD1TairEncounters.Add();//FS, O
+
+            if (GlassedSunEffect.Instance == null) GlassedSunEffect.Instance = ScriptableObject.CreateInstance<GlassedSunEffect>();
+            GlassedSunEffect.Instance.Setup();
+            try
+            {
+                GlassedSunHandler.Setup();
+            }
+            catch
+            {
+                Debug.LogError("Glassed sun handler fail");
+            }
         }
 
         public static void Start(Action<MainMenuController> orig, MainMenuController self)
@@ -1782,6 +1816,8 @@ namespace Hawthorne
         public static bool BirdScale => MultiENExist("LittleBeak_EN", "Warbird_EN", "TheCrow_EN", "Hunter_EN", "Firebird_EN");
         public static string[] Noses => new string[] { "SweatingNosestone_EN", "ProlificNosestone_EN", "ScatterbrainedNosestone_EN", "MesmerizingNosestone_EN", "UninspiredNosestone_EN" };
         public static bool Nosing => MultiENExistInternal(Noses);
+        public static string[] Bots => new string[] { "RedBot_EN", "YellowBot_EN", "BlueBot_EN", "PurpleBot_EN", "GreyBot_EN" };
+        public static bool Botting => MultiENExistInternal(Bots);
 
         public static string RandomOrph
         {
@@ -1826,6 +1862,7 @@ namespace Hawthorne
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("PerforatedSpoggle_EN")) list.Add("PerforatedSpoggle_EN");
                 if (UnityEngine.Random.Range(0, 100) < 10 && EnemyExist("FamiliarSpoggle_EN")) list.Add("FamiliarSpoggle_EN");
                 if (UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("RusticJumbleguts_EN")) list.Add("RusticJumbleguts_EN");
+                if (Botting){ list.Add("RedBot_EN"); list.Add("YellowBot_EN"); }
                 if (Flowering) { list.Add("YellowFlower_EN"); list.Add("PurpleFlower_EN"); };
             }
             if (zone == 2)
@@ -1836,6 +1873,7 @@ namespace Hawthorne
                 if (!killable && EnemyExist("MortalSpoggle_EN")) list.Add("MortalSpoggle_EN");
                 if (list.Count <= 0 || UnityEngine.Random.Range(0, 100) == 0) list.Add("JumbleGuts_Flummoxing_EN");
                 if (Nosing) for (int i = 0; i < 5; i++) list.Add(Noses[i]);
+                if (Botting) for (int i = 0; i < 5; i++) list.Add(Bots[i]);
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -1946,6 +1984,7 @@ namespace Hawthorne
                     }
                 }
                 if (Colophoning && !harderOnly) list.Add("DefeatedColophon_EN");
+                if (Botting && harder) list.Add("RedBot_EN");
             }
             if (list.Count <= 0)
             {
@@ -2097,6 +2136,11 @@ namespace Hawthorne
             if (harder && EnemyExist("YNL_EN")) for (int i = 0; i < 4; i++) list.Add("YNL_EN");
             if (EnemyExist("Stoplight_EN")) for (int i = 0; i < 1; i++) list.Add("Stoplight_EN");
             if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 2; i++) list.Add("Stoplight_EN");
+            if (EnemyExist("RedBot_EN")) for (int i = 0; i < 2; i++) list.Add("RedBot_EN");
+            if (EnemyExist("YellowBot_EN")) for (int i = 0; i < 2; i++) list.Add("YellowBot_EN");
+            if (harder && EnemyExist("BlueBot_EN")) for (int i = 0; i < 2; i++) list.Add("BlueBot_EN");
+            if (harder && EnemyExist("PurpleBot_EN")) for (int i = 0; i < 2; i++) list.Add("PurpleBot_EN");
+            if (harder && EnemyExist("GreyBot_EN")) for (int i = 0; i < 2; i++) list.Add("GreyBot_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2115,6 +2159,7 @@ namespace Hawthorne
             if (!harder && Colophoning) for (int i = 0; i < 2; i++) ret.Add(Colophon[0]);
             if (EnemyExist("Stoplight_EN")) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
             if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
+            if (EnemyExist("RedBot_EN")) for (int i = 0; i < 2; i++) ret.Add("RedBot_EN");
             return ret.GetRandom();
         }
 
@@ -2420,6 +2465,13 @@ namespace Hawthorne
                         ret = Noses.GetRandom();
                         if (forceRed) ret = "ProlificNosestone_EN";
                     }
+                    else if (Coloring == ColorType.Bots)
+                    {
+                        int limiter = 2;
+                        if (area > 1) limiter = 5;
+                        ret = Flowers.UpTo(limiter).GetRandom();
+                        if (forceRed) ret = "RedBot_EN";
+                    }
                     else ret = RandomColor(area);
                     if (reroll > 5 || forceRed)
                     {
@@ -2436,6 +2488,7 @@ namespace Hawthorne
                     List<string> ret = new List<string>();
                     if (Flowering) ret.Add("RedFlower_EN");
                     if (Nosing) ret.Add("ProlificNosestone_EN");
+                    if (Botting) ret.Add("RedBot_EN");
                     return ret.GetRandom();
                 }
                 else if (!doubleAble && forceRed) return RandomRedColor(false, true, area > 0);
@@ -2452,6 +2505,7 @@ namespace Hawthorne
                         if (Spligging) picking.Add(ColorType.Splig);
                     }
                     if (area > 0 && Flowering && (area > 1 || !forceRed)) picking.Add(ColorType.Flower);
+                    if (area > 0 && Botting) picking.Add(ColorType.Bots);
                     if (area == 2 && Nosing) picking.Add(ColorType.Noses);
                     ColorType picked = picking[UnityEngine.Random.Range(0, picking.Count)];
                     Coloring = picked;
@@ -2511,6 +2565,11 @@ namespace Hawthorne
                     {
                         ColorLastDouble = Noses.GetRandom();
                         if (forceRed) ColorLastDouble = "ProlificNosestone_EN";
+                    }
+                    else if (picked == ColorType.Bots)
+                    {
+                        ColorLastDouble = Bots.GetRandom();
+                        if (forceRed) ColorLastDouble = "RedBot_EN";
                     }
                     else
                     {
@@ -2731,7 +2790,7 @@ namespace Hawthorne
                     return list.GetRandom();
                 }
                 else if (tryDouble) list.Clear();
-                if (EnemyExist("Spitato_EN")) list.Add("Spitato_EN");
+                if (EnemyExist("Spitato_EN") && Third) list.Add("Spitato_EN");
                 if (EnemyExist("SterileBud_EN")) list.Add("SterileBud_EN");
                 if (EnemyExist("Harbinger_EN")) list.Add("Harbinger_EN");
                 if (EnemyExist("HowlingAvian_EN") && Half) list.Add("HowlingAvian_EN");
@@ -2746,6 +2805,11 @@ namespace Hawthorne
                     if (!Red && EnemyExist("Hunter_EN") && Half) list.Add("Hunter_EN");
                     if (!Red && Half) list.Add("ChoirBoy_EN");
                     if (EnemyExist("Shua_EN") && Half) list.Add("Shua_EN");
+                }
+                if (list.Count <= 0)
+                {
+                    list.Add("InHisImage_EN");
+                    list.Add("InHerImage_EN");
                 }
                 string ret = list.GetRandom();
                 if (ret == "InHisImage_EN" || ret == "InHerImage_EN") ChunkDoubleable = true;
@@ -2838,9 +2902,9 @@ namespace Hawthorne
     public static class DoDebugs
     {
         public static bool All => true;
-        public static bool EnemyNull => false && All;
+        public static bool EnemyNull => true && All;
         public static bool SpriteNull => true && All;
-        public static bool GenInfo => false && All;
+        public static bool GenInfo => true && All;
         public static bool MiscInfo => false && All;
     }
 
@@ -2853,6 +2917,7 @@ namespace Hawthorne
         Splig = 4,
         Flower = 5,
         Noses = 6,
+        Bots = 7,
     }
     public enum Weight
     {
@@ -2871,6 +2936,8 @@ namespace Hawthorne
             U1_3_29_2();
             U1_3_30();
             U1_4_0();
+            U1_4_3("Update_1_4_3.txt");
+            U1_4_3_1();
         }
         public static void U1_3_27()
         {
@@ -3033,6 +3100,14 @@ namespace Hawthorne
             {
                 if (Stamp.Stamps != null) foreach (Stamp stamp in Stamp.Stamps.Values) stamp.Update(update);
                 File.WriteAllText(SavePath + update, "Updatd stamps !");
+            }
+        }
+        public static void U1_4_3_1()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_3_1.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_3_1.txt", "Updatd pages !");
+                PageCollector.UpdatePage("SkyloftPage.png");
             }
         }
     }

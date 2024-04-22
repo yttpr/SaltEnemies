@@ -16,7 +16,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn;
 using Yarn.Unity;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.CanvasScaler;
+using static Hawthorne.Check;
 
 namespace Hawthorne
 {
@@ -444,6 +447,35 @@ namespace Hawthorne
                     _unbreakable = unbreakable;
                 }
                 return _unbreakable;
+            }
+        }
+        static BasePassiveAbilitySO _flithering;
+        public static BasePassiveAbilitySO Flithering
+        {
+            get
+            {
+                if (_flithering == null)
+                {
+                    PerformEffectPassiveAbility flither = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    flither._passiveName = "Flithering";
+                    flither.passiveIcon = ResourceLoader.LoadSprite("FlitheringIcon.png", 32, null);
+                    flither.type = FlitheringHandler.Flithering;
+                    flither._enemyDescription = "On any enemy dying, if there are no other enemies without \"Withering\" or \"Flithering\" as passives, instantly flee.\n" +
+                        "At the start and end of the enemies' turn, if there are no other enemies without \"Cowardice\" or \"Flithering\" as passives, instantly flee.";
+                    flither._characterDescription = "doesnt work";
+                    flither.doesPassiveTriggerInformationPanel = false;
+                    flither.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(RootActionEffect.Create(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<CowardEffect>(), 1, null, Slots.Self)
+                    }), 1, null, Slots.Self) });
+                    flither._triggerOn = new TriggerCalls[] { TriggerCalls.OnPlayerTurnEnd_ForEnemy, TriggerCalls.OnRoundFinished };
+                    flither.conditions = new EffectorConditionSO[]
+                    {
+                        ScriptableObject.CreateInstance<CowardCondition>()
+                    };
+                    _flithering = flither;
+                }
+                return _flithering;
             }
         }
         static BasePassiveAbilitySO _rupture;
@@ -1214,6 +1246,7 @@ namespace Hawthorne
                     ethereal.doesPassiveTriggerInformationPanel = true;
                     ethereal._triggerOn = new TriggerCalls[] { TriggerCalls.OnFleeting };
                     ethereal.effects = new EffectInfo[0];
+                    ethereal.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<NotFlitheringCondition>() };
                     _lazy = ethereal;
                 }
                 return _lazy;
@@ -1596,12 +1629,12 @@ namespace Hawthorne
                     bonus.name = "Trolley";
                     bonus.description = "If the Light phase is Green, deal 0-20 damage to either all enemies or all party members.";
                     bonus.effects = new Effect[7];
-                    bonus.effects[0] = new Effect(BasicEffects.GetVisuals("Salt/Train", false, TrainTargetting.Create(false)), 0, IntentType.Damage_21, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
-                    bonus.effects[1] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_1_2 , TrainTargetting.Create(true));
-                    bonus.effects[2] = new Effect(ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>(), 20, IntentType.Damage_3_6, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
-                    bonus.effects[3] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_7_10, TrainTargetting.Create(true));
-                    bonus.effects[4] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_11_15, TrainTargetting.Create(true));
-                    bonus.effects[5] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_16_20, TrainTargetting.Create(true));
+                    bonus.effects[1] = new Effect(BasicEffects.GetVisuals("Salt/Train", false, TrainTargetting.Create(false)), 0, IntentType.Damage_21, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
+                    bonus.effects[2] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_1_2 , TrainTargetting.Create(true));
+                    bonus.effects[3] = new Effect(ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>(), 20, IntentType.Damage_3_6, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
+                    bonus.effects[4] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_7_10, TrainTargetting.Create(true));
+                    bonus.effects[5] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Damage_11_15, TrainTargetting.Create(true));
+                    bonus.effects[0] = new Effect(ScriptableObject.CreateInstance<TrainSongEffect>(), 1, IntentType.Damage_16_20, TrainTargetting.Create(true), ScriptableObject.CreateInstance<SecondTrainCondition>());
                     bonus.effects[6] = new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, CustomIntentIconSystem.GetIntent("FallColor"), TrainTargetting.Create(true));
                     bonus.visuals = null;
                     bonus.animationTarget = Slots.Self;
@@ -1610,6 +1643,93 @@ namespace Hawthorne
                     _trolley = pressure;
                 }
                 return _trolley;
+            }
+        }
+        static BasePassiveAbilitySO _pillar;
+        public static BasePassiveAbilitySO Pillar
+        {
+            get
+            {
+                if (_pillar == null)
+                {
+                    PerformEffectPassiveAbility pillar = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    pillar._passiveName = "Pillar";
+                    pillar.type = (PassiveAbilityTypes)8383047;
+                    pillar.passiveIcon = ResourceLoader.LoadSprite("PillarPassive.png", 32);
+                    pillar._enemyDescription = "On death, randomize the health color of all enemies sharing this enemy's health color, ignoring the effects of Pure.";
+                    pillar._characterDescription = "On death, randomize the health color of all party members sharing this enemy's health color, ignoring the effects of Pure.";
+                    pillar.doesPassiveTriggerInformationPanel = true;
+                    pillar.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(RandomizeTargetHealthColorsNotSameEffect.Create(true), 1, null, Targetting.AllAlly) });
+                    pillar._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDeath };
+                    _pillar = pillar;
+                }
+                return _pillar;
+            }
+        }
+        static BasePassiveAbilitySO _hemochromia;
+        public static BasePassiveAbilitySO Hemochromia
+        {
+            get
+            {
+                if (_hemochromia == null)
+                {
+                    PerformEffectPassiveAbility pillar = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    pillar._passiveName = "Hemochromia";
+                    pillar.type = (PassiveAbilityTypes)78332;
+                    pillar.passiveIcon = ResourceLoader.LoadSprite("Hemochromia.png");
+                    pillar._enemyDescription = "Upon receiving any kind of damage, randomize this enemy's health colour.";
+                    pillar._characterDescription = "Upon receiving any kind of damage, randomize this party member's health colour.";
+                    ChangeToRandomHealthColorEffect instance47 = ScriptableObject.CreateInstance<ChangeToRandomHealthColorEffect>();
+                    instance47._healthColors = new ManaColorSO[4]
+                    {
+                        Pigments.Blue,
+                        Pigments.Red,
+                        Pigments.Yellow,
+                        Pigments.Purple
+                    };
+                    pillar.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1]
+                    {
+                        new Effect((EffectSO) instance47, 1, new IntentType?(), Slots.Self)
+                    });
+                    pillar._triggerOn = new TriggerCalls[1]
+                    {
+                        TriggerCalls.OnDamaged
+                    };
+                    _hemochromia = pillar;
+                }
+                return _hemochromia;
+            }
+        }
+        static BasePassiveAbilitySO _stained;
+        public static BasePassiveAbilitySO Stained
+        {
+            get
+            {
+                if (_stained == null)
+                {
+                    PriorityPerformEffectPassiveAbility pillar = ScriptableObject.CreateInstance<PriorityPerformEffectPassiveAbility>();
+                    pillar._passiveName = "Stained";
+                    pillar.type = (PassiveAbilityTypes)7839132;
+                    pillar.passiveIcon = ResourceLoader.LoadSprite("StainedPassive.png");
+                    pillar._enemyDescription = "At the end of each round, transform into a random color enemy of this enemy's health color.";
+                    pillar._characterDescription = "literally doesnt work";
+                    GlassedSunEffect g = ScriptableObject.CreateInstance<GlassedSunEffect>();
+                    GlassedSunEffect.Instance = g;
+                    AddPassiveEffect p = ScriptableObject.CreateInstance<AddPassiveEffect>();
+                    p._passiveToAdd = pillar;
+                    pillar.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                    {
+                        new Effect(g, 1, new IntentType?(), Slots.Self),
+                        new Effect(p, 1, null, Slots.Self),
+                    });
+                    pillar._triggerOn = new TriggerCalls[]
+                    {
+                        TriggerCalls.TimelineEndReached, TriggerCalls.CanChangeHealthColor
+                    };
+                    pillar.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<SunColorCondition>() };
+                    _stained = pillar;
+                }
+                return _stained;
             }
         }
 
@@ -4592,7 +4712,10 @@ namespace Hawthorne
             {
                 foreach (EnemyCombat enemy in stats.EnemiesOnField.Values)
                 {
-                    if (enemy.IsAlive && !enemy.ContainsPassiveAbility(Passi.Coward.type)) amount++;
+                    if (enemy.IsAlive && !enemy.ContainsPassiveAbility(Passi.Coward.type))
+                    {
+                        if (!enemy.ContainsPassiveAbility(FlitheringHandler.Flithering)) amount++;
+                    }
                 }
             }
             return amount <= 0;
@@ -4604,6 +4727,7 @@ namespace Hawthorne
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
+            FlitheringHandler.Run(stats);
             if (flee == null) flee = CreateInstance<FleeTargetEffect>();
             List<int> list = new List<int>();
             List<bool> list2 = new List<bool>();
@@ -6136,6 +6260,575 @@ namespace Hawthorne
             exitAmount = 0;
             CombatManager.Instance.AddUIAction(new SigilSongCheckUIAction());
             return true;
+        }
+    }
+    public class FlitheringCondition// : EffectorConditionSO
+    {
+        //public override bool MeetCondition(IEffectorChecks effector, object args)
+        //{
+        //    if (effector is IUnit unit && args is BooleanReference) FleeTargetEffect
+        //}
+    }
+    public static class FlitheringHandler
+    {
+        public static PassiveAbilityTypes Flithering => (PassiveAbilityTypes)2927829;
+        public static void Run(CombatStats stats)
+        {
+            try
+            {
+                bool yeah = stats.EnemiesOnField.Count > 0;
+                int coward = 0;
+                int wither = 0;
+                List<EnemyCombat> list5 = new List<EnemyCombat>();
+                List<int> list = new List<int>();
+                List<bool> list2 = new List<bool>();
+                List<string> list3 = new List<string>();
+                List<Sprite> list4 = new List<Sprite>();
+                foreach (EnemyCombat value in stats.EnemiesOnField.Values)
+                {
+                    if (value.IsAlive && value.CurrentHealth > 0)
+                    {
+                        if (value.TryGetPassiveAbility(Flithering, out var passi) && value.CanPassiveTrigger(Flithering))
+                        {
+                            list5.Add(value);
+                            list2.Add(value.IsUnitCharacter);
+                            list.Add(value.ID);
+                            list3.Add(passi.GetPassiveLocData().text);
+                            list4.Add(passi.passiveIcon);
+                        }
+                        else if (value.TryGetPassiveAbility(Passi.Coward.type, out var passs) && value.CanPassiveTrigger(Passi.Coward.type))
+                        {
+                            coward++;
+                            continue;
+                        }
+                        else if (value.TryGetPassiveAbility(PassiveAbilityTypes.Withering, out var passive) && value.CanPassiveTrigger(PassiveAbilityTypes.Withering))
+                        {
+                            wither++;
+                            continue;
+                        }
+                        else
+                        {
+                            yeah = false;
+                            break;
+                        }
+                    }
+                }
+                if (coward > 0 && wither > 0) yeah = false;
+                if (yeah)
+                {
+                    CombatManager.Instance.AddUIAction(new ShowMultiplePassiveInformationUIAction(list.ToArray(), list2.ToArray(), list3.ToArray(), list4.ToArray()));
+                    foreach (EnemyCombat enemy in list5)
+                    {
+                        CombatManager.Instance.PostNotification(TriggerCalls.OnFleeting.ToString(), enemy, false);
+                        if (enemy.ContainsPassiveAbility(ButterflyUnboxer.ButterflyPassive) && enemy.CurrentHealth > 0)
+                        {
+                            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(enemy.ID, enemy.IsUnitCharacter, Passi.Ethereal._passiveName, Passi.Ethereal.passiveIcon));
+                            stats.TryBoxEnemy(enemy.ID, ButterflyUnboxer.GetDefault(enemy.ID), UnitExitType.Obliterate);
+                            ButterflyUnboxer.Boxeds.Add(enemy.ID);
+                            if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("boxed enemy ID: " + enemy.ID);
+                        }
+                        else if (enemy.ContainsPassiveAbility(ButterflyUnboxer.SkyloftPassive) && enemy.CurrentHealth > 0)
+                        {
+                            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(enemy.ID, enemy.IsUnitCharacter, Passi.Lazy._passiveName, Passi.Lazy.passiveIcon));
+                            stats.TryBoxEnemy(enemy.ID, ButterflyUnboxer.GetDefault(enemy.ID, true), UnitExitType.Fleeting);
+                            ButterflyUnboxer.Boxeds.Add(enemy.ID);
+                            if (DoDebugs.MiscInfo) UnityEngine.Debug.Log("boxed enemy ID: " + enemy.ID);
+                        }
+                        else
+                        {
+                            enemy.FleeEnemy();
+                            enemy.DisconnectPassives();
+                            enemy.RemoveAllStatusEffects(showInfo: false);
+                            enemy.FinalizationEnd(disconnectPassives: false);
+                            CombatManager.Instance.AddUIAction(new EnemyFleetingUIAction(enemy.ID));
+                            stats.RemoveEnemy(enemy.ID);
+                            enemy.FinalizeFleeting();
+                        }
+                        //CombatManager.Instance.AddSubAction(new FleetingUnitAction(enemy.ID, enemy.IsUnitCharacter));
+                    }
+                }
+            }
+            catch
+            {
+                UnityEngine.Debug.LogError("Flithering fail");
+            }
+        }
+        public static IEnumerator Execute(Func<CombatAction, CombatStats, IEnumerator> orig, CombatAction self, CombatStats stats)
+        {
+            if (self is EnemyWitheringAction)
+            {
+                Run(stats);
+            }
+
+            yield return orig(self, stats);
+        }
+        public static void Setup()
+        {
+            try
+            {
+                IDetour hook = new Hook(typeof(EnemyWitheringAction).GetMethod(nameof(EnemyWitheringAction.Execute), ~BindingFlags.Default), typeof(FlitheringHandler).GetMethod(nameof(Execute), ~BindingFlags.Default));
+            }
+            catch
+            {
+                UnityEngine.Debug.LogError("Flithering setup fail");
+            }
+        }
+    }
+    public class NotFlitheringCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (args is bool b) return b;
+            return true;
+        }
+    }
+    public class MusicParameterByNameUIAction : CombatAction
+    {
+        public string Parameter;
+        public int value;
+        public MusicParameterByNameUIAction(string parameter, int Value)
+        {
+            this.Parameter = parameter;
+            this.value = Value;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName(Parameter, value);
+            yield return null;
+        }
+    }
+    public class MusicParameterByNameEffect : EffectSO
+    {
+        public string Parameter;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            CombatManager.Instance.AddUIAction(new MusicParameterByNameUIAction(Parameter, entryVariable));
+            return true;
+        }
+        public static MusicParameterByNameEffect Create(string p)
+        {
+            MusicParameterByNameEffect ret = ScriptableObject.CreateInstance<MusicParameterByNameEffect>();
+            ret.Parameter = p;
+            return ret;
+        }
+    }
+    public class TrainSongEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (changeMusic != null)
+            {
+                try { changeMusic.Abort(); } catch { UnityEngine.Debug.LogWarning("train thread failed to shut down."); }
+            }
+            changeMusic = new System.Threading.Thread(GO);
+            changeMusic.Start();
+            return true;
+        }
+
+        public static System.Threading.Thread changeMusic;
+        public static void GO()
+        {
+            int start = 0;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("train", out float num) == RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i <= 15; i++)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("train", i);
+                System.Threading.Thread.Sleep(100);
+                //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
+        }
+    }
+    public class GlassedSunEffect : CasterTransformationEffect
+    {
+        public static GlassedSunEffect Instance;
+        public void Setup()
+        {
+            _fullyHeal = false;
+            _maintainMaxHealth = true;
+            _maintainTimelineAbilities = false;
+            _currentToMaxHealth = false;
+            List<EnemySO> red = new List<EnemySO>()
+            {
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Clotted_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Writhing_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Clotted_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Writhing_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Clotted_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Writhing_EN"),
+            };
+            List<EnemySO> blue = new List<EnemySO>()
+            {
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Hollowing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Ruminating_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Hollowing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Ruminating_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Hollowing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Ruminating_EN"),
+            };
+            List<EnemySO> yellow = new List<EnemySO>()
+            {
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Waning_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Spitfire_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Waning_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Spitfire_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Waning_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Spitfire_EN"),
+            };
+            List<EnemySO> purple = new List<EnemySO>()
+            {
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Flummoxing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Resonant_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Flummoxing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Resonant_EN"),
+                LoadedAssetsHandler.GetEnemy("JumbleGuts_Flummoxing_EN"),
+                LoadedAssetsHandler.GetEnemy("Spoggle_Resonant_EN"),
+            };
+            List<EnemySO> grey = new List<EnemySO>();
+            if (EnemyExist("DesiccatingJumbleguts_EN")) grey.Add(LoadedAssetsHandler.GetEnemy("DesiccatingJumbleguts_EN"));
+            if (EnemyExist("PerforatedSpoggle_EN")) grey.Add(LoadedAssetsHandler.GetEnemy("PerforatedSpoggle_EN"));
+            if (EnemyExist("RusticJumbleguts_EN")) grey.Add(LoadedAssetsHandler.GetEnemy("RusticJumbleguts_EN"));
+            if (EnemyExist("MortalSpoggle_EN")) grey.Add(LoadedAssetsHandler.GetEnemy("MortalSpoggle_EN"));
+            if (Flowering)
+            {
+                for (int i = 0; i < 5; i++) red.Add(LoadedAssetsHandler.GetEnemy("RedFlower_EN"));
+                for (int i = 0; i < 5; i++) blue.Add(LoadedAssetsHandler.GetEnemy("BlueFlower_EN"));
+                for (int i = 0; i < 5; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("YellowFlower_EN"));
+                for (int i = 0; i < 5; i++) purple.Add(LoadedAssetsHandler.GetEnemy("PurpleFlower_EN"));
+                for (int i = 0; i < 2; i++) grey.Add(LoadedAssetsHandler.GetEnemy("GreyFlower_EN"));
+            }
+            if (Botting)
+            {
+                for (int i = 0; i < 5; i++) red.Add(LoadedAssetsHandler.GetEnemy("RedBot_EN"));
+                for (int i = 0; i < 5; i++) blue.Add(LoadedAssetsHandler.GetEnemy("BlueBot_EN"));
+                for (int i = 0; i < 5; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("YellowBot_EN"));
+                for (int i = 0; i < 5; i++) purple.Add(LoadedAssetsHandler.GetEnemy("PurpleBot_EN"));
+                for (int i = 0; i < 2; i++) grey.Add(LoadedAssetsHandler.GetEnemy("GreyBot_EN"));
+            }
+            if (EnemyExist("GlassedSun_EN"))
+            {
+                EnemySO first = LoadedAssetsHandler.GetEnemy("GlassedSun_EN");
+                EnemySO rE = ScriptableObject.Instantiate(first);
+                rE.enterEffects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<SunColorEffect>(), 1, null, Slots.Self) });
+                rE.healthColor = Pigments.Red;
+                for (int i = 0; i < 2; i++) red.Add(rE);
+                EnemySO bE = ScriptableObject.Instantiate(rE);
+                bE.healthColor = Pigments.Blue;
+                for (int i = 0; i < 2; i++) blue.Add(bE);
+                EnemySO yE = ScriptableObject.Instantiate(rE);
+                yE.healthColor = Pigments.Yellow;
+                for (int i = 0; i < 2; i++) yellow.Add(yE);
+                EnemySO pE = ScriptableObject.Instantiate(rE);
+                pE.healthColor = Pigments.Purple;
+                for (int i = 0; i < 2; i++) purple.Add(pE);
+                EnemySO gE = ScriptableObject.Instantiate(rE);
+                gE.healthColor = Pigments.Gray;
+                for (int i = 0; i < 2; i++) grey.Add(gE);
+            }
+            if (BowGutsing)
+            {
+                if (LoadedAssetsHandler.GetEnemy("BondedJumbleGuts_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("BondedJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("BondedJumbleGuts_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                else
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("BondedJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("BondedJumbleGuts_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("AnnoyingJumbleGuts_EN").healthColor == Pigments.Yellow)
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("AnnoyingJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("AnnoyingJumbleGuts_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                else
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("AnnoyingJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("AnnoyingJumbleGuts_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("ParasiticJumbleGuts_EN").healthColor == Pigments.Yellow)
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("ParasiticJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("ParasiticJumbleGuts_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("ParasiticJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("ParasiticJumbleGuts_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("MalignantJumbleGuts_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("MalignantJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("MalignantJumbleGuts_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("MalignantJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("MalignantJumbleGuts_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("ArtisticJumbleGuts_EN").healthColor == Pigments.Blue)
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("ArtisticJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("ArtisticJumbleGuts_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("ArtisticJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("ArtisticJumbleGuts_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("WaxingJumbleGuts_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("WaxingJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("WaxingJumbleGuts_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                else
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("WaxingJumbleGuts_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("WaxingJumbleGuts_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+            }
+            if (BowSpogging)
+            {
+                if (LoadedAssetsHandler.GetEnemy("FoamingSpoggle_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("FoamingSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("FoamingSpoggle_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                else
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("FoamingSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("FoamingSpoggle_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("IchtyosatedSpoggle_EN").healthColor == Pigments.Yellow)
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("IchtyosatedSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("IchtyosatedSpoggle_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                else
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("IchtyosatedSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("IchtyosatedSpoggle_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("PoolingSpoggle_EN").healthColor == Pigments.Yellow)
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("PoolingSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("PoolingSpoggle_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("PoolingSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("PoolingSpoggle_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("NecromanticSpoggle_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("NecromanticSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("NecromanticSpoggle_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("NecromanticSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("NecromanticSpoggle_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("EclipsedSpoggle_EN").healthColor == Pigments.Blue)
+                {
+                    blue.Add(LoadedAssetsHandler.GetEnemy("EclipsedSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("EclipsedSpoggle_EN"));
+                    n.healthColor = Pigments.Purple;
+                    purple.Add(n);
+                }
+                else
+                {
+                    purple.Add(LoadedAssetsHandler.GetEnemy("EclipsedSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("EclipsedSpoggle_EN"));
+                    n.healthColor = Pigments.Blue;
+                    blue.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("AmphibiousSpoggle_EN").healthColor == Pigments.Red)
+                {
+                    red.Add(LoadedAssetsHandler.GetEnemy("AmphibiousSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("AmphibiousSpoggle_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    yellow.Add(n);
+                }
+                else
+                {
+                    yellow.Add(LoadedAssetsHandler.GetEnemy("AmphibiousSpoggle_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("AmphibiousSpoggle_EN"));
+                    n.healthColor = Pigments.Red;
+                    red.Add(n);
+                }
+            }
+            if (Colophoning)
+            {
+                for (int i = 0; i < 5; i++) red.Add(LoadedAssetsHandler.GetEnemy("DefeatedColophon_EN"));
+                for (int i = 0; i < 5; i++) blue.Add(LoadedAssetsHandler.GetEnemy("ComposedColophon_EN"));
+                for (int i = 0; i < 5; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("MaladjustedColophon_EN"));
+                for (int i = 0; i < 5; i++) purple.Add(LoadedAssetsHandler.GetEnemy("DelightedColophon_EN"));
+            }
+            if (Spligging)
+            {
+                if (LoadedAssetsHandler.GetEnemy("RogueWailingSplugling_EN").healthColor == Pigments.Red)
+                {
+                    for (int i = 0; i < 3; i++) red.Add(LoadedAssetsHandler.GetEnemy("RogueWailingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueWailingSplugling_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    for (int i = 0; i < 3; i++) yellow.Add(n);
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("RogueWailingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueWailingSplugling_EN"));
+                    n.healthColor = Pigments.Red;
+                    for (int i = 0; i < 3; i++) red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("RogueBellowingSplugling_EN").healthColor == Pigments.Red)
+                {
+                    for (int i = 0; i < 3; i++) red.Add(LoadedAssetsHandler.GetEnemy("RogueBellowingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueBellowingSplugling_EN"));
+                    n.healthColor = Pigments.Purple;
+                    for (int i = 0; i < 3; i++) purple.Add(n);
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++) purple.Add(LoadedAssetsHandler.GetEnemy("RogueBellowingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueBellowingSplugling_EN"));
+                    n.healthColor = Pigments.Red;
+                    for (int i = 0; i < 3; i++) red.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("RogueFesteringSplugling_EN").healthColor == Pigments.Blue)
+                {
+                    for (int i = 0; i < 3; i++) blue.Add(LoadedAssetsHandler.GetEnemy("RogueFesteringSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueFesteringSplugling_EN"));
+                    n.healthColor = Pigments.Yellow;
+                    for (int i = 0; i < 3; i++) yellow.Add(n);
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("RogueFesteringSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueFesteringSplugling_EN"));
+                    n.healthColor = Pigments.Blue;
+                    for (int i = 0; i < 3; i++) blue.Add(n);
+                }
+                if (LoadedAssetsHandler.GetEnemy("RogueWeepingSplugling_EN").healthColor == Pigments.Blue)
+                {
+                    for (int i = 0; i < 3; i++) blue.Add(LoadedAssetsHandler.GetEnemy("RogueWeepingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueWeepingSplugling_EN"));
+                    n.healthColor = Pigments.Purple;
+                    for (int i = 0; i < 3; i++) purple.Add(n);
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++) purple.Add(LoadedAssetsHandler.GetEnemy("RogueWeepingSplugling_EN"));
+                    EnemySO n = ScriptableObject.Instantiate(LoadedAssetsHandler.GetEnemy("RogueWeepingSplugling_EN"));
+                    n.healthColor = Pigments.Blue;
+                    for (int i = 0; i < 3; i++) blue.Add(n);
+                }
+            }
+            if (Nosing)
+            {
+                for (int i = 0; i < 5; i++) red.Add(LoadedAssetsHandler.GetEnemy("ProlificNosestone_EN"));
+                for (int i = 0; i < 5; i++) blue.Add(LoadedAssetsHandler.GetEnemy("ScatterbrainedNosestone_EN"));
+                for (int i = 0; i < 5; i++) yellow.Add(LoadedAssetsHandler.GetEnemy("SweatingNosestone_EN"));
+                for (int i = 0; i < 5; i++) purple.Add(LoadedAssetsHandler.GetEnemy("MesmerizingNosestone_EN"));
+                for (int i = 0; i < 2; i++) grey.Add(LoadedAssetsHandler.GetEnemy("UninspiredNosestone_EN"));
+            }
+            Red = red.ToArray();
+            Blue = blue.ToArray();
+            Yellow = yellow.ToArray();
+            Purple = purple.ToArray();
+            Grey = grey.ToArray();
+        }
+        public EnemySO[] Red;
+        public EnemySO[] Blue;
+        public EnemySO[] Yellow;
+        public EnemySO[] Purple;
+        public EnemySO[] Grey;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (caster.IsUnitCharacter) return false;
+            try
+            {
+                if (caster.HealthColor == Pigments.Red) _enemyTransformation = Red.GetRandom();
+                else if (caster.HealthColor == Pigments.Blue) _enemyTransformation = Blue.GetRandom();
+                else if (caster.HealthColor == Pigments.Yellow) _enemyTransformation = Yellow.GetRandom();
+                else if (caster.HealthColor == Pigments.Purple) _enemyTransformation = Purple.GetRandom();
+                else _enemyTransformation = Grey.GetRandom();
+            }
+            catch
+            {
+                return false;
+            }
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public static class GlassedSunHandler
+    {
+        public static IEnumerator Execute(Func<TimelineEndReachedAction, CombatStats, IEnumerator> orig, TimelineEndReachedAction self, CombatStats stats)
+        {
+            foreach (EnemyCombat enemy in stats.EnemiesOnField.Values)
+            {
+                CombatManager.Instance.PostNotification(TriggerCalls.TimelineEndReached.ToString(), enemy, null);
+            }
+            return orig(self, stats);
+        }
+        public static void Setup()
+        {
+            IDetour hook = new Hook(typeof(TimelineEndReachedAction).GetMethod(nameof(TimelineEndReachedAction.Execute), ~BindingFlags.Default),
+                typeof(GlassedSunHandler).GetMethod(nameof(Execute), ~BindingFlags.Default));
+        }
+    }
+
+    public class PriorityPerformEffectPassiveAbility : PerformEffectPassiveAbility
+    {
+        public override void TriggerPassive(object sender, object args)
+        {
+            IUnit caster = sender as IUnit;
+            CombatManager.Instance.AddPrioritySubAction(new EffectAction(effects, caster));
         }
     }
 }

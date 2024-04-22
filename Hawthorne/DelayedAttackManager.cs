@@ -76,6 +76,7 @@ namespace Hawthorne
             CombatManager.Instance.AddRootAction(new PerformDelayedAttacksAction(true));
             CombatManager.Instance.AddRootAction(new ButterflyAction());
             CombatStarterPastCombatStart.Start();
+            PigmentUsedCollector.ClearBlueUsers();
         }
 
         public static void PlayerTurnEnd(Action<CombatStats> orig, CombatStats self)
@@ -93,7 +94,6 @@ namespace Hawthorne
             ButterflyUnboxer.Boxeds.Clear();
             BlackHoleEffect.Reset();
             WaterView.Reset();
-            StampHandler.PrintStampsByGroup();
         }
 
         public static void UIInitialization(Action<CombatStats> orig, CombatStats self)
@@ -115,6 +115,7 @@ namespace Hawthorne
             IDetour CombatStart = new Hook(typeof(CombatStats).GetMethod(nameof(CombatStats.UIInitialization), ~BindingFlags.Default), typeof(DelayedAttackManager).GetMethod(nameof(UIInitialization), ~BindingFlags.Default));
             IDetour TurnStart = new Hook(typeof(CombatStats).GetMethod(nameof(CombatStats.PlayerTurnStart), ~BindingFlags.Default), typeof(DelayedAttackManager).GetMethod(nameof(PlayerTurnStart), ~BindingFlags.Default));
             IDetour TurnEnd = new Hook(typeof(CombatStats).GetMethod(nameof(CombatStats.PlayerTurnEnd), ~BindingFlags.Default), typeof(DelayedAttackManager).GetMethod(nameof(PlayerTurnEnd), ~BindingFlags.Default));
+            PigmentUsedCollector.Setup();
         }
 
     }

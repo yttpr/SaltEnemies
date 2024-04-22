@@ -4,6 +4,7 @@ using Hawthorne.gay;
 using MFoolModOne;
 using MonoMod.RuntimeDetour;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TairbazFools.Effects;
@@ -2110,10 +2111,10 @@ namespace Hawthorne
             else CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Smile for the Camera!"));
             CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
+            if (caster.MaximumHealth != targets[0].Unit.MaximumHealth) CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
             if (caster.MaximizeHealth(targets[0].Unit.MaximumHealth))
             {
                 exitAmount++;
-                CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());
             }
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
@@ -2321,7 +2322,8 @@ namespace Hawthorne
                             exitAmount++;
                         }
                         unitEN.Abilities = newList;
-                        foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
+                        CombatManager.Instance.AddUIAction(new RefreshEnemyInfoUIAction(unitEN.ID));
+                        /*foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
                         {
                             EnemyCombatUIInfo enemyInfo;
                             if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
@@ -2333,7 +2335,7 @@ namespace Hawthorne
                                     stats.combatUI.TryUpdateEnemyIDInformation(enID);
                                 }
                             }
-                        }
+                        }*/
                     }
 
                     UnityEngine.Debug.Log(unitEN._currentName);
@@ -3532,6 +3534,36 @@ namespace Hawthorne
         {
             IDetour hook1 = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.RefreshAbilityUse), ~BindingFlags.Default), typeof(EnemyRefresher).GetMethod(nameof(RefreshAbilityUse), ~BindingFlags.Default));
             IDetour hook2 = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.ExhaustAbilityUse), ~BindingFlags.Default), typeof(EnemyRefresher).GetMethod(nameof(ExhaustAbilityUse), ~BindingFlags.Default));
+        }
+    }
+    public class RefreshEnemyInfoUIAction : CombatAction
+    {
+        public int ID;
+        public RefreshEnemyInfoUIAction(int id)
+        {
+            ID = id;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            EnemyCombat yeah = null;
+            foreach (EnemyCombat enemy in stats.EnemiesOnField.Values) if (enemy.ID == ID) yeah = enemy;
+            if (yeah != null)
+            {
+                foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
+                {
+                    EnemyCombatUIInfo enemyInfo;
+                    if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
+                    {
+                        if (enemyInfo.SlotID == yeah.SlotID)
+                        {
+                            enemyInfo.Abilities = yeah.Abilities;
+                            enemyInfo.UpdateAttacks(enemyInfo.Abilities.ToArray());
+                            stats.combatUI.TryUpdateEnemyIDInformation(enID);
+                        }
+                    }
+                }
+            }
+            yield return null;
         }
     }
 }

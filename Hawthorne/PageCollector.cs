@@ -49,6 +49,7 @@ namespace Hawthorne
         public static void Paging(this EnemyCombat self)
         {
             StampHandler.PageCheck(self);
+            return;
             if (self.IsEnemy("A'Flower'_EN")) AddPage("AnglerPage.png");
             if (self.IsEnemy("LittleBeak_EN")) AddPage("BeakPage.png");
             if (self.IsEnemy("BlueFlower_EN")) AddPage("BlueFlowerPage.png");

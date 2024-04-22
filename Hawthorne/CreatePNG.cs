@@ -248,8 +248,8 @@ namespace Hawthorne
                 int index = 0;
                 for (int j = 0; j < bot.Length && j < t.Length; j++)
                 {
-                    if (((Color32)t[j]).a >= 230) ret[j] = t[j];
-                    else if (((Color32)t[j]).a > 30)
+                    if (((Color32)t[j]).a >= 250) ret[j] = t[j];
+                    else if (((Color32)t[j]).a > 5)
                     {
                         Color32 b = bot[j];
                         Color32 to = t[j];

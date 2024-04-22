@@ -50,6 +50,8 @@ namespace Hawthorne
             }
             catch (Exception ex)
             {
+                if (DoDebugs.SpriteNull) Debug.LogError("Resource loader error load texture: " + name);
+                if (DoDebugs.SpriteNull) Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
                 if (name != "PassivePlaceholder.png") return LoadTexture("PassivePlaceholder.png");
                 else throw ex;
             }
