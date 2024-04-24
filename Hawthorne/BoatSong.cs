@@ -218,6 +218,7 @@ namespace Hawthorne
 
             BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("TrainWorld.png"));
 
+            OrphMed(sign);
             GardHard(sign);
         }
         public static void GardHard(int sign)
@@ -318,6 +319,86 @@ namespace Hawthorne
                 new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomChunk(), enemySlot=1},
                 new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomChunk(true), enemySlot=2},
                 new FieldEnemy(){enemyName = RandomEncounters.Garden.RandomChunk(true), enemySlot=3},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void OrphMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "lalalalalalaFUCK",
+                area = 1,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(10, 15) * 1,
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/NewTrainSong",
+                roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
+                difficulty = EncounterDifficulty.Medium
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Stoplight_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=2},
+                });
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = OrphWhore(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomColor(1), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomColor(1), enemySlot=1},
+                new FieldEnemy(){enemyName = OrphWhore(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomColor(1), enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=1},
+                new FieldEnemy(){enemyName = OrphWhore(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Stoplight_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=1},
+                new FieldEnemy(){enemyName = RandomOrph, enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(1, false, false), enemySlot=3},
                 });
             }
             jarden.variations = fields.ToArray();

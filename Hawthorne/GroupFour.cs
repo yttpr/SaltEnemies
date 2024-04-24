@@ -75,12 +75,6 @@ namespace Hawthorne
             PurpleBot.Add(544459);
             GreyBot.Add(544458);
             GlassedSun.Add(544457);
-            //event:/Hawthorne/Noise/ApparatusHit
-            //event:/Hawthorne/Noise/ApparatusDie
-            //assets/bot/[Color]Bot_Enemy.prefab
-            //assets/bot/[Color]Bot_Gibs.prefab
-            //assets/sun/Sun_Enemy.prefab
-            //assets/sun/Sun_Gibs.prefab
         }
         public static void AddEncounters()
         {
@@ -90,7 +84,7 @@ namespace Hawthorne
             CameraSong.Add(35788);
             CameraSong.Modify();
             BirdGroup.Add(2467405);
-            SatyrSong.Modify();//get a new song
+            SatyrSong.Modify();//EMBERCORAL IS WORKING ON IT
             UnMungGroup.Add(6559);
             SomethingSong.Add(2467406);
             FreudGroup.Modify();
@@ -140,8 +134,12 @@ namespace Hawthorne
             SpitatoSong.Add(2467437);
             BoatSong.Add(2467438);//ZLD1 IS WORKING ON IT
             StoplightSong.Add(2467439);
-            //event:/Hawthorne/ApparatusSong
-            //event:/Hawthorne/SunSong
+            ApparatusSong.RedAdd(2467440);
+            ApparatusSong.YellowAdd(2467441);
+            ApparatusSong.BlueAdd(2467442);
+            ApparatusSong.PurpleAdd(2467443);
+            ApparatusSong.GreyAdd(2467444);
+            SunSong.Add(2467445);
             //little angel song 
             //merced song MILLIEAMP IS WORKING ON IT
             //glass figurine song
@@ -413,7 +411,23 @@ namespace Hawthorne
             SaltMod.SpitatoMed();
             SaltMod.BoatEZ();
             SaltMod.BoatMed();
+            SaltMod.StoplightMed();
             SaltMod.StoplightHard();
+            SaltTwo.RedBotEZ();
+            SaltTwo.RedBotMed();
+            SaltTwo.RedBotHard();
+            SaltTwo.RedBotGard();
+            SaltTwo.YellowBotOrph();
+            SaltTwo.YellowBotHard();
+            SaltTwo.YellowBotEZ();
+            SaltTwo.YellowBotGard();
+            SaltTwo.BlueBotEZ();
+            SaltTwo.BlueBotMed();
+            SaltTwo.PurpleBotEZ();
+            SaltTwo.PurpleBotMed();
+            SaltTwo.GreyBotMed();
+            SaltTwo.GreyBotHard();
+            SaltTwo.GlassSunHard();
         }
     }
 }

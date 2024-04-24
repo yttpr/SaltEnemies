@@ -6595,5 +6595,454 @@ namespace Hawthorne
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
         }
+        public static void StoplightMed()
+        {
+            string bundle = "lalalalalalaFUCK";
+            string main = "Stoplight_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (Nosing)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                        {
+                            Noses.GetRandom(),
+                            main,
+                            Either(RandomEncounters.Garden.RandomChunk(), Either(Either(RandomEncounters.Garden.RandomWhore(), RandomSupport(2, false, false)), Noses.GetRandom()))
+                        }
+                    });
+                }
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
     }
+    public static class SaltTwo
+    {
+        public static void TemplateRandom()
+        {
+            string bundle = "H_Zone03_SkinningHomunculus_Medium_EnemyBundle";
+            string main = "SkinningHomunculus_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void TemplateDouble()
+        {
+            string bundle = "Monck_Primary_Easy";
+            string main = "Monck_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<SpecificEnemyGroup> list = new List<SpecificEnemyGroup>();
+            if (EnemyExist("LostSheep_EN") && Half)
+            {
+                list.Add(new SpecificEnemyGroup
+                {
+                    _enemyGroup = new SpecificEnemyInfo[]
+                    {
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = "LostSheep_EN",
+                            enemySlot = 2,
+                        },
+                        new SpecificEnemyInfo
+                        {
+                            enemyName = main,
+                            enemySlot = 0
+                        },
+                    }
+                });
+            }
+
+            if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> lost = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup group in list)
+                {
+                    lost.Add(group);
+                }
+                lost.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = lost.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+            else if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> lost = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup group in list.ToRandomGroup())
+                {
+                    lost.Add(group);
+                }
+                lost.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = lost.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+        }
+
+        public static void RedBotEZ()
+        {
+            string bundle = "virile_easy";
+            string main = "RedBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void RedBotMed()
+        {
+            string bundle = "virile_med";
+            string main = "RedBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void RedBotHard()
+        {
+            string bundle = "virile_waawaa";
+            string main = "RedBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void RedBotGard()
+        {
+            string bundle = "virile_garden";
+            string main = "RedBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YellowBotOrph()
+        {
+            string bundle = "projecting_med";
+            string main = "YellowBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YellowBotHard()
+        {
+            string bundle = "projecting_hard";
+            string main = "YellowBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YellowBotEZ()
+        {
+            string bundle = "project_ez_garden";
+            string main = "YellowBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void YellowBotGard()
+        {
+            string bundle = "project_med_garden";
+            string main = "YellowBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void BlueBotEZ()
+        {
+            string bundle = "mirror_ez_garden";
+            string main = "BlueBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void BlueBotMed()
+        {
+            string bundle = "mirror_med_garden";
+            string main = "BlueBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void PurpleBotEZ()
+        {
+            string bundle = "magic_ez_garden";
+            string main = "PurpleBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void PurpleBotMed()
+        {
+            string bundle = "magic_med_garden";
+            string main = "PurpleBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void GreyBotMed()
+        {
+            string bundle = "ANATOMYOFAGAMER_featuringpitbull";
+            string main = "GreyBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void GreyBotHard()
+        {
+            string bundle = "screamsatyouscreamsat_you";
+            string main = "GreyBot_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void GlassSunHard()
+        {
+            string bundle = "SUNSHINE";
+            string main = "GlassedSun_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+    }
+
 }

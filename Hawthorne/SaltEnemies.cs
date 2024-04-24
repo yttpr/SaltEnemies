@@ -1126,17 +1126,29 @@ namespace Hawthorne
             //addSepulchrePool("FrowningChancellor_EN");
             addSepulchrePool("Jansuli_EN");
             addSepulchrePool("Frostbite_EN");
+            addSepulchrePool("BackupDancer_EN");
+            addSepulchrePool("Metronome_EN");
+            addSepulchrePool("StageLight_EN");
+            addSepulchrePool("Loudhailer_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
             //addFountainPool("FrowningChancellor_EN");
             addFountainPool("Jansuli_EN");
             addFountainPool("Frostbite_EN");
+            addFountainPool("BackupDancer_EN");
+            addFountainPool("Metronome_EN");
+            addFountainPool("StageLight_EN");
+            addFountainPool("Loudhailer_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
             addBronzoPool("FrowningChancellor_EN");
             addBronzoPool("Jansuli_EN");
             addBronzoPool("Frostbite_EN");
             addBronzoPool("Giles_EN");
+            addBronzoPool("BackupDancer_EN");
+            addBronzoPool("Metronome_EN");
+            addBronzoPool("StageLight_EN");
+            addBronzoPool("Loudhailer_EN");
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1153,6 +1165,11 @@ namespace Hawthorne
             Family BBQ
             worm squared
             I'm running out of \"funny\" names for these
+
+            dancer (ez, med, hard)
+            cha cha real smooth
+            im so full of tumors yum
+            in the orpheum, straight up jorkin it
             */
 
             //furyball
@@ -1835,6 +1852,7 @@ namespace Hawthorne
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
                 else if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Jansuli_EN")) list.Add("Jansuli_EN");
                 else if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
+                else if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("BackupDancer_EN")) list.Add("BackupDancer_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
         }
@@ -2018,17 +2036,16 @@ namespace Hawthorne
                 list.Add("SingingStone_EN");
                 if (!red) list.Add("SilverSuckle_EN");
                 if (Gizos) list.Add("NakedGizo_EN");
-                if (Supporting) { list.Add("LostSheep_EN"); if (UnityEngine.Random.Range(0, 100) < 33) list.Add("Enigma_EN"); };
+                if (Supporting) { list.Add("LostSheep_EN"); if (UnityEngine.Random.Range(0, 100) < 33) for (int i = 0; i < 3; i++) list.Add("Enigma_EN"); };
                 if (EnemyExist("Pacemaker_EN")) list.Add("Pacemaker_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Skyloft_EN")) list.Add("Skyloft_EN");
                 if (!mustSmall && EnemyExist("Seraphim_EN") && UnityEngine.Random.Range(0, 100) < 50) list.Add("Seraphim_EN");
-                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("WindSong_EN")) list.Add("WindSong_EN");
-                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("LivingSolvent_EN")) list.Add("LivingSolvent_EN");
-                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Sigil_EN")) list.Add("Sigil_EN");
+                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("WindSong_EN")) for (int i = 0; i < 2; i++) list.Add("WindSong_EN");
+                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("LivingSolvent_EN")) for (int i = 0; i < 2; i++) list.Add("LivingSolvent_EN");
+                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Sigil_EN")) for (int i = 0; i < 3; i++) list.Add("Sigil_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Grandfather_EN")) list.Add("Grandfather_EN");
                 if (UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("EyePalm_EN")) list.Add("EyePalm_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Merced_EN")) list.Add("Merced_EN");
-                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Butterfly_EN")) list.Add("Butterfly_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Shua_EN")) list.Add("Shua_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Nameless_EN")) list.Add("Nameless_EN");
                 if (!red && !mustSmall && EnemyExist("Romantic_EN")) list.Add("Romantic_EN");
@@ -2039,6 +2056,7 @@ namespace Hawthorne
                 if (!red && !killable && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("Children6_EN")) list.Add("Children6_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!mustSmall && !killable && UnityEngine.Random.Range(0, 100) < 75 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
+                if (!mustSmall && EnemyExist("BackupDancer_EN")) for (int i = 0; i < 3; i++) list.Add("BackupDancer_EN");
             }
             if (zone == 2)
             {
@@ -2049,13 +2067,13 @@ namespace Hawthorne
                 if (EnemyExist("Unterling_EN")) list.Add("Unterling_EN");
                 if (!red && !killable && EnemyExist("Children6_EN")) list.Add("Children6_EN");
                 if (!mustSmall && EnemyExist("ScreamingHomunculus_EN")) list.Add("ScreamingHomunculus_EN");
-                if (!killable && !red && EnemyExist("LittleAngel_EN")) list.Add("LittleAngel_EN");
+                if (!killable && !red && EnemyExist("LittleAngel_EN")) for (int i = 0; i < 2; i++) list.Add("LittleAngel_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 5 && EnemyExist("StarGazer_EN")) list.Add("StarGazer_EN");
-                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 65 && EnemyExist("WindSong_EN")) list.Add("WindSong_EN");
-                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 45 && EnemyExist("LivingSolvent_EN")) list.Add("LivingSolvent_EN");
+                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 65 && EnemyExist("WindSong_EN")) for (int i = 0; i < 2; i++) list.Add("WindSong_EN");
+                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 45 && EnemyExist("LivingSolvent_EN")) for (int i = 0; i < 2; i++) list.Add("LivingSolvent_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 65 && EnemyExist("Sigil_EN")) list.Add("Sigil_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Grandfather_EN")) list.Add("Grandfather_EN");
-                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("MiniReaper_EN")) list.Add("MiniReaper_EN");
+                if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("MiniReaper_EN")) for (int i = 0; i < 2; i++) list.Add("MiniReaper_EN");
                 if (EnemyExist("EyePalm_EN")) list.Add("EyePalm_EN");
                 if (!red && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Merced_EN")) list.Add("Merced_EN");
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Butterfly_EN")) list.Add("Butterfly_EN");
@@ -2063,9 +2081,9 @@ namespace Hawthorne
                 if (!red && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Nameless_EN")) list.Add("Nameless_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 20 && EnemyExist("GlassFigurine_EN")) list.Add("GlassFigurine_EN");
                 if (EnemyExist("InfernalDrummer_EN")) list.Add("InfernalDrummer_EN");
-                if (!red && EnemyExist("EggKeeper_EN")) list.Add("EggKeeper_EN");
+                if (!red && EnemyExist("EggKeeper_EN")) for (int i = 0; i < 2; i++) list.Add("EggKeeper_EN");
                 if (!red && EnemyExist("Damocles_EN")) list.Add("Damocles_EN");
-                if (!red && EnemyExist("Romantic_EN")) list.Add("Romantic_EN");
+                if (!red && EnemyExist("Romantic_EN")) for (int i = 0; i < 2; i++) list.Add("Romantic_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 65 && EnemyExist("Evangelists_EN")) list.Add("Evangelists_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 75 && EnemyExist("Windle3_EN")) list.Add("Windle3_EN");
                 if (!red && EnemyExist("BlackStar_EN")) list.Add("BlackStar_EN");
