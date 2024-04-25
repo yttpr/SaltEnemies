@@ -324,6 +324,9 @@ namespace Hawthorne
             ModTwo.NosestoneTemplateHard("ScatterbrainedNosestoneEncountersHard", "ScatterbrainedNosestone_EN");
             ModTwo.NosestoneTemplateHard("MesmerizingNosestoneEncountersHard", "MesmerizingNosestone_EN");
             ModTwo.NosestoneTemplateHard("UninspiredNosestoneEncountersHard", "UninspiredNosestone_EN");
+            ModTwo.DancerEZ();
+            ModTwo.DancerMed();
+            ModTwo.DancerHard();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

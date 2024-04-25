@@ -37654,57 +37654,60 @@ namespace Hawthorne
             if (!MultiENExist(main, sub)) return;
             if (!BundleExist(bundle)) return;
             List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
-            list.Add(new RandomEnemyGroup
+            for (int i = 0; i < 3; i++)
             {
-                _enemyNames = new string[]
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
                     {
                         sub,
                         main,
                         RainBaseColor(false, true, true, main),
                         RandomOrph,
                     }
-            });
-            list.Add(new RandomEnemyGroup
-            {
-                _enemyNames = new string[]
-                    {
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
                         RandomSupport(1, false, false),
                         main,
                         sub,
                         RandomRedColor(false, false, true, true, main),
-                    }
-            });
-            list.Add(new RandomEnemyGroup
-            {
-                _enemyNames = new string[]
-                    {
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
                         RandomSupport(1, false, false),
                         main,
                         RainBaseColor(false, false, false, main),
                         sub,
                         RandomOrph,
-                    }
-            });
-            list.Add(new RandomEnemyGroup
-            {
-                _enemyNames = new string[]
-                    {
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
                         RandomOrph,
                         main,
                         RandomOrph,
                         RainBaseColor(false, true, true, main),
-                    }
-            });
-            list.Add(new RandomEnemyGroup
-            {
-                _enemyNames = new string[]
-                    {
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
                         RandomOrph,
                         main,
                         RandomOrph,
                         RainBaseColor(false, true, true, main),
-                    }
-            });
+                        }
+                });
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
