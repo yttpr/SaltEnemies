@@ -7050,7 +7050,7 @@ namespace Hawthorne
         {
             exitAmount = 0;
             if (!stats.InCombat) return false;
-            for (int i = caster.GetStoredValue(value); i > 0; i -= 6)
+            for (int i = (Math.Max(caster.GetStoredValue(value), 1)); i > 0; i -= 6)
             {
                 if (i >= 6 && Check.EnemyExist("Children6_EN")) enemy = LoadedAssetsHandler.GetEnemy("Children6_EN");
                 else if (Check.EnemyExist("Children" + i.ToString() + "_EN")) enemy = LoadedAssetsHandler.GetEnemy("Children" + i.ToString() + "_EN");
