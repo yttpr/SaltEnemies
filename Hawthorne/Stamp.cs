@@ -484,7 +484,7 @@ namespace Hawthorne
             new Stamp("Satyr", "Satyr_EN", "SatyrPage.png", "Group_2a", "SatyrLock.png", "SatyrMark.png");
             new Stamp("Something", "Something_EN", "SomethingPage.png", "Group_2a", "SomethingLock.png", "SomethingMark.png");
             new Stamp("Derogatory", "Derogatory_EN", "SomethingPage.png", "Group_2a", "DerogatoryLock.png", "DerogatoryMark.png");
-            new Stamp("Denial", "Denial_EN", "SomethingPagepng", "Group_2a", "DenialLock.png", "DenialMark.png");
+            new Stamp("Denial", "Denial_EN", "SomethingPage.png", "Group_2a", "DenialLock.png", "DenialMark.png");
             new Stamp("Unmung", "TeachaMantoFish_EN", "UnmungPage.png", "Group_2a", "UnmungLock.png", "UnmungMark.png");
             new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "", "");
 
