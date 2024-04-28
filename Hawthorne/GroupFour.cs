@@ -107,7 +107,7 @@ namespace Hawthorne
             SigilGroup.Add(2467413);
             TortoiseSong.Add(2467414);
             ClockTowerSong.Add(2467415);
-            TripodGroup.Add(2467416);//get a new song
+            TripodGroup.Add(2467416);
             RabiesGroup.Add(2467417);
             LonelyFlummox.Add();
             RedoManiskins.Add();

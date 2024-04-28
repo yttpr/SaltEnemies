@@ -1118,7 +1118,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity / 2,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/TripodTheme",
+                musicEvent = "event:/Hawthorne/NewTripodTheme",
                 roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
                 difficulty = EncounterDifficulty.Hard
             };
@@ -2088,7 +2088,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = rarity,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/TripodTheme",
+                musicEvent = "event:/Hawthorne/NewTripodTheme",
                 roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
                 difficulty = EncounterDifficulty.Medium
             };
