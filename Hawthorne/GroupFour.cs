@@ -125,7 +125,7 @@ namespace Hawthorne
             ShuaGroup.Add(2467429);//ZLD1 IS WORKING ON IT
             BlackStarGroup.Add(2467430);
             IndicatorGroup.Add(2467431);
-            MawGroup.Add(2467432);//get a new song
+            MawGroup.Add(2467432);
             Iconoclast2Group.Add();
             ClioneSong.Add(2467433);
             YNLSong.Add(2467434);
@@ -140,8 +140,8 @@ namespace Hawthorne
             ApparatusSong.PurpleAdd(2467443);
             ApparatusSong.GreyAdd(2467444);
             SunSong.Add(2467445);
+            MercedSong.Add(2467446);
             //little angel song 
-            //merced song MILLIEAMP IS WORKING ON IT
             //glass figurine song
             //windlesong ZLD1 IS WORKING ON IT
         }
@@ -431,6 +431,7 @@ namespace Hawthorne
             SaltTwo.GreyBotMed();
             SaltTwo.GreyBotHard();
             SaltTwo.GlassSunHard();
+            SaltTwo.MercedGard();
         }
     }
 }

@@ -171,6 +171,7 @@ namespace Hawthorne
             Hawthorne.FieldEffectFixHook.Setup();
             try { ShuaHandler.Setup(); } catch { Debug.LogError("SHUA HANDLER EPIC FAILURE"); }
             try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
+            try { HooksGeneral.Setup(); } catch { Debug.LogError("failed hooks generic"); }
 
             StampSaver.LoadAllValues();
             StampHandler.DefaultSetup();
@@ -2956,6 +2957,7 @@ namespace Hawthorne
             U1_4_0();
             U1_4_3("Update_1_4_3.txt");
             U1_4_3_1();
+            U1_4_3_2();
         }
         public static void U1_3_27()
         {
@@ -3126,6 +3128,18 @@ namespace Hawthorne
             {
                 File.WriteAllText(SavePath + "Update_1_4_3_1.txt", "Updatd pages !");
                 PageCollector.UpdatePage("SkyloftPage.png");
+            }
+        }
+        public static void U1_4_3_2()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_3_2.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_3_2.txt", "Updatd pages !");
+                PageCollector.UpdatePage("CoffinPage.png");
+                PageCollector.UpdatePage("MawPage.png");
+                PageCollector.UpdatePage("MercedPage.png");
+                PageCollector.UpdatePage("SatyrPage.png");
+                PageCollector.UpdatePage("StoplightPage.png");
             }
         }
     }

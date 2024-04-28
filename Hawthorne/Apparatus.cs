@@ -201,7 +201,6 @@ namespace Hawthorne
                         Pigments.Red,
                         Pigments.Yellow,
                         Pigments.Purple,
-                        Pigments.Gray,
             };
             enemy.enterEffects = new Effect[]
             {

@@ -186,6 +186,14 @@ namespace Hawthorne
                 }
                 Duplicates++;
             }
+            try
+            {
+                if (StampSaver.Check(StampID) >= 1) PageCollector.AddPage(PageName);
+            }
+            catch
+            {
+                Debug.LogWarning("failed page check");
+            }
         }
 
         public Texture2D Hidden => ResourceLoader.LoadTexture(LockedImage);
@@ -281,10 +289,11 @@ namespace Hawthorne
         public string Name;
         public string[] StampIDs;
 
-        public static string Introduction;
-        public static string Compilation;
+        public string Introduction;
+        public string Compilation;
+        public UnlockItem Item;
         
-        public StampGroup(string name, string[] ids, string intro, string comp)
+        public StampGroup(string name, string[] ids, string intro, string comp, UnlockItem item = null)
         {
             Name = name;
             StampIDs = ids;
@@ -292,6 +301,10 @@ namespace Hawthorne
             Compilation = comp;
             if (Groups == null) Groups = new Dictionary<string, StampGroup>();
             Groups.Add(Name, this);
+            Item = item;
+            Item?.Prepare();
+            IntroCheck();
+            CompCheck();
         }
         public bool IntroCheck()
         {
@@ -312,6 +325,7 @@ namespace Hawthorne
                 if (id != "" && Stamp.Stamps != null && Stamp.Stamps.TryGetValue(id, out Stamp stamp) && stamp.GetValue() < 4) return false;
             }
             PageCollector.AddPage(Compilation);
+            Item?.GetItem();
             return true;
         }
         public Texture2D[] GetTextures()
@@ -566,12 +580,12 @@ namespace Hawthorne
             new Stamp("Train", "Stoplight_EN", "StoplightPage.png", "Group_5b", "TrainLock.png", "TrainMark.png");
             new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "", "");
 
-            new Stamp("RedBot", "RedBot_EN", "", "Group_5c", "RedBotLock.png", "RedBotMark.png");
-            new Stamp("BlueBot", "BlueBot_EN", "", "Group_5c", "BlueBotLock.png", "BlueBotMark.png");
-            new Stamp("YellowBot", "YellowBot_EN", "", "Group_5c", "YellowBotLock.png", "YellowBotMark.png");
-            new Stamp("PurpleBot", "PurpleBot_EN", "", "Group_5c", "PurpleBotLock.png", "PurpleBotMark.png");
-            new Stamp("GreyBot", "GreyBot_EN", "", "Group_5c", "GreyBotLock.png", "GreyBotMark.png");
-            new Stamp("Sun", "GlassedSun_EN", "", "Group_5c", "SunLock.png", "SunMark.png");
+            new Stamp("RedBot", "RedBot_EN", "RedBotPage.png", "Group_5c", "RedBotLock.png", "RedBotMark.png");
+            new Stamp("BlueBot", "BlueBot_EN", "BlueBotPage.png", "Group_5c", "BlueBotLock.png", "BlueBotMark.png");
+            new Stamp("YellowBot", "YellowBot_EN", "YellowBotPage.png", "Group_5c", "YellowBotLock.png", "YellowBotMark.png");
+            new Stamp("PurpleBot", "PurpleBot_EN", "PurpleBotPage.png", "Group_5c", "PurpleBotLock.png", "PurpleBotMark.png");
+            new Stamp("GreyBot", "GreyBot_EN", "GreyBotPage.png", "Group_5c", "GreyBotLock.png", "GreyBotMark.png");
+            new Stamp("Sun", "GlassedSun_EN", "SunPage.png", "Group_5c", "SunLock.png", "SunMark.png");
             new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "");
 
         }

@@ -1052,7 +1052,7 @@ namespace Hawthorne
                 rarity = 4,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/ShuaTheme",
-                roarEvent = "event:/Hawthorne/Roar/ShuaRoar",
+                roarEvent = "event:/Hawthorne/Attack3/Censored",
                 difficulty = EncounterDifficulty.Easy
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();

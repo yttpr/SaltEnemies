@@ -43,7 +43,7 @@ namespace Hawthorne
             }
             enemyEncounter.variations = new FieldEnemy[11][];
             enemyEncounter.signType = (SignType)4578;
-            enemyEncounter.musicEvent = "event:/Hawthorne/SatyrTheme";
+            enemyEncounter.musicEvent = "event:/Hawthorne/NewerSatyrTheme";
             enemyEncounter.roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_Sepulchre_Hard_EnemyBundle")._roarReference.roarEvent;
             enemyEncounter.variations[0] = new FieldEnemy[3];
             enemyEncounter.variations[0][0] = new FieldEnemy()

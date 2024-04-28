@@ -497,6 +497,7 @@
 	  <None Remove="Pages\ArcelesPage.png" />
 	  <None Remove="Pages\BeakPage.png" />
 	  <None Remove="Pages\BlackStarPage.png" />
+	  <None Remove="Pages\BlueBotPage.png" />
 	  <None Remove="Pages\BlueFlowerPage.png" />
 	  <None Remove="Pages\ButterflyPage.png" />
 	  <None Remove="Pages\CameraPage.png" />
@@ -517,6 +518,7 @@
 	  <None Remove="Pages\FirebirdPage.png" />
 	  <None Remove="Pages\GlassPage.png" />
 	  <None Remove="Pages\GospelPage.png" />
+	  <None Remove="Pages\GreyBotPage.png" />
 	  <None Remove="Pages\GreyFlowerPage.png" />
 	  <None Remove="Pages\HuntingPage.png" />
 	  <None Remove="Pages\IndicatorPage.png" />
@@ -528,9 +530,11 @@
 	  <None Remove="Pages\NamelessPage.png" />
 	  <None Remove="Pages\PinanoPage.png" />
 	  <None Remove="Pages\PostmodernPage.png" />
+	  <None Remove="Pages\PurpleBotPage.png" />
 	  <None Remove="Pages\PurpleFlowerPage.png" />
 	  <None Remove="Pages\RabiesPage.png" />
 	  <None Remove="Pages\ReaperPage.png" />
+	  <None Remove="Pages\RedBotPage.png" />
 	  <None Remove="Pages\RedFlowerPage.png" />
 	  <None Remove="Pages\RusticPage.png" />
 	  <None Remove="Pages\SatyrPage.png" />
@@ -543,6 +547,7 @@
 	  <None Remove="Pages\SomethingPage.png" />
 	  <None Remove="Pages\StarGazerPage.png" />
 	  <None Remove="Pages\StoplightPage.png" />
+	  <None Remove="Pages\SunPage.png" />
 	  <None Remove="Pages\SuperbossPage.png" />
 	  <None Remove="Pages\TankPage.png" />
 	  <None Remove="Pages\TheDeepPage.png" />
@@ -552,6 +557,7 @@
 	  <None Remove="Pages\WarbirdPage.png" />
 	  <None Remove="Pages\WindlePage.png" />
 	  <None Remove="Pages\WindSongPage.png" />
+	  <None Remove="Pages\YellowBotPage.png" />
 	  <None Remove="Pages\YellowFlowerPage.png" />
 	  <None Remove="Pages\YNLPage.png" />
 	  <None Remove="PaleStatus.png" />
@@ -1113,6 +1119,7 @@
 	  <EmbeddedResource Include="Pages\ArcelesPage.png" />
 	  <EmbeddedResource Include="Pages\BeakPage.png" />
 	  <EmbeddedResource Include="Pages\BlackStarPage.png" />
+	  <EmbeddedResource Include="Pages\BlueBotPage.png" />
 	  <EmbeddedResource Include="Pages\BlueFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\ButterflyPage.png" />
 	  <EmbeddedResource Include="Pages\CameraPage.png" />
@@ -1133,6 +1140,7 @@
 	  <EmbeddedResource Include="Pages\FirebirdPage.png" />
 	  <EmbeddedResource Include="Pages\GlassPage.png" />
 	  <EmbeddedResource Include="Pages\GospelPage.png" />
+	  <EmbeddedResource Include="Pages\GreyBotPage.png" />
 	  <EmbeddedResource Include="Pages\GreyFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\HuntingPage.png" />
 	  <EmbeddedResource Include="Pages\IndicatorPage.png" />
@@ -1144,9 +1152,11 @@
 	  <EmbeddedResource Include="Pages\NamelessPage.png" />
 	  <EmbeddedResource Include="Pages\PinanoPage.png" />
 	  <EmbeddedResource Include="Pages\PostmodernPage.png" />
+	  <EmbeddedResource Include="Pages\PurpleBotPage.png" />
 	  <EmbeddedResource Include="Pages\PurpleFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\RabiesPage.png" />
 	  <EmbeddedResource Include="Pages\ReaperPage.png" />
+	  <EmbeddedResource Include="Pages\RedBotPage.png" />
 	  <EmbeddedResource Include="Pages\RedFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\RusticPage.png" />
 	  <EmbeddedResource Include="Pages\SatyrPage.png" />
@@ -1159,6 +1169,7 @@
 	  <EmbeddedResource Include="Pages\SomethingPage.png" />
 	  <EmbeddedResource Include="Pages\StarGazerPage.png" />
 	  <EmbeddedResource Include="Pages\StoplightPage.png" />
+	  <EmbeddedResource Include="Pages\SunPage.png" />
 	  <EmbeddedResource Include="Pages\SuperbossPage.png" />
 	  <EmbeddedResource Include="Pages\TankPage.png" />
 	  <EmbeddedResource Include="Pages\TheDeepPage.png" />
@@ -1168,6 +1179,7 @@
 	  <EmbeddedResource Include="Pages\WarbirdPage.png" />
 	  <EmbeddedResource Include="Pages\WindlePage.png" />
 	  <EmbeddedResource Include="Pages\WindSongPage.png" />
+	  <EmbeddedResource Include="Pages\YellowBotPage.png" />
 	  <EmbeddedResource Include="Pages\YellowFlowerPage.png" />
 	  <EmbeddedResource Include="Pages\YNLPage.png" />
 	  <EmbeddedResource Include="PaleStatus.png" />
