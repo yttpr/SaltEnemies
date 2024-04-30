@@ -115,6 +115,15 @@ namespace Hawthorne
             Hawthorne.ItsWings.Add();
             Hawthorne.Chocolate.Add();
             Hawthorne.LootFour.Add();
+            try
+            {
+                StampSaver.LoadAllValues();
+                StampHandler.DefaultSetup();
+            }
+            catch
+            {
+                Debug.LogError("stamping faile");
+            }
             Hawthorne.stupidFuckingStatusEffects.Add();
             Hawthorne.OtherStatusEffects.Add();
             Hawthorne.MyStatusEffects.Add();
@@ -173,8 +182,6 @@ namespace Hawthorne
             try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
             try { HooksGeneral.Setup(); } catch { Debug.LogError("failed hooks generic"); }
 
-            StampSaver.LoadAllValues();
-            StampHandler.DefaultSetup();
 
 
             Logger.LogInfo("Salt.Hawthorne loaded successfully!");

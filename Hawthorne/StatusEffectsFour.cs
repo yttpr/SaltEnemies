@@ -668,11 +668,11 @@ namespace Hawthorne
         {
             if (sender is IUnit unit)
             {
+                this.ReduceDuration(sender as IStatusEffector);
                 SwapToOneSideEffect goLeft = ScriptableObject.CreateInstance<SwapToOneSideEffect>();
                 goLeft._swapRight = false;
                 Effect left = new Effect(goLeft, 1, null, Slots.Self);
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[1] { left }), unit));
-                this.ReduceDuration(sender as IStatusEffector);
             }
         }
 
