@@ -588,6 +588,11 @@ namespace Hawthorne
             new Stamp("Sun", "GlassedSun_EN", "SunPage.png", "Group_5c", "SunLock.png", "SunMark.png");
             new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "");
 
+            new Stamp("Crystal", "Crystal_EN", "", "Group_5d", "CrystalLock.png", "CrystalMark.png");
+            new Stamp("Dragon", "TheDragon_EN", "", "Group_5d", "DragonLock.png", "DragonMark.png");
+            new Stamp("Vase", "OdetoHumanity_EN", "", "Group_5d", "VaseLock.png", "VaseMark.png");
+            new StampGroup("Group_5d", new string[] { "Crystal", "Dragon", "Vase" }, "", "");
+
         }
 
         public static void WorldAwake(Action<OverworldManagerBG> orig, OverworldManagerBG self)
