@@ -1032,7 +1032,7 @@ namespace Hawthorne
             //Whimsical
             addSepulchrePool("OsseousClad_EN");
             addSepulchrePool("Lymphropod_EN");
-            addSepulchrePool("ColossalSheo_EN");
+            //addSepulchrePool("ColossalSheo_EN");
             addSepulchrePool("RougeWailingSplugling_EN");
             addSepulchrePool("RougeBellowingSplugling_EN");
             addSepulchrePool("RougeFesteringSplugling_EN");
