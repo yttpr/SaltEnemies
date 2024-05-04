@@ -5,8 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using THE_DEAD;
 using UnityEngine;
 using static Hawthorne.CustomIntentIconSystem;
 using static UnityEngine.GraphicsBuffer;
@@ -878,6 +880,264 @@ namespace Hawthorne
                 return false;
             }
             return true; 
+        }
+    }
+
+    public class PowerByDamageCondition : EffectorConditionSO
+    {
+        public static Sprite sprite;
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (effector is IUnit unit && args is IntegerReference reference)
+            {
+                CombatStats stats = CombatManager.Instance._stats;
+                if (sprite == null) sprite = ResourceLoader.LoadSprite("SweetTooth.png");
+                CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(unit.ID, unit.IsUnitCharacter, "Sweet Tooth", sprite));
+                StatusEffectInfoSO effectInfo;
+                stats.statusEffectDataBase.TryGetValue((StatusEffectType)456789, out effectInfo);
+
+                int amount = reference.value;
+                IStatusEffect powerStatusEffect = new Power_StatusEffect(amount);
+
+
+                IStatusEffector Seffector = unit as IStatusEffector;
+                bool hasItAlready = false;
+                int thisIndex = 999;
+                for (int i = 0; i < Seffector.StatusEffects.Count; i++)
+                {
+                    if (Seffector.StatusEffects[i].EffectType == powerStatusEffect.EffectType)
+                    {
+                        thisIndex = i;
+                        hasItAlready = true;
+                    }
+                }
+                if (hasItAlready == true && powerStatusEffect.GetType() != Seffector.StatusEffects[thisIndex].GetType())
+                {
+                    ConstructorInfo[] constructors = Seffector.StatusEffects[thisIndex].GetType().GetConstructors();
+                    foreach (ConstructorInfo constructor in constructors)
+                    {
+                        if (constructor.GetParameters().Length == 2)
+                        {
+                            powerStatusEffect = (IStatusEffect)Activator.CreateInstance(Seffector.StatusEffects[thisIndex].GetType(), amount, 0);
+                        }
+                    }
+                }
+
+                powerStatusEffect.SetEffectInformation(effectInfo);
+                try
+                {
+                    unit.ApplyStatusEffect(powerStatusEffect, amount);
+                }
+                catch (Exception ex)
+                {
+                    CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(unit.ID, unit.IsUnitCharacter, "so uh Power was attempted to be applied to this enemy (crystaline corpse eater hi) but it failed and wouldve softlocked normally. so erm. just pretend this didnt happen!"));
+                    Debug.LogError(ex.ToString());
+                    Debug.LogError(ex.Message + ex.StackTrace);
+                }
+            }
+            return false;
+        }
+    }
+    public class DamageScarIfMissEffect : ApplyScarsEffect
+    {
+        [SerializeField]
+        public DeathType _deathType = DeathType.Basic;
+
+        [SerializeField]
+        public bool _usePreviousExitValue;
+
+        [SerializeField]
+        public bool _ignoreShield;
+
+        [SerializeField]
+        public bool _indirect;
+
+        [SerializeField]
+        public bool _returnKillAsSuccess;
+
+        public int IntendedTargets = 2;
+
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            if (_usePreviousExitValue)
+            {
+                entryVariable *= base.PreviousExitValue;
+            }
+
+            for (int i = targets.Length; i < IntendedTargets; i++)
+            {
+                base.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int exi);
+            }
+
+            exitAmount = 0;
+            bool flag = false;
+            foreach (TargetSlotInfo targetSlotInfo in targets)
+            {
+                if (targetSlotInfo.HasUnit)
+                {
+                    int targetSlotOffset = (areTargetSlots ? (targetSlotInfo.SlotID - targetSlotInfo.Unit.SlotID) : (-1));
+                    int amount = entryVariable;
+                    DamageInfo damageInfo;
+                    if (_indirect)
+                    {
+                        damageInfo = targetSlotInfo.Unit.Damage(amount, null, _deathType, targetSlotOffset, addHealthMana: false, directDamage: false, ignoresShield: true);
+                    }
+                    else
+                    {
+                        amount = caster.WillApplyDamage(amount, targetSlotInfo.Unit);
+                        damageInfo = targetSlotInfo.Unit.Damage(amount, caster, _deathType, targetSlotOffset, addHealthMana: true, directDamage: true, _ignoreShield);
+                    }
+
+                    flag |= damageInfo.beenKilled;
+                    exitAmount += damageInfo.damageAmount;
+                }
+                else
+                {
+                    base.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, 1, out int exi);
+                }
+            }
+
+            if (!_indirect && exitAmount > 0)
+            {
+                caster.DidApplyDamage(exitAmount);
+            }
+
+            if (!_returnKillAsSuccess)
+            {
+                return exitAmount > 0;
+            }
+
+            return flag;
+        }
+        public static DamageScarIfMissEffect Create(int targets)
+        {
+            DamageScarIfMissEffect ret = ScriptableObject.CreateInstance<DamageScarIfMissEffect>();
+            ret.IntendedTargets = targets;
+            return ret;
+        }
+    }
+    public class SpawnEnemyWithPowerEffect : SpawnEnemyInSlotFromEntryStringNameEffect
+    {
+        public int Power;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (!Check.EnemyExist(en)) return false;
+            EnemySO enemy = LoadedAssetsHandler.GetEnemy(en);
+            for (int num = targets.Length - 1; num >= 0; num--)
+            {
+                int preferredSlot = entryVariable + targets[num].SlotID;
+                CombatManager.Instance.AddSubAction(new CrystalDecayHandler.SpawnEnemyWithPowerAction(enemy, preferredSlot, givesExperience, trySpawnAnywhereIfFail, _spawnType, Power));
+            }
+
+            exitAmount = targets.Length;
+            return true;
+        }
+        public static SpawnEnemyWithPowerEffect Create(string enemy, int power, bool anyways = false)
+        {
+            SpawnEnemyWithPowerEffect ret = ScriptableObject.CreateInstance<SpawnEnemyWithPowerEffect>();
+            ret.en = enemy;
+            ret.Power = power;
+            ret.trySpawnAnywhereIfFail = anyways;
+            return ret;
+        }
+    }
+    public static class CrystalDecayHandler
+    {
+        public static bool AddNewEnemyWithPower(this CombatStats self, EnemySO enemy, int slot, bool givesExperience, SpawnType spawnType, int power)
+        {
+            int firstEmptyEnemyFieldID = self.GetFirstEmptyEnemyFieldID();
+            if (firstEmptyEnemyFieldID == -1)
+            {
+                return false;
+            }
+
+            int count = self.Enemies.Count;
+            EnemyCombat enemyCombat = new EnemyCombat(count, firstEmptyEnemyFieldID, enemy, givesExperience);
+            self.Enemies.Add(count, enemyCombat);
+            self.AddEnemyToField(count, firstEmptyEnemyFieldID);
+            self.combatSlots.AddEnemyToSlot(enemyCombat, slot);
+            self.timeline.AddEnemyToTimeline(enemyCombat);
+            CombatManager.Instance.AddUIAction(new EnemySpawnUIAction(enemyCombat.ID, spawnType));
+            enemyCombat.ConnectPassives();
+            enemyCombat.InitializationEnd();
+            CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), power, null, Slots.Self) }), enemyCombat));
+            return true;
+        }
+        public class SpawnEnemyWithPowerAction : CombatAction
+        {
+            public int _preferredSlot;
+
+            public EnemySO _enemy;
+
+            public bool _givesExperience;
+
+            public bool _trySpawnAnyways;
+
+            public SpawnType _spawnType;
+            public int power;
+
+            public SpawnEnemyWithPowerAction(EnemySO enemy, int preferredSlot, bool givesExperience, bool trySpawnAnyways, SpawnType spawnType, int power)
+            {
+                _preferredSlot = preferredSlot;
+                _givesExperience = givesExperience;
+                _enemy = enemy;
+                _trySpawnAnyways = trySpawnAnyways;
+                _spawnType = spawnType;
+                this.power = power;
+            }
+
+            public override IEnumerator Execute(CombatStats stats)
+            {
+                int num;
+                if (_preferredSlot >= 0)
+                {
+                    num = stats.combatSlots.GetEnemyFitSlot(_preferredSlot, _enemy.size);
+                    if (num == -1 && _trySpawnAnyways)
+                    {
+                        num = stats.GetRandomEnemySlot(_enemy.size);
+                    }
+                }
+                else
+                {
+                    num = stats.GetRandomEnemySlot(_enemy.size);
+                }
+
+                if (num != -1)
+                {
+                    stats.AddNewEnemyWithPower(_enemy, num, _givesExperience, _spawnType, power);
+                }
+
+                yield return null;
+            }
+        }
+    }
+    public class ShowDecayInfoEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(caster.ID, caster.IsUnitCharacter, "Decay", Passives.Decay.passiveIcon));
+            return true;
+        }
+    }
+    public class CrystalDecayCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (effector is IUnit unit)
+            {
+                int amount = 0;
+                foreach (IStatusEffect status in (unit as IStatusEffector).StatusEffects)
+                {
+                    if (status.EffectType == (StatusEffectType)456789) amount = status.StatusContent;
+                }
+                if (amount <= 0) return false;
+                SpawnEnemyWithPowerEffect e = SpawnEnemyWithPowerEffect.Create("CandyStone_EN", amount, true);
+                CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<ShowDecayInfoEffect>(), 1, null, Slots.Self), new Effect(e, 0, null, Slots.Self) }), unit));
+                return false;
+            }
+            return true;
         }
     }
 }

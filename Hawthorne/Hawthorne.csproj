@@ -609,6 +609,13 @@
 	  <None Remove="Sixteenth\DragonLock.png" />
 	  <None Remove="Sixteenth\DragonMark.png" />
 	  <None Remove="Sixteenth\DragonWorld.png" />
+	  <None Remove="Sixteenth\ResistancePassive.png" />
+	  <None Remove="Sixteenth\StoneDead.png" />
+	  <None Remove="Sixteenth\StoneIcon.png" />
+	  <None Remove="Sixteenth\StoneLock.png" />
+	  <None Remove="Sixteenth\StoneMark.png" />
+	  <None Remove="Sixteenth\StoneWorld.png" />
+	  <None Remove="Sixteenth\SweetTooth.png" />
 	  <None Remove="Sixteenth\VaseDead.png" />
 	  <None Remove="Sixteenth\VaseIcon.png" />
 	  <None Remove="Sixteenth\VaseLock.png" />
@@ -1264,6 +1271,13 @@
 	  <EmbeddedResource Include="Sixteenth\DragonLock.png" />
 	  <EmbeddedResource Include="Sixteenth\DragonMark.png" />
 	  <EmbeddedResource Include="Sixteenth\DragonWorld.png" />
+	  <EmbeddedResource Include="Sixteenth\ResistancePassive.png" />
+	  <EmbeddedResource Include="Sixteenth\StoneDead.png" />
+	  <EmbeddedResource Include="Sixteenth\StoneIcon.png" />
+	  <EmbeddedResource Include="Sixteenth\StoneLock.png" />
+	  <EmbeddedResource Include="Sixteenth\StoneMark.png" />
+	  <EmbeddedResource Include="Sixteenth\StoneWorld.png" />
+	  <EmbeddedResource Include="Sixteenth\SweetTooth.png" />
 	  <EmbeddedResource Include="Sixteenth\VaseDead.png" />
 	  <EmbeddedResource Include="Sixteenth\VaseIcon.png" />
 	  <EmbeddedResource Include="Sixteenth\VaseLock.png" />
