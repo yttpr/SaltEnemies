@@ -1,8 +1,10 @@
 ﻿using BrutalAPI;
+using JetBrains.Annotations;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data.Common;
 using System.Drawing;
 using System.Linq;
@@ -361,6 +363,410 @@ namespace Hawthorne
                     };
                 }
                 return _temper;
+            }
+        }
+        static Ability _scorchLeft;
+        public static Ability ScorchLeft
+        {
+            get
+            {
+                if (_scorchLeft == null)
+                {
+                    CustomOpponentTargetting_BySlot_Index tar = ScriptableObject.CreateInstance<CustomOpponentTargetting_BySlot_Index>();
+                    tar._frontOffsets = new int[1] { 0 };
+                    tar._slotPointerDirections = new int[1];
+                    _scorchLeft = new Ability()
+                    {
+                        name = "Scorch Left",
+                        description = "Inflict 3 Fire on the Left Opposing party member position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 3, IntentType.Field_Fire, tar),
+
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Scorch"),
+                        animationTarget = tar,
+                    };
+                }
+                return _scorchLeft;
+            }
+        }
+        static Ability _scourgeRight;
+        public static Ability ScourgeRight
+        {
+            get
+            {
+                if (_scourgeRight == null)
+                {
+                    CustomOpponentTargetting_BySlot_Index tar = ScriptableObject.CreateInstance<CustomOpponentTargetting_BySlot_Index>();
+                    tar._frontOffsets = new int[1] { 1 };
+                    tar._slotPointerDirections = new int[1];
+                    _scourgeRight = new Ability()
+                    {
+                        name = "Scourge Right",
+                        description = "Inflict 3 Fire on the Right Opposing party member position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 3, IntentType.Field_Fire, tar),
+
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Scorch"),
+                        animationTarget = tar,
+                    };
+                }
+                return _scourgeRight;
+            }
+        }
+        static Ability _phosphate;
+        public static Ability Phosphate
+        {
+            get
+            {
+                if (_phosphate == null)
+                {
+                    _phosphate = new Ability()
+                    {
+                        name = "Phosphate Fumes",
+                        description = "Deal a Little indirect damage to all party members.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(BasicEffects.Indirect, 1, IntentType.Damage_1_2, Targetting.AllEnemy)
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("OfDeath_1_A").visuals,
+                        animationTarget = Targetting.AllEnemy,
+                    };
+                }
+                return _phosphate;
+            }
+        }
+        static Ability _norimimi;
+        public static Ability Norimimi
+        {
+            get
+            {
+                if (_norimimi == null)
+                {
+                    RemovePassiveEffect r = ScriptableObject.CreateInstance<RemovePassiveEffect>();
+                    r._passiveToRemove = Passi.DragonAwakeFake.type;
+                    AddPassiveEffect a = ScriptableObject.CreateInstance<AddPassiveEffect>();
+                    a._passiveToAdd = Passi.DragonAwakeReal;
+                    new CustomIntentInfo("Sleepy", (IntentType)3737410, ResourceLoader.LoadSprite("AsleepDragonPassive.png"), IntentType.Misc);
+                    _norimimi = new Ability()
+                    {
+                        name = "Norimimi",
+                        description = "Inflict 1 Fire on all party member positions. Go to sleep at the end of the round.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 1, IntentType.Field_Fire, Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
+                            new Effect(r, 1, GetIntent("Sleepy"), Slots.Self),
+                            new Effect(a, 1, null, Slots.Self)
+
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Insult_1_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _norimimi;
+            }
+        }
+        static Ability _sneeze;
+        public static Ability Sneeze
+        {
+            get
+            {
+                if (_sneeze == null)
+                {
+                    _sneeze = new Ability()
+                    {
+                        name = "Sneeze",
+                        description = "Inflict 1 Fire on the Opposing positions.",
+                        rarity = 3,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyFireSlotEffect>(), 1, IntentType.Field_Fire, Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Flood_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _sneeze;
+            }
+        }
+        static Ability _snore;
+        public static Ability Snore
+        {
+            get
+            {
+                if (_snore == null)
+                {
+                    _snore = new Ability()
+                    {
+                        name = "Snore",
+                        description = "Does nothing.",
+                        rarity = 10,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, null, Slots.Self)
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _snore;
+            }
+        }
+        static Ability _drool;
+        public static Ability Drool
+        {
+            get
+            {
+                if (_drool == null)
+                {
+                    _drool = new Ability()
+                    {
+                        name = "Drool",
+                        description = "Inflict 3 Oil-Slicked on the Opposing party members.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyOilSlickedEffect>(), 1, IntentType.Status_OilSlicked, Slots.Front)
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Oil_1_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _drool;
+            }
+        }
+        static Ability _snort;
+        public static Ability Snort
+        {
+            get
+            {
+                if (_snort == null)
+                {
+                    _snort = new Ability()
+                    {
+                        name = "Snort",
+                        description = "This enemy might take a little indirect damage.",
+                        rarity = 2,
+                        effects = new Effect[]
+                        {
+                            new Effect(BasicEffects.GetVisuals("Scream_1_A", true, Slots.Self), 1, null, Slots.Self, Conditions.Chance(50)),
+                            new Effect(BasicEffects.Indirect, 1, IntentType.Damage_1_2, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, null, Slots.Self, BasicEffects.DidThat(false, 2))
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _snort;
+            }
+        }
+        static Ability _mar;
+        public static Ability Mar
+        {
+            get
+            {
+                if (_mar == null)
+                {
+                    _mar = new Ability()
+                    {
+                        name = "Mar",
+                        description = "Deal a barely Painful amount of damage to the Left and Right party members. \nIf either attack misses, gain 1 Scar per missed attack.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageScarIfMissEffect>(), 3, IntentType.Damage_3_6, Slots.LeftRight),
+                            new Effect(BasicEffects.Empty, 1, IntentType.Status_Scars, Slots.Self)
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Talons_A").visuals,
+                        animationTarget = Slots.LeftRight,
+                    };
+                }
+                return _mar;
+            }
+        }
+        static Ability _torture;
+        public static Ability Torture
+        {
+            get
+            {
+                if (_torture == null)
+                {
+                    _torture = new Ability()
+                    {
+                        name = "Torture",
+                        description = "Deal a Little damage to this enemy twice. Consume 3 random pigment.",
+                        rarity = 10,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ConsumeRandomManaEffect>(), 3, IntentType.Mana_Consume, Slots.Self)
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Purify_1_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _torture;
+            }
+        }
+        static Ability _overbite;
+        public static Ability Overbite
+        {
+            get
+            {
+                if (_overbite == null)
+                {
+                    _overbite = new Ability()
+                    {
+                        name = "Overbite",
+                        description = "Deal a Barely Painful amount of damage to the Opposing party member. If damage is not dealt, deal it to this enemy instead.",
+                        rarity = 12,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 3, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 3, IntentType.Damage_3_6, Slots.Self, BasicEffects.DidThat(false)),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Gnaw_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _overbite;
+            }
+        }
+        static Ability _sugar;
+        public static Ability Sugar
+        {
+            get
+            {
+                if (_sugar == null)
+                {
+                    _sugar = new Ability()
+                    {
+                        name = "Shard of Sugar",
+                        description = "Deal a Barely Painful amount of damage to this enemy. Increase Bone Spurs on this enemy by 2.",
+                        rarity = 1,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 3, IntentType.Damage_3_6, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyBoneSpursByTwoCasterEffect>(), 2, IntentType.Misc, Slots.Self),
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Absolve_1_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _sugar;
+            }
+        }
+        static Ability _nibble;
+        public static Ability Nibble
+        {
+            get
+            {
+                if (_nibble == null)
+                {
+                    _nibble = new Ability()
+                    {
+                        name = "Nibble",
+                        description = LoadedAssetsHandler.GetEnemyAbility("Nibble_A")._description,
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Front),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Nibble_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _nibble;
+            }
+        }
+        static Ability _colors;
+        public static Ability Colors
+        {
+            get
+            {
+                if (_colors == null)
+                {
+                    _colors = new Ability()
+                    {
+                        name = "Remember Colors",
+                        description = "Randomize all Resistances. Produce 2 of each color of primary Pigment. \nInflict 1 Scar on this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RandomizeResistancesEffect>(), 1, (IntentType)3773404, Slots.Self),
+                            new Effect(BasicEffects.GenPigment(Pigments.Red), 2, IntentType.Mana_Generate, Slots.Self),
+                            new Effect(BasicEffects.GenPigment(Pigments.Blue), 2, null, Slots.Self),
+                            new Effect(BasicEffects.GenPigment(Pigments.Yellow), 2, null, Slots.Self),
+                            new Effect(BasicEffects.GenPigment(Pigments.Purple), 2, null, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Rose"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _colors;
+            }
+        }
+        static Ability _holdHands;
+        public static Ability HoldHands
+        {
+            get
+            {
+                if (_holdHands == null)
+                {
+                    GenericTargetting_BySlot_Index farthest = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    farthest.slotPointerDirections = new int[] { 0, 4 };
+                    farthest.getAllies = false;
+                    _holdHands = new Ability()
+                    {
+                        name = "Hold Hands",
+                        description = "Remove 1 random Resistance.\nDeal an Agonizing amount of damage to the Leftmost and Rightmost party member grid positions.\nInflict 1 Scar on this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<RemoveRandomResistanceEffect>(), 1, (IntentType)3773404, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 8, IntentType.Damage_7_10, farthest),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self),
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Weave_1_A").visuals,
+                        animationTarget = farthest,
+                    };
+                }
+                return _holdHands;
+            }
+        }
+        static Ability _voice;
+        public static Ability Voice
+        {
+            get
+            {
+                if (_voice == null)
+                {
+                    _voice = new Ability()
+                    {
+                        name = "Your Voice",
+                        description = "Curse the Opposing party member and deal a Painful amount of damage to them. \nIf no dmaage was dealt, deal it to this enemy instead. \nInflict 1 Scar on this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, IntentType.Status_Cursed, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Self, BasicEffects.DidThat(false)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Whisper"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _voice;
             }
         }
     }
@@ -1137,6 +1543,231 @@ namespace Hawthorne
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<ShowDecayInfoEffect>(), 1, null, Slots.Self), new Effect(e, 0, null, Slots.Self) }), unit));
                 return false;
             }
+            return true;
+        }
+    }
+    public class ResistanceCondition : EffectorConditionSO
+    {
+        public static UnitStoredValueNames Red => (UnitStoredValueNames)272995;
+        public static UnitStoredValueNames Blue => (UnitStoredValueNames)272996;
+        public static UnitStoredValueNames Yellow => (UnitStoredValueNames)272997;
+        public static UnitStoredValueNames Purple => (UnitStoredValueNames)272998;
+        public static UnitStoredValueNames Grey => (UnitStoredValueNames)272999;
+        public static Sprite sprite;
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (effector is IUnit unit && args is DamageReceivedValueChangeException e)
+            {
+                if (sprite == null) sprite = ResourceLoader.LoadSprite("ResistancePassive.png");
+                if (!e.directDamage) return false;
+                ManaColorSO[] has = unit.GetResistances();
+                for (int i = 0; i < PigmentUsedCollector.lastUsed.Count; i++)
+                {
+                    if (has.Contains(PigmentUsedCollector.lastUsed[i]))
+                    {
+                        CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(unit.ID, unit.IsUnitCharacter, "Resistance", sprite));
+                        e.AddModifier(new MultiplyIntValueModifier(false, 0));
+                        return false;
+                    }
+                }
+            }
+            else if (effector is IUnit uni) return uni.GetResistances().Length <= 0;
+            return false;
+        }
+
+    }
+    public static class ResistanceHandler
+    {
+        public static UnitStoredValueNames Red => ResistanceCondition.Red;
+        public static UnitStoredValueNames Blue => ResistanceCondition.Blue;
+        public static UnitStoredValueNames Yellow => ResistanceCondition.Yellow;
+        public static UnitStoredValueNames Purple => ResistanceCondition.Purple;
+        public static UnitStoredValueNames Grey => ResistanceCondition.Grey;
+        public static ManaColorSO[] GetResistances(this IUnit unit)
+        {
+            List<ManaColorSO> res = new List<ManaColorSO>();
+            if (unit.GetStoredValue(Red) > 0) res.Add(Pigments.Red);
+            if (unit.GetStoredValue(Blue) > 0) res.Add(Pigments.Blue);
+            if (unit.GetStoredValue(Yellow) > 0) res.Add(Pigments.Yellow);
+            if (unit.GetStoredValue(Purple) > 0) res.Add(Pigments.Purple);
+            if (unit.GetStoredValue(Grey) > 0) res.Add(Pigments.Gray);
+            return res.ToArray();
+        }
+        public static void SetAllResistances(this IUnit unit, ManaColorSO[] res)
+        {
+            if (res.Contains(Pigments.Red)) unit.SetStoredValue(Red, 1);
+            else unit.SetStoredValue(Red, 0);
+            if (res.Contains(Pigments.Blue)) unit.SetStoredValue(Blue, 1);
+            else unit.SetStoredValue(Blue, 0);
+            if (res.Contains(Pigments.Yellow)) unit.SetStoredValue(Yellow, 1);
+            else unit.SetStoredValue(Yellow, 0);
+            if (res.Contains(Pigments.Purple)) unit.SetStoredValue(Purple, 1);
+            else unit.SetStoredValue(Purple, 0);
+            if (res.Contains(Pigments.Gray)) unit.SetStoredValue(Grey, 1);
+            else unit.SetStoredValue(Grey, 0);
+
+        }
+        public static void AddResistance(this IUnit unit, ManaColorSO res)
+        {
+            if (res == Pigments.Red) unit.SetStoredValue(Red, 1);
+            if (res == Pigments.Blue) unit.SetStoredValue(Blue, 1);
+            if (res == Pigments.Yellow) unit.SetStoredValue(Yellow, 1);
+            if (res == Pigments.Purple) unit.SetStoredValue(Purple, 1);
+            if (res == Pigments.Gray) unit.SetStoredValue(Grey, 1);
+        }
+        public static void RemoveResistance(this IUnit unit, ManaColorSO res)
+        {
+            if (res == Pigments.Red) unit.SetStoredValue(Red, 0);
+            if (res == Pigments.Blue) unit.SetStoredValue(Blue, 0);
+            if (res == Pigments.Yellow) unit.SetStoredValue(Yellow, 0);
+            if (res == Pigments.Purple) unit.SetStoredValue(Purple, 0);
+            if (res == Pigments.Gray) unit.SetStoredValue(Grey, 0);
+        }
+        public static ManaColorSO[] GenerateRandomResistances(this IUnit unit, int amount)
+        {
+            List<ManaColorSO> ret = new List<ManaColorSO>();
+            List<ManaColorSO> orig = new List<ManaColorSO>() { Pigments.Red, Pigments.Blue, Pigments.Yellow, Pigments.Purple };
+            if (amount >= 4)
+            {
+                amount = 3;
+                ret.Add(Pigments.Gray);
+            }
+            List<ManaColorSO> has = new List<ManaColorSO>(unit.GetResistances());
+            for (int i = 0; i < 4 - amount; i++)
+            {
+                if (has.Count > 0)
+                {
+                    ManaColorSO pick = has.GetRandom();
+                    has.Remove(pick);
+                    if (orig.Contains(pick)) orig.Remove(pick);
+                }
+            }
+             for (int i = 0; i < amount; i++)
+            {
+                if (orig.Count > 0)
+                {
+                    ManaColorSO pick = orig.GetRandom();
+                    orig.Remove(pick);
+                    ret.Add(pick);
+                }
+            }
+            return ret.ToArray();
+        }
+    }
+    public class RandomizeResistancesEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            caster.SetAllResistances(caster.GenerateRandomResistances(caster.GetResistances().Length));
+            return true;
+        }
+    }
+    public class RemoveRandomResistanceEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (caster.GetResistances().Length <= 0) return false;
+            caster.RemoveResistance(caster.GetResistances().GetRandom());
+            return true;
+        }
+    }
+    public class GainRandomResistancesEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            caster.SetAllResistances(caster.GenerateRandomResistances(entryVariable));
+            return true;
+        }
+    }
+    public class AddResistanceEffect : EffectSO
+    {
+        public ManaColorSO resistance;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            caster.AddResistance(resistance); 
+            return true;
+        }
+        public static AddResistanceEffect Create(ManaColorSO mana)
+        {
+            AddResistanceEffect ret = ScriptableObject.CreateInstance<AddResistanceEffect>();
+            ret.resistance = mana;
+            return ret;
+        }
+    }
+    public class PerformEffectWithConnectionPassiveAbility : Connection_PerformEffectPassiveAbility
+    {
+        public EffectInfo[] effects;
+        public override void TriggerPassive(object sender, object args)
+        {
+            IUnit caster = sender as IUnit;
+            CombatManager.Instance.AddSubAction(new EffectAction(effects, caster));
+        }
+    }
+    public class AbilitySelector_Dragon : BaseAbilitySelectorSO
+    {
+
+        public override bool UsesRarity => true;
+
+        public override int GetNextAbilitySlotUsage(List<CombatAbility> abilities, IUnit unit)
+        {
+            int maxExclusive1 = 0;
+            int maxExclusive2 = 0;
+            List<int> intList1 = new List<int>();
+            List<int> intList2 = new List<int>();
+            bool hasFleeting = unit.ContainsPassiveAbility(PassiveAbilityTypes.Fleeting);
+            for (int index = 0; index < abilities.Count; ++index)
+            {
+                if (this.ShouldBeIgnored(abilities[index], unit))
+                {
+                    maxExclusive2 += abilities[index].rarity.rarityValue;
+                    intList2.Add(index);
+                }
+                else
+                {
+                    maxExclusive1 += abilities[index].rarity.rarityValue;
+                    intList1.Add(index);
+                }
+            }
+            int num1 = UnityEngine.Random.Range(0, maxExclusive1);
+            int num2 = 0;
+            foreach (int index in intList1)
+            {
+                num2 += abilities[index].rarity.rarityValue;
+                if (num1 < num2)
+                    return index;
+            }
+            int num3 = UnityEngine.Random.Range(0, maxExclusive2);
+            int num4 = 0;
+            foreach (int index in intList2)
+            {
+                num4 += abilities[index].rarity.rarityValue;
+                if (num3 < num4)
+                    return index;
+            }
+            return -1;
+        }
+
+        public bool ShouldBeIgnored(CombatAbility ability, IUnit unit)
+        {
+            string name = ability.ability._abilityName;
+            if (unit.GetStoredValue(UnitStoredValueNames.DemonCoreW) > 0)
+            {
+                return (name == "Phosphate Fumes" || name == "Chomp" || name == "Norimimi");
+            }
+            return false;
+        }
+    }
+    public class ApplyBoneSpursByTwoCasterEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (!caster.ContainsPassiveAbility(PassiveAbilityTypes.BoneSpurs)) caster.AddPassiveAbility(LoadedAssetsHandler.GetCharcater("Fennec_CH").passiveAbilities[0]);
+            else caster.SetStoredValue(UnitStoredValueNames.BoneSpursPA, caster.GetStoredValue(UnitStoredValueNames.BoneSpursPA) + 2);
             return true;
         }
     }

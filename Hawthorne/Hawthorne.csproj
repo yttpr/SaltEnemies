@@ -10,6 +10,22 @@
 
 
 	<ItemGroup>
+	  <None Remove="Achi2Mat\Chapter01Achi.png" />
+	  <None Remove="Achi2Mat\Chapter02Achi.png" />
+	  <None Remove="Achi2Mat\Chapter03Achi.png" />
+	  <None Remove="Achi2Mat\Chapter04Achi.png" />
+	  <None Remove="Achi2Mat\Chapter05Achi.png" />
+	  <None Remove="Achi2Mat\Chapter06Achi.png" />
+	  <None Remove="Achi2Mat\Chapter07Achi.png" />
+	  <None Remove="Achi2Mat\Chapter08Achi.png" />
+	  <None Remove="Achi2Mat\Chapter09Achi.png" />
+	  <None Remove="Achi2Mat\Chapter10Achi.png" />
+	  <None Remove="Achi2Mat\Chapter11Achi.png" />
+	  <None Remove="Achi2Mat\Chapter12Achi.png" />
+	  <None Remove="Achi2Mat\Chapter13Achi.png" />
+	  <None Remove="Achi2Mat\Chapter14Achi.png" />
+	  <None Remove="Achi2Mat\Chapter15Achi.png" />
+	  <None Remove="Achi2Mat\Chapter16Achi.png" />
 	  <None Remove="Achievement\ClockAch.png" />
 	  <None Remove="Achievement\CoinAch.png" />
 	  <None Remove="Achievement\Comedy.png" />
@@ -672,6 +688,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Achi2Mat\Chapter01Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter02Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter03Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter04Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter05Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter06Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter07Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter08Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter09Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter10Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter11Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter12Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter13Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter14Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter15Achi.png" />
+	  <EmbeddedResource Include="Achi2Mat\Chapter16Achi.png" />
 	  <EmbeddedResource Include="Achievement\ClockAch.png" />
 	  <EmbeddedResource Include="Achievement\CoinAch.png" />
 	  <EmbeddedResource Include="Achievement\Comedy.png" />

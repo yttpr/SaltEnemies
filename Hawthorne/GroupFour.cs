@@ -75,6 +75,10 @@ namespace Hawthorne
             PurpleBot.Add(544459);
             GreyBot.Add(544458);
             GlassedSun.Add(544457);
+            Crystal.Add(544456);
+            Stone.Add(544455);
+            Dragon.Add(544454);
+            Vase.Add(544453);
         }
         public static void AddEncounters()
         {
@@ -84,7 +88,7 @@ namespace Hawthorne
             CameraSong.Add(35788);
             CameraSong.Modify();
             BirdGroup.Add(2467405);
-            SatyrSong.Modify();//EMBERCORAL IS WORKING ON IT
+            SatyrSong.Modify();
             UnMungGroup.Add(6559);
             SomethingSong.Add(2467406);
             FreudGroup.Modify();
@@ -141,6 +145,9 @@ namespace Hawthorne
             ApparatusSong.GreyAdd(2467444);
             SunSong.Add(2467445);
             MercedSong.Add(2467446);
+            CrystalSong.Add(2467447);
+            DragonSong.Add(2467448);
+            OdeSong.Add(2467449);
             //little angel song 
             //glass figurine song
             //windlesong ZLD1 IS WORKING ON IT

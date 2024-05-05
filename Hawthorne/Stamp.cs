@@ -302,7 +302,7 @@ namespace Hawthorne
             if (Groups == null) Groups = new Dictionary<string, StampGroup>();
             Groups.Add(Name, this);
             Item = item;
-            Item?.Prepare();
+            //Item?.Prepare();
             IntroCheck();
             CompCheck();
         }
@@ -367,7 +367,7 @@ namespace Hawthorne
                     foreach (StampGroup group in StampGroup.Groups.Values)
                         output.Add(CreatePNG.CombineTexColumn(group.GetTextures()));
 
-                CreatePNG.WriteToPagesFolder(CreatePNG.AttachTexture(true, Background, CreatePNG.CombineTexRow(output.ToArray())), "SALT_ENEMIES_STAMP_SHEET.png");
+                CreatePNG.WriteToPagesFolder(CreatePNG.AttachTexture(true, Background, CreatePNG.CombineTexRow(output.ToArray()), true, true), "SALT_ENEMIES_STAMP_SHEET.png");
             }
             catch (Exception ex)
             {
@@ -479,33 +479,33 @@ namespace Hawthorne
             new Stamp("Pixel", "DeadPixel_EN", "DeadPixelPage.png", "Group_1", "PixelLock.png", "PixelMark.png");
             new Stamp("Pale", "LittleAngel_EN", "LittleAngelPage.png", "Group_1", "PaleLock.png", "PaleMark.png");
             new Stamp("DeadGod", "EmbersofaDeadGod_EN", "DeadGodPage.png", "Group_1", "DeadGodLock.png", "DeadGodMark.png");
-            new StampGroup("Group_1", new string[] { "CNS", "Enigma", "Pixel", "Pale", "DeadGod" }, "", "");
+            new StampGroup("Group_1", new string[] { "CNS", "Enigma", "Pixel", "Pale", "DeadGod" }, "", "", Chapter.One);
 
             new Stamp("Satyr", "Satyr_EN", "SatyrPage.png", "Group_2a", "SatyrLock.png", "SatyrMark.png");
             new Stamp("Something", "Something_EN", "SomethingPage.png", "Group_2a", "SomethingLock.png", "SomethingMark.png");
             new Stamp("Derogatory", "Derogatory_EN", "SomethingPage.png", "Group_2a", "DerogatoryLock.png", "DerogatoryMark.png");
             new Stamp("Denial", "Denial_EN", "SomethingPage.png", "Group_2a", "DenialLock.png", "DenialMark.png");
             new Stamp("Unmung", "TeachaMantoFish_EN", "UnmungPage.png", "Group_2a", "UnmungLock.png", "UnmungMark.png");
-            new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "", "");
+            new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "", "", Chapter.Two);
 
             new Stamp("Crow", "TheCrow_EN", "CrowPage.png", "Group_2b", "CrowLock.png", "CrowMark.png");
             new Stamp("DontTouchMe", "Freud_EN", "DontTouchMePage.png", "Group_2b", "DontTouchMeLock.png", "DontTouchMeMark.png");
             new Stamp("Angler", "A'Flower'_EN", "AnglerPage.png", "Group_2b", "AnglerLock.png", "AnglerMark.png");
             new Stamp("StarGazer", "StarGazer_EN", "StarGazerPage.png", "Group_2b", "StarsLock.png", "StarsMark.png");
-            new StampGroup("Group_2b", new string[] { "Crow", "DontTouchMe", "Angler", "StarGazer" }, "", "");
+            new StampGroup("Group_2b", new string[] { "Crow", "DontTouchMe", "Angler", "StarGazer" }, "", "", Chapter.Three);
 
             new Stamp("Shiny", "CoinHunter_EN", "CoinHunterPage.png", "Group_3", "CoinLock.png", "CoinMark.png");
             new Stamp("Camera", "MechanicalLens_EN", "CameraPage.png", "Group_3", "CameraLock.png", "CameraMark.png");
             new Stamp("Gospel", "MortalSpoggle_EN", "GospelPage.png", "Group_3", "MortalLock.png", "MortalMark.png");
             new Stamp("Rustic", "RusticJumbleguts_EN", "RusticPage.png", "Group_3", "RusticLock.png", "RusticMark.png");
-            new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "", "");
+            new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "", "", Chapter.Four);
 
             new Stamp("Superboss", "544517_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544516_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544515_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544514_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544513_EN", "SuperbossPage.png", "Group_3_5", "BossLock.png", "BossMark.png");
-            new StampGroup("Group_3_5", new string[] { "Superboss" }, "", "");
+            new StampGroup("Group_3_5", new string[] { "Superboss" }, "", "", Chapter.Five);
 
             new Stamp("Delusion", "Illusion_EN", "DelusionPage.png", "Group_4a", "DelusionLock.png", "DelusionMark.png");
             new Stamp("Angel", "FakeAngel_EN", "FakeAngelPage.png", "Group_4a", "AngelLock.png", "AngelMark.png");
@@ -513,25 +513,25 @@ namespace Hawthorne
             new Stamp("BlueFlower", "BlueFlower_EN", "BlueFlowerPage.png", "Group_4a", "BlueFlowerLock.png", "BlueFlowerMark.png");
             new Stamp("YellowFlower", "YellowFlower_EN", "YellowFlowerPage.png", "Group_4a", "YellowFlowerLock.png", "YellowFlowerMark.png");
             new Stamp("PurpleFlower", "PurpleFlower_EN", "PurpleFlowerPage.png", "Group_4a", "PurpleFlowerLock.png", "PurpleFlowerMark.png");
-            new StampGroup("Group_4a", new string[] { "Delusion", "Angel", "RedFlower", "BlueFlower", "YellowFlower", "PurpleFlower" }, "", "");
+            new StampGroup("Group_4a", new string[] { "Delusion", "Angel", "RedFlower", "BlueFlower", "YellowFlower", "PurpleFlower" }, "", "", Chapter.Six);
 
             new Stamp("Postmodern", "Postmodern_EN", "PostmodernPage.png", "Group_4b", "PostmodernLock.png", "PostmodernMark.png");
             new Stamp("War", "War_EN", "PostmodernPage.png", "Group_4b", "WarLock.png", "WarMark.png");
             new Stamp("Deep", "TheDeep_EN", "TheDeepPage.png", "Group_4b", "DeepLock.png", "DeepMark.png");
-            new StampGroup("Group_4b", new string[] { "Postmodern", "War", "Deep" }, "", "");
+            new StampGroup("Group_4b", new string[] { "Postmodern", "War", "Deep" }, "", "", Chapter.Seven);
 
             new Stamp("Sigil", "Sigil_EN", "SigilPage.png", "Group_4c", "SigilLock.png", "SigilMark.png");
             new Stamp("WindSong", "WindSong_EN", "WindSongPage.png", "Group_4c", "WindSongLock.png", "WindSongMark.png");
             new Stamp("Solvent", "LivingSolvent_EN", "SolventPage.png", "Group_4c", "SolventLock.png", "SolventMark.png");
             new Stamp("Tank", "RealisticTank_EN", "TankPage.png", "Group_4c", "TankLock.png", "TankMark.png");
             new Stamp("ClockTower", "ClockTower_EN", "ClockPage.png", "Group_4c", "ClockLock.png", "ClockMark.png");
-            new StampGroup("Group_4c", new string[] { "Sigil", "WindSong", "Solvent", "Tank", "ClockTower" }, "", "");
+            new StampGroup("Group_4c", new string[] { "Sigil", "WindSong", "Solvent", "Tank", "ClockTower" }, "", "", Chapter.Eight);
 
             new Stamp("Grandfather", "Grandfather_EN", "CoffinPage.png", "Group_4d", "CoffinLock.png", "CoffinMark.png");
             new Stamp("Tortoise", "StalwartTortoise_EN", "TortoisePage.png", "Group_4d", "TortoiseLock.png", "TortoiseMark.png");
             new Stamp("GreyFlower", "GreyFlower_EN", "GreyFlowerPage.png", "Group_4d", "GreyFlowerLock.png", "GreyFlowerMark.png");
             new Stamp("Butterfly", "Butterfly_EN", "ButterflyPage.png", "Group_4d", "ButterflyLock.png", "ButterflyMark.png");
-            new StampGroup("Group_4d", new string[] { "Grandfather", "Tortoise", "GreyFlower", "Butterfly" }, "", "");
+            new StampGroup("Group_4d", new string[] { "Grandfather", "Tortoise", "GreyFlower", "Butterfly" }, "", "", Chapter.Nine);
 
             new Stamp("Reaper", "MiniReaper_EN", "ReaperPage.png", "Group_4e", "ReaperLock.png", "ReaperMark.png");
             new Stamp("Miriam", "Miriam_EN", "MiriamPage.png", "Group_4e", "MiriamLock.png", "MiriamMark.png");
@@ -539,7 +539,7 @@ namespace Hawthorne
             new Stamp("Skyloft", "Skyloft_EN", "SkyloftPage.png", "Group_4e", "SkyloftLock.png", "SkyloftMark.png");
             new Stamp("Merced", "Merced_EN", "MercedPage.png", "Group_4e", "MercedLock.png", "MercedMark.png");
             new Stamp("Shua", "Shua_EN", "ShuaPage.png", "Group_4e", "ShuaLock.png", "ShuaMark.png");
-            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "", "");
+            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "", "", Chapter.Ten);
 
             new Stamp("Nameless", "Nameless_EN", "NamelessPage.png", "Group_4f", "NamelessLock.png", "NamelessMark.png");
             new Stamp("Tripod", "TripodFish_EN", "TripodPage.png", "Group_4f", "TripodLock.png", "TripodMark.png");
@@ -547,13 +547,13 @@ namespace Hawthorne
             new Stamp("Damocles", "Damocles_EN", "DamoclesPage.png", "Group_4f", "DamoclesLock.png", "DamoclesMark.png");
             new Stamp("Glass", "GlassFigurine_EN", "GlassPage.png", "Group_4f", "GlassLock.png", "GlassMark.png");
             new Stamp("SnakeGod", "SnakeGod_EN", "SnakeGodPage.png", "Group_4f", "SnakeGodLock.png", "SnakeGodMark.png");
-            new StampGroup("Group_4f", new string[] { "Nameless", "Tripod", "Rabies", "Damocles", "Glass", "SnakeGod" }, "", "");
+            new StampGroup("Group_4f", new string[] { "Nameless", "Tripod", "Rabies", "Damocles", "Glass", "SnakeGod" }, "", "", Chapter.Eleven);
 
             new Stamp("Beak", "LittleBeak_EN", "BeakPage.png", "Group_4g", "BeakLock.png", "BeakMark.png");
             new Stamp("Hunter", "Hunter_EN", "HuntingPage.png", "Group_4g", "HunterLock.png", "HunterMark.png");
             new Stamp("Firebird", "Firebird_EN", "FirebirdPage.png", "Group_4g", "FirebirdLock.png", "FirebirdMark.png");
             new Stamp("Warbird", "Warbird_EN", "WarbirdPage.png", "Group_4g", "WarbirdLock.png", "WarbirdMark.png");
-            new StampGroup("Group_4g", new string[] { "Beak", "Hunter", "Firebird", "Warbird" }, "", "");
+            new StampGroup("Group_4g", new string[] { "Beak", "Hunter", "Firebird", "Warbird" }, "", "", Chapter.Twelve);
 
             new Stamp("Windle", "Windle1_EN", "WindlePage.png", "Group_5a", "WindleLock.png", "WindleMark.png");
             new Stamp("Windle", "Windle2_EN", "WindlePage.png", "", "WindleLock.png", "WindleMark.png");
@@ -562,7 +562,7 @@ namespace Hawthorne
             new Stamp("Singularity", "Singularity_EN", "SingularityPage.png", "Group_5a", "SingularityLock.png", "SingularityMark.png");
             new Stamp("Indicator", "Indicator_EN", "IndicatorPage.png", "Group_5a", "IndicatorLock.png", "IndicatorMark.png");
             new Stamp("Maw", "Maw_EN", "MawPage.png", "Group_5a", "MawLock.png", "MawMark.png");
-            new StampGroup("Group_5a", new string[] { "Windle", "Blackstar", "Singularity", "Indicator", "Maw" }, "", "");
+            new StampGroup("Group_5a", new string[] { "Windle", "Blackstar", "Singularity", "Indicator", "Maw" }, "", "", Chapter.Thirteen);
 
             new Stamp("Clione", "Clione_EN", "ClionePage.png", "Group_5b", "ClioneLock.png", "ClioneMark.png");
             new Stamp("Children", "Children6_EN", "ChildrenPage.png", "Group_5b", "ChildrenLock.png", "ChildrenMark.png");
@@ -578,7 +578,7 @@ namespace Hawthorne
             new Stamp("Minana", "Minana_EN", "PinanoPage.png", "Group_5b", "MinanaLock.png", "MinanaMark.png");
             new Stamp("Boat", "Arceles_EN", "ArcelesPage.png", "Group_5b", "BoatLock.png", "BoatMark.png");
             new Stamp("Train", "Stoplight_EN", "StoplightPage.png", "Group_5b", "TrainLock.png", "TrainMark.png");
-            new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "", "");
+            new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "", "", Chapter.Fourteen);
 
             new Stamp("RedBot", "RedBot_EN", "RedBotPage.png", "Group_5c", "RedBotLock.png", "RedBotMark.png");
             new Stamp("BlueBot", "BlueBot_EN", "BlueBotPage.png", "Group_5c", "BlueBotLock.png", "BlueBotMark.png");
@@ -586,12 +586,13 @@ namespace Hawthorne
             new Stamp("PurpleBot", "PurpleBot_EN", "PurpleBotPage.png", "Group_5c", "PurpleBotLock.png", "PurpleBotMark.png");
             new Stamp("GreyBot", "GreyBot_EN", "GreyBotPage.png", "Group_5c", "GreyBotLock.png", "GreyBotMark.png");
             new Stamp("Sun", "GlassedSun_EN", "SunPage.png", "Group_5c", "SunLock.png", "SunMark.png");
-            new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "");
+            new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "", Chapter.Fifteen);
 
             new Stamp("Crystal", "Crystal_EN", "", "Group_5d", "CrystalLock.png", "CrystalMark.png");
+            new Stamp("Stone", "CandyStone_EN", "", "Group_5d", "StoneLock.png", "StoneMark.png");
             new Stamp("Dragon", "TheDragon_EN", "", "Group_5d", "DragonLock.png", "DragonMark.png");
             new Stamp("Vase", "OdetoHumanity_EN", "", "Group_5d", "VaseLock.png", "VaseMark.png");
-            new StampGroup("Group_5d", new string[] { "Crystal", "Dragon", "Vase" }, "", "");
+            new StampGroup("Group_5d", new string[] { "Crystal", "Stone", "Dragon", "Vase" }, "", "", Chapter.Sixteen);
 
         }
 

@@ -82,7 +82,7 @@ namespace Hawthorne
                 rarity = rarity / (UnityEngine.Random.Range(2, 4)),
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/GreyScaleTheme",
-                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
+                roarEvent = "event:/Hawthorne/Noise/Ominous",
                 difficulty = EncounterDifficulty.Medium
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
@@ -454,7 +454,7 @@ namespace Hawthorne
                 rarity = rarity / 2,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/GreyScaleTheme",
-                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
+                roarEvent = "event:/Hawthorne/Noise/Ominous",
                 difficulty = EncounterDifficulty.Hard
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
@@ -1032,7 +1032,7 @@ namespace Hawthorne
                 rarity = rarity,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/GreyScaleTheme",
-                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_ShiveringHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
+                roarEvent = "event:/Hawthorne/Noise/Ominous",
                 difficulty = EncounterDifficulty.Medium
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();

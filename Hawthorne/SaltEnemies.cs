@@ -37,6 +37,7 @@ using static Hawthorne.Check;
 using HarmonyLib;
 using MonoMod.Cil;
 using UnityEngine.PlayerLoop;
+using System.Runtime;
 
 namespace Hawthorne
 {
@@ -120,9 +121,10 @@ namespace Hawthorne
                 StampSaver.LoadAllValues();
                 StampHandler.DefaultSetup();
             }
-            catch
+            catch (Exception ex)
             {
                 Debug.LogError("stamping faile");
+                Debug.Log(ex.ToString() + ex.Message + ex.StackTrace);
             }
             Hawthorne.stupidFuckingStatusEffects.Add();
             Hawthorne.OtherStatusEffects.Add();
@@ -169,6 +171,7 @@ namespace Hawthorne
             Hawthorne.WaterInfo.Setup();
             Hawthorne.GroupFour.Setup();
             Hawthorne.GroupFour.AddEnemies();
+            Abili.Clean();
             TellsYouToInstallSaltAdjustments.TellYou();
             Hawthorne.PageCollector.Setup();
 
@@ -782,6 +785,10 @@ namespace Hawthorne
             addSepulchrePool("Minana_EN");
             addSepulchrePool("Arceles_EN");
             addSepulchrePool("Stoplight_EN");
+            addSepulchrePool("Crystal_EN");
+            addSepulchrePool("CrystalStone_EN");
+            addSepulchrePool("TheDragon_EN");
+            addSepulchrePool("OdetoHumanity_EN");
             AddScrungiePool("LostSheep_EN", 3);
             AddScrungiePool("Derogatory_EN", 2);
             AddScrungiePool("Denial_EN", 1);
@@ -793,6 +800,7 @@ namespace Hawthorne
             AddScrungiePool("Children6_EN");
             AddScrungiePool("Minana_EN", 3);
             AddScrungiePool("Arceles_EN");
+            AddScrungiePool("CrystalStone_EN", 2);
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -834,6 +842,9 @@ namespace Hawthorne
             addFountainPool("Minana_EN");
             addFountainPool("Arceles_EN");
             addFountainPool("Stoplight_EN");
+            addFountainPool("Crystal_EN");
+            addFountainPool("CrystalStone_EN");
+            addFountainPool("OdetoHumanity_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -901,6 +912,10 @@ namespace Hawthorne
             addBronzoPool("Minana_EN");
             addBronzoPool("Arceles_EN");
             addBronzoPool("Stoplight_EN");
+            addBronzoPool("Crystal_EN");
+            addBronzoPool("CrystalStone_EN");
+            addBronzoPool("TheDragon_EN");
+            addBronzoPool("OdetoHumanity_EN");
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -1236,7 +1251,7 @@ namespace Hawthorne
             LetsYouIgnoreMissingEnemiesHook.ReadOutDisabled();
             PerformRandomEffectsAmongEffects.GO();
 
-
+            Setbirds();
         }
         public static bool Crossed = false;
         public static void Crossover()
@@ -1353,6 +1368,47 @@ namespace Hawthorne
                 Debug.Log("--------------------");
             }
         }
+        public static UnitType Avian => (UnitType)200548;
+        public static TriggerCalls FeatherGun => (TriggerCalls)7308109;
+        public static void Setbirds()
+        {
+            //if (EnemyExist("LittleAngel_EN")) LoadedAssetsHandler.GetEnemy("LittleAngel_EN").unitType = Avian;
+            if (EnemyExist("Satyr_EN")) LoadedAssetsHandler.GetEnemy("Satyr_EN").unitType = Avian;
+            if (EnemyExist("TheCrow_EN")) LoadedAssetsHandler.GetEnemy("TheCrow_EN").unitType = Avian;
+            if (EnemyExist("CoinHunter_EN")) LoadedAssetsHandler.GetEnemy("CoinHunter_EN").unitType = Avian;
+            //if (EnemyExist("MechanicalLens_EN")) LoadedAssetsHandler.GetEnemy("MechanicalLens_EN").unitType = Avian;
+            //if (EnemyExist("FakeAngel_EN")) LoadedAssetsHandler.GetEnemy("FakeAngel_EN").unitType = Avian;
+            //if (EnemyExist("Sigil_EN")) LoadedAssetsHandler.GetEnemy("Sigil_EN").unitType = Avian;
+            //if (EnemyExist("WindSong_EN")) LoadedAssetsHandler.GetEnemy("WindSong_EN").unitType = Avian;
+            //if (EnemyExist("Butterfly_EN")) LoadedAssetsHandler.GetEnemy("Butterfly_EN").unitType = Avian;
+            if (EnemyExist("LittleBeak_EN")) LoadedAssetsHandler.GetEnemy("LittleBeak_EN").unitType = Avian;
+            if (EnemyExist("Hunter_EN")) LoadedAssetsHandler.GetEnemy("Hunter_EN").unitType = Avian;
+            if (EnemyExist("Firebird_EN")) LoadedAssetsHandler.GetEnemy("Firebird_EN").unitType = Avian;
+            if (EnemyExist("Warbird_EN")) LoadedAssetsHandler.GetEnemy("Warbird_EN").unitType = Avian;
+            OtherAvians = new List<EnemySO>()
+            {
+                LoadedAssetsHandler.GetEnemy("Scrungie_EN"),
+                LoadedAssetsHandler.GetEnemy("Revola_EN"),
+                LoadedAssetsHandler.GetEnemy("GigglingMinister_EN"),
+                LoadedAssetsHandler.GetEnemy("Charcarrion_Alive_BOSS"),
+                LoadedAssetsHandler.GetEnemy("Charcarrion_Corpse_BOSS"),
+                LoadedAssetsHandler.GetEnemy("TaintedYolk_EN"),
+                LoadedAssetsHandler.GetEnemy("TaMaGoa_EN"),
+                LoadedAssetsHandler.GetEnemy("UnfinishedHeir_BOSS")
+            };
+            if (EnemyExist("Gizo_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("Gizo_EN"));
+            if (EnemyExist("NakedGizo_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("NakedGizo_EN"));
+            if (EnemyExist("TitteringPeon_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("TitteringPeon_EN"));
+            if (EnemyExist("HowlingAvian_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("HowlingAvian_EN"));
+            if (EnemyExist("Scrundreigon_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("Scrundreigon_EN"));
+            if (EnemyExist("VoyagerofWar_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("VoyagerofWar_EN"));
+            if (EnemyExist("ColossalSheo_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("ColossalSheo_EN"));
+            if (EnemyExist("Errant_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("Errant_EN"));
+            if (EnemyExist("FrowningChancellor_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("FrowningChancellor_EN"));
+            if (EnemyExist("RevoltingRevola_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("RevoltingRevola_EN"));
+            for (int i = 1; i <= 5; i++) if (EnemyExist("Zygote" + i.ToString() + "_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("Zygote" + i.ToString() + "_EN"));
+        }
+        public static List<EnemySO> OtherAvians;
     }
 
 
@@ -2100,6 +2156,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("YNL_EN")) list.Add("YNL_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!mustSmall && !red && !killable && UnityEngine.Random.Range(0, 100) < 13 && EnemyExist("Inequity_EN")) list.Add("Inequity_EN");
+                if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("OdetoHumanity_EN")) list.Add("OdetoHumanity_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2167,6 +2224,7 @@ namespace Hawthorne
             if (harder && EnemyExist("BlueBot_EN")) for (int i = 0; i < 2; i++) list.Add("BlueBot_EN");
             if (harder && EnemyExist("PurpleBot_EN")) for (int i = 0; i < 2; i++) list.Add("PurpleBot_EN");
             if (harder && EnemyExist("GreyBot_EN")) for (int i = 0; i < 2; i++) list.Add("GreyBot_EN");
+            if (harder && EnemyExist("OdetoHumanity_EN")) for (int i = 0; i < 1; i++) list.Add("OdetoHumanity_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2186,6 +2244,7 @@ namespace Hawthorne
             if (EnemyExist("Stoplight_EN")) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
             if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
             if (EnemyExist("RedBot_EN")) for (int i = 0; i < 2; i++) ret.Add("RedBot_EN");
+            if (EnemyExist("OdetoHumanity_EN")) for (int i = 0; i < 1; i++) ret.Add("OdetoHumanity_EN");
             return ret.GetRandom();
         }
 
@@ -2791,6 +2850,7 @@ namespace Hawthorne
                 if (!red && EnemyExist("Hunter_EN")) list.Add("Hunter_EN");
                 if (EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
                 if (EnemyExist("Errant_EN") && Half) list.Add("Errant_EN");
+                if (!red && EnemyExist("Crystal_EN") && UnityEngine.Random.Range(0, 100) < (50 * CrystalSong.mod)) list.Add("Crystal_EN");
                 return list.GetRandom();
             }
             public static string Fag(bool red = false)
@@ -2799,6 +2859,7 @@ namespace Hawthorne
                 list.Add("WrigglingSacrifice_EN");
                 list.Add("Conductor_EN");
                 if (EnemyExist("Errant_EN")) list.Add("Errant_EN");
+                if (!red && EnemyExist("Crystal_EN")) list.Add("Crystal_EN");
                 return list.GetRandom();
             }
         }
@@ -2856,6 +2917,7 @@ namespace Hawthorne
                 if (EnemyExist("FrowningChancellor_EN") && Half) list.Add("FrowningChancellor_EN");
                 if (Quarter && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!Red && Third && EnemyExist("ClockTower_EN")) list.Add("ClockTower_EN");
+                if (EnemyExist("OdetoHumanity_EN") && Half) list.Add("OdetoHumanity_EN");
                 return list.GetRandom();
             }
             public static string RandomTwoSizeFag()
@@ -2927,7 +2989,7 @@ namespace Hawthorne
 
     public static class DoDebugs
     {
-        public static bool All => true;
+        public static bool All => false;
         public static bool EnemyNull => true && All;
         public static bool SpriteNull => true && All;
         public static bool GenInfo => true && All;

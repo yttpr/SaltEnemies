@@ -27,7 +27,7 @@ namespace Hawthorne
                 rarity = 7 * 1,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/BlackStarTheme",
-                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_InnerChild_Hard_EnemyBundle")._roarReference.roarEvent,
+                roarEvent = "event:/Hawthorne/Noise/Ominous",
                 difficulty = EncounterDifficulty.Easy
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();

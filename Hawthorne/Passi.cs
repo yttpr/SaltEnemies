@@ -1732,6 +1732,186 @@ namespace Hawthorne
                 return _stained;
             }
         }
+        static BasePassiveAbilitySO _crystalDecay;
+        public static BasePassiveAbilitySO CrystalDecay
+        {
+            get
+            {
+                if (_crystalDecay == null)
+                {
+                    PerformEffectPassiveAbility decay = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    decay._passiveName = "Decay";
+                    decay.type = PassiveAbilityTypes.Decay;
+                    decay.passiveIcon = Passives.Decay.passiveIcon;
+                    decay._enemyDescription = "On death, spawn a Candy Stone.\nTransfer all Power from this enemy to the Crystal Stone.";
+                    decay._characterDescription = decay._enemyDescription;
+                    decay.doesPassiveTriggerInformationPanel = true;
+                    decay.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<CrystalDecayCondition>() };
+                    decay._triggerOn = new TriggerCalls[] { TriggerCalls.OnDeath };
+                    decay.effects = new EffectInfo[0];
+                    _crystalDecay = decay;
+                }
+                return _crystalDecay;
+            }
+        }
+        static BasePassiveAbilitySO _sweetTooth;
+        public static BasePassiveAbilitySO SweetTooth
+        {
+            get
+            {
+                if (_sweetTooth == null)
+                {
+                    PerformEffectPassiveAbility tooth = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    tooth._passiveName = "Sweet Tooth";
+                    tooth.type = (PassiveAbilityTypes)7633020;
+                    tooth.passiveIcon = ResourceLoader.LoadSprite("SweetTooth.png", 32);
+                    tooth._enemyDescription = "On dealing damage, gain an equivalent amount of Power.";
+                    tooth._characterDescription = tooth._enemyDescription;
+                    tooth.doesPassiveTriggerInformationPanel = true;
+                    tooth.effects = new EffectInfo[0];
+                    tooth._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDidApplyDamage };
+                    tooth.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<PowerByDamageCondition>() };
+                    _sweetTooth = tooth;
+                }
+                return _sweetTooth;
+            }
+        }
+        static BasePassiveAbilitySO _dragonAwakeFake;
+        public static BasePassiveAbilitySO DragonAwakeFake
+        {
+            get
+            {
+                if (_dragonAwakeFake == null)
+                {
+                    PerformEffectPassiveAbility awake = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    awake._passiveName = "Awoken";
+                    awake.type = (PassiveAbilityTypes)7633020;
+                    awake.passiveIcon = ResourceLoader.LoadSprite("AwakeDragonPassive.png", 32);
+                    awake._enemyDescription = "The Dragon is awake.";
+                    awake._characterDescription = awake._enemyDescription;
+                    awake.doesPassiveTriggerInformationPanel = true;
+                    awake.effects = new EffectInfo[0];
+                    awake._triggerOn = new TriggerCalls[1] { TriggerCalls.Count };
+                    _dragonAwakeFake = awake;
+                }
+                return _dragonAwakeFake;
+            }
+        }
+        static BasePassiveAbilitySO _dragonAwakeReal;
+        public static BasePassiveAbilitySO DragonAwakeReal
+        {
+            get
+            {
+                if (_dragonAwakeReal == null)
+                {
+                    PerformEffectPassiveAbility awake = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    awake._passiveName = "Awoken";
+                    awake.type = (PassiveAbilityTypes)7633020;
+                    awake.passiveIcon = ResourceLoader.LoadSprite("AwakeDragonPassive.png", 32);
+                    awake._enemyDescription = "The Dragon is awake.";
+                    awake._characterDescription = awake._enemyDescription;
+                    awake.doesPassiveTriggerInformationPanel = false;
+                    SetCasterAnimationParameterEffect param = ScriptableObject.CreateInstance<SetCasterAnimationParameterEffect>();
+                    param._parameterName = "Awake";
+                    param._parameterValue = false;
+                    awake.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<ResetCasterAbilitiesToDefaultEffect>(), 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<ResetCasterPassivesToDefaultEffect>(), 1, null, Slots.Self),
+                        new Effect(param, 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<DragonSongEffect>(), 1, null, Slots.Self),
+                    });
+                    awake._triggerOn = new TriggerCalls[1] { TriggerCalls.TimelineEndReached };
+                    _dragonAwakeReal = awake;
+                }
+                return _dragonAwakeReal;
+            }
+        }
+        static BasePassiveAbilitySO _resistance;
+        public static BasePassiveAbilitySO Resistance
+        {
+            get
+            {
+                if (_resistance == null)
+                {
+                    PerformEffectPassiveAbility res = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    res._passiveName = "Resistance";
+                    res.type = (PassiveAbilityTypes)7632028;
+                    res.passiveIcon = ResourceLoader.LoadSprite("ResistancePassive.png", 32);
+                    res._enemyDescription = "This enemy may become fully Resistant to Direct Damage from abilities that were performed using certain colors of Pigment. \nAt the end of each round, if this enemy has no Resistances, gain Resistence to 3 random colors of Pigment.";
+                    res._characterDescription = res._enemyDescription;
+                    res.doesPassiveTriggerInformationPanel = true;
+                    res.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<GainRandomResistancesEffect>(), 3, null, Slots.Self)
+                    });
+                    res._triggerOn = new TriggerCalls[] { TriggerCalls.TimelineEndReached, TriggerCalls.OnBeingDamaged };
+                    res.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<ResistanceCondition>() };
+                    _resistance = res;
+                    new CustomIntentInfo("Resist", (IntentType)3773404, res.passiveIcon, IntentType.Field_Shield);
+                }
+                return _resistance;
+            }
+        }
+        static BasePassiveAbilitySO _dragonAsleep;
+        public static BasePassiveAbilitySO DragonAsleep
+        {
+            get
+            {
+                if (_dragonAsleep == null)
+                {
+                    PerformEffectPassiveAbility asleep = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    asleep._passiveName = "Slumber";
+                    asleep.type = (PassiveAbilityTypes)7633021;
+                    asleep.passiveIcon = ResourceLoader.LoadSprite("AsleepDragonPassive.png", 32);
+                    asleep._enemyDescription = "The Dragon is sleeping. On taking any damage, awaken.";
+                    asleep._characterDescription = asleep._enemyDescription;
+                    asleep.doesPassiveTriggerInformationPanel = false;
+                    SetCasterAnimationParameterEffect param = ScriptableObject.CreateInstance<SetCasterAnimationParameterEffect>();
+                    param._parameterName = "Awake";
+                    param._parameterValue = true;
+                    CasterSetStoredValueEffect a = ScriptableObject.CreateInstance<CasterSetStoredValueEffect>();
+                    a._valueName = UnitStoredValueNames.DemonCoreW;
+                    RaritySO five = ScriptableObject.CreateInstance<RaritySO>();
+                    five.canBeRerolled = true;
+                    five.rarityValue = 5;
+                    RaritySO three = ScriptableObject.CreateInstance<RaritySO>();
+                    three.canBeRerolled = true;
+                    three.rarityValue = 3;
+                    RerollSwapCasterAbilitiesEffect abil = ScriptableObject.CreateInstance<RerollSwapCasterAbilitiesEffect>();
+                    abil._abilitiesToSwap = new ExtraAbilityInfo[]
+                    {
+                        new ExtraAbilityInfo() {ability = Bbili.ScorchLeft.EnemyAbility().ability, rarity = five},
+                        new ExtraAbilityInfo() {ability = Bbili.ScourgeRight.EnemyAbility().ability, rarity = five},
+                        new ExtraAbilityInfo() {ability = Bbili.Phosphate.EnemyAbility().ability, rarity = five},
+                        new ExtraAbilityInfo() {ability = Abili.Chomp.EnemyAbility().ability, rarity = five},
+                        new ExtraAbilityInfo() {ability = Bbili.Norimimi.EnemyAbility().ability, rarity = three }
+                    };
+                    SwapCasterPassivesEffect pas = ScriptableObject.CreateInstance<SwapCasterPassivesEffect>();
+                    pas._passivesToSwap = new BasePassiveAbilitySO[]
+                    {
+                        Passives.Skittish, Passi.Multiattack(2), Passi.DragonAwakeFake
+                    };
+                    asleep.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                    {
+                        new Effect(param, 1, null, Slots.Self),
+                        new Effect(a, 1, null, Slots.Self),
+                        new Effect(abil, 1, null, Slots.Self),
+                        new Effect(pas, 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<ResetFleetingEffect>(), 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<AddTurnCasterToTimelineEffect>(), 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<DragonSongEffect>(), 1, null, Slots.Self),
+                        new Effect(RootActionEffect.Create(new Effect[]
+                        {
+                            new Effect(a, 0, null, Slots.Self)
+                        }), 1, null, Slots.Self)
+                    });
+                    asleep._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDamaged };
+                    _dragonAsleep = asleep;
+                }
+                return _dragonAsleep;
+            }
+        }
 
     }
 
@@ -4768,6 +4948,7 @@ namespace Hawthorne
             }
 
             TrySpawnWindSongEffect(stats.combatUI, caster.ID);
+            //CombatManager.Instance.AddUIAction(new WindSongEffectUIAction(caster.ID));
             return true;
         }
 
@@ -5031,8 +5212,9 @@ namespace Hawthorne
                         specialDamage = Utils.GetBasicDamageTypeFromAmount(modifiedValue);
                     }
 
+                    CombatManager.Instance.AddUIAction(new WindSongUIActionAgain(self.ID, num3 == 0));
                     CombatManager.Instance.AddUIAction(new EnemyDamagedUIAction(self.ID, self.CurrentHealth, self.MaximumHealth, modifiedValue, specialDamage));
-                    TrySpawnWindSongEffect(CombatManager.Instance._stats.combatUI, self.ID, num3 == 0);
+                    //TrySpawnWindSongEffect(CombatManager.Instance._stats.combatUI, self.ID, num3 == 0);
                     if (addHealthMana)
                     {
                         CombatManager.Instance.ProcessImmediateAction(new AddManaToManaBarAction(self.HealthColor, Utils.enemyManaAmount, self.IsUnitCharacter, self.ID));
@@ -5058,6 +5240,21 @@ namespace Hawthorne
                 return new DamageInfo(num4, flag);
             }
             return orig(self, amount, killer, deathType, targetSlotOffset, addHealthMana, directDamage, ignoresShield, specialDamage);
+        }
+        public class WindSongUIActionAgain : CombatAction
+        {
+            public int ID;
+            public bool Extra;
+            public WindSongUIActionAgain(int ID, bool Extra)
+            {
+                this.ID = ID;
+                this.Extra = Extra;
+            }
+            public override IEnumerator Execute(CombatStats stats)
+            {
+                TrySpawnWindSongEffect(stats.combatUI, ID, Extra);
+                yield return null;
+            }
         }
         public static void TrySpawnWindSongEffect(CombatVisualizationController UI, int id, bool extra = false)
         {
@@ -5613,6 +5810,7 @@ namespace Hawthorne
                     ef.trySpawnAnywhereIfFail = true;
                     array[0] = new Effect(ef, 0, null, Slots.Self);
                 }
+                else return;
                 CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(enemy.ID, enemy.IsUnitCharacter, Passives.Decay.GetPassiveLocData().text, Passives.Decay.passiveIcon));
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(array), enemy));
             }
@@ -6829,6 +7027,72 @@ namespace Hawthorne
         {
             IUnit caster = sender as IUnit;
             CombatManager.Instance.AddPrioritySubAction(new EffectAction(effects, caster));
+        }
+    }
+    public class DragonSongEffect : EffectSO
+    {
+        public static bool WereDragons = false;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (changeMusic != null)
+            {
+                try { changeMusic.Abort(); } catch { UnityEngine.Debug.LogWarning("train thread failed to shut down."); }
+            }
+            if (AreDragons())
+            {
+                if (!WereDragons)
+                {
+                    changeMusic = new System.Threading.Thread(GO);
+                    changeMusic.Start();
+                }
+            }
+            else
+            {
+                if (WereDragons)
+                {
+                    changeMusic = new System.Threading.Thread(STOP);
+                    changeMusic.Start();
+                }
+            }
+            WereDragons = AreDragons();
+            return true;
+        }
+
+        public static System.Threading.Thread changeMusic;
+        public static void GO()
+        {
+            int start = 0;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("DragonAwake", out float num) == RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i <= 10; i++)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("DragonAwake", i);
+                System.Threading.Thread.Sleep(30);
+                //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
+        }
+        public static void STOP()
+        {
+            int start = 10;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("DragonAwake", out float num) == RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i >= 0; i--)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("DragonAwake", i);
+                System.Threading.Thread.Sleep(30);
+                //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
+        }
+        public static bool AreDragons()
+        {
+            foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values)
+            {
+                if (enemy.ContainsPassiveAbility(Passi.DragonAwakeFake.type)) return true;
+            }
+            return false;
         }
     }
 }

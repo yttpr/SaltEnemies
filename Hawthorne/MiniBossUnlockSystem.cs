@@ -701,6 +701,7 @@ namespace Hawthorne
 
         public bool Gun = false;
         public bool firstBullet = false;
+        public int Fish;
 
         public AchievementSystem.AchieveInfo Ach;
         
@@ -755,6 +756,7 @@ namespace Hawthorne
         {
             if (Added) return;
             base.AddItem();
+            if (base.itemPools == ItemPools.Fish) MiniBossUnlockSystem.AddToFishPool(MiniBossUnlockSystem.GetItemName(this), Fish);
             if (Ach != null) Ach.SetValue(true);
             Added = true;
             //if (Hide) return;

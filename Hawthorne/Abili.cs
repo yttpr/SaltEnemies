@@ -3576,6 +3576,144 @@ namespace Hawthorne
             }
         }
 
+        public static void Clean()
+        {
+            _weep = null;
+            _pray = null;
+            _drain = null;
+            _haunt = null;
+            _gnaw = null;
+            _mast = null;
+            _insight = null;
+            _swapSupport = null;
+            _resetDefault = null;
+            _aroma = null;
+            _photosynthesize = null;
+            _love4U = null;
+            _cry4U = null;
+            _smile4U = null;
+            _lie4U = null;
+            _die4U = null;
+            _struggle = null;
+            _bloodletting = null;
+            _runaway = null;
+            _camouflage = null;
+            _indluge = null;
+            _agony = null;
+            _terrify = null;
+            _throttle = null;
+            _coda = null;
+            _bloat = null;
+            _coarse = null;
+            _gross = null;
+            _cripple = null;
+            _crucify = null;
+            _cracking = null;
+            _deepBreaths = null;
+            _hurdle = null;
+            _disembowel = null;
+            _crush = null;
+            _sink = null;
+            _rot = null;
+            _writhe = null;
+            _rightKill = null;
+            _leftKill = null;
+            _loseControl = null;
+            _sing = null;
+            _tooFarGone = null;
+            _seeDreams = null;
+            _takeBones = null;
+            _beyondLies = null;
+            _dieWithYou = null;
+            _bluePigs = null;
+            _crazyBlood = null;
+            _pinch = null;
+            _shredding = null;
+            _binder = null;
+            _engravings = null;
+            _press = null;
+            _descriptions = null;
+            _indexing = null;
+            _dissolver = null;
+            _fadeOut = null;
+            _phaseIn = null;
+            _waver = null;
+            _wanderlust = null;
+            _whisperings = null;
+            _nameless = null;
+            _nobodyMoves = null;
+            _longSlice = null;
+            _foggyLens = null;
+            _shortStomp = null;
+            _chomp = null;
+            _psychoDreams = null;
+            _glassWaves = null;
+            _woodChips = null;
+            _painStar = null;
+            _defense = null;
+            _offense = null;
+            _spectral = null;
+            _pure = null;
+            _dangle = null;
+            _fall = null;
+            _descent = null;
+            _presence = null;
+            _bloodAttract = null;
+            _abyss = null;
+            _sprayBlood = null;
+            _splitBlood = null;
+            _splatterBlood = null;
+            _librarium = null;
+            _silenceFools = null;
+            _hangWeak = null;
+            _suffocatePoor = null;
+            _eatTears = null;
+            _scareFeeble = null;
+            _crashYourGame = null;
+            _nest = null;
+            _patience = null;
+            _trackDown = null;
+            _singeClaws = null;
+            _fireVeins = null;
+            _fireDeath = null;
+            _pointyBeak = null;
+            _scry = null;
+            _stare = null;
+            _lightScratch = null;
+            _statue = null;
+            _hellScreech = null;
+            _windle1 = null;
+            _windle2 = null;
+            _windle3 = null;
+            _radiation = null;
+            _flare = null;
+            _gravity = null;
+            _transEmo = null;
+            _transHung = null;
+            _transPain = null;
+            _transSen = null;
+            _hide = null;
+            _seek = null;
+            _play = null;
+            _stay = null;
+            _salivate = null;
+            _underwater = null;
+            _lostLove = null;
+            _tailHead = null;
+            _slop = null;
+            _pingo = null;
+            _skitter = null;
+            _shockTherapy = null;
+            _illuminate = null;
+            _replacement = null;
+            _burp = null;
+            _flail = null;
+            _swallow = null;
+            _lubricate = null;
+            _suffocate = null;
+            _thrash = null;
+        }
+
     }
 
     public static class BasicEffects
@@ -3779,6 +3917,16 @@ namespace Hawthorne
                 instance2.allSelfSlots = true;
                 instance2.slotPointerDirections = new int[1];
                 return instance2;
+            }
+        }
+        public static TargettingByHealthUnits HighestAlly
+        {
+            get
+            {
+                TargettingByHealthUnits highest = ScriptableObject.CreateInstance<TargettingByHealthUnits>();
+                highest.Lowest = false;
+                highest.getAllies = true;
+                return highest;
             }
         }
 

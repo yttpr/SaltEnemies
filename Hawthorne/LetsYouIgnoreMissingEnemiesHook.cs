@@ -144,6 +144,9 @@ namespace Hawthorne
             CheckEnemy("PurpleBot_EN");
             CheckEnemy("GreyBot_EN");
             CheckEnemy("GlassedSun_EN");
+            CheckEnemy("Crystal_EN");
+            CheckEnemy("TheDragon_EN");
+            CheckEnemy("OdetoHumanity_EN");
         }
         public static void CheckEnemy(string enemy)
         {
@@ -163,6 +166,7 @@ namespace Hawthorne
                     if (enemy == "Windle1_EN") { DisableEnemy("Windle2_EN"); DisableEnemy("Windle3_EN"); }
                     if (enemy == "BlackStar_EN") DisableEnemy("Singularity_EN");
                     if (enemy == "Windle1_EN") { DisableEnemy("Children5_EN"); DisableEnemy("Children4_EN"); DisableEnemy("Children3_EN"); DisableEnemy("Children2_EN"); DisableEnemy("Children1_EN"); DisableEnemy("Children0_EN"); DisableEnemy("ChildrenPrayer_EN"); }
+                    if (enemy == "Crystal_EN") DisableEnemy("CandyStone_EN");
                 }
             }
             catch
