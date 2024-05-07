@@ -439,6 +439,11 @@ namespace Hawthorne
             SaltTwo.GreyBotHard();
             SaltTwo.GlassSunHard();
             SaltTwo.MercedGard();
+            SaltTwo.CrystalMed();
+            SaltTwo.CrystalHard();
+            SaltTwo.DragonHard();
+            SaltTwo.OdeMed();
+            SaltTwo.ShuaMed();
         }
     }
 }

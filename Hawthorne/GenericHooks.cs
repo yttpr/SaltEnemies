@@ -48,7 +48,7 @@ namespace Hawthorne
                 CombatManager.Instance.AddUIAction(new ShowItemInformationUIAction(killer.ID, killer.HeldItem.GetItemLocData().text, false, killer.HeldItem.wearableImage));
                 ScriptableObject.CreateInstance<ApplyDeterminedEffect>().PerformEffect(CombatManager.Instance._stats, self, Slots.Self.GetTargets(CombatManager.Instance._stats.combatSlots, self.SlotID, self.IsUnitCharacter), Slots.Self.AreTargetSlots, 3, out int exi);
             }
-            if (killer != null && killer.HasUsableItem && killer.HeldItem._itemName == "Echo")
+            if (killer != null && killer.HasUsableItem && killer.HeldItem._itemName == "Echo" && ret.damageAmount > 0)
             {
                 try
                 {

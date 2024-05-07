@@ -1872,6 +1872,8 @@ namespace Hawthorne
                     param._parameterValue = true;
                     CasterSetStoredValueEffect a = ScriptableObject.CreateInstance<CasterSetStoredValueEffect>();
                     a._valueName = UnitStoredValueNames.DemonCoreW;
+                    CasterSetStoredValueEffect b = ScriptableObject.CreateInstance<CasterSetStoredValueEffect>();
+                    b._valueName = DragonOnceCondition.Value;
                     RaritySO five = ScriptableObject.CreateInstance<RaritySO>();
                     five.canBeRerolled = true;
                     five.rarityValue = 5;
@@ -1903,10 +1905,12 @@ namespace Hawthorne
                         new Effect(ScriptableObject.CreateInstance<DragonSongEffect>(), 1, null, Slots.Self),
                         new Effect(RootActionEffect.Create(new Effect[]
                         {
-                            new Effect(a, 0, null, Slots.Self)
+                            new Effect(a, 0, null, Slots.Self),
+                            new Effect(b, 0, null, Slots.Self)
                         }), 1, null, Slots.Self)
                     });
                     asleep._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDamaged };
+                    asleep.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<DragonOnceCondition>(), ScriptableObject.CreateInstance<IsAliveCondition>() };
                     _dragonAsleep = asleep;
                 }
                 return _dragonAsleep;
@@ -7068,7 +7072,7 @@ namespace Hawthorne
             for (int i = start; i <= 10; i++)
             {
                 CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("DragonAwake", i);
-                System.Threading.Thread.Sleep(30);
+                System.Threading.Thread.Sleep(80);
                 //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
             }
             //UnityEngine.Debug.Log("done");
@@ -7081,7 +7085,7 @@ namespace Hawthorne
             for (int i = start; i >= 0; i--)
             {
                 CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("DragonAwake", i);
-                System.Threading.Thread.Sleep(30);
+                System.Threading.Thread.Sleep(80);
                 //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
             }
             //UnityEngine.Debug.Log("done");

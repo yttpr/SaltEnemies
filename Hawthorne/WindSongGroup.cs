@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static Hawthorne.Check;
+using static Hawthorne.RandomEncounters;
 
 namespace Hawthorne
 {
@@ -1040,6 +1041,7 @@ namespace Hawthorne
             BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("ShuaWorld.png"));
 
             gardEZ(sign);
+            GardMed(sign);
         }
         public static void gardEZ(int sign)
         {
@@ -1051,7 +1053,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = 4,
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/ShuaTheme",
+                musicEvent = "event:/Hawthorne/NewerShuaTheme",
                 roarEvent = "event:/Hawthorne/Attack3/Censored",
                 difficulty = EncounterDifficulty.Easy
             };
@@ -1216,6 +1218,93 @@ namespace Hawthorne
                 new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
                 new FieldEnemy(){enemyName = "Unterling_EN", enemySlot=1},
                 new FieldEnemy(){enemyName = "Unterling_EN", enemySlot=2},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.CheckEncounters();
+            jarden.AddEncounter();
+        }
+        public static void GardMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "CensoredForYourViewingPleasure",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(8, 14),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/NewerShuaTheme",
+                roarEvent = "event:/Hawthorne/Attack3/Censored",
+                difficulty = EncounterDifficulty.Medium
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Shua_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "InHisImage_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "InHisImage_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(false, Half), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(false, true), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(false, Half), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomColor(2), enemySlot=3},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = SmartColor(2, true), enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(2), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = SmartColor(2, true), enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(2), enemySlot=2},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomWhore(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomColor(2), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomWhore(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Shua_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomWhore(), enemySlot=2},
                 });
             }
             jarden.variations = fields.ToArray();

@@ -56,8 +56,8 @@ namespace Hawthorne
                     effectItem.trigger = TriggerCalls.Count;
                     effectItem.namePopup = true;
                     effectItem.consumedOnUse = false;
-                    effectItem.itemPools = ItemPools.Treasure;
-                    effectItem.shopPrice = 5;
+                    effectItem.itemPools = ItemPools.Shop;
+                    effectItem.shopPrice = 2;
                     effectItem.startsLocked = false;
                     effectItem.immediate = false;
                     effectItem.effects = new Effect[0];
@@ -237,7 +237,7 @@ namespace Hawthorne
                     UnlockItem effectItem = new UnlockItem();
                     effectItem.name = "Feeding Frenzy";
                     effectItem.flavorText = "\"Blood excitement\"";
-                    effectItem.description = "On killing anything, apply 1 Haste on every party member and enemy.";
+                    effectItem.description = "On killing anything, apply 1 Haste on all other party members and enemies.";
                     effectItem.sprite = ResourceLoader.LoadSprite("FeedingFrenzy.png");
                     effectItem.trigger = TriggerCalls.OnKill;
                     effectItem.namePopup = true;
@@ -246,7 +246,7 @@ namespace Hawthorne
                     effectItem.shopPrice = 8;
                     effectItem.startsLocked = false;
                     effectItem.immediate = false;
-                    effectItem.effects = new Effect[] { new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 1, null, MultiTargetting.Create(Targetting.AllAlly, Targetting.AllEnemy)) };
+                    effectItem.effects = new Effect[] { new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 1, null, MultiTargetting.Create(Slots.SlotTarget(new int[] {-4, -3, -2, -1, 1, 2, 3, 4}, true), Targetting.AllEnemy)) };
                     effectItem.unlockableID = (UnlockableID)18482908;
                     effectItem.Ach = new AchievementSystem.AchieveInfo((Achievement)18482908, AchievementUnlockType.Strangers, "Salt's Enemies Chapter Eight", "Defeat all enemies in Chapter 8 of Salt's Enemy Mod.", ResourceLoader.LoadSprite("Chapter08Achi.png", 32));
                     effectItem.Prepare();
@@ -407,7 +407,7 @@ namespace Hawthorne
                     UnlockItem effectItem = new UnlockItem();
                     effectItem.name = "Coelacanth";
                     effectItem.flavorText = "\"You caught a... coelacanth! 150 cm\"";
-                    effectItem.description = "On taking any damage, heal 2 health and inflict 1 Deep Water on the Opposing position. 10% chance to be destroyed on activation.";
+                    effectItem.description = "On taking any damage, heal 2 health and inflict 1 Deep Water on the Opposing position. 20% chance to be destroyed on activation.";
                     effectItem.sprite = ResourceLoader.LoadSprite("Coelocanth.png");
                     effectItem.trigger = TriggerCalls.OnDamaged;
                     effectItem.namePopup = true;
@@ -417,7 +417,7 @@ namespace Hawthorne
                     effectItem.Fish = 1;
                     effectItem.startsLocked = false;
                     effectItem.immediate = false;
-                    effectItem.effects = new Effect[] { new Effect(ScriptableObject.CreateInstance<HealEffect>(), 2, null, Slots.Self), new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 1, null, Slots.Front), new Effect(ScriptableObject.CreateInstance<ConsumeItemEffect>(), 1, null, Slots.Self, Conditions.Chance(10)) };
+                    effectItem.effects = new Effect[] { new Effect(ScriptableObject.CreateInstance<HealEffect>(), 2, null, Slots.Self), new Effect(ScriptableObject.CreateInstance<ApplyWaterSlotEffect>(), 1, null, Slots.Front), new Effect(ScriptableObject.CreateInstance<ConsumeItemEffect>(), 1, null, Slots.Self, Conditions.Chance(20)) };
                     effectItem.unlockableID = (UnlockableID)18482914;
                     effectItem.Ach = new AchievementSystem.AchieveInfo((Achievement)18482914, AchievementUnlockType.Strangers, "Salt's Enemies Chapter Fourteen", "Defeat all enemies in Chapter 14 of Salt's Enemy Mod.", ResourceLoader.LoadSprite("Chapter14Achi.png", 32));
                     effectItem.Prepare();
@@ -555,9 +555,36 @@ namespace Hawthorne
             {
                 if (effector is IUnit unit && unit.HasUsableItem) CombatManager.Instance.AddUIAction(new ShowItemInformationUIAction(unit.ID, unit.HeldItem._itemName, false, unit.HeldItem.wearableImage));
                 if (hitting.opponentUnitType == SaltEnemies.Avian) hitting.AddModifier(new FloatMod(2.0f, true));
-                else hitting.AddModifier(new FloatMod(1.15f, true));
+                else hitting.AddModifier(new FloatModMin1(1.15f, false));
             }
             return false;
+        }
+    }
+    public class FloatModMin1 : IntValueModifier
+    {
+        public readonly float mod;
+        public readonly bool roundUp;
+        public FloatModMin1(float _mod, bool _RoundUp) : base(74)
+        {
+            this.mod = _mod;
+            this.roundUp = _RoundUp;
+        }
+
+        public override int Modify(int value)
+        {
+            int orig = value;
+            float gap = value;
+            gap *= mod;
+            if (roundUp)
+            {
+                value = (int)Math.Ceiling(gap);
+            }
+            else
+            {
+                value = (int)Math.Floor(gap);
+            }
+            if (value <= orig) value++;
+            return value;
         }
     }
     public class StageFrightCondition : EffectorConditionSO

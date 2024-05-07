@@ -4656,7 +4656,17 @@ namespace Hawthorne
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
-            entryVariable = UnityEngine.Random.Range(5, 16);
+            exitAmount = 0;
+            int min = 5;
+            int max = 11;
+            int mon = 2;
+            if (CombatManager.Instance._informationHolder.Run.CurrentZoneID >= 2)
+            {
+                min += 5;
+                max += 5;
+                mon++;
+            }
+            entryVariable = UnityEngine.Random.Range(min, max);
 
             int minimize = 5;
             if (caster is EnemyCombat enemy)
@@ -4667,13 +4677,13 @@ namespace Hawthorne
                 }
                 for (int i = 0; i < minimize; i++)
                 {
-                    entryVariable += UnityEngine.Random.Range(3, 5);
+                    entryVariable += UnityEngine.Random.Range(mon, 5);
                 }
             }
             int second = 0;
             for (int i = 0; i < stats.TurnsPassed; i++)
             {
-                second += UnityEngine.Random.Range(2, 3);
+                second += mon;
                 if (UnityEngine.Random.Range(0, 100) < 45) second++;
                 if (UnityEngine.Random.Range(0, 100) < 15) second++;
             }

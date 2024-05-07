@@ -17589,18 +17589,6 @@ namespace Hawthorne
                 });
                 ResetColor();
             }
-            if (MultiENExist("MechanicalLens_EN", "WindSong_EN") && Fifth)
-            {
-                list.Add(new RandomEnemyGroup
-                {
-                    _enemyNames = new string[]
-                    {
-                        "MechanicalLens_EN",
-                        "Nephilim_EN",
-                        "WindSong_EN",
-                    }
-                });
-            }
             if (MultiENExist("MechanicalLens_EN", "Disembodied_EN") && Half)
             {
                 list.Add(new RandomEnemyGroup

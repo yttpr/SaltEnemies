@@ -156,7 +156,7 @@ namespace Hawthorne
                         rarity = 8,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.GoLeft, 1, IntentType.Swap_Left, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{1 }, true))
                         },
@@ -181,7 +181,7 @@ namespace Hawthorne
                         rarity = 8,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.GoRight, 1, IntentType.Swap_Right, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{-1 }, true))
                         },
@@ -1538,7 +1538,6 @@ namespace Hawthorne
                 {
                     if (status.EffectType == (StatusEffectType)456789) amount = status.StatusContent;
                 }
-                if (amount <= 0) return false;
                 SpawnEnemyWithPowerEffect e = SpawnEnemyWithPowerEffect.Create("CandyStone_EN", amount, true);
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<ShowDecayInfoEffect>(), 1, null, Slots.Self), new Effect(e, 0, null, Slots.Self) }), unit));
                 return false;
@@ -1769,6 +1768,49 @@ namespace Hawthorne
             if (!caster.ContainsPassiveAbility(PassiveAbilityTypes.BoneSpurs)) caster.AddPassiveAbility(LoadedAssetsHandler.GetCharcater("Fennec_CH").passiveAbilities[0]);
             else caster.SetStoredValue(UnitStoredValueNames.BoneSpursPA, caster.GetStoredValue(UnitStoredValueNames.BoneSpursPA) + 2);
             return true;
+        }
+    }
+    public class DragonOnceCondition : EffectorConditionSO
+    {
+        public static UnitStoredValueNames Value => (UnitStoredValueNames)28299631;
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (effector is IUnit unit)
+            {
+                if (unit.GetStoredValue(Value) <= 0)
+                {
+                    unit.SetStoredValue(Value, 1);
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    public class SpawnEnemyFromAreaFromEntryEffect : SpawnEnemyInSlotFromEntryStringNameEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            for (int i = 0; i < 20; i++)
+            {
+                try
+                {
+                    switch (CombatManager.Instance._informationHolder.Run.CurrentZoneID)
+                    {
+                        case 0: en = SaltEnemies.Shore.GetRandom(); break;
+                        case 1: en = SaltEnemies.Orpheum.GetRandom(); break;
+                        case 2: en = SaltEnemies.Garden.GetRandom(); break;
+                        default: en = Check.Third ? SaltEnemies.Shore.GetRandom() : Check.Either(SaltEnemies.Orpheum.GetRandom(), SaltEnemies.Garden.GetRandom()); break;
+                    }
+                    if (Check.EnemyExist(en)) break;
+                }
+                catch
+                {
+                    Debug.LogError("torture me not effect failed");
+                    if (i > 10) return false;
+                }
+            }
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
         }
     }
 }

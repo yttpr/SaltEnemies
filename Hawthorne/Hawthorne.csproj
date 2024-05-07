@@ -540,11 +540,13 @@
 	  <None Remove="Pages\CoffinPage.png" />
 	  <None Remove="Pages\CoinHunterPage.png" />
 	  <None Remove="Pages\CrowPage.png" />
+	  <None Remove="Pages\CrystalPage.png" />
 	  <None Remove="Pages\DamoclesPage.png" />
 	  <None Remove="Pages\DeadGodPage.png" />
 	  <None Remove="Pages\DeadPixelPage.png" />
 	  <None Remove="Pages\DelusionPage.png" />
 	  <None Remove="Pages\DontTouchMePage.png" />
+	  <None Remove="Pages\DragonPage.png" />
 	  <None Remove="Pages\EnigmaPage.png" />
 	  <None Remove="Pages\FakeAngelPage.png" />
 	  <None Remove="Pages\FirebirdPage.png" />
@@ -560,6 +562,7 @@
 	  <None Remove="Pages\MercedPage.png" />
 	  <None Remove="Pages\MiriamPage.png" />
 	  <None Remove="Pages\NamelessPage.png" />
+	  <None Remove="Pages\OdePage.png" />
 	  <None Remove="Pages\PinanoPage.png" />
 	  <None Remove="Pages\PostmodernPage.png" />
 	  <None Remove="Pages\PurpleBotPage.png" />
@@ -1218,11 +1221,13 @@
 	  <EmbeddedResource Include="Pages\CoffinPage.png" />
 	  <EmbeddedResource Include="Pages\CoinHunterPage.png" />
 	  <EmbeddedResource Include="Pages\CrowPage.png" />
+	  <EmbeddedResource Include="Pages\CrystalPage.png" />
 	  <EmbeddedResource Include="Pages\DamoclesPage.png" />
 	  <EmbeddedResource Include="Pages\DeadGodPage.png" />
 	  <EmbeddedResource Include="Pages\DeadPixelPage.png" />
 	  <EmbeddedResource Include="Pages\DelusionPage.png" />
 	  <EmbeddedResource Include="Pages\DontTouchMePage.png" />
+	  <EmbeddedResource Include="Pages\DragonPage.png" />
 	  <EmbeddedResource Include="Pages\EnigmaPage.png" />
 	  <EmbeddedResource Include="Pages\FakeAngelPage.png" />
 	  <EmbeddedResource Include="Pages\FirebirdPage.png" />
@@ -1238,6 +1243,7 @@
 	  <EmbeddedResource Include="Pages\MercedPage.png" />
 	  <EmbeddedResource Include="Pages\MiriamPage.png" />
 	  <EmbeddedResource Include="Pages\NamelessPage.png" />
+	  <EmbeddedResource Include="Pages\OdePage.png" />
 	  <EmbeddedResource Include="Pages\PinanoPage.png" />
 	  <EmbeddedResource Include="Pages\PostmodernPage.png" />
 	  <EmbeddedResource Include="Pages\PurpleBotPage.png" />

@@ -105,6 +105,19 @@ namespace Hawthorne
                         return;
                     }
                 }
+                if (EnemyExist("TheDragon_EN") && value.EnemyBase == LoadedAssetsHandler.GetEnemy("TheDragon_EN"))
+                {
+                    if (self._gibs != null && self._animator.GetBool("Awake"))
+                    {
+                        UnityEngine.Object.Instantiate(self._gibs, self.transform.position, self.transform.rotation);
+                        return;
+                    }
+                    else
+                    {
+                        UnityEngine.Object.Instantiate(Dragon.Green, self.transform.position, self.transform.rotation);
+                        return;
+                    }
+                }
             }
             orig(self);
         }

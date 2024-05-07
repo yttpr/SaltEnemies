@@ -46,7 +46,9 @@ namespace Hawthorne
                             foreach (EnemyBundleData enemy in ret.Enemies)
                             {
                                 if (ExcludeEnemies.Contains(enemy.enemy) || 
-                                    (IsGarden && Check.EnemyExist("Freud_EN") && enemy.enemy == LoadedAssetsHandler.GetEnemy("Freud_EN")))
+                                    (IsGarden && Check.EnemyExist("Freud_EN") && enemy.enemy == LoadedAssetsHandler.GetEnemy("Freud_EN")) ||
+                                    (!IsGarden && Check.EnemyExist("Merced_EN") && enemy.enemy == LoadedAssetsHandler.GetEnemy("Merced_EN")) ||
+                                    (!IsGarden && Check.EnemyExist("Butterfly_EN") && enemy.enemy == LoadedAssetsHandler.GetEnemy("Butterfly_EN")))
                                 {
 
                                     if (DoDebugs.MiscInfo) Debug.LogWarning("salt enemies config disables the enemy " + enemy.enemy._enemyName + ". sorry! we are on trial " + j.ToString()); 

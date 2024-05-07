@@ -588,10 +588,10 @@ namespace Hawthorne
             new Stamp("Sun", "GlassedSun_EN", "SunPage.png", "Group_5c", "SunLock.png", "SunMark.png");
             new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "", Chapter.Fifteen);
 
-            new Stamp("Crystal", "Crystal_EN", "", "Group_5d", "CrystalLock.png", "CrystalMark.png");
-            new Stamp("Stone", "CandyStone_EN", "", "Group_5d", "StoneLock.png", "StoneMark.png");
-            new Stamp("Dragon", "TheDragon_EN", "", "Group_5d", "DragonLock.png", "DragonMark.png");
-            new Stamp("Vase", "OdetoHumanity_EN", "", "Group_5d", "VaseLock.png", "VaseMark.png");
+            new Stamp("Crystal", "Crystal_EN", "CrystalPage.png", "Group_5d", "CrystalLock.png", "CrystalMark.png");
+            new Stamp("Stone", "CandyStone_EN", "CrystalPage.png", "Group_5d", "StoneLock.png", "StoneMark.png");
+            new Stamp("Dragon", "TheDragon_EN", "DragonPage.png", "Group_5d", "DragonLock.png", "DragonMark.png");
+            new Stamp("Vase", "OdetoHumanity_EN", "OdePage.png", "Group_5d", "VaseLock.png", "VaseMark.png");
             new StampGroup("Group_5d", new string[] { "Crystal", "Stone", "Dragon", "Vase" }, "", "", Chapter.Sixteen);
 
         }

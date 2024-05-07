@@ -638,6 +638,54 @@ namespace Hawthorne
         {
             orig(self);
             StampHandler.PrintStampsByGroup();
+            AddToAreaPool("ChoirBoy_EN", 2);
+            AddToAreaPool("Chordophone_EN", 1);
+            AddToAreaPool("Conductor_EN", 1);
+            AddToAreaPool("FlaMinGoa_EN", 0);
+            AddToAreaPool("Flarblet_EN", 0);
+            AddToAreaPool("GigglingMinister_EN", 2);
+            AddToAreaPool("GildedGulper_EN", 1);
+            AddToAreaPool("Goa_EN", 0);
+            AddToAreaPool("HeavensGateBlue_BOSS", 2);
+            AddToAreaPool("HeavensGatePurple_BOSS", 2);
+            AddToAreaPool("HeavensGateRed_BOSS", 2);
+            AddToAreaPool("HeavensGateYellow_BOSS", 2);
+            AddToAreaPool("InHerImage_EN", 2);
+            AddToAreaPool("InHisImage_EN", 2);
+            AddToAreaPool("JumbleGuts_Clotted_EN", 0);
+            AddToAreaPool("JumbleGuts_Clotted_EN", 1);
+            AddToAreaPool("JumbleGuts_Flummoxing_EN", 1);
+            AddToAreaPool("JumbleGuts_Hollowing_EN", 1);
+            AddToAreaPool("JumbleGuts_Waning_EN", 0);
+            AddToAreaPool("JumbleGuts_Waning_EN", 1);
+            AddToAreaPool("Keko_EN", 0);
+            AddToAreaPool("ManicHips_EN", 1);
+            AddToAreaPool("ManicMan_EN", 1);
+            AddToAreaPool("MudLung_EN", 0);
+            AddToAreaPool("Mung_EN", 0);
+            AddToAreaPool("Mungie_EN", 0);
+            AddToAreaPool("MusicMan_EN", 1);
+            AddToAreaPool("NextOfKin_EN", 2);
+            AddToAreaPool("OneManBand_EN", 1);
+            AddToAreaPool("Psaltery_EN", 1);
+            AddToAreaPool("Scrungie_EN", 1);
+            AddToAreaPool("ShiveringHomunculus_EN", 2);
+            AddToAreaPool("SilverSuckle_EN", 1);
+            AddToAreaPool("SingingStone_EN", 1);
+            AddToAreaPool("SkinningHomunculus_EN", 2);
+            AddToAreaPool("Spoggle_Resonant_EN", 1);
+            AddToAreaPool("Spoggle_Ruminating_EN", 0);
+            AddToAreaPool("Spoggle_Ruminating_EN", 1);
+            AddToAreaPool("Spoggle_Spitfire_EN", 0);
+            AddToAreaPool("Spoggle_Spitfire_EN", 1);
+            AddToAreaPool("Spoggle_Writhing_EN", 1);
+            AddToAreaPool("Woodwind_EN", 1);
+            AddToAreaPool("WrigglingSacrifice_EN", 1);
+            AddToAreaPool("Wringle_EN", 0);
+            AddToAreaPool("Zeitgeist_EN", 2);
+            
+
+
             //Taco
             addSepulchrePool("Monck_EN");
             addSepulchrePool("Iconoclast_EN");
@@ -647,6 +695,8 @@ namespace Hawthorne
             addBronzoPool("Disembodied_EN");//Disembodied_Primary_Medium Disembodied_Primary_Hard Disembodied_Diva_Hard
             addBronzoPool("BarnacleQueen_EN");//BarnacleQueen_Hard_Miniboss
             addFountainPool("Monck_EN");
+            AddToAreaPool("Monck_EN", 0);
+            AddToAreaPool("Disembodied_EN", 0);
 
             //TairPeep
             AddScrungiePool("Flarbleft_EN", 3);
@@ -736,6 +786,22 @@ namespace Hawthorne
             AnglerH
             MetatronH
              */
+            AddToAreaPool("DrySimian_EN", 0);
+            AddToAreaPool("Flarbleft_EN", 0);
+            AddToAreaPool("LipBug_EN", 0);
+            AddToAreaPool("DesiccatingJumbleguts_EN", 1);
+            AddToAreaPool("PerforatedSpoggle_EN", 1);
+            AddToAreaPool("NakedGizo_EN", 1);
+            AddToAreaPool("Gizo_EN", 1);
+            AddToAreaPool("Chapman_EN", 1);
+            AddToAreaPool("TitteringPeon_EN", 2);
+            AddToAreaPool("Unterling_EN", 2);
+            AddToAreaPool("ScreamingHomunculus_EN", 2);
+            AddToAreaPool("SterileBud_EN", 2);
+            AddToAreaPool("FamiliarSpoggle_EN", 1);
+            AddToAreaPool("Nephilim_EN", 0);
+            AddToAreaPool("Seraphim_EN", 1);
+            AddToAreaPool("Seraphim_EN", 1);
 
             //Salt
             addSepulchrePool("LostSheep_EN");
@@ -785,6 +851,12 @@ namespace Hawthorne
             addSepulchrePool("Minana_EN");
             addSepulchrePool("Arceles_EN");
             addSepulchrePool("Stoplight_EN");
+            addSepulchrePool("RedBot_EN");
+            addSepulchrePool("YellowBot_EN");
+            addSepulchrePool("BlueBot_EN");
+            addSepulchrePool("PurpleBot_EN");
+            addSepulchrePool("GreyBot_EN");
+            addSepulchrePool("GlassedSun_EN");
             addSepulchrePool("Crystal_EN");
             addSepulchrePool("CrystalStone_EN");
             addSepulchrePool("TheDragon_EN");
@@ -842,6 +914,11 @@ namespace Hawthorne
             addFountainPool("Minana_EN");
             addFountainPool("Arceles_EN");
             addFountainPool("Stoplight_EN");
+            addFountainPool("RedBot_EN");
+            addFountainPool("YellowBot_EN");
+            addFountainPool("BlueBot_EN");
+            addFountainPool("PurpleBot_EN");
+            addFountainPool("GreyBot_EN");
             addFountainPool("Crystal_EN");
             addFountainPool("CrystalStone_EN");
             addFountainPool("OdetoHumanity_EN");
@@ -912,10 +989,121 @@ namespace Hawthorne
             addBronzoPool("Minana_EN");
             addBronzoPool("Arceles_EN");
             addBronzoPool("Stoplight_EN");
+            addBronzoPool("RedBot_EN");
+            addBronzoPool("YellowBot_EN");
+            addBronzoPool("BlueBot_EN");
+            addBronzoPool("PurpleBot_EN");
+            addBronzoPool("GreyBot_EN");
+            addBronzoPool("GlassedSun_EN");
             addBronzoPool("Crystal_EN");
-            addBronzoPool("CrystalStone_EN");
+            addBronzoPool("CandyStone_EN");
             addBronzoPool("TheDragon_EN");
             addBronzoPool("OdetoHumanity_EN");
+
+            AddToAreaPool("LostSheep_EN", 0);
+            AddToAreaPool("LostSheep_EN", 1);
+            AddToAreaPool("LostSheep_EN", 2);
+            AddToAreaPool("Enigma_EN", 1);
+            AddToAreaPool("Enigma_EN", 2);
+            AddToAreaPool("DeadPixel_EN", 0);
+            AddToAreaPool("DeadPixel_EN", 1);
+            AddToAreaPool("DeadPixel_EN", 2);
+            AddToAreaPool("LittleAngel_EN", 2);
+            AddToAreaPool("A'Flower'_EN", 0);
+            AddToAreaPool("Denial_EN", 1);
+            AddToAreaPool("Derogatory_EN", 1);
+            AddToAreaPool("Something_EN", 1);
+            AddToAreaPool("Satyr_EN", 2);
+            AddToAreaPool("TeachaMantoFish_EN", 0);
+            AddToAreaPool("TeachaMantoFish_EN", 2);
+            AddToAreaPool("TheCrow_EN", 1);
+            AddToAreaPool("TheCrow_EN", 2);
+            AddToAreaPool("Freud_EN", 1);
+            AddToAreaPool("StarGazer_EN", 2);
+            AddToAreaPool("RusticJumbleguts_EN", 1);
+            AddToAreaPool("RusticJumbleguts_EN", 2);
+            AddToAreaPool("MortalSpoggle_EN", 2);
+            AddToAreaPool("MechanicalLens_EN", 0);
+            AddToAreaPool("MechanicalLens_EN", 1);
+            AddToAreaPool("MechanicalLens_EN", 2);
+            AddToAreaPool("FakeAngel_EN", 1);
+            AddToAreaPool("FakeAngel_EN", 2);
+            AddToAreaPool("Illusion_EN", 1);
+            AddToAreaPool("Illusion_EN", 2);
+            AddToAreaPool("RedFlower_EN", 2);
+            AddToAreaPool("BlueFlower_EN", 2);
+            AddToAreaPool("YellowFlower_EN", 1);
+            AddToAreaPool("YellowFlower_EN", 2);
+            AddToAreaPool("PurpleFlower_EN", 1);
+            AddToAreaPool("PurpleFlower_EN", 2);
+            AddToAreaPool("GreyFlower_EN", 2);
+            AddToAreaPool("LivingSolvent_EN", 1);
+            AddToAreaPool("LivingSolvent_EN", 2);
+            AddToAreaPool("WindSong_EN", 1);
+            AddToAreaPool("WindSong_EN", 2);
+            AddToAreaPool("Sigil_EN", 0);
+            AddToAreaPool("Sigil_EN", 1);
+            AddToAreaPool("Sigil_EN", 2);
+            AddToAreaPool("ClockTower_EN", 2);
+            AddToAreaPool("Grandfather_EN", 1);
+            AddToAreaPool("Grandfather_EN", 2);
+            AddToAreaPool("MiniReaper_EN", 2);
+            AddToAreaPool("Skyloft_EN", 0);
+            AddToAreaPool("Skyloft_EN", 1);
+            AddToAreaPool("Skyloft_EN", 2);
+            AddToAreaPool("Miriam_EN", 2);
+            AddToAreaPool("EyePalm_EN", 1);
+            AddToAreaPool("EyePalm_EN", 2);
+            AddToAreaPool("Merced_EN", 2);
+            AddToAreaPool("Butterfly_EN", 2);
+            AddToAreaPool("Shua_EN", 1);
+            AddToAreaPool("Shua_EN", 2);
+            AddToAreaPool("Nameless_EN", 1);
+            AddToAreaPool("Nameless_EN", 2);
+            AddToAreaPool("TripodFish_EN", 0);
+            AddToAreaPool("TripodFish_EN", 2);
+            AddToAreaPool("Lyssa_EN", 1);
+            AddToAreaPool("GlassFigurine_EN", 1);
+            AddToAreaPool("GlassFigurine_EN", 2);
+            AddToAreaPool("Damocles_EN", 1);
+            AddToAreaPool("Damocles_EN", 2);
+            AddToAreaPool("Hunter_EN", 1);
+            AddToAreaPool("Hunter_EN", 2);
+            AddToAreaPool("Firebird_EN", 2);
+            AddToAreaPool("LittleBeak_EN", 0);
+            AddToAreaPool("LittleBeak_EN", 1);
+            AddToAreaPool("Warbird_EN", 0);
+            AddToAreaPool("Warbird_EN", 1);
+            AddToAreaPool("Windle1_EN", 0);
+            AddToAreaPool("Windle2_EN", 1);
+            AddToAreaPool("Windle3_EN", 2);
+            AddToAreaPool("BlackStar_EN", 2);
+            AddToAreaPool("Singularity_EN", 2);
+            AddToAreaPool("Indicator_EN", 2);
+            AddToAreaPool("Maw_EN", 2);
+            AddToAreaPool("Clione_EN", 0);
+            AddToAreaPool("Clione_EN", 1);
+            AddToAreaPool("Clione_EN", 2);
+            AddToAreaPool("Children6_EN", 1);
+            AddToAreaPool("Children6_EN", 2);
+            AddToAreaPool("YNL_EN", 2);
+            AddToAreaPool("Spitato_EN", 2);
+            AddToAreaPool("Pinano_EN", 0);
+            AddToAreaPool("Minana_EN", 0);
+            AddToAreaPool("Arceles_EN", 0);
+            AddToAreaPool("Stoplight_EN", 1);
+            AddToAreaPool("Stoplight_EN", 2);
+            AddToAreaPool("RedBot_EN", 1);
+            AddToAreaPool("RedBot_EN", 2);
+            AddToAreaPool("YellowBot_EN", 1);
+            AddToAreaPool("YellowBot_EN", 2);
+            AddToAreaPool("BlueBot_EN", 2);
+            AddToAreaPool("PurpleBot_EN", 2);
+            AddToAreaPool("GreyBot_EN", 2);
+            AddToAreaPool("GlassedSun_EN", 2);
+            AddToAreaPool("Crystal_EN", 1);
+            AddToAreaPool("CandyStone_EN", 1);
+            AddToAreaPool("OdetoHumanity_EN", 2);
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -958,6 +1146,24 @@ namespace Hawthorne
             addBronzoPool("FoamingSpoggle_EN");
             addBronzoPool("NecromanticSpoggle_EN");
             addBronzoPool("PoolingSpoggle_EN");
+            AddToAreaPool("BondedJumbleGuts_EN", 0);
+            AddToAreaPool("BondedJumbleGuts_EN", 1);
+            AddToAreaPool("AnnoyingJumbleGuts_EN", 0);
+            AddToAreaPool("AnnoyingJumbleGuts_EN", 1);
+            AddToAreaPool("ParasiticJumbleGuts_EN", 0);
+            AddToAreaPool("ParasiticJumbleGuts_EN", 1);
+            AddToAreaPool("AmphibiousSpoggle_EN", 0);
+            AddToAreaPool("AmphibiousSpoggle_EN", 1);
+            AddToAreaPool("IchtyosatedSpoggle_EN", 0);
+            AddToAreaPool("IchtyosatedSpoggle_EN", 1);
+            AddToAreaPool("EclipsedSpoggle_EN", 0);
+            AddToAreaPool("EclipsedSpoggle_EN", 1);
+            AddToAreaPool("MalignantJumbleGuts_EN", 1);
+            AddToAreaPool("ArtisticJumbleGuts_EN", 1);
+            AddToAreaPool("WaxingJumbleGuts_EN", 1);
+            AddToAreaPool("FoamingSpoggle_EN", 1);
+            AddToAreaPool("NecromanticSpoggle_EN", 1);
+            AddToAreaPool("PoolingSpoggle_EN", 1);
             //Far Shore
             //Zone01_JumbleGuts_Bonded_Easy_EnemyBundle
             //1AnnEasy
@@ -1015,6 +1221,12 @@ namespace Hawthorne
             addBronzoPool("Gordo_EN");
             addBronzoPool("Sergeant_EN");
             addBronzoPool("AmmunitionsCrate_EN");
+            AddToAreaPool("InfernalDrummer_EN", 2);
+            AddToAreaPool("Harbinger_EN", 2);
+            AddToAreaPool("HowlingAvian_EN", 2);
+            AddToAreaPool("Scuttlerunt_EN", 2);
+            AddToAreaPool("Lurchin_EN", 0);
+            AddToAreaPool("FesteringFaction_EN", 0);
 
             //Colophon
             addSepulchrePool("MaladjustedColophon_EN");//MaladjustedFarShoreHard MaladjustedMedium
@@ -1029,6 +1241,12 @@ namespace Hawthorne
             addBronzoPool("DelightedColophon_EN");
             addBronzoPool("DefeatedColophon_EN");
             addBronzoPool("ComposedColophon_EN");
+            AddToAreaPool("MaladjustedColophon_EN", 1);
+            AddToAreaPool("DelightedColophon_EN", 1);
+            AddToAreaPool("DefeatedColophon_EN", 0);
+            AddToAreaPool("DefeatedColophon_EN", 1);
+            AddToAreaPool("ComposedColophon_EN", 0);
+            AddToAreaPool("ComposedColophon_EN", 1);
 
             //ZLD1
             addSepulchrePool("Boulder_EN");//Rock_Farshore
@@ -1043,6 +1261,10 @@ namespace Hawthorne
             addBronzoPool("BoulderBuddy_EN");
             addBronzoPool("Teto_EN");
             addBronzoPool("ReflectedHound_EN");
+            AddToAreaPool("Boulder_EN", 0);
+            AddToAreaPool("BoulderBuddy_EN", 0);
+            AddToAreaPool("Teto_EN", 0);
+            AddToAreaPool("ReflectedHound_EN", 1);
 
             //Whimsical
             addSepulchrePool("OsseousClad_EN");
@@ -1089,6 +1311,23 @@ namespace Hawthorne
             addBronzoPool("FumeFactory_EN");
             addBronzoPool("FesteringMusicMan_EN");
             addBronzoPool("Evangelists_EN");
+
+            AddToAreaPool("OsseousClad_EN", 0);
+            AddToAreaPool("OsseousClad_EN", 1);
+            AddToAreaPool("Lymphropod_EN", 0);
+            AddToAreaPool("ColossalSheo_EN", 0);
+            AddToAreaPool("ColossalSheo_EN", 1);
+            AddToAreaPool("RogueWailingSplugling_EN", 0);
+            AddToAreaPool("RogueWailingSplugling_EN", 1);
+            AddToAreaPool("RogueBellowingSplugling_EN", 0);
+            AddToAreaPool("RogueBellowingSplugling_EN", 1);
+            AddToAreaPool("RogueFesteringSplugling_EN", 0);
+            AddToAreaPool("RogueFesteringSplugling_EN", 1);
+            AddToAreaPool("RogueWeepingSplugling_EN", 0);
+            AddToAreaPool("RogueWeepingSplugling_EN", 1);
+            AddToAreaPool("FumeFactory_EN", 1);
+            AddToAreaPool("FesteringMusicMan_EN", 1);
+            AddToAreaPool("Evangelists_EN", 2);
             /*Far Shore
             BluePurpleCrayolaFarShoreEasy
             RedYellowCrayolaFarShoreEasy
@@ -1128,13 +1367,15 @@ namespace Hawthorne
             addSepulchrePool("EggKeeper_EN");//Choirboy Medium - Eggkeeper
             addFountainPool("EggKeeper_EN");
             addBronzoPool("EggKeeper_EN");
+            AddToAreaPool("EggKeeper_EN", 2);
 
             //Marmo
             DontAddPool("Romantic_EN");
             DontAddPool("Mungbert_EN");
             DontAddPool("Errant_EN");
-            addFountainPool("Romantic_EN");
-            addFountainPool("Errant_EN");
+            AddToAreaPool("Romantic_EN", 1);
+            AddToAreaPool("Romantic_EN", 2);
+            AddToAreaPool("Errant_EN", 1);
             //H_M_Zone02_Errant_Hard_EnemyBundle
             //H_M_Zone02_Errant_Medium_EnemyBundle
 
@@ -1142,6 +1383,7 @@ namespace Hawthorne
             addSepulchrePool("RolliUngbun_EN");
             addFountainPool("RolliUngbun_EN");
             addBronzoPool("RolliUngbun_EN");
+            AddToAreaPool("RolliUngbun_EN", 0);
 
             //AG
             addSepulchrePool("MarbleMaw_EN");
@@ -1172,6 +1414,15 @@ namespace Hawthorne
             addBronzoPool("Metronome_EN");
             addBronzoPool("StageLight_EN");
             addBronzoPool("Loudhailer_EN");
+            AddToAreaPool("MarbleMaw_EN", 2);
+            AddToAreaPool("UnculturedSwine_EN", 0);
+            AddToAreaPool("FrowningChancellor_EN", 2);
+            AddToAreaPool("Jansuli_EN", 1);
+            AddToAreaPool("Frostbite_EN", 1);
+            AddToAreaPool("BackupDancer_EN", 1);
+            AddToAreaPool("Metronome_EN", 1);
+            AddToAreaPool("StageLight_EN", 1);
+            AddToAreaPool("Loudhailer_EN", 1);
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1215,6 +1466,12 @@ namespace Hawthorne
             addBronzoPool("UninspiredNosestone_EN");//gray
             addBronzoPool("Boler_EN");
             addBronzoPool("Flatback_EN");
+            AddToAreaPool("SweatingNosestone_EN", 2);
+            AddToAreaPool("ProlificNosestone_EN", 2);
+            AddToAreaPool("ScatterbrainedNosestone_EN", 2);
+            AddToAreaPool("MesmerizingNosestone_EN", 2);
+            AddToAreaPool("UninspiredNosestone_EN", 2);
+            AddToAreaPool("Inequity_EN", 2);
             /*
             inequity
             InequityEncountersHard
@@ -1409,6 +1666,32 @@ namespace Hawthorne
             for (int i = 1; i <= 5; i++) if (EnemyExist("Zygote" + i.ToString() + "_EN")) OtherAvians.Add(LoadedAssetsHandler.GetEnemy("Zygote" + i.ToString() + "_EN"));
         }
         public static List<EnemySO> OtherAvians;
+
+        public static List<string> Shore = new List<string>();
+        public static List<string> Orpheum = new List<string>();
+        public static List<string> Garden = new List<string>();
+        public static void AddToAreaPool(string enemy, int zone)
+        {
+            if (Shore == null) Shore = new List<string>();
+            if (Orpheum == null) Orpheum = new List<string>();
+            if (Garden == null) Garden = new List<string>();
+            if (!EnemyExist(enemy))
+            {
+                if (DoDebugs.EnemyNull) Debug.LogWarning(enemy + " is null, cannot add to area pool");
+                return;
+            }
+            else if (LoadedAssetsHandler.GetEnemy(enemy).size > 1)
+            {
+                if (DoDebugs.EnemyNull) Debug.LogWarning(enemy + " is size 2+, not adding to area pool.");
+                return;
+            }
+            switch (zone)
+            {
+                case 0: if (!Shore.Contains(enemy)) Shore.Add(enemy); break;
+                case 1: if (!Orpheum.Contains(enemy)) Orpheum.Add(enemy); break;
+                case 2: if (!Garden.Contains(enemy)) Garden.Add(enemy); break;
+            }
+        }
     }
 
 
@@ -2109,7 +2392,6 @@ namespace Hawthorne
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 33 && EnemyExist("Sigil_EN")) for (int i = 0; i < 3; i++) list.Add("Sigil_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Grandfather_EN")) list.Add("Grandfather_EN");
                 if (UnityEngine.Random.Range(0, 100) < 40 && EnemyExist("EyePalm_EN")) list.Add("EyePalm_EN");
-                if (!red && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Merced_EN")) list.Add("Merced_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("Shua_EN")) list.Add("Shua_EN");
                 if (!red && !mustSmall && UnityEngine.Random.Range(0, 100) < 15 && EnemyExist("Nameless_EN")) list.Add("Nameless_EN");
                 if (!red && !mustSmall && EnemyExist("Romantic_EN")) list.Add("Romantic_EN");
@@ -3209,6 +3491,14 @@ namespace Hawthorne
                 PageCollector.UpdatePage("MercedPage.png");
                 PageCollector.UpdatePage("SatyrPage.png");
                 PageCollector.UpdatePage("StoplightPage.png");
+            }
+        }
+        public static void U1_4_3_3()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_3_3.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_3_3.txt", "Updatd pages !");
+                PageCollector.UpdatePage("TripodPage.png");
             }
         }
     }

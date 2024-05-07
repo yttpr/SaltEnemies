@@ -73,6 +73,7 @@ namespace Hawthorne
     public static class Dragon
     {
         public static string ID = "Dragon";
+        public static ParticleSystem Green;
         public static void Add(int entity)
         {
             Enemy enemy = new Enemy()
@@ -87,6 +88,7 @@ namespace Hawthorne
                 prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/16/" + ID + "_Enemy.prefab").AddComponent<EnemyInFieldLayout>()
             };
             enemy.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/16/" + ID + "_Gibs.prefab").GetComponent<ParticleSystem>();
+            Green = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/16/SecondGibsDragon.prefab").GetComponent<ParticleSystem>();
             enemy.prefab.SetDefaultParams();
             enemy.combatSprite = ResourceLoader.LoadSprite(ID + "Icon.png", 32);
             enemy.overworldAliveSprite = ResourceLoader.LoadSprite(ID + "World.png", 32, new Vector2?(new Vector2(0.5f, 0f)));
