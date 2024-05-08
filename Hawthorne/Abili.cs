@@ -3395,7 +3395,7 @@ namespace Hawthorne
                         rarity = 5,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<RemoveAllStatusEffectsEffect>(), 3, IntentType.Misc, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<RemoveAllStatusEffectsByAmountEffect>(), 3, IntentType.Misc, Slots.Front),
                             new Effect(ScriptableObject.CreateInstance<ApplyStunnedEffect>(), 3, (IntentType)988896, Slots.Front, BasicEffects.DidThat(false)),
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front, BasicEffects.DidThat(false, 2))
                         },

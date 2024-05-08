@@ -1850,4 +1850,25 @@ namespace Hawthorne
             //UnityEngine.Debug.Log("done");
         }
     }
+    public class RemoveAllStatusEffectsByAmountEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            for (int i = 0; i < targets.Length; i++)
+            {
+                if (targets[i].HasUnit)
+                {
+                    if (targets[i].Unit is IStatusEffector effector)
+                    {
+                        exitAmount += effector.StatusEffects.Count;
+                        targets[i].Unit.TryRemoveAllStatusEffects();
+                    }
+                   else  exitAmount += targets[i].Unit.TryRemoveAllStatusEffects();
+                }
+            }
+
+            return exitAmount > 0;
+        }
+    }
 }
