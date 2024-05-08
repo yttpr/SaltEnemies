@@ -800,7 +800,7 @@ namespace Hawthorne
             AddToAreaPool("SterileBud_EN", 2);
             AddToAreaPool("FamiliarSpoggle_EN", 1);
             AddToAreaPool("Nephilim_EN", 0);
-            AddToAreaPool("Seraphim_EN", 1);
+            AddToAreaPool("Seraphim_EN", 0);
             AddToAreaPool("Seraphim_EN", 1);
 
             //Salt
@@ -873,6 +873,7 @@ namespace Hawthorne
             AddScrungiePool("Minana_EN", 3);
             AddScrungiePool("Arceles_EN");
             AddScrungiePool("CrystalStone_EN", 2);
+            AddScrungiePool("TortureMeNot_EN");
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -999,6 +1000,7 @@ namespace Hawthorne
             addBronzoPool("CandyStone_EN");
             addBronzoPool("TheDragon_EN");
             addBronzoPool("OdetoHumanity_EN");
+            addBronzoPool("TortureMeNot_EN");
 
             AddToAreaPool("LostSheep_EN", 0);
             AddToAreaPool("LostSheep_EN", 1);
@@ -2363,6 +2365,7 @@ namespace Hawthorne
         public static string RandomSupport(int zone, bool red = false, bool mustSmall = true, bool movable = false, bool killable = false)
         {
             List<string> list = new List<string>();
+            if (EnemyExist("TortureMeNot_EN") && Half) list.Add("TortureMeNot_EN");
             if (zone == 0)
             {
                 if (!red) list.Add("Flarblet_EN");
@@ -2403,6 +2406,7 @@ namespace Hawthorne
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!mustSmall && !killable && UnityEngine.Random.Range(0, 100) < 75 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
                 if (!mustSmall && EnemyExist("BackupDancer_EN")) for (int i = 0; i < 3; i++) list.Add("BackupDancer_EN");
+                if (EnemyExist("TortureMeNot_EN") && Third) list.Add("TortureMeNot_EN");
             }
             if (zone == 2)
             {
@@ -2439,6 +2443,7 @@ namespace Hawthorne
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!mustSmall && !red && !killable && UnityEngine.Random.Range(0, 100) < 13 && EnemyExist("Inequity_EN")) list.Add("Inequity_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("OdetoHumanity_EN")) list.Add("OdetoHumanity_EN");
+                if (EnemyExist("TortureMeNot_EN") && Half) list.Add("TortureMeNot_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2739,6 +2744,7 @@ namespace Hawthorne
                 if (EnemyExist("Skyloft_EN") && !flarbOnly && Fifth) list.Add("Skyloft_EN");
                 if (EnemyExist("Minana_EN") && !flarbOnly && Half) list.Add("Minana_EN");
                 if (EnemyExist("Arceles_EN") && !flarbOnly && UnityEngine.Random.Range(0, 100) < 85) list.Add("Arceles_EN");
+                if (EnemyExist("TortureMeNot_EN") && !flarbOnly && Third) list.Add("TortureMeNot_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
             public static string FarShoreSlop(bool doubleAble = false, bool red = false)
@@ -3499,6 +3505,10 @@ namespace Hawthorne
             {
                 File.WriteAllText(SavePath + "Update_1_4_3_3.txt", "Updatd pages !");
                 PageCollector.UpdatePage("TripodPage.png");
+                PageCollector.UpdatePage("OdePage.png");
+                PageCollector.UpdatePage("LittleAngelPage.png");
+                PageCollector.UpdatePage("ShuaPage.png");
+                PageCollector.UpdatePage("YNLPage.png");
             }
         }
     }

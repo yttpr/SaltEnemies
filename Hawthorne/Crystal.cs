@@ -144,4 +144,44 @@ namespace Hawthorne
             enemy.AddEnemy();
         }
     }
+    public static class Forget
+    {
+        public static string ID = "Forget";
+        public static void Add(int entity)
+        {
+            Enemy enemy = new Enemy()
+            {
+                name = "Torture-Me-Not",
+                enemyID = "TortureMeNot_EN",
+                health = 3,
+                size = 1,
+                entityID = (EntityIDs)entity,
+                healthColor = Pigments.Red,
+                priority = 0,
+                prefab = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/16/" + ID + "_Enemy.prefab").AddComponent<MultiSpriteEnemyLayout>()
+            };
+            enemy.prefab._gibs = Hawthorne.SaltEnemies.assetBundle.LoadAsset<GameObject>("assets/16/" + ID + "_Gibs.prefab").GetComponent<ParticleSystem>();
+            enemy.prefab.SetDefaultParams();
+            (enemy.prefab as MultiSpriteEnemyLayout).OtherRenderers = new SpriteRenderer[]
+            {
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").Find("f1").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").Find("f2").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").Find("f3").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").Find("f4").GetComponent<SpriteRenderer>(),
+                enemy.prefab._locator.transform.Find("Sprite").Find("Sprite").Find("f5").GetComponent<SpriteRenderer>(),
+            };
+            enemy.combatSprite = ResourceLoader.LoadSprite(ID + "Icon.png", 32);
+            enemy.overworldAliveSprite = ResourceLoader.LoadSprite(ID + "World.png", 32, new Vector2?(new Vector2(0.5f, 0f)));
+            enemy.overworldDeadSprite = ResourceLoader.LoadSprite(ID + "World.png", 32, new Vector2?(new Vector2(0.5f, 0f)));
+            enemy.hurtSound = LoadedAssetsHandler.GetEnemy("JumbleGuts_Flummoxing_EN").damageSound;
+            enemy.deathSound = LoadedAssetsHandler.GetEnemy("JumbleGuts_Flummoxing_EN").deathSound;
+            enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
+            enemy.passives = new BasePassiveAbilitySO[]
+            {
+                Passi.ForgetMe, Passives.Withering
+            };
+            enemy.abilities = new Ability[] { Abili.Chomp, Abili.Gnaw };
+            enemy.AddEnemy();
+        }
+    }
 }

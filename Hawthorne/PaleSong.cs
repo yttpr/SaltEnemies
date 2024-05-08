@@ -769,4 +769,98 @@ namespace Hawthorne
             orph.AddEncounter();
         }
     }
+    public static class PaleSong
+    {
+        public static void Add(int sign)
+        {
+            if (!EnemyExist("LittleAngel_EN")) return;
+
+            BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("Angel_Icon.png"));
+
+            GardEZ(sign);
+        }
+        public static void GardEZ(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "LittleAngelEasy",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(8,12),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/PaleSong",
+                roarEvent = LoadedAssetsHandler.GetCharcater("Hans_CH").dxSound,
+                difficulty = EncounterDifficulty.Easy
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("LittleAngel_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=3},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=2},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomColor(2), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomColor(2), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomColor(2), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(), enemySlot=2},
+                new FieldEnemy(){enemyName = Garden.RandomChunk(false, true), enemySlot=3},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(2, true), enemySlot=2},
+                new FieldEnemy(){enemyName = SmartColor(2), enemySlot=3},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "LittleAngel_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, false), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomSupport(2, false, Half), enemySlot=4},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.AddEncounter();
+        }
+    }
 }

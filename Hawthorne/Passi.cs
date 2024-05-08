@@ -1916,6 +1916,28 @@ namespace Hawthorne
                 return _dragonAsleep;
             }
         }
+        static BasePassiveAbilitySO _forgetMe;
+        public static BasePassiveAbilitySO ForgetMe
+        {
+            get
+            {
+                if (_forgetMe == null)
+                {
+                    PerformEffectPassiveAbility forget = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    forget._passiveName = "Forget Me";
+                    forget.passiveIcon = ResourceLoader.LoadSprite("ForgettingPassive.png");
+                    forget.type = (PassiveAbilityTypes)388027941;
+                    forget._enemyDescription = "On dying except from Withering, spawn a random 1-tile enemy from this area.";
+                    forget._characterDescription = "eh";
+                    forget.doesPassiveTriggerInformationPanel = true;
+                    forget.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(ScriptableObject.CreateInstance<SpawnEnemyFromAreaFromEntryEffect>(), 0, null, Slots.Self) });
+                    forget._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDeath };
+                    forget.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<IsntWitheringDeathCondition>() };
+                    _forgetMe = forget;
+                }
+                return _forgetMe;
+            }
+        }
 
     }
 

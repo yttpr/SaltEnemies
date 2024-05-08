@@ -3372,7 +3372,7 @@ namespace Hawthorne
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ShockTherapyEffect>(), 3, IntentType.Misc, Slots.Front),
-                            new Effect(BasicEffects.Empty, 3, IntentType.Damage_3_6, Slots.Front)
+                            new Effect(ScriptableObject.CreateInstance<LobotomySongEffect>(), 0, IntentType.Damage_3_6, Slots.Front, BasicEffects.DidThat(true))
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Zap"),
                         animationTarget = Slots.Front,

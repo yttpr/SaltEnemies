@@ -79,6 +79,7 @@ namespace Hawthorne
             Stone.Add(544455);
             Dragon.Add(544454);
             Vase.Add(544453);
+            Forget.Add(544452);
         }
         public static void AddEncounters()
         {
@@ -126,7 +127,7 @@ namespace Hawthorne
             ButterflyGroup.Add(2467426);
             GrandfatherGroup.Add(2467427);
             ReaperGroup.Add(2467428);
-            ShuaGroup.Add(2467429);//ZLD1 IS WORKING ON IT
+            ShuaGroup.Add(2467429);
             BlackStarGroup.Add(2467430);
             IndicatorGroup.Add(2467431);
             MawGroup.Add(2467432);
@@ -148,7 +149,7 @@ namespace Hawthorne
             CrystalSong.Add(2467447);
             DragonSong.Add(2467448);
             OdeSong.Add(2467449);
-            //little angel song 
+            PaleSong.Add(2467450);
             //glass figurine song
             //windlesong ZLD1 IS WORKING ON IT
         }
@@ -444,6 +445,7 @@ namespace Hawthorne
             SaltTwo.DragonHard();
             SaltTwo.OdeMed();
             SaltTwo.ShuaMed();
+            SaltTwo.AngelEZ();
         }
     }
 }

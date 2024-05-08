@@ -550,6 +550,7 @@
 	  <None Remove="Pages\EnigmaPage.png" />
 	  <None Remove="Pages\FakeAngelPage.png" />
 	  <None Remove="Pages\FirebirdPage.png" />
+	  <None Remove="Pages\ForgettingPage.png" />
 	  <None Remove="Pages\GlassPage.png" />
 	  <None Remove="Pages\GospelPage.png" />
 	  <None Remove="Pages\GreyBotPage.png" />
@@ -628,6 +629,11 @@
 	  <None Remove="Sixteenth\DragonLock.png" />
 	  <None Remove="Sixteenth\DragonMark.png" />
 	  <None Remove="Sixteenth\DragonWorld.png" />
+	  <None Remove="Sixteenth\ForgetIcon.png" />
+	  <None Remove="Sixteenth\ForgetLock.png" />
+	  <None Remove="Sixteenth\ForgetMark.png" />
+	  <None Remove="Sixteenth\ForgettingPassive.png" />
+	  <None Remove="Sixteenth\ForgetWorld.png" />
 	  <None Remove="Sixteenth\ResistancePassive.png" />
 	  <None Remove="Sixteenth\StoneDead.png" />
 	  <None Remove="Sixteenth\StoneIcon.png" />
@@ -1231,6 +1237,7 @@
 	  <EmbeddedResource Include="Pages\EnigmaPage.png" />
 	  <EmbeddedResource Include="Pages\FakeAngelPage.png" />
 	  <EmbeddedResource Include="Pages\FirebirdPage.png" />
+	  <EmbeddedResource Include="Pages\ForgettingPage.png" />
 	  <EmbeddedResource Include="Pages\GlassPage.png" />
 	  <EmbeddedResource Include="Pages\GospelPage.png" />
 	  <EmbeddedResource Include="Pages\GreyBotPage.png" />
@@ -1309,6 +1316,11 @@
 	  <EmbeddedResource Include="Sixteenth\DragonLock.png" />
 	  <EmbeddedResource Include="Sixteenth\DragonMark.png" />
 	  <EmbeddedResource Include="Sixteenth\DragonWorld.png" />
+	  <EmbeddedResource Include="Sixteenth\ForgetIcon.png" />
+	  <EmbeddedResource Include="Sixteenth\ForgetLock.png" />
+	  <EmbeddedResource Include="Sixteenth\ForgetMark.png" />
+	  <EmbeddedResource Include="Sixteenth\ForgettingPassive.png" />
+	  <EmbeddedResource Include="Sixteenth\ForgetWorld.png" />
 	  <EmbeddedResource Include="Sixteenth\ResistancePassive.png" />
 	  <EmbeddedResource Include="Sixteenth\StoneDead.png" />
 	  <EmbeddedResource Include="Sixteenth\StoneIcon.png" />

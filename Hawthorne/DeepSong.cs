@@ -4179,7 +4179,7 @@ namespace Hawthorne
                 {
                 new FieldEnemy(){enemyName = "BlueFlower_EN", enemySlot=0},
                 new FieldEnemy(){enemyName = "RedFlower_EN", enemySlot=1},
-                new FieldEnemy(){enemyName = "PurpleFlower_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "YellowFlower_EN", enemySlot=2},
                 new FieldEnemy(){enemyName = "PurpleFlower_EN", enemySlot=3},
                 new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=4},
                 });

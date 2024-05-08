@@ -1813,4 +1813,41 @@ namespace Hawthorne
             return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
         }
     }
+    public class IsntWitheringDeathCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (args is DeathReference reffe && reffe.witheringDeath == false) return true;
+            return false;
+        }
+    }
+    public class LobotomySongEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (changeMusic != null)
+            {
+                try { changeMusic.Abort(); } catch { UnityEngine.Debug.LogWarning("lobotomy song thread failed to shut down."); }
+            }
+            changeMusic = new System.Threading.Thread(GO);
+            changeMusic.Start();
+            return true;
+        }
+
+        public static System.Threading.Thread changeMusic;
+        public static void GO()
+        {
+            int start = 0;
+            if (CombatManager.Instance._stats.audioController.MusicCombatEvent.getParameterByName("Lobotomized", out float num) == FMOD.RESULT.OK) start = (int)num;
+            //UnityEngine.Debug.Log("going: " + start);
+            for (int i = start; i <= 100; i++)
+            {
+                CombatManager.Instance._stats.audioController.MusicCombatEvent.setParameterByName("Lobotomized", i);
+                System.Threading.Thread.Sleep(50);
+                //if (i > 95) UnityEngine.Debug.Log("we;re getting there properly");
+            }
+            //UnityEngine.Debug.Log("done");
+        }
+    }
 }
