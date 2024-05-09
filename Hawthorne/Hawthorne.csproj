@@ -616,6 +616,24 @@
 	  <None Remove="reworkicons\HasteIcon.png" />
 	  <None Remove="reworkicons\PhotoIcon.png" />
 	  <None Remove="reworkicons\RootsIcon.png" />
+	  <None Remove="SecondPages\ChapterEightCompPage.png" />
+	  <None Remove="SecondPages\ChapterEightIntroPage.png" />
+	  <None Remove="SecondPages\ChapterFiveCompPage.png" />
+	  <None Remove="SecondPages\ChapterFourCompPage.png" />
+	  <None Remove="SecondPages\ChapterFourIntroPage.png" />
+	  <None Remove="SecondPages\ChapterNineCompPage.png" />
+	  <None Remove="SecondPages\ChapterNineIntroPage.png" />
+	  <None Remove="SecondPages\ChapterOneCompPage.png" />
+	  <None Remove="SecondPages\ChapterOneIntroPage.png" />
+	  <None Remove="SecondPages\ChapterSevenCompPage.png" />
+	  <None Remove="SecondPages\ChapterSevenIntroPage.png" />
+	  <None Remove="SecondPages\ChapterSixCompPage.png" />
+	  <None Remove="SecondPages\ChapterSixIntroPage.png" />
+	  <None Remove="SecondPages\ChapterTenIntroPage.png" />
+	  <None Remove="SecondPages\ChapterThreeCompPage.png" />
+	  <None Remove="SecondPages\ChapterThreeIntroPage.png" />
+	  <None Remove="SecondPages\ChapterTwoCompPage.png" />
+	  <None Remove="SecondPages\ChapterTwoIntroPage.png" />
 	  <None Remove="ShinyIcon.png" />
 	  <None Remove="Sixteenth\AsleepDragonPassive.png" />
 	  <None Remove="Sixteenth\AwakeDragonPassive.png" />
@@ -1303,6 +1321,24 @@
 	  <EmbeddedResource Include="reworkicons\HasteIcon.png" />
 	  <EmbeddedResource Include="reworkicons\PhotoIcon.png" />
 	  <EmbeddedResource Include="reworkicons\RootsIcon.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterEightCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterEightIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterFiveCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterFourCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterFourIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterNineCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterNineIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterOneCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterOneIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterSevenCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterSevenIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterSixCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterSixIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterTenIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterThreeCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterThreeIntroPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterTwoCompPage.png" />
+	  <EmbeddedResource Include="SecondPages\ChapterTwoIntroPage.png" />
 	  <EmbeddedResource Include="ShinyIcon.png" />
 	  <EmbeddedResource Include="Sixteenth\AsleepDragonPassive.png" />
 	  <EmbeddedResource Include="Sixteenth\AwakeDragonPassive.png" />
@@ -1398,6 +1434,9 @@
 	  </Reference>
 	  <Reference Include="BrutalAPI">
 	    <HintPath>..\..\the folder for references VS\BO Modding Hawthorne\BrutalAPI.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Cat'sCradle">
+	    <HintPath>..\..\the folder for references VS\BO Modding Hawthorne\Cat'sCradle.dll</HintPath>
 	  </Reference>
 	  <Reference Include="DOTween">
 	    <HintPath>..\..\the folder for references VS\BO Modding Hawthorne\DOTween.dll</HintPath>

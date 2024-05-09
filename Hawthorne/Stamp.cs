@@ -479,33 +479,33 @@ namespace Hawthorne
             new Stamp("Pixel", "DeadPixel_EN", "DeadPixelPage.png", "Group_1", "PixelLock.png", "PixelMark.png");
             new Stamp("Pale", "LittleAngel_EN", "LittleAngelPage.png", "Group_1", "PaleLock.png", "PaleMark.png");
             new Stamp("DeadGod", "EmbersofaDeadGod_EN", "DeadGodPage.png", "Group_1", "DeadGodLock.png", "DeadGodMark.png");
-            new StampGroup("Group_1", new string[] { "CNS", "Enigma", "Pixel", "Pale", "DeadGod" }, "", "", Chapter.One);
+            new StampGroup("Group_1", new string[] { "CNS", "Enigma", "Pixel", "Pale", "DeadGod" }, "ChapterOneIntroPage.png", "ChapterOneCompPage.png", Chapter.One);
 
             new Stamp("Satyr", "Satyr_EN", "SatyrPage.png", "Group_2a", "SatyrLock.png", "SatyrMark.png");
             new Stamp("Something", "Something_EN", "SomethingPage.png", "Group_2a", "SomethingLock.png", "SomethingMark.png");
             new Stamp("Derogatory", "Derogatory_EN", "SomethingPage.png", "Group_2a", "DerogatoryLock.png", "DerogatoryMark.png");
             new Stamp("Denial", "Denial_EN", "SomethingPage.png", "Group_2a", "DenialLock.png", "DenialMark.png");
             new Stamp("Unmung", "TeachaMantoFish_EN", "UnmungPage.png", "Group_2a", "UnmungLock.png", "UnmungMark.png");
-            new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "", "", Chapter.Two);
+            new StampGroup("Group_2a", new string[] { "Satyr", "Something", "Derogatory", "Denial", "Unmung" }, "ChapterTwoIntroPage.png", "ChapterTwoCompPage.png", Chapter.Two);
 
             new Stamp("Crow", "TheCrow_EN", "CrowPage.png", "Group_2b", "CrowLock.png", "CrowMark.png");
             new Stamp("DontTouchMe", "Freud_EN", "DontTouchMePage.png", "Group_2b", "DontTouchMeLock.png", "DontTouchMeMark.png");
             new Stamp("Angler", "A'Flower'_EN", "AnglerPage.png", "Group_2b", "AnglerLock.png", "AnglerMark.png");
             new Stamp("StarGazer", "StarGazer_EN", "StarGazerPage.png", "Group_2b", "StarsLock.png", "StarsMark.png");
-            new StampGroup("Group_2b", new string[] { "Crow", "DontTouchMe", "Angler", "StarGazer" }, "", "", Chapter.Three);
+            new StampGroup("Group_2b", new string[] { "Crow", "DontTouchMe", "Angler", "StarGazer" }, "ChapterThreeIntroPage.png", "ChapterThreeCompPage.png", Chapter.Three);
 
             new Stamp("Shiny", "CoinHunter_EN", "CoinHunterPage.png", "Group_3", "CoinLock.png", "CoinMark.png");
             new Stamp("Camera", "MechanicalLens_EN", "CameraPage.png", "Group_3", "CameraLock.png", "CameraMark.png");
             new Stamp("Gospel", "MortalSpoggle_EN", "GospelPage.png", "Group_3", "MortalLock.png", "MortalMark.png");
             new Stamp("Rustic", "RusticJumbleguts_EN", "RusticPage.png", "Group_3", "RusticLock.png", "RusticMark.png");
-            new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "", "", Chapter.Four);
+            new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "ChapterFourIntroPage.png", "ChapterFourCompPage.png", Chapter.Four);
 
             new Stamp("Superboss", "544517_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544516_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544515_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544514_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544513_EN", "SuperbossPage.png", "Group_3_5", "BossLock.png", "BossMark.png");
-            new StampGroup("Group_3_5", new string[] { "Superboss" }, "", "", Chapter.Five);
+            new StampGroup("Group_3_5", new string[] { "Superboss" }, "ChapterFiveIntroPage.png", "ChapterFiveCompPage.png", Chapter.Five);
 
             new Stamp("Delusion", "Illusion_EN", "DelusionPage.png", "Group_4a", "DelusionLock.png", "DelusionMark.png");
             new Stamp("Angel", "FakeAngel_EN", "FakeAngelPage.png", "Group_4a", "AngelLock.png", "AngelMark.png");
@@ -513,25 +513,25 @@ namespace Hawthorne
             new Stamp("BlueFlower", "BlueFlower_EN", "BlueFlowerPage.png", "Group_4a", "BlueFlowerLock.png", "BlueFlowerMark.png");
             new Stamp("YellowFlower", "YellowFlower_EN", "YellowFlowerPage.png", "Group_4a", "YellowFlowerLock.png", "YellowFlowerMark.png");
             new Stamp("PurpleFlower", "PurpleFlower_EN", "PurpleFlowerPage.png", "Group_4a", "PurpleFlowerLock.png", "PurpleFlowerMark.png");
-            new StampGroup("Group_4a", new string[] { "Delusion", "Angel", "RedFlower", "BlueFlower", "YellowFlower", "PurpleFlower" }, "", "", Chapter.Six);
+            new StampGroup("Group_4a", new string[] { "Delusion", "Angel", "RedFlower", "BlueFlower", "YellowFlower", "PurpleFlower" }, "ChapterSixIntroPage.png", "ChapterSixCompPage.png", Chapter.Six);
 
             new Stamp("Postmodern", "Postmodern_EN", "PostmodernPage.png", "Group_4b", "PostmodernLock.png", "PostmodernMark.png");
             new Stamp("War", "War_EN", "PostmodernPage.png", "Group_4b", "WarLock.png", "WarMark.png");
             new Stamp("Deep", "TheDeep_EN", "TheDeepPage.png", "Group_4b", "DeepLock.png", "DeepMark.png");
-            new StampGroup("Group_4b", new string[] { "Postmodern", "War", "Deep" }, "", "", Chapter.Seven);
+            new StampGroup("Group_4b", new string[] { "Postmodern", "War", "Deep" }, "ChapterSevenIntroPage.png", "ChapterSevenCompPage.png", Chapter.Seven);
 
             new Stamp("Sigil", "Sigil_EN", "SigilPage.png", "Group_4c", "SigilLock.png", "SigilMark.png");
             new Stamp("WindSong", "WindSong_EN", "WindSongPage.png", "Group_4c", "WindSongLock.png", "WindSongMark.png");
             new Stamp("Solvent", "LivingSolvent_EN", "SolventPage.png", "Group_4c", "SolventLock.png", "SolventMark.png");
             new Stamp("Tank", "RealisticTank_EN", "TankPage.png", "Group_4c", "TankLock.png", "TankMark.png");
             new Stamp("ClockTower", "ClockTower_EN", "ClockPage.png", "Group_4c", "ClockLock.png", "ClockMark.png");
-            new StampGroup("Group_4c", new string[] { "Sigil", "WindSong", "Solvent", "Tank", "ClockTower" }, "", "", Chapter.Eight);
+            new StampGroup("Group_4c", new string[] { "Sigil", "WindSong", "Solvent", "Tank", "ClockTower" }, "ChapterEightIntroPage.png", "ChapterEightCompPage.png", Chapter.Eight);
 
             new Stamp("Grandfather", "Grandfather_EN", "CoffinPage.png", "Group_4d", "CoffinLock.png", "CoffinMark.png");
             new Stamp("Tortoise", "StalwartTortoise_EN", "TortoisePage.png", "Group_4d", "TortoiseLock.png", "TortoiseMark.png");
             new Stamp("GreyFlower", "GreyFlower_EN", "GreyFlowerPage.png", "Group_4d", "GreyFlowerLock.png", "GreyFlowerMark.png");
             new Stamp("Butterfly", "Butterfly_EN", "ButterflyPage.png", "Group_4d", "ButterflyLock.png", "ButterflyMark.png");
-            new StampGroup("Group_4d", new string[] { "Grandfather", "Tortoise", "GreyFlower", "Butterfly" }, "", "", Chapter.Nine);
+            new StampGroup("Group_4d", new string[] { "Grandfather", "Tortoise", "GreyFlower", "Butterfly" }, "ChapterNineIntroPage.png", "ChapterNineCompPage.png", Chapter.Nine);
 
             new Stamp("Reaper", "MiniReaper_EN", "ReaperPage.png", "Group_4e", "ReaperLock.png", "ReaperMark.png");
             new Stamp("Miriam", "Miriam_EN", "MiriamPage.png", "Group_4e", "MiriamLock.png", "MiriamMark.png");
@@ -539,7 +539,7 @@ namespace Hawthorne
             new Stamp("Skyloft", "Skyloft_EN", "SkyloftPage.png", "Group_4e", "SkyloftLock.png", "SkyloftMark.png");
             new Stamp("Merced", "Merced_EN", "MercedPage.png", "Group_4e", "MercedLock.png", "MercedMark.png");
             new Stamp("Shua", "Shua_EN", "ShuaPage.png", "Group_4e", "ShuaLock.png", "ShuaMark.png");
-            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "", "", Chapter.Ten);
+            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "ChapterTenIntroPage.png", "", Chapter.Ten);
 
             new Stamp("Nameless", "Nameless_EN", "NamelessPage.png", "Group_4f", "NamelessLock.png", "NamelessMark.png");
             new Stamp("Tripod", "TripodFish_EN", "TripodPage.png", "Group_4f", "TripodLock.png", "TripodMark.png");

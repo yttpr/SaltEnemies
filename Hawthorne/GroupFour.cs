@@ -1,85 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 namespace Hawthorne
 {
     public static class GroupFour
     {
+        public static void PCall(Action call)
+        {
+            try { call(); }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                }
+                catch
+                {
+                    Debug.LogError("some fucking function failed to get added");
+                }
+
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+            }
+        }
+        public static void PCall(Action<int> call, int var)
+        {
+            try { call(var); }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                }
+                catch
+                {
+                    Debug.LogError("some fucking function failed to get added");
+                }
+
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+            }
+        }
         public static void Setup()
         {
-            DelayedAttackManager.Setup();
-            SigilManager.Setup();
-            WitheringFix.Setup();
-            DrowningManager.Setup();
-            PostmodernHandler.Setup();
-            NoiseHandler.Setup();
-            SepulchreFix.Setup();
-            FleetingHandler.Setup();
-            FlitheringHandler.Setup();
-            PimplesInfo.Setup();
+            PCall(DelayedAttackManager.Setup);
+            PCall(SigilManager.Setup);
+            PCall(WitheringFix.Setup);
+            PCall(DrowningManager.Setup);
+            PCall(PostmodernHandler.Setup);
+            PCall(NoiseHandler.Setup);
+            PCall(SepulchreFix.Setup);
+            PCall(FleetingHandler.Setup);
+            PCall(FlitheringHandler.Setup);
+            PCall(PimplesInfo.Setup);
         }
         public static void AddEnemies()
         {
-            Angel.Add(544510);
-            Illusion.Add(544509);
-            RedFlower.Add(544508);
-            BlueFlower.Add(544507);
-            YellowFlower.Add(544506);
-            PurpleFlower.Add(544505);
-            GreyFlower.Add(544504);
-            Solvent.Add(544503);
-            WindSong.Add(544502);
-            Sigil.Add(544501);
-            Tank.Add(544500);
-            ClockTower.Add(544499);
-            Tortoise.Add(544498);
-            Coffin.Add(544497);
-            Reaper.Add(544496);
-            Skyloft.Add(544495);
-            Miriam.Add(544494);
-            EyePalm.Add(544493);
-            Merced.Add(544492);
-            Butterfly.Add(544491);
-            Shua.Add(544490);
-            Nameless.Add(544489);
-            Tripod.Add(544488);
-            Rabies.Add(544487);
-            Glass.Add(544486);
-            Damocles.Add(544485);
-            Deep.Add(544484);
-            Postmodern.Add(544483);
-            War.Add(544482);
-            SnakeGod.Add(544481);
-            CrashesYourGame.Add(544480);
-            Hunter.Add(544479);
-            Firebird.Add(544478);
-            Beak.Add(544477);
-            Scarecrow.Add(544476);
-            Windle.Add(544475);
-            Blackstar.Add(544474);
-            Singularity.Add(544473);
-            Indicator.Add(544472);
-            Maw.Add(544471);
-            Clione.Add(544470);
-            Children.Add(544469);
-            Lobotomy.Add(544468);
-            Pinano.Add(544467);
-            Spitato.Add(544466);
-            Minana.Add(544465);
-            Boat.Add(544464);
-            Train.Add(544463);
-            RedBot.Add(544462);
-            BlueBot.Add(544461);
-            YellowBot.Add(544460);
-            PurpleBot.Add(544459);
-            GreyBot.Add(544458);
-            GlassedSun.Add(544457);
-            Crystal.Add(544456);
-            Stone.Add(544455);
-            Dragon.Add(544454);
-            Vase.Add(544453);
-            Forget.Add(544452);
+            PCall(Angel.Add, 544510);
+            PCall(Illusion.Add, 544509);
+            PCall(RedFlower.Add, 544508);
+            PCall(BlueFlower.Add, 544507);
+            PCall(YellowFlower.Add, 544506);
+            PCall(PurpleFlower.Add, 544505);
+            PCall(GreyFlower.Add, 544504);
+            PCall(Solvent.Add, 544503);
+            PCall(WindSong.Add, 544502);
+            PCall(Sigil.Add, 544501);
+            PCall(Tank.Add, 544500);
+            PCall(ClockTower.Add, 544499);
+            PCall(Tortoise.Add, 544498);
+            PCall(Coffin.Add, 544497);
+            PCall(Reaper.Add, 544496);
+            PCall(Skyloft.Add, 544495);
+            PCall(Miriam.Add, 544494);
+            PCall(EyePalm.Add, 544493);
+            PCall(Merced.Add, 544492);
+            PCall(Butterfly.Add, 544491);
+            PCall(Shua.Add, 544490);
+            PCall(Nameless.Add, 544489);
+            PCall(Tripod.Add, 544488);
+            PCall(Rabies.Add, 544487);
+            PCall(Glass.Add, 544486);
+            PCall(Damocles.Add, 544485);
+            PCall(Deep.Add, 544484);
+            PCall(Postmodern.Add, 544483);
+            PCall(War.Add, 544482);
+            PCall(SnakeGod.Add, 544481);
+            PCall(CrashesYourGame.Add, 544480);
+            PCall(Hunter.Add, 544479);
+            PCall(Firebird.Add, 544478);
+            PCall(Beak.Add, 544477);
+            PCall(Scarecrow.Add, 544476);
+            PCall(Windle.Add, 544475);
+            PCall(Blackstar.Add, 544474);
+            PCall(Singularity.Add, 544473);
+            PCall(Indicator.Add, 544472);
+            PCall(Maw.Add, 544471);
+            PCall(Clione.Add, 544470);
+            PCall(Children.Add, 544469);
+            PCall(Lobotomy.Add, 544468);
+            PCall(Pinano.Add, 544467);
+            PCall(Spitato.Add, 544466);
+            PCall(Minana.Add, 544465);
+            PCall(Boat.Add, 544464);
+            PCall(Train.Add, 544463);
+            PCall(RedBot.Add, 544462);
+            PCall(BlueBot.Add, 544461);
+            PCall(YellowBot.Add, 544460);
+            PCall(PurpleBot.Add, 544459);
+            PCall(GreyBot.Add, 544458);
+            PCall(GlassedSun.Add, 544457);
+            PCall(Crystal.Add, 544456);
+            PCall(Stone.Add, 544455);
+            PCall(Dragon.Add, 544454);
+            PCall(Vase.Add, 544453);
+            PCall(Forget.Add, 544452);
         }
         public static void AddEncounters()
         {

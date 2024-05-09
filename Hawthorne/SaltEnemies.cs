@@ -51,6 +51,40 @@ namespace Hawthorne
         public static int rando => UnityEngine.Random.Range(0, 100);
 
         public static AssetBundle assetBundle;
+        public static void PCall(Action call)
+        {
+            try { call(); }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                }
+                catch
+                {
+                    Debug.LogError("some fucking function failed to get added");
+                }
+
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+            }
+        }
+        public static void PCall(Action<int> call, int var)
+        {
+            try { call(var); }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                }
+                catch
+                {
+                    Debug.LogError("some fucking function failed to get added");
+                }
+
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+            }
+        }
 
         public static AssetBundle Group4;
         public static List<CharacterSO> BaseChara = new List<CharacterSO>();
@@ -66,12 +100,26 @@ namespace Hawthorne
             text.Close();
             text.Dispose();
         }
-        public void Awake()
+        public void Default()
         {
-            Hawthorne.SaltEnemies.assetBundle = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("hawthorne"));
+            try
+            {
+                Hawthorne.SaltEnemies.assetBundle = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("hawthorne"));
+            }
+            catch
+            {
+                Debug.LogError("hawthorne assetbundle");
+            }
 
-            Group4 = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("group4"));
-            SoundClass.Setup();
+            try
+            {
+                Group4 = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("group4"));
+            }
+            catch
+            {
+                Debug.LogError("group 4 asset bundle");
+            }
+            PCall(SoundClass.Setup);
 
             try
             {
@@ -82,40 +130,61 @@ namespace Hawthorne
                 Debug.LogError("custom attack animations failed.");
             }
 
-            foreach (CharacterSO vanillaChar in BrutalAPI.BrutalAPI.vanillaChars)
-                BaseChara.Add(vanillaChar);
-            if (!Directory.Exists(SavePath) || !File.Exists(SavePath + "Hawthorne.config"))
+            try
             {
-                StreamWriter text = File.CreateText(SavePath + "Hawthorne.config");
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml("<config Numbah = '9'> </config>");
-                xmlDocument.Save((TextWriter)text);
-                text.Close();
-                text.Dispose();
+                foreach (CharacterSO vanillaChar in BrutalAPI.BrutalAPI.vanillaChars)
+                    BaseChara.Add(vanillaChar);
             }
-            if (File.Exists(SavePath + "Hawthorne.config"))
+            catch
             {
-                FileStream inStream = File.Open(SavePath + "Hawthorne.config", FileMode.Open);
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load((Stream)inStream);
-                Numbah = int.Parse(xmlDocument.GetElementsByTagName("config")[0].Attributes["Numbah"].Value);
-                inStream.Close();
-                inStream.Dispose();
+                Debug.LogError("HERE #1");
             }
-            Hawthorne.NewFolder.SecondChance.costMod = Numbah;
+            try
+            {
+                if (!Directory.Exists(SavePath) || !File.Exists(SavePath + "Hawthorne.config"))
+                {
+                    StreamWriter text = File.CreateText(SavePath + "Hawthorne.config");
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.LoadXml("<config Numbah = '9'> </config>");
+                    xmlDocument.Save((TextWriter)text);
+                    text.Close();
+                    text.Dispose();
+                }
+                if (File.Exists(SavePath + "Hawthorne.config"))
+                {
+                    FileStream inStream = File.Open(SavePath + "Hawthorne.config", FileMode.Open);
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load((Stream)inStream);
+                    Numbah = int.Parse(xmlDocument.GetElementsByTagName("config")[0].Attributes["Numbah"].Value);
+                    inStream.Close();
+                    inStream.Dispose();
+                }
+                Hawthorne.NewFolder.SecondChance.costMod = Numbah;
+            }
+            catch
+            {
+                Debug.LogError("salt enemies configing DIDNT WORK");
+            }
 
-            IDetour addThingsToSepulchreAndBronzoIDetour = (IDetour)new Hook((MethodBase)typeof(MainMenuController).GetMethod("FinalizeMainMenuSounds", ~BindingFlags.Default), typeof(SaltEnemies).GetMethod("ProcessGameStart", ~BindingFlags.Default));
-            AbilityNameFix.Setup();
-            Wysteria.Setup();
-            LetsYouIgnoreMissingEnemiesHook.Setup();
-            Hawthorne.Config.TryWriteConfig();
-            Hawthorne.SaltEnemies.Add();
-            Hawthorne.Hooks.Add();
-            Hawthorne.MiniBossUnlockSystem.Setup();
-            Hawthorne.NewFolder.LootItems.Add();
-            Hawthorne.ItsWings.Add();
-            Hawthorne.Chocolate.Add();
-            Hawthorne.LootFour.Add();
+            try
+            {
+                IDetour addThingsToSepulchreAndBronzoIDetour = (IDetour)new Hook((MethodBase)typeof(MainMenuController).GetMethod("FinalizeMainMenuSounds", ~BindingFlags.Default), typeof(SaltEnemies).GetMethod("ProcessGameStart", ~BindingFlags.Default));
+            }
+            catch
+            {
+                Debug.LogError("HERE#2");
+            }
+            PCall(AbilityNameFix.Setup);
+            PCall(Wysteria.Setup);
+            PCall(LetsYouIgnoreMissingEnemiesHook.Setup);
+            PCall(Hawthorne.Config.TryWriteConfig);
+            PCall(Hawthorne.SaltEnemies.Add);
+            PCall(Hawthorne.Hooks.Add);
+            PCall(Hawthorne.MiniBossUnlockSystem.Setup);
+            PCall(Hawthorne.NewFolder.LootItems.Add);
+            PCall(Hawthorne.ItsWings.Add);
+            PCall(Hawthorne.Chocolate.Add);
+            PCall(Hawthorne.LootFour.Add);
             try
             {
                 StampSaver.LoadAllValues();
@@ -126,61 +195,69 @@ namespace Hawthorne
                 Debug.LogError("stamping faile");
                 Debug.Log(ex.ToString() + ex.Message + ex.StackTrace);
             }
-            Hawthorne.stupidFuckingStatusEffects.Add();
-            Hawthorne.OtherStatusEffects.Add();
-            Hawthorne.MyStatusEffects.Add();
-            Hawthorne.CentralNervousSystem.Add();
-            Hawthorne.FalseTruth.Add();
-            Hawthorne.Pixel.Add();
-            Hawthorne.LittleAngel.Add();
-            Hawthorne.Flower.Add();
-            Hawthorne.Denial.Add();
-            Hawthorne.Derogatory.Add();
-            Hawthorne.Something.Add();
-            Hawthorne.Satyr.Add();
-            Hawthorne.UnMung.Add();
-            Hawthorne.Crow.Add();
-            Hawthorne.DontTouchMe.Add();
-            Hawthorne.Stars.Add();
-            Hawthorne.gay.Rustic.Add();
-            Hawthorne.gay.gopel.Add();
-            Hawthorne.CameraEffects.Add();
-            Hawthorne.Camera.Add();
-            Hawthorne.CameraEncounters.Add();
-            Hawthorne.DeadGod.Add();
-            Hawthorne.NewFolder.Phase0.Add();
-            Hawthorne.Shiny.Hook();
-            Hawthorne.Shiny.Add();
-            Hawthorne.CNSEncounters.Add();
-            Hawthorne.FalseTruthEncounters.Add();
-            Hawthorne.PixelEncounters.Add();
-            Hawthorne.AngelEncounters.Add();
-            Hawthorne.DeadGodEncounter.Add();
-            Hawthorne.SatyrEncounters.Add();
-            Hawthorne.UnMungEncounters.Add();
-            Hawthorne.SomethingEncounters.Add();
-            Hawthorne.CrowEncounters.Add();
-            Hawthorne.FlowerEncounters.Add();
-            Hawthorne.GreyEncounters.Add();
-            Hawthorne.RustEncounters.Add();
-            Hawthorne.DontTouchMeEncounters.Add();
-            Hawthorne.StarsEncounters.Add();
+            PCall(NPCModHook.Setup);
+            PCall(Hawthorne.stupidFuckingStatusEffects.Add);
+            PCall(Hawthorne.OtherStatusEffects.Add);
+            PCall(Hawthorne.MyStatusEffects.Add);
+            PCall(Hawthorne.CentralNervousSystem.Add);
+            PCall(Hawthorne.FalseTruth.Add);
+            PCall(Hawthorne.Pixel.Add);
+            PCall(Hawthorne.LittleAngel.Add);
+            PCall(Hawthorne.Flower.Add);
+            PCall(Hawthorne.Denial.Add);
+            PCall(Hawthorne.Derogatory.Add);
+            PCall(Hawthorne.Something.Add);
+            PCall(Hawthorne.Satyr.Add);
+            PCall(Hawthorne.UnMung.Add);
+            PCall(Hawthorne.Crow.Add);
+            PCall(Hawthorne.DontTouchMe.Add);
+            PCall(Hawthorne.Stars.Add);
+            PCall(Hawthorne.gay.Rustic.Add);
+            PCall(Hawthorne.gay.gopel.Add);
+            PCall(Hawthorne.CameraEffects.Add);
+            PCall(Hawthorne.Camera.Add);
+            PCall(Hawthorne.CameraEncounters.Add);
+            PCall(Hawthorne.DeadGod.Add);
+            PCall(Hawthorne.NewFolder.Phase0.Add);
+            PCall(Hawthorne.Shiny.Hook);
+            PCall(Hawthorne.Shiny.Add);
+            PCall(Hawthorne.CNSEncounters.Add);
+            PCall(Hawthorne.FalseTruthEncounters.Add);
+            PCall(Hawthorne.PixelEncounters.Add);
+            PCall(Hawthorne.AngelEncounters.Add);
+            PCall(Hawthorne.DeadGodEncounter.Add);
+            PCall(Hawthorne.SatyrEncounters.Add);
+            PCall(Hawthorne.UnMungEncounters.Add);
+            PCall(Hawthorne.SomethingEncounters.Add);
+            PCall(Hawthorne.CrowEncounters.Add);
+            PCall(Hawthorne.FlowerEncounters.Add);
+            PCall(Hawthorne.GreyEncounters.Add);
+            PCall(Hawthorne.RustEncounters.Add);
+            PCall(Hawthorne.DontTouchMeEncounters.Add);
+            PCall(Hawthorne.StarsEncounters.Add);
             if (DoDebugs.GenInfo) Logger.LogInfo("Beginning Group 4");
-            Hawthorne.Rework.Setup();
-            Hawthorne.DrownInfo.Setup();
-            Hawthorne.WaterInfo.Setup();
-            Hawthorne.GroupFour.Setup();
-            Hawthorne.GroupFour.AddEnemies();
-            Abili.Clean();
-            TellsYouToInstallSaltAdjustments.TellYou();
-            Hawthorne.PageCollector.Setup();
+            PCall(Hawthorne.Rework.Setup);
+            PCall(Hawthorne.DrownInfo.Setup);
+            PCall(Hawthorne.WaterInfo.Setup);
+            PCall(Hawthorne.GroupFour.Setup);
+            PCall(Hawthorne.GroupFour.AddEnemies);
+            PCall(Abili.Clean);
+            PCall(TellsYouToInstallSaltAdjustments.TellYou);
+            PCall(Hawthorne.PageCollector.Setup);
 
-            new Harmony("What.How.WhatTheFuck").PatchAll();
-            Hawthorne.Shittary.Setup();
+            try
+            {
+                new Harmony("What.How.WhatTheFuck").PatchAll();
+            }
+            catch
+            {
+                Debug.LogError("FUCKING HARMONY BROKE");
+            }
+            PCall(Hawthorne.Shittary.Setup);
             try { EnemyRefresher.Setup(); }
             catch { Debug.LogError("enemy refreshser failed to set up :("); }
-            Hawthorne.MultiSpriteEnemyLayout.Setup();
-            Hawthorne.FieldEffectFixHook.Setup();
+            PCall(Hawthorne.MultiSpriteEnemyLayout.Setup);
+            PCall(Hawthorne.FieldEffectFixHook.Setup);
             try { ShuaHandler.Setup(); } catch { Debug.LogError("SHUA HANDLER EPIC FAILURE"); }
             try { CombatStarterPastCombatStart.Setup(); } catch { Debug.LogError("combat post notif combat start past turn 0 setup DIDT WORK lollll"); }
             try { HooksGeneral.Setup(); } catch { Debug.LogError("failed hooks generic"); }
@@ -201,6 +278,130 @@ namespace Hawthorne
             Debug.Log(ResourceLoader.ResourceBinary("hawthorne").Length);
             Debug.Log(ResourceLoader.ResourceBinary("group4").Length);
             //Prayer.Add();
+        }
+        public void Second()
+        {
+            try
+            {
+                if (assetBundle == null)
+                    Hawthorne.SaltEnemies.assetBundle = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("hawthorne"));
+            }
+            catch
+            {
+                Debug.LogError("HAWTHORNE ASSETBUNDLE");
+            }
+            try
+            {
+                if (Group4 == null)
+                    Group4 = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("group4"));
+            }
+            catch
+            {
+                Debug.LogError("GROUP4 ASSETBUNDLE");
+            }
+            PCall(Hawthorne.CentralNervousSystem.Add);
+            PCall(Hawthorne.FalseTruth.Add);
+            PCall(Hawthorne.Pixel.Add);
+            PCall(Hawthorne.LittleAngel.Add);
+            PCall(Hawthorne.Flower.Add);
+            PCall(Hawthorne.Denial.Add);
+            PCall(Hawthorne.Derogatory.Add);
+            PCall(Hawthorne.Something.Add);
+            PCall(Hawthorne.Satyr.Add);
+            PCall(Hawthorne.UnMung.Add);
+            PCall(Hawthorne.Crow.Add);
+            PCall(Hawthorne.DontTouchMe.Add);
+            PCall(Hawthorne.Stars.Add);
+            PCall(Hawthorne.gay.Rustic.Add);
+            PCall(Hawthorne.gay.gopel.Add);
+            PCall(Hawthorne.CameraEffects.Add);
+            PCall(Hawthorne.Camera.Add);
+            PCall(Hawthorne.CameraEncounters.Add);
+            PCall(Hawthorne.DeadGod.Add);
+            PCall(Hawthorne.NewFolder.Phase0.Add);
+            PCall(Hawthorne.Shiny.Add); PCall(Angel.Add, 544510);
+            PCall(Illusion.Add, 544509);
+            PCall(RedFlower.Add, 544508);
+            PCall(BlueFlower.Add, 544507);
+            PCall(YellowFlower.Add, 544506);
+            PCall(PurpleFlower.Add, 544505);
+            PCall(GreyFlower.Add, 544504);
+            PCall(Solvent.Add, 544503);
+            PCall(WindSong.Add, 544502);
+            PCall(Sigil.Add, 544501);
+            PCall(Tank.Add, 544500);
+            PCall(ClockTower.Add, 544499);
+            PCall(Tortoise.Add, 544498);
+            PCall(Coffin.Add, 544497);
+            PCall(Reaper.Add, 544496);
+            PCall(Skyloft.Add, 544495);
+            PCall(Miriam.Add, 544494);
+            PCall(EyePalm.Add, 544493);
+            PCall(Merced.Add, 544492);
+            PCall(Butterfly.Add, 544491);
+            PCall(Shua.Add, 544490);
+            PCall(Nameless.Add, 544489);
+            PCall(Tripod.Add, 544488);
+            PCall(Rabies.Add, 544487);
+            PCall(Glass.Add, 544486);
+            PCall(Damocles.Add, 544485);
+            PCall(Deep.Add, 544484);
+            PCall(Postmodern.Add, 544483);
+            PCall(War.Add, 544482);
+            PCall(SnakeGod.Add, 544481);
+            PCall(CrashesYourGame.Add, 544480);
+            PCall(Hunter.Add, 544479);
+            PCall(Firebird.Add, 544478);
+            PCall(Beak.Add, 544477);
+            PCall(Scarecrow.Add, 544476);
+            PCall(Windle.Add, 544475);
+            PCall(Blackstar.Add, 544474);
+            PCall(Singularity.Add, 544473);
+            PCall(Indicator.Add, 544472);
+            PCall(Maw.Add, 544471);
+            PCall(Clione.Add, 544470);
+            PCall(Children.Add, 544469);
+            PCall(Lobotomy.Add, 544468);
+            PCall(Pinano.Add, 544467);
+            PCall(Spitato.Add, 544466);
+            PCall(Minana.Add, 544465);
+            PCall(Boat.Add, 544464);
+            PCall(Train.Add, 544463);
+            PCall(RedBot.Add, 544462);
+            PCall(BlueBot.Add, 544461);
+            PCall(YellowBot.Add, 544460);
+            PCall(PurpleBot.Add, 544459);
+            PCall(GreyBot.Add, 544458);
+            PCall(GlassedSun.Add, 544457);
+            PCall(Crystal.Add, 544456);
+            PCall(Stone.Add, 544455);
+            PCall(Dragon.Add, 544454);
+            PCall(Vase.Add, 544453);
+            PCall(Forget.Add, 544452);
+        }
+        public void Awake()
+        {
+            try
+            {
+                Default();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("salt enemies fucking broke");
+                Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+                File.WriteAllText(BepInEx.Paths.PluginPath + "SaltEnemiesErrorLog.txt", ex.ToString() + ex.Message + ex.StackTrace);
+                try
+                {
+                    Second();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("salt enemies fucking broke again");
+                    Debug.LogError(ex.ToString() + ex.Message + ex.StackTrace);
+                    File.WriteAllText(BepInEx.Paths.PluginPath + "SaltEnemiesErrorLogSecond.txt", ex.ToString() + ex.Message + ex.StackTrace);
+                    Default();
+                }
+            }
         }
 
         public static void Add()
@@ -637,7 +838,7 @@ namespace Hawthorne
         public static void ProcessGameStart(Action<MainMenuController> orig, MainMenuController self)
         {
             orig(self);
-            StampHandler.PrintStampsByGroup();
+            PCall(StampHandler.PrintStampsByGroup);
             AddToAreaPool("ChoirBoy_EN", 2);
             AddToAreaPool("Chordophone_EN", 1);
             AddToAreaPool("Conductor_EN", 1);
@@ -1516,55 +1717,62 @@ namespace Hawthorne
         public static void Crossover()
         {
             if (Crossed) return; Crossed = true;
-            //TairPeep
-            Hawthorne.CNSEncountersTairPeep.Add();//FS, O
-            Hawthorne.FalseTruthEncountersTairPeep.Add();//O
-            Hawthorne.PixelEncountersTairPeep.Add();//FS, G?
-            Hawthorne.AngelEncountersTairPeep.Add();//G
-            Hawthorne.SatyrEncountersTairPeep.Add();//G
-            Hawthorne.UnMungEncountersTairPeep.Add();//FS
-            Hawthorne.SomethingEncountersTairPeep.Add();//O
-            Hawthorne.CrowEncountersTairPeep.Add();//O
-            Hawthorne.GreyEncountersTairPeep.Add();//G
-            Hawthorne.FlowerEncountersTairPeep.Add();//FS
-            Hawthorne.DontTouchMeEncountersTairPeep.Add();//O
-            Hawthorne.RainbowEncounters.Add();//FS, O
-            Hawthorne.ColoEncounters.Add();//FS, O
-            //Artist
-            Hawthorne.SinnersEncounters.Add();//FS, O, G
-            //Minichibis
-            Hawthorne.MinichibisEncounters.Add();//G
-            //Taco
-            Hawthorne.CNSEncountersTaco.Add();//FS, O
-            Hawthorne.FalseTruthEncountersTaco.Add();//O
-            Hawthorne.PixelEncountersTaco.Add();//FS
-            Hawthorne.AngelEncountersTaco.Add();//G
-            Hawthorne.SatyrEncountersTaco.Add();//G
-            Hawthorne.UnMungEncountersTaco.Add();//FS
-            Hawthorne.SomethingEncountersTaco.Add();//O
-            Hawthorne.CrowEncountersTaco.Add();//O
-            Hawthorne.FlowerEncountersTaco.Add();//FS
-            Hawthorne.DontTouchMeEncountersTaco.Add();//O
-            //ZLD1
-            Hawthorne.ZLD1_Encounters.Add();//FS, O
-            //Childeater
-            Hawthorne.WhimsicalEncounters.Add();//FS, O
-            //TairPeepTaco
-            Hawthorne.CNSEncountersBoth.Add();//FS
-            Hawthorne.FalseTruthEncountersBoth.Add();//O
-            Hawthorne.PixelEncountersBoth.Add();//FS
-            Hawthorne.AngelEncountersBoth.Add();//G
-            Hawthorne.SatyrEncountersBoth.Add();//G
-            Hawthorne.UnMungEncountersBoth.Add();//?
-            Hawthorne.SomethingEncountersBoth.Add();//O
-            Hawthorne.CrowEncountersBoth.Add();//O
-            Hawthorne.FlowerEncountersBoth.Add();//FS
-            Hawthorne.DontTouchMeEncountersBoth.Add();//?
-            //TairPeepZLD1
-            Hawthorne.ZLD1TairEncounters.Add();//FS, O
+            try
+            {
+                //TairPeep
+                Hawthorne.CNSEncountersTairPeep.Add();//FS, O
+                Hawthorne.FalseTruthEncountersTairPeep.Add();//O
+                Hawthorne.PixelEncountersTairPeep.Add();//FS, G?
+                Hawthorne.AngelEncountersTairPeep.Add();//G
+                Hawthorne.SatyrEncountersTairPeep.Add();//G
+                Hawthorne.UnMungEncountersTairPeep.Add();//FS
+                Hawthorne.SomethingEncountersTairPeep.Add();//O
+                Hawthorne.CrowEncountersTairPeep.Add();//O
+                Hawthorne.GreyEncountersTairPeep.Add();//G
+                Hawthorne.FlowerEncountersTairPeep.Add();//FS
+                Hawthorne.DontTouchMeEncountersTairPeep.Add();//O
+                Hawthorne.RainbowEncounters.Add();//FS, O
+                Hawthorne.ColoEncounters.Add();//FS, O
+                                               //Artist
+                Hawthorne.SinnersEncounters.Add();//FS, O, G
+                                                  //Minichibis
+                Hawthorne.MinichibisEncounters.Add();//G
+                                                     //Taco
+                Hawthorne.CNSEncountersTaco.Add();//FS, O
+                Hawthorne.FalseTruthEncountersTaco.Add();//O
+                Hawthorne.PixelEncountersTaco.Add();//FS
+                Hawthorne.AngelEncountersTaco.Add();//G
+                Hawthorne.SatyrEncountersTaco.Add();//G
+                Hawthorne.UnMungEncountersTaco.Add();//FS
+                Hawthorne.SomethingEncountersTaco.Add();//O
+                Hawthorne.CrowEncountersTaco.Add();//O
+                Hawthorne.FlowerEncountersTaco.Add();//FS
+                Hawthorne.DontTouchMeEncountersTaco.Add();//O
+                                                          //ZLD1
+                Hawthorne.ZLD1_Encounters.Add();//FS, O
+                                                //Childeater
+                Hawthorne.WhimsicalEncounters.Add();//FS, O
+                                                    //TairPeepTaco
+                Hawthorne.CNSEncountersBoth.Add();//FS
+                Hawthorne.FalseTruthEncountersBoth.Add();//O
+                Hawthorne.PixelEncountersBoth.Add();//FS
+                Hawthorne.AngelEncountersBoth.Add();//G
+                Hawthorne.SatyrEncountersBoth.Add();//G
+                Hawthorne.UnMungEncountersBoth.Add();//?
+                Hawthorne.SomethingEncountersBoth.Add();//O
+                Hawthorne.CrowEncountersBoth.Add();//O
+                Hawthorne.FlowerEncountersBoth.Add();//FS
+                Hawthorne.DontTouchMeEncountersBoth.Add();//?
+                                                          //TairPeepZLD1
+                Hawthorne.ZLD1TairEncounters.Add();//FS, O
+            }
+            catch
+            {
+                Debug.LogError("HERE#3");
+            }
 
             if (GlassedSunEffect.Instance == null) GlassedSunEffect.Instance = ScriptableObject.CreateInstance<GlassedSunEffect>();
-            GlassedSunEffect.Instance.Setup();
+            PCall(GlassedSunEffect.Instance.Setup);
             try
             {
                 GlassedSunHandler.Setup();
@@ -1577,15 +1785,15 @@ namespace Hawthorne
 
         public static void Start(Action<MainMenuController> orig, MainMenuController self)
         {
-            LetsYouIgnoreMissingEnemiesHook.FinishDisablingEnemies();
+            PCall(LetsYouIgnoreMissingEnemiesHook.FinishDisablingEnemies);
             orig(self);
             if (Crossed) return;
-            GroupFour.AddEncounters();
-            GroupFour.ModifyEncounters();
-            Crossover();
-            GroupFour.ModifyMods();
-            FindMH();
-            Updater.Update();
+            PCall(GroupFour.AddEncounters);
+            PCall(GroupFour.ModifyEncounters);
+            PCall(Crossover);
+            PCall(GroupFour.ModifyMods);
+            PCall(FindMH);
+            PCall(Updater.Update);
 
             try
             {
@@ -3509,6 +3717,8 @@ namespace Hawthorne
                 PageCollector.UpdatePage("LittleAngelPage.png");
                 PageCollector.UpdatePage("ShuaPage.png");
                 PageCollector.UpdatePage("YNLPage.png");
+                PageCollector.UpdatePage("DragonPage.png");
+                PageCollector.UpdatePage("GlassPage.png");
             }
         }
     }

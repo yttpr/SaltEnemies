@@ -149,6 +149,7 @@ namespace Hawthorne
             CheckEnemy("Crystal_EN");
             CheckEnemy("TheDragon_EN");
             CheckEnemy("OdetoHumanity_EN");
+            CheckEnemy("TortureMeNot_EN");
         }
         public static void CheckEnemy(string enemy)
         {
