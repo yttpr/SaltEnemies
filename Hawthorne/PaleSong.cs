@@ -863,4 +863,228 @@ namespace Hawthorne
             jarden.AddEncounter();
         }
     }
+    public static class GlassSong
+    {
+        public static void Add(int sign)
+        {
+            if (!EnemyExist("GlassFigurine_EN")) return;
+
+            BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("GlassIcon.png"));
+
+            GardEZ(sign);
+        }
+        public static void GardEZ(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "howyoumoveaboutthescenehowyoutwisthowyouturn",
+                area = 2,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = 2,
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/GlassSong",
+                roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone02_JumbleGuts_Hollowing_Medium_EnemyBundle")._roarReference.roarEvent,
+                difficulty = EncounterDifficulty.Easy
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("GlassFigurine_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "ChoirBoy_EN", enemySlot=3},
+                });
+            }
+            if (EnemyExist("GlassFigurine_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "GigglingMinister_EN", enemySlot=2},
+                });
+            }
+            if (EnemyExist("Merced_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Merced_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "Merced_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "Merced_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "Merced_EN", enemySlot=4},
+                });
+            }
+            if (EnemyExist("TheCrow_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "TheCrow_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "NextOfKin_EN", enemySlot=2},
+                });
+            }
+            if (EnemyExist("BlackStar_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "BlackStar_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "BlackStar_EN", enemySlot=2},
+                });
+            }
+            if (EnemyExist("Windle2_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "GlassFigurine_EN", enemySlot=0},
+                new FieldEnemy(){enemyName = "Windle2_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "SkinningHomunculus_EN", enemySlot=2},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.AddEncounter();
+        }
+    }
+    public static class WindleSong
+    {
+        public static void Add(int sign)
+        {
+            if (!EnemyExist("Windle1_EN")) return;
+
+            BrutalAPI.BrutalAPI.AddSignType((SignType)sign, ResourceLoader.LoadSprite("WindleWorld.png"));
+
+            WindleEZ(sign);
+            WindleMed(sign);
+        }
+        public static void WindleEZ(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "WindleEZ",
+                area = 0,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(3, 6),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/WindleSong",
+                roarEvent = LoadedAssetsHandler.GetCharcater("Doll_CH").deathSound,
+                difficulty = EncounterDifficulty.Easy
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Windle1_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=3},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = ShoreSlop(Half), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Either(RandomSupport(0, false, false), RandomShoreMidget(false)), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = ShoreSlop(Half), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = Either(RandomSupport(0), RandomShoreMidget(false)), enemySlot=4},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.AddEncounter();
+        }
+        public static void WindleMed(int sign)
+        {
+            BrutalAPI.EnemyEncounter jarden = new BrutalAPI.EnemyEncounter()
+            {
+                encounterName = "WindleMed",
+                area = 0,
+                randomPlacement = true,
+                hardmodeEncounter = true,
+                rarity = UnityEngine.Random.Range(3, 9),
+                signType = (SignType)sign,
+                musicEvent = "event:/Hawthorne/WindleSong",
+                roarEvent = LoadedAssetsHandler.GetCharcater("Doll_CH").deathSound,
+                difficulty = EncounterDifficulty.Medium
+            };
+            List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
+            if (EnemyExist("Windle1_EN"))
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=2},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=3},
+                new FieldEnemy(){enemyName = "MudLung_EN", enemySlot=4},
+                });
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = ShoreSlop(Half), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = Either(RandomSupport(0, false, false), RandomColor(0)), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Either(RandomSupport(0), RandomShoreMidget(false)), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = Shore.RandomShoreWhore(), enemySlot=4},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = SmartColor(0, true), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = SmartColor(0), enemySlot=4},
+                });
+                ResetColor();
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = ShoreSlop(Half), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                new FieldEnemy(){enemyName = RandomSupport(0, false, false), enemySlot=4},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Shore.RandomShoreWhore(), enemySlot=2},
+                new FieldEnemy(){enemyName = ShoreSlop(), enemySlot=3},
+                });
+                fields.Add(new FieldEnemy[]
+                {
+                new FieldEnemy(){enemyName = "Windle1_EN", enemySlot=1},
+                new FieldEnemy(){enemyName = Shore.RandomShoreWhore(), enemySlot=2},
+                new FieldEnemy(){enemyName = RandomColor(0), enemySlot=3},
+                });
+            }
+            jarden.variations = fields.ToArray();
+            jarden.AddEncounter();
+        }
+    }
 }

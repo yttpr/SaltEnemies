@@ -7204,6 +7204,75 @@ namespace Hawthorne
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
         }
+        public static void GlassEZ()
+        {
+            string bundle = "howyoumoveaboutthescenehowyoutwisthowyouturn";
+            string main = "GlassFigurine_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void WindleShoreEZ()
+        {
+            string bundle = "WindleEZ";
+            string main = "Windle1_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
+        public static void WindleShoreMed()
+        {
+            string bundle = "WindleMed";
+            string main = "Windle1_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle) || !BundleRandom(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+            /*if (EnemyExist("Satyr_EN") && Half)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        "Satyr_EN",
+                        main,
+                        "ShiveringHomunculus_EN",
+                    }
+                });
+            }*/
+            list.CheckEncounters();
+            ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
+            if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Hawthorne
             {
                 try
                 {
-                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                    Debug.LogError(call.GetMethodInfo().Name + " FUCKING FAILED TO GET ADDED");
                 }
                 catch
                 {
@@ -31,7 +32,7 @@ namespace Hawthorne
             {
                 try
                 {
-                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                    Debug.LogError(call.GetMethodInfo().Name + " FUCKING FAILED TO GET ADDED");
                 }
                 catch
                 {
@@ -172,7 +173,7 @@ namespace Hawthorne
             PinanoSong.Add(2467435);
             MinanaSong.Add(2467436);
             SpitatoSong.Add(2467437);
-            BoatSong.Add(2467438);//ZLD1 IS WORKING ON IT
+            BoatSong.Add(2467438);
             StoplightSong.Add(2467439);
             ApparatusSong.RedAdd(2467440);
             ApparatusSong.YellowAdd(2467441);
@@ -185,8 +186,8 @@ namespace Hawthorne
             DragonSong.Add(2467448);
             OdeSong.Add(2467449);
             PaleSong.Add(2467450);
-            //glass figurine song
-            //windlesong ZLD1 IS WORKING ON IT
+            GlassSong.Add(2467451);
+            WindleSong.Add(2467452);
         }
         public static void ModifyEncounters()
         {
@@ -481,6 +482,9 @@ namespace Hawthorne
             SaltTwo.OdeMed();
             SaltTwo.ShuaMed();
             SaltTwo.AngelEZ();
+            SaltTwo.GlassEZ();
+            SaltTwo.WindleShoreEZ();
+            SaltTwo.WindleShoreMed();
         }
     }
 }

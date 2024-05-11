@@ -4056,7 +4056,7 @@ namespace Hawthorne
                     }
                 });
             }
-            if (EnemyExist("LostSheep_EN") && Half)
+            if (EnemyExist("Enigma_EN") && Half)
             {
                 list.Add(new RandomEnemyGroup
                 {

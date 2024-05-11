@@ -27,7 +27,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = UnityEngine.Random.Range(3, 7),
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/BoatSong",
+                musicEvent = "event:/Hawthorne/NewBoatSong",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Easy
             };
@@ -98,7 +98,7 @@ namespace Hawthorne
                 hardmodeEncounter = true,
                 rarity = UnityEngine.Random.Range(5, 11),
                 signType = (SignType)sign,
-                musicEvent = "event:/Hawthorne/BoatSong",
+                musicEvent = "event:/Hawthorne/NewBoatSong",
                 roarEvent = LoadedAssetsHandler.GetEnemyBundle("H_Zone03_SkinningHomunculus_Medium_EnemyBundle")._roarReference.roarEvent,
                 difficulty = EncounterDifficulty.Medium
             };

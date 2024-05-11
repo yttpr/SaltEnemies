@@ -58,7 +58,7 @@ namespace Hawthorne
             {
                 try
                 {
-                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                    Debug.LogError(call.GetMethodInfo().Name + " FUCKING FAILED TO GET ADDED");
                 }
                 catch
                 {
@@ -75,7 +75,7 @@ namespace Hawthorne
             {
                 try
                 {
-                    Debug.LogError(nameof(call) + " FUCKING FAILED TO GET ADDED");
+                    Debug.LogError(call.GetMethodInfo().Name + " FUCKING FAILED TO GET ADDED");
                 }
                 catch
                 {
@@ -3719,6 +3719,8 @@ namespace Hawthorne
                 PageCollector.UpdatePage("YNLPage.png");
                 PageCollector.UpdatePage("DragonPage.png");
                 PageCollector.UpdatePage("GlassPage.png");
+                PageCollector.UpdatePage("WindlePage.png");
+                PageCollector.UpdatePage("ArcelesPage.png");
             }
         }
     }

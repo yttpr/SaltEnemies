@@ -271,7 +271,7 @@ namespace Hawthorne
                 _enemyNames = new string[]
                 {
                     "Spoggle_Writhing_EN",
-                    "JumbleGuts_Waning_EN",
+                    "Spoggle_Spitfire_EN",
                     "LostSheep_EN"
                 }
             });

@@ -9,9 +9,10 @@ namespace Hawthorne
 {
     public static class NPCModHook
     {
-        public static void Setup()
+        public static void Setup() => SaltEnemies.PCall(Set);
+        public static void Set()
         {
-            IDetour hook = new Hook(typeof(Cat_sCradle.SavePerRun).GetMethod(nameof(Cat_sCradle.SavePerRun.Check), ~BindingFlags.Default), typeof(NPCModHook).GetMethod(nameof(Set), ~BindingFlags.Default));
+            IDetour hook = new Hook(typeof(Cat_sCradle.SavePerRun).GetMethod(nameof(Cat_sCradle.SavePerRun.Set), ~BindingFlags.Default), typeof(NPCModHook).GetMethod(nameof(Set), ~BindingFlags.Default));
         }
         public static void Set(Action<string, bool> orig, string name, bool value)
         {
