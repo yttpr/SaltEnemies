@@ -539,7 +539,7 @@ namespace Hawthorne
             new Stamp("Skyloft", "Skyloft_EN", "SkyloftPage.png", "Group_4e", "SkyloftLock.png", "SkyloftMark.png");
             new Stamp("Merced", "Merced_EN", "MercedPage.png", "Group_4e", "MercedLock.png", "MercedMark.png");
             new Stamp("Shua", "Shua_EN", "ShuaPage.png", "Group_4e", "ShuaLock.png", "ShuaMark.png");
-            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "ChapterTenIntroPage.png", "", Chapter.Ten);
+            new StampGroup("Group_4e", new string[] { "Reaper", "Miriam", "EyePalm", "Skyloft", "Merced", "Shua" }, "ChapterTenIntroPage.png", "ChapterTenCompPage.png", Chapter.Ten);
 
             new Stamp("Nameless", "Nameless_EN", "NamelessPage.png", "Group_4f", "NamelessLock.png", "NamelessMark.png");
             new Stamp("Tripod", "TripodFish_EN", "TripodPage.png", "Group_4f", "TripodLock.png", "TripodMark.png");
@@ -547,13 +547,13 @@ namespace Hawthorne
             new Stamp("Damocles", "Damocles_EN", "DamoclesPage.png", "Group_4f", "DamoclesLock.png", "DamoclesMark.png");
             new Stamp("Glass", "GlassFigurine_EN", "GlassPage.png", "Group_4f", "GlassLock.png", "GlassMark.png");
             new Stamp("SnakeGod", "SnakeGod_EN", "SnakeGodPage.png", "Group_4f", "SnakeGodLock.png", "SnakeGodMark.png");
-            new StampGroup("Group_4f", new string[] { "Nameless", "Tripod", "Rabies", "Damocles", "Glass", "SnakeGod" }, "", "", Chapter.Eleven);
+            new StampGroup("Group_4f", new string[] { "Nameless", "Tripod", "Rabies", "Damocles", "Glass", "SnakeGod" }, "ChapterElevenIntroPage.png", "ChapterElevenCompPage.png", Chapter.Eleven);
 
             new Stamp("Beak", "LittleBeak_EN", "BeakPage.png", "Group_4g", "BeakLock.png", "BeakMark.png");
             new Stamp("Hunter", "Hunter_EN", "HuntingPage.png", "Group_4g", "HunterLock.png", "HunterMark.png");
             new Stamp("Firebird", "Firebird_EN", "FirebirdPage.png", "Group_4g", "FirebirdLock.png", "FirebirdMark.png");
             new Stamp("Warbird", "Warbird_EN", "WarbirdPage.png", "Group_4g", "WarbirdLock.png", "WarbirdMark.png");
-            new StampGroup("Group_4g", new string[] { "Beak", "Hunter", "Firebird", "Warbird" }, "", "", Chapter.Twelve);
+            new StampGroup("Group_4g", new string[] { "Beak", "Hunter", "Firebird", "Warbird" }, "ChapterTwelveIntroPage.png", "ChapterTwelveCompPage.png", Chapter.Twelve);
 
             new Stamp("Windle", "Windle1_EN", "WindlePage.png", "Group_5a", "WindleLock.png", "WindleMark.png");
             new Stamp("Windle", "Windle2_EN", "WindlePage.png", "", "WindleLock.png", "WindleMark.png");
@@ -562,7 +562,7 @@ namespace Hawthorne
             new Stamp("Singularity", "Singularity_EN", "SingularityPage.png", "Group_5a", "SingularityLock.png", "SingularityMark.png");
             new Stamp("Indicator", "Indicator_EN", "IndicatorPage.png", "Group_5a", "IndicatorLock.png", "IndicatorMark.png");
             new Stamp("Maw", "Maw_EN", "MawPage.png", "Group_5a", "MawLock.png", "MawMark.png");
-            new StampGroup("Group_5a", new string[] { "Windle", "Blackstar", "Singularity", "Indicator", "Maw" }, "", "", Chapter.Thirteen);
+            new StampGroup("Group_5a", new string[] { "Windle", "Blackstar", "Singularity", "Indicator", "Maw" }, "ChapterThirteenIntroPage.png", "ChapterThirteenCompPage.png", Chapter.Thirteen);
 
             new Stamp("Clione", "Clione_EN", "ClionePage.png", "Group_5b", "ClioneLock.png", "ClioneMark.png");
             new Stamp("Children", "Children6_EN", "ChildrenPage.png", "Group_5b", "ChildrenLock.png", "ChildrenMark.png");
@@ -578,7 +578,7 @@ namespace Hawthorne
             new Stamp("Minana", "Minana_EN", "PinanoPage.png", "Group_5b", "MinanaLock.png", "MinanaMark.png");
             new Stamp("Boat", "Arceles_EN", "ArcelesPage.png", "Group_5b", "BoatLock.png", "BoatMark.png");
             new Stamp("Train", "Stoplight_EN", "StoplightPage.png", "Group_5b", "TrainLock.png", "TrainMark.png");
-            new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "", "", Chapter.Fourteen);
+            new StampGroup("Group_5b", new string[] { "Clione", "Children", "YNL", "Pinano", "Spitato", "Minana", "Boat", "Train" }, "ChapterFourteenIntroPage.png", "ChapterFourteenCompPage.png", Chapter.Fourteen);
 
             new Stamp("RedBot", "RedBot_EN", "RedBotPage.png", "Group_5c", "RedBotLock.png", "RedBotMark.png");
             new Stamp("BlueBot", "BlueBot_EN", "BlueBotPage.png", "Group_5c", "BlueBotLock.png", "BlueBotMark.png");
@@ -586,14 +586,14 @@ namespace Hawthorne
             new Stamp("PurpleBot", "PurpleBot_EN", "PurpleBotPage.png", "Group_5c", "PurpleBotLock.png", "PurpleBotMark.png");
             new Stamp("GreyBot", "GreyBot_EN", "GreyBotPage.png", "Group_5c", "GreyBotLock.png", "GreyBotMark.png");
             new Stamp("Sun", "GlassedSun_EN", "SunPage.png", "Group_5c", "SunLock.png", "SunMark.png");
-            new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "", "", Chapter.Fifteen);
+            new StampGroup("Group_5c", new string[] { "RedBot", "BlueBot", "YellowBot", "PurpleBot", "GreyBot", "Sun" }, "ChapterFifteenIntroPage.png", "ChapterFifteenCompPage.png", Chapter.Fifteen);
 
             new Stamp("Crystal", "Crystal_EN", "CrystalPage.png", "Group_5d", "CrystalLock.png", "CrystalMark.png");
             new Stamp("Stone", "CandyStone_EN", "CrystalPage.png", "Group_5d", "StoneLock.png", "StoneMark.png");
             new Stamp("Dragon", "TheDragon_EN", "DragonPage.png", "Group_5d", "DragonLock.png", "DragonMark.png");
             new Stamp("Vase", "OdetoHumanity_EN", "OdePage.png", "Group_5d", "VaseLock.png", "VaseMark.png");
             new Stamp("Forget", "TortureMeNot_EN", "ForgettingPage.png", "Group_5d", "ForgetLock.png", "ForgetMark.png");
-            new StampGroup("Group_5d", new string[] { "Crystal", "Stone", "Dragon", "Vase", "Forget" }, "", "", Chapter.Sixteen);
+            new StampGroup("Group_5d", new string[] { "Crystal", "Stone", "Dragon", "Vase", "Forget" }, "ChapterSixteenIntroPage.png", "ChapterSixteenCompPage.png", Chapter.Sixteen);
 
         }
 

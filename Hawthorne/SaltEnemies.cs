@@ -3088,6 +3088,11 @@ namespace Hawthorne
                     if (area > 0 && Flowering && (area > 1 || !forceRed)) picking.Add(ColorType.Flower);
                     if (area > 0 && Botting) picking.Add(ColorType.Bots);
                     if (area == 2 && Nosing) picking.Add(ColorType.Noses);
+                    if (area == 2 && picking.Count >= 4)
+                    {
+                        if (Half && picking.Contains(ColorType.Jumble)) picking.Remove(ColorType.Jumble);
+                        if (Half && picking.Contains(ColorType.Spoggle)) picking.Remove(ColorType.Spoggle);
+                    }
                     ColorType picked = picking[UnityEngine.Random.Range(0, picking.Count)];
                     Coloring = picked;
                     if (picked == ColorType.Jumble)
@@ -3523,6 +3528,7 @@ namespace Hawthorne
             U1_4_3("Update_1_4_3.txt");
             U1_4_3_1();
             U1_4_3_2();
+            U1_4_3_3();
         }
         public static void U1_3_27()
         {
@@ -3721,6 +3727,7 @@ namespace Hawthorne
                 PageCollector.UpdatePage("GlassPage.png");
                 PageCollector.UpdatePage("WindlePage.png");
                 PageCollector.UpdatePage("ArcelesPage.png");
+                PageCollector.UpdatePage("ChapterSevenIntroPage.png");
             }
         }
     }
