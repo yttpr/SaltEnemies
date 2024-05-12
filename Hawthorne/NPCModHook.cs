@@ -40,7 +40,7 @@ namespace Hawthorne
             ExtraAbility_Wearable_SMS extra = ScriptableObject.CreateInstance<ExtraAbility_Wearable_SMS>();
             extra._extraAbility = awaken.CharacterAbility();
             effectItem.equippedModifiers = new WearableStaticModifierSetterSO[] { extra };
-            effectItem.Ach = new AchievementSystem.AchieveInfo((Achievement)547283, AchievementUnlockType.Strangers, "Itsme", "Meet Salt's Computer", ResourceLoader.LoadSprite("ItsMe.png", 32), true, "...");
+            effectItem.Ach = new AchievementSystem.AchieveInfo((Achievement)547283, AchievementUnlockType.Strangers, "Helpme", "Find Help.", ResourceLoader.LoadSprite("ItsMe.png", 32), true, "...");
             effectItem.Prepare();
             Item = effectItem;
         }
