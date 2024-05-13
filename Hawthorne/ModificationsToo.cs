@@ -461,7 +461,7 @@ namespace Hawthorne
             string main = "BackupDancer_EN";
             if (!EnemyExist(main)) return;
             if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._hardEnemyBundleSelector._enemyEncounters)
             {
                 if (e._bundleName == bundle)
                 {
@@ -530,6 +530,185 @@ namespace Hawthorne
                         main,
                         OrphWhore(),
                         Either(Either(RandomOrph, RandomColor(1)), RandomSupport(1, false, false))
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void MooneEZ()
+        {
+            string bundle = "MooneEncountersEasy";
+            string main = "Moone_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._easyEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    if (e.Priority > 30) e._priority /= 2;
+
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomOrph, RandomColor(0)),
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomColor(1),
+                        main,
+                        main,
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomOrph, RandomColor(0)),
+                        main,
+                        main,
+                        RandomSupport(1, false, false),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        RandomOrph
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomOrph,
+                        main,
+                        RandomColor(1),
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void MooneMed()
+        {
+            string bundle = "MooneEncountersMedium";
+            string main = "Moone_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_02"))._mediumEnemyBundleSelector._enemyEncounters)
+            {
+                if (e._bundleName == bundle)
+                {
+                    if (e.Priority > 30) e._priority /= 2;
+
+                    break;
+                }
+            }
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomOrph, RandomColor(1)),
+                        main,
+                        main,
+                        RandomSupport(1)
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(1, true),
+                        SmartColor(1),
+                        main,
+                        main,
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomOrph, RandomColor(1)),
+                        main,
+                        main,
+                        RandomSupport(1, false, false),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        main,
+                        Either(RandomOrph, RandomColor(1))
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Either(RandomSupport(1, false, false), RandomOrph),
+                        main,
+                        main,
+                        RandomColor(1),
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        main,
+                        OrphWhore(),
                     }
                 });
             }

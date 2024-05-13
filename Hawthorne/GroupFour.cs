@@ -355,7 +355,6 @@ namespace Hawthorne
             ModMod.StatueMed();
             ModMod.StatueHard();
             ModMod.BolerOrph();
-            ModMod.CrabEZ();
             ModMod.CrabMed();
             ModMod.CrabHard();
             ModTwo.NosestoneTemplateMed("SweatingNosestoneEncountersMedium", "SweatingNosestone_EN");
@@ -371,6 +370,8 @@ namespace Hawthorne
             ModTwo.DancerEZ();
             ModTwo.DancerMed();
             ModTwo.DancerHard();
+            ModTwo.MooneEZ();
+            ModTwo.MooneMed();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

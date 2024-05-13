@@ -840,36 +840,6 @@ namespace Hawthorne
                 permaGut._triggerOn = new TriggerCalls[1] { TriggerCalls.Count };
                 enemy.AddPassiveAbility(permaGut);
             }//Torn Apart
-            if (passives.ContainsPassiveAbility((PassiveAbilityTypes)24680))
-            {
-                PerformEffectPassiveAbility instance4 = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
-                instance4._passiveName = "Treasure Hunter";
-                foreach (BasePassiveAbilitySO passive in character.PassiveAbilities)
-                {
-                    if (passive.type == (PassiveAbilityTypes)24680)
-                        instance4.passiveIcon = passive.passiveIcon;
-                }
-                instance4.type = (PassiveAbilityTypes)24680;
-                instance4._enemyDescription = "15% chance of producing a random treasure item at the end of combat.";
-                instance4._characterDescription = "15% chance of producing a random treasure item at the end of combat.";
-                PercentageEffectorCondition instance5 = ScriptableObject.CreateInstance<PercentageEffectorCondition>();
-                instance5.triggerPercentage = 15;
-                ExtraLootEffect instance6 = ScriptableObject.CreateInstance<ExtraLootEffect>();
-                instance6._isTreasure = true;
-                instance4.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1]
-                {
-                        new Effect((EffectSO) instance6, 1, new IntentType?(), Slots.Self)
-                });
-                instance4.conditions = new EffectorConditionSO[1]
-                {
-                        (EffectorConditionSO) instance5
-                };
-                instance4._triggerOn = new TriggerCalls[1]
-                {
-                        TriggerCalls.OnCombatEnd
-                };
-                enemy.AddPassiveAbility(instance4);
-            }//Treasure Hunter
             if (passives.ContainsPassiveAbility((PassiveAbilityTypes)8193))
             {
                 RealFragilePassiveAbility instance3 = ScriptableObject.CreateInstance<RealFragilePassiveAbility>();
@@ -2003,6 +1973,16 @@ namespace Hawthorne
                     }
                 }
             }//Obsession
+            if (passives.ContainsPassiveAbility((PassiveAbilityTypes)2823734))
+            {
+                foreach (BasePassiveAbilitySO passive in character.PassiveAbilities)
+                {
+                    if (passive.type == (PassiveAbilityTypes)2823734)
+                    {
+                        enemy.AddPassiveAbility(passive); break;
+                    }
+                }
+            }//Tim
         }
         public static void RemoveAttack(Action<EnemyCombatUIInfo, int> orig, EnemyCombatUIInfo self, int attackID)
         {

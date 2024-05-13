@@ -40540,49 +40540,6 @@ namespace Hawthorne
                 if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
             }
         }
-        public static void CrabEZ()
-        {
-            string bundle = "FlatbackEncountersEasy";
-            string main = "Flatback_EN";
-            if (!EnemyExist(main)) return;
-            if (!BundleExist(bundle)) return;
-            foreach (EnemyEncounter e in ((ZoneBGDataBaseSO)LoadedAssetsHandler.GetZoneDB("ZoneDB_Hard_01"))._easyEnemyBundleSelector._enemyEncounters)
-            {
-                if (e._bundleName == bundle)
-                {
-                    e._priority /= 10;
-
-                    break;
-                }
-            }
-            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
-            /*for (int i = 0; i < 2; i++)
-            {
-                list.Add(new RandomEnemyGroup
-                {
-                    _enemyNames = new string[]
-                    {
-                        main
-                    }
-                });
-            }*/
-            if (BundleRandom(bundle))
-            {
-                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
-                foreach (RandomEnemyGroup g in list) yad.Add(g);
-                yad.CheckEncounters();
-                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
-                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
-            }
-            else if (BundleStatic(bundle))
-            {
-                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
-                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
-                yod.CheckEncounters();
-                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
-                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
-            }
-        }
         public static void CrabMed()
         {
             string bundle = "FlatbackEncountersMedium";

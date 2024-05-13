@@ -41,7 +41,7 @@ using System.Runtime;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.3.1")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.4")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -1656,11 +1656,13 @@ namespace Hawthorne
             addSepulchrePool("MesmerizingNosestone_EN");//purple
             addSepulchrePool("UninspiredNosestone_EN");//gray
             addSepulchrePool("Flatback_EN");
+            addSepulchrePool("Moone_EN");
             addFountainPool("SweatingNosestone_EN");
             addFountainPool("ProlificNosestone_EN");
             addFountainPool("ScatterbrainedNosestone_EN");
             addFountainPool("MesmerizingNosestone_EN");
             addFountainPool("UninspiredNosestone_EN");
+            addFountainPool("Moone_EN");
             addBronzoPool("Inequity_EN");
             addBronzoPool("SweatingNosestone_EN");//yellow
             addBronzoPool("ProlificNosestone_EN");//red
@@ -1669,12 +1671,14 @@ namespace Hawthorne
             addBronzoPool("UninspiredNosestone_EN");//gray
             addBronzoPool("Boler_EN");
             addBronzoPool("Flatback_EN");
+            addBronzoPool("Moone_EN");
             AddToAreaPool("SweatingNosestone_EN", 2);
             AddToAreaPool("ProlificNosestone_EN", 2);
             AddToAreaPool("ScatterbrainedNosestone_EN", 2);
             AddToAreaPool("MesmerizingNosestone_EN", 2);
             AddToAreaPool("UninspiredNosestone_EN", 2);
             AddToAreaPool("Inequity_EN", 2);
+            AddToAreaPool("Moone_EN", 1);
             /*
             inequity
             InequityEncountersHard
@@ -2408,8 +2412,9 @@ namespace Hawthorne
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("LittleBeak_EN")) list.Add("LittleBeak_EN");
                 if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
                 else if (UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Jansuli_EN")) list.Add("Jansuli_EN");
-                else if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
-                else if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("BackupDancer_EN")) list.Add("BackupDancer_EN");
+                if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
+                if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("BackupDancer_EN")) list.Add("BackupDancer_EN");
+                if (EnemyExist("Moone_EN")) list.Add("Moone_EN");
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
         }
