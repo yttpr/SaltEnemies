@@ -350,6 +350,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.GuyGroup(main, 0, false));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -437,6 +441,10 @@ namespace Hawthorne
                         RandomSupport(1, false, false)
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.GuyGroup(main, 1, false));
             }
             if (BundleRandom(bundle))
             {
@@ -533,6 +541,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.GuyGroup(main, 2, false));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -614,6 +626,10 @@ namespace Hawthorne
                         RandomColor(1),
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.GuyGroup(main, 0, Half));
             }
             if (BundleRandom(bundle))
             {
@@ -711,6 +727,10 @@ namespace Hawthorne
                         OrphWhore(),
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.GuyGroup(main, 0, true));
             }
             if (BundleRandom(bundle))
             {

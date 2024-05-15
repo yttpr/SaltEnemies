@@ -3638,6 +3638,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.WhoreGroup("WrigglingSacrifice_EN", 2, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4237,6 +4241,14 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 12; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup("Spoggle_Writhing_EN", 1, ColorType.Spoggle, true));
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GreyColorGroup("Spoggle_Resonant_EN", 1, ColorType.Spoggle, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4611,6 +4623,11 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 10; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup("Scrungie_EN", 1, false));
+                list.Add(RandomEncounters.Orpheum.GuyGroup("Scrungie_EN", 1, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -4978,6 +4995,14 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 12; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup("Spoggle_Resonant_EN", 1, ColorType.Spoggle, false));
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GreyColorGroup("Spoggle_Resonant_EN", 1, ColorType.Spoggle));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -5261,6 +5286,10 @@ namespace Hawthorne
                         Either("SilverSuckle_EN", RandomSupport(1, false, false))
                     }
                 });
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.BiggieGroup("Revola_EN", 2));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -5558,6 +5587,10 @@ namespace Hawthorne
                         "MusicMan_EN",
                     }
             });
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup("MusicMan_EN", 1, Half));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -5759,6 +5792,10 @@ namespace Hawthorne
                         "MusicMan_EN",
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup("MusicMan_EN", 0, Half));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -6226,6 +6263,10 @@ namespace Hawthorne
                         H ? Either(RainBaseWeighted(true, true, true, "JumbleGuts_Flummoxing_EN"), RandomSupport(1, false, false)) : RandomOrph
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup("JumbleGuts_Flummoxing_EN", 1, ColorType.Jumble, false));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -6708,6 +6749,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup("JumbleGuts_Hollowing_EN", 1, ColorType.Jumble, false));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7067,6 +7112,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.FagGroup("Conductor_EN", 2, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -7356,6 +7405,10 @@ namespace Hawthorne
                         OrphWhore(),
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.FagGroup("Conductor_EN", 1, true));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -18344,6 +18397,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.WhoreGroup("Gizo_EN", 1, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -18875,6 +18932,11 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                if (!Third) list.Add(RandomEncounters.Orpheum.GuyGroup("Gizo_EN", 2, Half));
+                else list.Add(RandomEncounters.Orpheum.WhoreGroup("Gizo_EN", 2, true));
+            }
             list.Add(new RandomEnemyGroup
             {
                 _enemyNames = new string[]
@@ -19176,6 +19238,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Jumble, false));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19249,6 +19315,10 @@ namespace Hawthorne
                         main,
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Spoggle, false));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -19632,6 +19702,10 @@ namespace Hawthorne
                         Either(Either(main, Either(main, RandomOrph)), RandomColor(1))
                 }
             });
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 1, !Fifth));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -19911,6 +19985,14 @@ namespace Hawthorne
                         main
                     }
                 });
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.BiggieGroup(main, 2));
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GreyGroup(main, 2, false, 2));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -23711,6 +23793,10 @@ namespace Hawthorne
                         }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, false));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24105,6 +24191,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, true));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24486,6 +24576,10 @@ namespace Hawthorne
                         }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, IsRed));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -24866,6 +24960,10 @@ namespace Hawthorne
 
                         }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, IsRed));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -25258,6 +25356,10 @@ namespace Hawthorne
                         }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, IsRed));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -25638,6 +25740,10 @@ namespace Hawthorne
 
                         }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, jumble ? ColorType.Jumble : ColorType.Spoggle, IsRed));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -28981,6 +29087,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.SmallGroup(main, 1, false));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -29129,6 +29239,10 @@ namespace Hawthorne
                         "MusicMan_EN"
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.SmallGroup(main, 2, false));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -29469,6 +29583,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.BiggieGroup(main, 1));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -29588,6 +29706,10 @@ namespace Hawthorne
                         main,
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.BiggieGroup(main, 2));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -31552,6 +31674,14 @@ namespace Hawthorne
                         Either(RandomSupport(1, false, false), RandomOrph)
                 }
             });
+            for (int i = 0; i < 12; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Colophon, false));
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GreyColorGroup(main, 1, ColorType.Colophon));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -31917,6 +32047,14 @@ namespace Hawthorne
                         H ? sub : red
                     }
                 });
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Colophon, false));
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GreyColorGroup(main, 1, ColorType.Colophon));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
@@ -32853,6 +32991,11 @@ namespace Hawthorne
                         },
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                if (Half) list.Add(RandomEncounters.Orpheum.GuyGroup(main, 1, false).ToSpecific());
+                else list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 1, false).ToSpecific());
             }
 
             if (BundleStatic(bundle))
@@ -36672,6 +36815,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Splig, false));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -36916,6 +37063,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 1, ColorType.Splig, true));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37124,6 +37275,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 1));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37254,6 +37409,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 2));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37376,6 +37535,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 1, true));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37495,6 +37658,10 @@ namespace Hawthorne
                         Either(RandomOrph, RandomColor(1))
                     }
             });
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 1));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37617,6 +37784,11 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 10; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 1, false));
+                list.Add(RandomEncounters.Orpheum.GreyGroup(main, 1));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -37695,6 +37867,10 @@ namespace Hawthorne
                         RainBaseColor(false, true, true, main),
                         }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.ColorGroup(main, 2, ColorType.Spoggle, false));
             }
             if (BundleRandom(bundle))
             {
@@ -39024,6 +39200,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 0));
+            }
             if (EnemyExist("DeadPixel_EN"))
             {
                 list.Add(new RandomEnemyGroup
@@ -39126,6 +39306,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 1));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -39209,6 +39393,10 @@ namespace Hawthorne
                         Either(RandomColor(1), Either(main, RandomOrph))
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 2));
             }
             if (BundleRandom(bundle))
             {
@@ -39701,6 +39889,11 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 2; i++)
+            {
+                if (!Third) list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 2));
+                else list.Add(RandomEncounters.Orpheum.FagGroup(main, 2));
+            }
             list.Add(new RandomEnemyGroup
             {
                 _enemyNames = new string[]
@@ -39877,6 +40070,11 @@ namespace Hawthorne
                     });
                 }
             }
+            for (int i = 0; i < 2; i++)
+            {
+                if (!Third) list.Add(RandomEncounters.Orpheum.WhoreGroup(main, 1));
+                else list.Add(RandomEncounters.Orpheum.FagGroup(main, 1));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -39951,6 +40149,10 @@ namespace Hawthorne
                         main
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 0, Half));
             }
             if (BundleRandom(bundle))
             {
@@ -40073,6 +40275,10 @@ namespace Hawthorne
                         main
                     }
                 });
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 1, true));
             }
             if (BundleRandom(bundle))
             {
@@ -40213,6 +40419,10 @@ namespace Hawthorne
                         "ManicMan_EN",
                 }
             });
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.GuyGroup(main, 2, true));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
@@ -40523,6 +40733,10 @@ namespace Hawthorne
                     Either(RandomColor(1), Either(RandomOrph, RandomSupport(1, false, false)))
                 }
             });
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(RandomEncounters.Orpheum.FagGroup(main, 2, false));
+            }
             if (BundleRandom(bundle))
             {
                 List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);

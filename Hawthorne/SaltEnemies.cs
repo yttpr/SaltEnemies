@@ -39,6 +39,7 @@ using MonoMod.Cil;
 using UnityEngine.PlayerLoop;
 using System.Runtime;
 using System.Security.Cryptography;
+using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
@@ -3621,6 +3622,117 @@ namespace Hawthorne
                 RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
                 return ret;
             }
+            public static RandomEnemyGroup WeirdGroup(string main, int difficulty, bool isRed = false)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        switch (UnityEngine.Random.Range(0, 3))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(RandomOrph);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true, !isRed && Half));
+                                names.Add(Either(SmartColor(1), RandomOrph));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                break;
+                            default:
+                                if (Half) goto case 2;
+                                else goto case 1;
+                        }
+                        break;
+                    case 1:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(OrphWhore());
+                                break;
+                            case 1:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                names.Add(Either(RandomColor(1), RandomSupport(1, false, false)));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                if (Third) names.Add(SmartColor(1));
+                                else names.Add(OrphWhore());
+                                ResetColor();
+                                break;
+                            case 3:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                names.Add(RandomOrph);
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 3;
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(Either(RandomColor(1), OrphWhore()));
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(RandomOrph, a));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true, !isRed));
+                                names.Add(Third ? RandomOrph : SmartColor(1));
+                                ResetColor();
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                names.Add(OrphWhore(!isRed));
+                                break;
+                            case 3:
+                                names.Add(main);
+                                string b = RandomOrph;
+                                names.Add(b);
+                                names.Add(Either(Either(RandomOrph, b), RandomSupport(1, false, false)));
+                                names.Add(Either(RandomOrph, b));
+                                if (Third)
+                                    names.Add(Either(RandomOrph, b));
+                                break;
+                            default:
+                                if (Half) goto case 0;
+                                else
+                                {
+                                    if (Half) goto case 1;
+                                    else goto case 3;
+                                }
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
             public static RandomEnemyGroup GuyGroup(string main, int difficulty, bool forcetwo = false)
             {
                 List<string> names = new List<string>();
@@ -4187,6 +4299,188 @@ namespace Hawthorne
                         break;
                     default:
                         goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup GreyGroup(string main, int difficulty, bool isRed = false, int size = 1, bool forcetwo = false)
+            {
+                List<string> names = new List<string>();
+                if (isRed && Third) isRed = false;
+                if (size > 3) names.Add(main);
+                else
+                {
+                    switch (difficulty)
+                    {
+                        case 0:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 3))
+                            {
+                                case 0:
+                                    if (main == "Illusion_EN" && Half) goto case 1;
+                                    if (forcetwo) names.Add(main);
+                                    else if(Half) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    if (forcetwo) names.Add(main);
+                                    else if (Half) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add(GreyScaleSupport(false));
+                                    break;
+                                default: goto case 0;
+                            }
+                            break;
+                        case 1:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 3))
+                            {
+                                case 0:
+                                    if (main == "Illusion_EN" && Half) goto case 1;
+                                    if (forcetwo) names.Add(main);
+                                    else names.Add("Illusion_EN");
+                                    if (size <= 2) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    if (size <= 2) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    if (forcetwo) names.Add(main);
+                                    else names.Add(GreyScaleSupport(false));
+                                    break;
+                                default: goto case 1;
+                            }
+                            break;
+                        case 2:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 5))
+                            {
+                                case 0:
+                                    if (size > 1) goto default;
+                                    if (forcetwo) names.Add(main);
+                                    else names.Add("Illusion_EN");
+                                    names.Add("Illusion_EN");
+                                    names.Add(Either("Illusion_EN", GreyScaleSupport(false)));
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    if (size <= 1) goto case 4;
+                                    if (size <= 2) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add(Either("Illusion_EN", GreyScaleSupport(false)));
+                                    if (forcetwo) names.Add(main);
+                                    else names.Add(GreyScaleSupport(false));
+                                    break;
+                                case 3:
+                                    if (size > 1) goto default;
+                                    if (forcetwo) names.Add(main);
+                                    bool a = Half;
+                                    if (!forcetwo || a) names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    names.Add(GreyScaleSupport(false));
+                                    if (!forcetwo || !a) names.Add(GreyScaleSupport(false));
+                                    break;
+                                case 4:
+                                    if (Half) goto case 0;
+                                    else goto case 3;
+                                default:
+                                    goto case 1;
+                            }
+                            break;
+                        default:
+                            goto case 2;
+                    }
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup GreyColorGroup(string main, int difficulty, ColorType color, bool isRed = false)
+            {
+                List<string> names = new List<string>();
+                if (isRed && Third) isRed = false;
+                else
+                {
+                    switch (difficulty)
+                    {
+                        case 0:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 3))
+                            {
+                                case 0:
+                                    if (main == "Illusion_EN" && Half) goto case 1;
+                                    names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add(GreyScaleSupport(false));
+                                    break;
+                                default: goto case 0;
+                            }
+                            break;
+                        case 1:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 3))
+                            {
+                                case 0:
+                                    if (main == "Illusion_EN" && Half) goto case 1;
+                                    names.Add("Illusion_EN");
+                                    names.Add(Either("Illusion_EN", ColorEnemy(1, color, main)));
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    names.Add(GreyScaleSupport(false));
+                                    break;
+                                default: goto case 1;
+                            }
+                            break;
+                        case 2:
+                            names.Add(main);
+                            switch (UnityEngine.Random.Range(0, 6))
+                            {
+                                case 0:
+                                    names.Add(Either("Illusion_EN", ColorEnemy(1, color, main)));
+                                    names.Add("Illusion_EN");
+                                    names.Add(Either("Illusion_EN", GreyScaleSupport(false)));
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    break;
+                                case 1:
+                                    names.Add(Either("Illusion_EN", ColorEnemy(1, color, main)));
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add(Either("Illusion_EN", GreyScaleSupport(false)));
+                                    names.Add(GreyScaleSupport(false));
+                                    break;
+                                case 3:
+                                    names.Add("Illusion_EN");
+                                    if (!isRed) names.Add(GreyScaleRedSource(false));
+                                    else names.Add("Illusion_EN");
+                                    names.Add(GreyScaleSupport(false));
+                                    names.Add(Either(GreyScaleSupport(false), ColorEnemy(1, color, main)));
+                                    break;
+                                case 2:
+                                    goto case 1;
+                                default:
+                                    if (Half) goto case 0;
+                                    else goto case 3;
+                            }
+                            break;
+                        default:
+                            goto case 2;
+                    }
                 }
                 if (names.Count <= 0) names.Add(main);
                 RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
