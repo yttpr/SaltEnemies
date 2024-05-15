@@ -38,6 +38,7 @@ using HarmonyLib;
 using MonoMod.Cil;
 using UnityEngine.PlayerLoop;
 using System.Runtime;
+using System.Security.Cryptography;
 
 namespace Hawthorne
 {
@@ -1708,6 +1709,8 @@ namespace Hawthorne
             UninspiredNosestoneEncountersMedium
              */
 
+            addBronzoPool("Boomer_EN");
+            AddToAreaPool("Boomer_EN", 2);
 
             //((LoadedAssetsHandler.GetEnemy("Sepulchre_EN").abilities[0].ability.effects[2].effect) as SpawnMassivelyEverywhereUsingHealthEffect)._possibleEnemies
             //(LoadedAssetsHandler.GetEnemy("Bronzo5_EN").abilities[0].ability.effects[0].effect as SpawnRandomEnemyAnywhereEffect)._enemies
@@ -2657,6 +2660,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && !killable && UnityEngine.Random.Range(0, 100) < 13 && EnemyExist("Inequity_EN")) list.Add("Inequity_EN");
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("OdetoHumanity_EN")) list.Add("OdetoHumanity_EN");
                 if (EnemyExist("TortureMeNot_EN") && Half) list.Add("TortureMeNot_EN");
+                if (!red && Quarter && EnemyExist("Boomer_EN")) list.Add("Boomer_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2725,6 +2729,7 @@ namespace Hawthorne
             if (harder && EnemyExist("PurpleBot_EN")) for (int i = 0; i < 2; i++) list.Add("PurpleBot_EN");
             if (harder && EnemyExist("GreyBot_EN")) for (int i = 0; i < 2; i++) list.Add("GreyBot_EN");
             if (harder && EnemyExist("OdetoHumanity_EN")) for (int i = 0; i < 1; i++) list.Add("OdetoHumanity_EN");
+            if (harder && Half && EnemyExist("Boomer_EN")) list.Add("Boomer_EN");
             return list.GetRandom();
         }
         public static string GreyScaleRedSource(bool harder = false)
@@ -2867,6 +2872,68 @@ namespace Hawthorne
         public static string SmartColor(int area, bool doubleAble = false, bool forceRed = false) => RandomEncounters.Shore.RandomIntelligentColor(area, doubleAble, forceRed);
         public static void ResetColor() => RandomEncounters.Shore.ResetIntelligentColor();
 
+        public static string _color(int area, ColorType color, string exclude = "")
+        {
+            switch (area)
+            {
+                case 0:
+                    switch (color)
+                    {
+                        case ColorType.Jumble:
+                            return RainBaseWeighted(true, false, true, exclude);
+                        case ColorType.Spoggle:
+                            return RainBaseWeighted(false, false, true, exclude);
+                        case ColorType.Splig:
+                            return Spligs.Exclude(exclude).GetRandom();
+                        case ColorType.Colophon:
+                            return Colophon.UpTo(2).Exclude(exclude).GetRandom();
+                    }
+                    break;
+                case 1:
+                    switch (color)
+                    {
+                        case ColorType.Jumble:
+                            return RainBaseWeighted(true, true, true, exclude);
+                        case ColorType.Spoggle:
+                            return RainBaseWeighted(false, true, true, exclude);
+                        case ColorType.Splig:
+                            return Spligs.Exclude(exclude).GetRandom();
+                        case ColorType.Colophon:
+                            return Colophon.Exclude(exclude).GetRandom();
+                        case ColorType.Bots:
+                            return Bots.UpTo(2).Exclude(exclude).GetRandom();
+                        case ColorType.Flower:
+                            return Flowers.UpTo(2).Exclude(exclude).GetRandom();
+                    }
+                    break;
+                case 2:
+                    switch (color)
+                    {
+                        case ColorType.Bots:
+                            return Bots.Exclude(exclude).GetRandom();
+                        case ColorType.Flower:
+                                return Flowers.Exclude(exclude).GetRandom();
+                        case ColorType.Noses:
+                            return Noses.Exclude(exclude).GetRandom();
+                    }
+                    break;
+            }
+            if (EnemyExist("TortureMeNot_EN")) return "TortureMeNot_EN";
+            else return RandomSupport(area);
+        }
+        public static string ColorEnemy(int area, ColorType color, string exclude = "", string secondEx = "", string thirdEx = "")
+        {
+            string ret = _color(area, color, exclude);
+            if (secondEx == "" && thirdEx == "") return ret;
+            for (int i = 0; i < 100; i++)
+            {
+                if (ret == "TortureMeNot_EN") break;
+                else if (ret == secondEx || ret == thirdEx) ret = _color(area, color, exclude);
+                else break;
+            }
+            return ret;
+        }
+
         public static List<RandomEnemyGroup> ToRandomGroup(this List<SpecificEnemyGroup> g)
         {
             List<RandomEnemyGroup> ret = new List<RandomEnemyGroup>();
@@ -2915,6 +2982,48 @@ namespace Hawthorne
                     _enemyGroup = names.ToArray()
                 });
             }
+            return ret;
+        }
+        public static RandomEnemyGroup ToRandom(this SpecificEnemyGroup group)
+        {
+            List<string> names = new List<string>();
+            foreach (SpecificEnemyInfo enemy in group.EnemyGroup)
+            {
+                names.Add(enemy.enemyName);
+            }
+            RandomEnemyGroup ret = new RandomEnemyGroup()
+            {
+                _enemyNames = names.ToArray()
+            };
+            return ret;
+        }
+        public static SpecificEnemyGroup ToSpecific(this RandomEnemyGroup group)
+        {
+            List<SpecificEnemyInfo> names = new List<SpecificEnemyInfo>();
+            List<int> slots = new List<int>();
+            for (int i = 5; i > 0; i--)
+            {
+                foreach (string enemy in group.EnemyNames)
+                {
+                    if (!EnemyExist(enemy) || slots.Count >= 5) continue;
+                    int size = LoadedAssetsHandler.GetEnemy(enemy).size;
+                    if (size == i)
+                    {
+                        int slot = GenerateSlots(size, slots).GetRandom();
+                        for (int k = 0; k < size; k++) slots.Add(slot + k);
+                        SpecificEnemyInfo info = new SpecificEnemyInfo()
+                        {
+                            enemySlot = slot,
+                            enemyName = enemy
+                        };
+                        names.Add(info);
+                    }
+                }
+            }
+            SpecificEnemyGroup ret = new SpecificEnemyGroup()
+            {
+                _enemyGroup = names.ToArray()
+            };
             return ret;
         }
         public static List<int> GenerateSlots(int size, List<int> used)
@@ -3367,6 +3476,721 @@ namespace Hawthorne
                 if (EnemyExist("Errant_EN")) list.Add("Errant_EN");
                 if (!red && EnemyExist("Crystal_EN")) list.Add("Crystal_EN");
                 return list.GetRandom();
+            }
+            public static string TwoGuy(bool red = false)
+            {
+                List<string> list = new List<string>();
+                list.Add("Revola_EN");
+                if (!red && EnemyExist("TheDragon_EN")) list.Add("TheDragon_EN");
+                return list.GetRandom();
+            }//DONT USE
+            public static RandomEnemyGroup SmallGroup(string main, int difficulty, bool forcetwo = false)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        names.Add(main);
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(RandomColor(1));
+                                names.Add(RandomSupport(1, true));
+                                break;
+                            case 2:
+                                if (forcetwo) goto default;
+                                names.Add(RandomOrph);
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 3:
+                                if (forcetwo) goto default;
+                                names.Add(RandomColor(1));
+                                names.Add(RandomOrph);
+                                break;
+                            case 4:
+                                if (forcetwo) goto default;
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(RandomColor(1));
+                                break;
+                            default:
+                                if (Half) goto case 0;
+                                else goto case 1;
+                        }
+                        break;
+                    case 1:
+                        names.Add(main);
+                        switch (UnityEngine.Random.Range(0, 7))
+                        {
+                            case 0:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                names.Add(RandomColor(1));
+                                break;
+                            case 2:
+                                if (forcetwo) goto default;
+                                names.Add(RandomOrph);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                names.Add(SmartColor(1));
+                                ResetColor();
+                                break;
+                            case 3:
+                                names.Add(RandomOrph);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(main);
+                                break;
+                            case 4: 
+                                goto case 1;
+                            case 5:
+                                if (!Third)
+                                {
+                                    if (Half) goto case 4;
+                                    else goto default;
+                                }
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(main);
+                                break;
+                            default:
+                                if (Half) goto case 0;
+                                else goto case 3;
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                if (forcetwo) goto default;
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(main);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                if (Third) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(main);
+                                string b = RandomOrph;
+                                names.Add(b);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                names.Add(Either(Either(b, RandomOrph), SmartColor(1, true)));
+                                ResetColor();
+                                break;
+                            case 3:
+                                if (forcetwo) goto default;
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                names.Add(OrphWhore());
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 4:
+                                if (forcetwo) goto default;
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                names.Add(RandomOrph);
+                                names.Add(Either(RandomOrph, RandomColor(1)));
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 2;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup GuyGroup(string main, int difficulty, bool forcetwo = false)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        names.Add(main);
+                        switch (UnityEngine.Random.Range(0, 30))
+                        {
+                            case 0:
+                                names.Add(Third ? RandomOrph : main);
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(Either(main, RandomOrph));
+                                if (Third) names.Add(main);
+                                break;
+                            case 2:
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(RandomColor(1));
+                                break;
+                            case 3:
+                                if (Half) goto case 0;
+                                else goto case 1;
+                            case 4:
+                                if (Half) goto case 2;
+                                else goto case 5;
+                            case 5:
+                                names.Add(Either(RandomOrph, main));
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 6:
+                                if (!EnemyExist("DeadPixel_EN")) goto default;
+                                if (!Fifth) names.Add(Either(Either(RandomOrph, main), Either(Either(RandomOrph, main), RandomColor(1))));
+                                names.Add("DeadPixel_EN");
+                                names.Add("DeadPixel_EN");
+                                break;
+                            default:
+                                if (Half) goto case 3;
+                                else goto case 4;
+                        }
+                        break;
+                    case 1:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(Either(main, RandomOrph));
+                                names.Add(Either(main, RandomOrph));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(Either(main, RandomOrph));
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomColor(1));
+                                names.Add(Either(main, RandomOrph));
+                                if (!Third) names.Add(Either(Either(main, RandomOrph), RandomSupport(1, false, false)));
+                                break;
+                            case 3:
+                                names.Add(Either(main, RandomOrph));
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                names.Add(SmartColor(1));
+                                ResetColor();
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 2;
+                        }
+                        break;
+                    case 2:
+                        switch(UnityEngine.Random.Range(0, 6))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Third ? RandomOrph : main);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Third ? RandomOrph : main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                if (Half) names.Add(SmartColor(1));
+                                ResetColor();
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Third ? RandomOrph : main);
+                                names.Add(Either(RandomSupport(1, false, false), RandomColor(1)));
+                                names.Add(Third ? RandomOrph : main);
+                                break;
+                            case 3:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                names.Add(SmartColor(1));
+                                ResetColor();
+                                names.Add(OrphWhore());
+                                break;
+                            default:
+                                names.Add(main);
+                                names.Add(Either(main, RandomColor(1)));
+                                names.Add(OrphWhore());
+                                if (Third) names.Add(RandomSupport(1, false, false));
+                                break;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                if (forcetwo)
+                {
+                    List<string> test = new List<string>(names);
+                    if (!test.Contains(main)) return GuyGroup(main, difficulty, forcetwo);
+                    test.Remove(main);
+                    if (!test.Contains(main)) return GuyGroup(main, difficulty, forcetwo);
+                }
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup ColorGroup(string main, int difficulty, ColorType color, bool isRed = false)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        names.Add(main);
+                        switch(UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(RandomOrph);
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 1:
+                                names.Add(RandomSupport(1, false, false));
+                                if (Half) names.Add(RandomOrph);
+                                break;
+                            case 2:
+                                if (color == ColorType.Noses) goto default;
+                                if (Half) names.Add(RandomSupport(1));
+                                names.Add(ColorEnemy(1, color, main));
+                                break;
+                            case 3:
+                                goto case 2;
+                            default:
+                                if (Half) goto case 0;
+                                else goto case 1;
+                        }
+                        break;
+                    case 1:
+                        names.Add(main);
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 1:
+                                if (color == ColorType.Noses) goto default;
+                                string b = RandomOrph;
+                                names.Add(b);
+                                if (Half) names.Add(Either(b, RandomOrph));
+                                names.Add(ColorEnemy(1, color, main));
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                if (color == ColorType.Noses || color == ColorType.Flower || color == ColorType.Bots) goto default;
+                                string c = ColorEnemy(1, color, main);
+                                names.Add(c);
+                                if (isRed) names.Add(ColorEnemy(1, color, main, c));
+                                if (Half || !isRed) names.Add(Either(RandomOrph, RandomSupport(1, !isRed, false)));
+                                break;
+                            case 3:
+                                names.Add(OrphWhore());
+                                if (!Third) names.Add(Either(RandomOrph, RandomSupport(1, !isRed, false)));
+                                break;
+                            case 4:
+                                if (color == ColorType.Noses) goto default;
+                                names.Add(OrphWhore(!isRed));
+                                names.Add(ColorEnemy(1, color, main));
+                                if (Third) names.Add(RandomSupport(1));
+                                break;
+                            default:
+                                if (Third) goto case 0;
+                                else goto case 3;
+
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 8))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                string a = RandomOrph;
+                                names.Add(Either(a, RandomOrph));
+                                if (Half) names.Add(Either(a, RandomSupport(1, false, false)));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                names.Add(OrphWhore());
+                                if (Third) names.Add(Either(RandomOrph, RandomSupport(1, false, false)));
+                                break;
+                            case 2:
+                                if (color == ColorType.Colophon)
+                                {
+                                    foreach (string colo in Colophon) names.Add(colo);
+                                }
+                                else if (color == ColorType.Spoggle)
+                                {
+                                    if (!Quarter)
+                                    {
+                                        names.Add("Spoggle_Spitfire_EN");
+                                        names.Add("Spoggle_Ruminating_EN");
+                                        names.Add("Spoggle_Writhing_EN");
+                                        names.Add("Spoggle_Resonant_EN");
+                                    }
+                                    else
+                                    {
+                                        string q = ColorEnemy(1, color, main);
+                                        string w = ColorEnemy(1, color, main, q);
+                                        string e = ColorEnemy(1, color, main, q, w);
+                                        names.Add(main);
+                                        names.Add(q);
+                                        names.Add(w);
+                                        names.Add(e);
+                                    }
+                                }
+                                else if (color == ColorType.Jumble)
+                                {
+                                    if (!Quarter)
+                                    {
+                                        names.Add("JumbleGuts_Waning_EN");
+                                        names.Add("JumbleGuts_Clotted_EN");
+                                        names.Add("JumbleGuts_Hollowing_EN");
+                                        names.Add("JumbleGuts_Flummoxing_EN");
+                                    }
+                                    else
+                                    {
+                                        string q = ColorEnemy(1, color, main);
+                                        string w = ColorEnemy(1, color, main, q);
+                                        string e = ColorEnemy(1, color, main, q, w);
+                                        names.Add(main);
+                                        names.Add(q);
+                                        names.Add(w);
+                                        names.Add(e);
+                                    }
+                                }
+                                else goto default;
+                                switch(UnityEngine.Random.Range(0, 5))
+                                {
+                                    case 0: names.Add(RandomSupport(1, false, false)); break;
+                                    case 1: names.Add(Either(RandomOrph, OrphWhore())); break;
+                                }
+                                break;
+                            case 3:
+                                if (color == ColorType.Noses) goto default;
+                                names.Add(main);
+                                names.Add(ColorEnemy(1, color, main));
+                                bool b = Half;
+                                names.Add(OrphWhore(!isRed && b));
+                                if (Third) names.Add(RandomSupport(1, !b, Half));
+                                break;
+                            case 4:
+                                if (color == ColorType.Noses) goto default;
+                                names.Add(main);
+                                names.Add(ColorEnemy(1, color, main));
+                                string c = RandomOrph;
+                                names.Add(c);
+                                names.Add(Either(c, RandomOrph));
+                                names.Add(Either(Either(c, RandomOrph), RandomSupport(1, false, false)));
+                                break;
+                            case 5:
+                                if (color == ColorType.Noses) goto default;
+                                names.Add(main);
+                                names.Add(ColorEnemy(1, color, main));
+                                names.Add(OrphWhore());
+                                names.Add(RandomOrph);
+                                break;
+                            case 6:
+                                if (Third) goto case 4;
+                                else if (Half) goto case 3;
+                                else goto case 5;
+                            default:
+                                if (Half) goto case 0;
+                                else goto case 1;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup WhoreGroup(string main, int difficulty, bool isRed = true)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        switch (UnityEngine.Random.Range(0, 3))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, !isRed && Half));
+                                break;
+                            case 1:
+                                if (!isRed) goto case 0;
+                                names.Add(main);
+                                if (Half) names.Add(RandomColor(1));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                break;
+                            default:
+                                names.Add(main);
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(RandomSupport(1));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                names.Add(RandomColor(1));
+                                break;
+                            case 3:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(RandomOrph);
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 3;
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(Either(main, OrphWhore()));
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(RandomOrph, a));
+                                break;
+                            case 1:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true, !isRed));
+                                names.Add(SmartColor(1));
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(Either(main, OrphWhore()));
+                                names.Add(OrphWhore(!isRed));
+                                break;
+                            case 3:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                names.Add(RandomColor(1));
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            default:
+                                goto case 0;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup FagGroup(string main, int difficulty, bool isRed = true)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        switch (UnityEngine.Random.Range(0, 4))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, !isRed && Half));
+                                break;
+                            case 1:
+                                if (!isRed) goto case 0;
+                                names.Add(main);
+                                if (Third) names.Add(RandomColor(0));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                if (Half) names.Add(RandomOrph);
+                                break;
+                            default:
+                                names.Add(main);
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 1:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(a, RandomOrph));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(SmartColor(1, false, !isRed));
+                                if (Third) names.Add(RandomOrph);
+                                break;
+                            case 3:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(RandomOrph);
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 3;
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                names.Add(RandomOrph);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true, !isRed));
+                                names.Add(SmartColor(1));
+                                if (Half) names.Add(RandomSupport(1, false, false));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(main);
+                                names.Add(Either(RandomOrph, SmartColor(1, false, !isRed)));
+                                break;
+                            case 3:
+                                names.Add(main);
+                                names.Add(Either(main, Fag()));
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            default:
+                                if (Half) goto case 0;
+                                else goto case 2;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
+            }
+            public static RandomEnemyGroup BiggieGroup(string main, int difficulty)
+            {
+                List<string> names = new List<string>();
+                switch (difficulty)
+                {
+                    case 0:
+                        switch (UnityEngine.Random.Range(0, 4))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomOrph);
+                                break;
+                            default:
+                                names.Add(main);
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                if (Third) names.Add(RandomOrph);
+                                break;
+                            case 1:
+                                names.Add(main);
+                                names.Add(Either(RandomOrph, RandomColor(1)));
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                break;
+                            default:
+                                if (Half) goto case 1;
+                                else goto case 2;
+                        }
+                        break;
+                    case 2:
+                        switch (UnityEngine.Random.Range(0, 5))
+                        {
+                            case 0:
+                                names.Add(main);
+                                names.Add(OrphWhore());
+                                break;
+                            case 1:
+                                names.Add(main);
+                                ResetColor();
+                                names.Add(SmartColor(1, true));
+                                names.Add(SmartColor(1));
+                                ResetColor();
+                                break;
+                            case 2:
+                                names.Add(main);
+                                names.Add(RandomSupport(1, false, false));
+                                names.Add(Either(RandomColor(1), RandomOrph));
+                                break;
+                            case 3:
+                                names.Add(main);
+                                string a = RandomOrph;
+                                names.Add(a);
+                                names.Add(Either(RandomOrph, a));
+                                break;
+                            default:
+                                if (Half) goto case 3;
+                                else goto case 2;
+                        }
+                        break;
+                    default:
+                        goto case 2;
+                }
+                if (names.Count <= 0) names.Add(main);
+                RandomEnemyGroup ret = new RandomEnemyGroup() { _enemyNames = names.ToArray() };
+                return ret;
             }
         }
         public static class Garden
