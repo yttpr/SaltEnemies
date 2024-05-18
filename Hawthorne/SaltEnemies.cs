@@ -3798,7 +3798,7 @@ namespace Hawthorne
                                 if (!Third) names.Add(Either(Either(main, RandomOrph), RandomSupport(1, false, false)));
                                 break;
                             case 3:
-                                names.Add(Either(main, RandomOrph));
+                                names.Add(main);
                                 ResetColor();
                                 names.Add(SmartColor(1, true));
                                 names.Add(SmartColor(1));
