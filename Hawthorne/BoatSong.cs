@@ -232,7 +232,7 @@ namespace Hawthorne
                 rarity = UnityEngine.Random.Range(15, 25) * 1,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/NewTrainSong",
-                roarEvent = "event:/Hawthorne/Attack3/Censored",
+                roarEvent = "event:/Hawthorne/Noise/TrainRoar",
                 difficulty = EncounterDifficulty.Hard
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
@@ -336,7 +336,7 @@ namespace Hawthorne
                 rarity = UnityEngine.Random.Range(10, 15) * 1,
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/NewTrainSong",
-                roarEvent = "event:/Hawthorne/Attack3/Censored",
+                roarEvent = "event:/Hawthorne/Noise/TrainRoar",
                 difficulty = EncounterDifficulty.Medium
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
