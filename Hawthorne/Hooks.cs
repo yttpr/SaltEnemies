@@ -1628,7 +1628,7 @@ namespace Hawthorne
             //Debug.Log("started");
             if (obj is IUnit unit)
             {
-                while (!unit.Equals(null) && unit.IsAlive)
+                while (CombatManager._instance != null && CombatManager.Instance._stats.InCombat && !unit.Equals(null) && unit.IsAlive)
                 {
                     int amountOfTime = 50 * unit.GetStoredValue((UnitStoredValueNames)20051511);
                     for (int i = 0; i < amountOfTime; i++)
@@ -1636,7 +1636,7 @@ namespace Hawthorne
                         Thread.Sleep(20);
                     }
 
-                    if (unit is EnemyCombat enemyOnField && unit.ContainsPassiveAbility((PassiveAbilityTypes)77696))
+                    if (unit is EnemyCombat enemyOnField && unit.ContainsPassiveAbility((PassiveAbilityTypes)77696) && CombatManager._instance != null && CombatManager.Instance._stats.InCombat)
                     {
                         CombatManager.Instance._stats.timeline.TryAddNewExtraEnemyTurns((ITurn)enemyOnField, 1);
                         Debug.Log("turn added");
@@ -1672,6 +1672,10 @@ namespace Hawthorne
         public override void OnPassiveDisconnected(IUnit unit)
         {
             TimerAbominationPassiveHook.inCombat -= 1;
+            if (timerThread != null)
+            {
+                timerThread.Abort();
+            }
         }
     }
     public static class TimerAbominationPassiveHook

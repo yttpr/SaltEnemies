@@ -5746,7 +5746,7 @@ namespace Hawthorne
         {
             try
             {
-                CombatManager.Instance.AddRootAction(new SubActionAction(new UIActionAction(new TrainIntentsAllUpdateUIAction())));
+                if (CombatManager._instance != null && CombatManager.Instance._stats.InCombat) CombatManager.Instance.AddRootAction(new SubActionAction(new UIActionAction(new TrainIntentsAllUpdateUIAction())));
             }
             catch
             {

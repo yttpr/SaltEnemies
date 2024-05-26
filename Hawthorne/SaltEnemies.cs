@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.4")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.5")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -221,6 +221,7 @@ namespace Hawthorne
             PCall(Hawthorne.CameraEncounters.Add);
             PCall(Hawthorne.DeadGod.Add);
             PCall(Hawthorne.NewFolder.Phase0.Add);
+            PCall(theGimmick.Add);
             PCall(Hawthorne.Shiny.Hook);
             PCall(Hawthorne.Shiny.Add);
             PCall(Hawthorne.CNSEncounters.Add);
@@ -1909,6 +1910,37 @@ namespace Hawthorne
                 case 1: if (!Orpheum.Contains(enemy)) Orpheum.Add(enemy); break;
                 case 2: if (!Garden.Contains(enemy)) Garden.Add(enemy); break;
             }
+        }
+
+        public static ExtraAbilityInfo GetRandomItemAbility()
+        {
+            CasterAddRandomExtraAbilityEffect effect = (LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0] as Connection_PerformEffectPassiveAbility).connectionEffects[1].effect as CasterAddRandomExtraAbilityEffect;
+            List<BasicAbilityChange_Wearable_SMS> changeWearableSmsList = new List<BasicAbilityChange_Wearable_SMS>((IEnumerable<BasicAbilityChange_Wearable_SMS>)effect._slapData);
+            List<ExtraAbility_Wearable_SMS> abilityWearableSmsList = new List<ExtraAbility_Wearable_SMS>((IEnumerable<ExtraAbility_Wearable_SMS>)effect._extraData);
+            int count1 = changeWearableSmsList.Count;
+            int count2 = abilityWearableSmsList.Count;
+            int index1 = UnityEngine.Random.Range(0, count1 + count2);
+            ExtraAbilityInfo randomItemAbility;
+            RaritySO rar = ScriptableObject.CreateInstance<RaritySO>();
+            rar.canBeRerolled = true;
+            rar.rarityValue = 5;
+            if (index1 < changeWearableSmsList.Count)
+            {
+                BasicAbilityChange_Wearable_SMS changeWearableSms = changeWearableSmsList[index1];
+                changeWearableSmsList.RemoveAt(index1);
+                int num = count1 - 1;
+                randomItemAbility = new ExtraAbilityInfo(changeWearableSms.BasicAbility);
+            }
+            else
+            {
+                int index2 = index1 - count1;
+                ExtraAbility_Wearable_SMS abilityWearableSms = abilityWearableSmsList[index2];
+                abilityWearableSmsList.RemoveAt(index2);
+                int num = count2 - 1;
+                randomItemAbility = new ExtraAbilityInfo(abilityWearableSms.ExtraAbility);
+            }
+            randomItemAbility.rarity = rar;
+            return randomItemAbility;
         }
     }
 

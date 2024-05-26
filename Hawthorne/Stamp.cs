@@ -254,8 +254,8 @@ namespace Hawthorne
         {
             if (sender is EnemyCombat enemy)
             {
-                if (notificationName == TriggerCalls.OnCombatEnd.ToString() && CombatManager.Instance._stats.CharactersAlive) EndcombatCheck(enemy);
-                if (notificationName == TriggerCalls.OnFleetingEnd.ToString() && CombatManager.Instance._stats.CharactersAlive) FleeCheck(enemy);
+                //if (notificationName == TriggerCalls.OnCombatEnd.ToString() && CombatManager.Instance._stats.CharactersAlive) EndcombatCheck(enemy);
+                //if (notificationName == TriggerCalls.OnFleetingEnd.ToString() && CombatManager.Instance._stats.CharactersAlive) FleeCheck(enemy);
                 if (notificationName == TriggerCalls.OnDeath.ToString() && CombatManager.Instance._stats.CharactersAlive) KillCheck(enemy);
 
             }
@@ -500,10 +500,10 @@ namespace Hawthorne
             new Stamp("Rustic", "RusticJumbleguts_EN", "RusticPage.png", "Group_3", "RusticLock.png", "RusticMark.png");
             new StampGroup("Group_3", new string[] { "Shiny", "Camera", "Gospel", "Rustic" }, "ChapterFourIntroPage.png", "ChapterFourCompPage.png", Chapter.Four);
 
-            new Stamp("Superboss", "544517_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
-            new Stamp("Superboss", "544516_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
-            new Stamp("Superboss", "544515_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
-            new Stamp("Superboss", "544514_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Placeholder", "544517_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Placeholder", "544516_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Placeholder", "544515_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
+            new Stamp("Placeholder", "544514_EN", "SuperbossPage.png", "", "BossLock.png", "BossMark.png");
             new Stamp("Superboss", "544513_EN", "SuperbossPage.png", "Group_3_5", "BossLock.png", "BossMark.png");
             new StampGroup("Group_3_5", new string[] { "Superboss" }, "ChapterFiveIntroPage.png", "ChapterFiveCompPage.png", Chapter.Five);
 

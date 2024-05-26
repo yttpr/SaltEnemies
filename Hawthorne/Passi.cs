@@ -5882,11 +5882,11 @@ namespace Hawthorne
         public static List<PerformRandomEffectsAmongEffects> Selves = new List<PerformRandomEffectsAmongEffects>();
         public static void GO()
         {
-            //foreach (PerformRandomEffectsAmongEffects self in Selves) self.Actually();
+            foreach (PerformRandomEffectsAmongEffects self in Selves) self.Actually();
         }
         public void Setup()
         {
-            //Selves.Add(this);
+            Selves.Add(this);
             Actually();
         }
         public void Actually()

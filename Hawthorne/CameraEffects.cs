@@ -10,6 +10,7 @@ using System.Reflection;
 using TairbazFools.Effects;
 using THE_DEAD;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.CanvasScaler;
 
 namespace Hawthorne
@@ -277,7 +278,18 @@ namespace Hawthorne
             }
             if (passives.ContainsPassiveAbility(PassiveAbilityTypes.Construct))
             {
-                enemy.AddPassiveAbility(Passives.Construct);
+                //enemy.AddPassiveAbility(Passives.Construct);
+                RandomAbilityPassive instance1 = ScriptableObject.CreateInstance<RandomAbilityPassive>();
+                instance1._passiveName = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0]._passiveName;
+                instance1.passiveIcon = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0].passiveIcon;
+                instance1.type = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0].type;
+                instance1._enemyDescription = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0]._enemyDescription;
+                instance1._characterDescription = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0]._characterDescription;
+                instance1._triggerOn = new TriggerCalls[1]
+                {
+                (TriggerCalls) 889532
+                };
+                enemy.AddPassiveAbility(instance1);
             }
             if (passives.ContainsPassiveAbility(PassiveAbilityTypes.Cashout))
             {
@@ -2172,33 +2184,42 @@ namespace Hawthorne
             {
                 foreach (CombatAbility ability in enemy.Abilities)
                 {
-                    if (ability.ability._locAbilityData.text == "Favorite Picture")
+                    try
                     {
-                        enemy.Abilities.Remove(ability);
-                        foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
+                        if (ability.ability.GetAbilityLocData().text == "Favorite Picture")
                         {
-                            EnemyCombatUIInfo enemyInfo;
-                            if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
+                            enemy.Abilities.Remove(ability);
+                            foreach (int enID in stats.combatUI._enemiesInCombat.Keys)
                             {
-                                if (enemyInfo.SlotID == enemy.SlotID)
+                                EnemyCombatUIInfo enemyInfo;
+                                if (stats.combatUI._enemiesInCombat.TryGetValue(enID, out enemyInfo))
                                 {
-                                    enemyInfo.UpdateAttacks(enemy.Abilities.ToArray());
-                                    stats.combatUI.TryUpdateEnemyIDInformation(enID);
+                                    if (enemyInfo.SlotID == enemy.SlotID)
+                                    {
+                                        //enemyInfo.UpdateAttacks(enemy.Abilities.ToArray());
+                                        stats.combatUI.TryUpdateAllEnemyAttacks(enemy.ID, enemy.Abilities.ToArray());
+                                        stats.combatUI.TryUpdateEnemyIDInformation(enID);
+                                    }
                                 }
                             }
+                            exitAmount++;
+                            break;
                         }
-                        exitAmount++;
-                        break;
+                    }
+                    catch
+                    {
+                        Debug.LogError("broke somehow. fuck if i know");
                     }
                 }
-                UnityEngine.Debug.Log(enemy._currentName);
-                foreach (CombatAbility ability in enemy.Abilities)
-                {
-                    UnityEngine.Debug.Log(ability.ability._locAbilityData.text + " ; " + ability.ability._abilityName);
-                }
+                //UnityEngine.Debug.Log(enemy._currentName);
+                //foreach (CombatAbility ability in enemy.Abilities)
+                //{
+                //    UnityEngine.Debug.Log(ability.ability._locAbilityData.text + " ; " + ability.ability._abilityName);
+                //}
             }
 
-
+            //Timeline
+            if (!caster.IsUnitCharacter) CombatManager.Instance.AddUIAction(new RefreshEnemyInfoUIAction(caster.ID));
             return exitAmount > 0;
         }
     }
@@ -2278,14 +2299,16 @@ namespace Hawthorne
                         }
                     }
                     List<CombatAbility> abilities = unitEN.Abilities;
-                    foreach (CombatAbility removeLens in abilities)
+                    foreach (CombatAbility removeLens in new List<CombatAbility>(abilities))
                     {
                         if (removeLens.ability._abilityName == "Lens Flash")
                         {
                             abilities.Remove(removeLens);
-                            break;
+                            //break;
                         }
                     }
+                    //if (abilToAdd.Count > 0) abilities.Add(abilToAdd[0]);
+
                     foreach (CombatAbility ability in abilToAdd)
                     {
                         abilities.Add(ability);
@@ -2294,11 +2317,14 @@ namespace Hawthorne
                     {
                         List<CombatAbility> newList = new List<CombatAbility>();
                         //newList.Add(abilities[0]);
+                        
                         newList.Add(lens);
+                        //for (int i = 1; i < abilToAdd.Count; i++) abilities.Add(abilToAdd[i]);
                         exitAmount++;
                         for (int i = 0; i < abilities.Count; i++)
                         {
                             newList.Add(abilities[i]);
+                            //if (i == 0) 
                             exitAmount++;
                         }
                         unitEN.Abilities = newList;
@@ -3537,13 +3563,54 @@ namespace Hawthorne
                         if (enemyInfo.SlotID == yeah.SlotID)
                         {
                             enemyInfo.Abilities = yeah.Abilities;
-                            enemyInfo.UpdateAttacks(enemyInfo.Abilities.ToArray());
+                            //enemyInfo.UpdateAttacks(enemyInfo.Abilities.ToArray());
+                            stats.combatUI.TryUpdateAllEnemyAttacks(yeah.ID, yeah.Abilities.ToArray());
                             stats.combatUI.TryUpdateEnemyIDInformation(enID);
                         }
                     }
                 }
             }
             yield return null;
+        }
+    }
+    public class RandomAbilityPassive : BasePassiveAbilitySO
+    {
+        private Dictionary<IUnit, ExtraAbilityInfo> extraAbilities;
+
+        public override bool IsPassiveImmediate => true;
+
+        public override bool DoesPassiveTrigger => true;
+
+        public override void TriggerPassive(object sender, object args)
+        {
+            IUnit key = sender as IUnit;
+            ExtraAbilityInfo extraAbilityInfo;
+            if (this.extraAbilities.TryGetValue(key, out extraAbilityInfo))
+            {
+                key.TryRemoveExtraAbility(extraAbilityInfo);
+                this.extraAbilities.Remove(key);
+            }
+            ExtraAbilityInfo randomItemAbility = SaltEnemies.GetRandomItemAbility();
+            this.extraAbilities.Add(key, randomItemAbility);
+            key.AddExtraAbility(this.extraAbilities[key]);
+        }
+
+        public override void OnPassiveConnected(IUnit unit)
+        {
+            if (this.extraAbilities == null)
+                this.extraAbilities = new Dictionary<IUnit, ExtraAbilityInfo>();
+            ExtraAbilityInfo randomItemAbility = SaltEnemies.GetRandomItemAbility();
+            this.extraAbilities.Add(unit, randomItemAbility);
+            unit.AddExtraAbility(this.extraAbilities[unit]);EnemyCombat e;
+        }
+
+        public override void OnPassiveDisconnected(IUnit unit)
+        {
+            ExtraAbilityInfo extraAbilityInfo;
+            if (!this.extraAbilities.TryGetValue(unit, out extraAbilityInfo))
+                return;
+            unit.TryRemoveExtraAbility(extraAbilityInfo);
+            this.extraAbilities.Remove(unit);
         }
     }
 }

@@ -63,11 +63,14 @@ namespace Hawthorne.NewFolder
             dontClick.doesPassiveTriggerInformationPanel = true;
             dontClick._triggerOn = new TriggerCalls[1] { (TriggerCalls)267850 };
             dontClick.conditions = new EffectorConditionSO[1] { ScriptableObject.CreateInstance<StoredValueIsFiveTriggerOnlyOnceCondition>() };
-            dontClick.effects = ExtensionMethods.ToEffectInfoArray(new Effect[4] 
+            OverrideMusicEffect newsong = ScriptableObject.CreateInstance<OverrideMusicEffect>();
+            newsong.newsong = "event:/Hawthorne/DeadPixelTheme";
+            dontClick.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] 
             { 
                 new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, null, Slots.Self),
                 new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, null, allAlly),
                 new Effect(exhaust, 1, null, allEnemy),
+                new Effect(newsong, 1, null, Slots.Self),
                 new Effect(bossItUp, 1, null, Slots.Self)
             });
 

@@ -15,6 +15,7 @@ namespace Hawthorne
         public static void Setup()
         {
             IDetour hook = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.DefaultPassiveAbilityInitialization), ~BindingFlags.Default), typeof(PageCollector).GetMethod(nameof(DefaultPassiveAbilityInitialization), ~BindingFlags.Default));
+            SaltEnemies.PCall(CombatManagerCrashHandler.Setup);
         }
         
         public static void DefaultPassiveAbilityInitialization(Action<EnemyCombat> orig, EnemyCombat self)
@@ -45,11 +46,12 @@ namespace Hawthorne
                 }
             }
         }
-
+        
         public static void Paging(this EnemyCombat self)
         {
             StampHandler.PageCheck(self);
             return;
+            /*
             if (self.IsEnemy("A'Flower'_EN")) AddPage("AnglerPage.png");
             if (self.IsEnemy("LittleBeak_EN")) AddPage("BeakPage.png");
             if (self.IsEnemy("BlueFlower_EN")) AddPage("BlueFlowerPage.png");
@@ -128,6 +130,7 @@ namespace Hawthorne
             if (self.IsEnemy("Minana_EN")) AddPage("PinanoPage.png");
             if (self.IsEnemy("Arceles_EN")) AddPage("ArcelesPage.png");
             if (self.IsEnemy("Stoplight_EN")) AddPage("StoplightPage.png");
+            */
         }
 
         public static bool IsEnemy(this EnemyCombat self, string enemy)
@@ -328,6 +331,25 @@ namespace Hawthorne
                     enemy.Name = names.GetRandom();
                 }
             }
+        }
+    }
+    public static class CombatManagerCrashHandler
+    {
+        public static void Setup()
+        {
+            IDetour other = new Hook(typeof(CombatManager).GetMethod(nameof(CombatManager.Update), ~BindingFlags.Default), typeof(CombatManagerCrashHandler).GetMethod(nameof(Update), ~BindingFlags.Default));
+        }
+        public static void Update(Action<CombatManager> orig, CombatManager self)
+        {
+            if (self._informationHolder == null) self._informationHolder = Resources.FindObjectsOfTypeAll<GameInformationHolder>()[0];
+            //if (self != null && self._informationHolder != null && self._informationHolder.Run != null && self._stats != null && self._combatUI != null)
+                orig(self);
+            //else
+            //{
+            //    CombatManager._instance = null;
+            //    UnityEngine.Object.Destroy(self);
+            //    Debug.LogWarning("buncha stuff in combat manager was null so i destroyed it - salt");
+            //}
         }
     }
 }

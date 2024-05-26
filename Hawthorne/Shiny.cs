@@ -190,7 +190,7 @@ namespace Hawthorne
             orig(self);
             //Debug.Log("entered");
             if (LetsYouIgnoreMissingEnemiesHook.IsDisabled("CoinHunter_EN")) return;
-            if (UnityEngine.Random.Range(0, 100) < chance() && CombatManager.Instance._stats.PlayerCurrency >= 32 && !enteredCombat)
+            if (UnityEngine.Random.Range(0, 100) < chance() && ((CombatManager.Instance._stats.PlayerCurrency >= 32 && Check.Half) || CombatManager.Instance._stats.PlayerCurrency >= 99) && !enteredCombat)
             {
                 //Debug.Log("a");
                 foreach (ItemInGameData itemData in CombatManager.Instance._informationHolder.Run.playerData._itemList)

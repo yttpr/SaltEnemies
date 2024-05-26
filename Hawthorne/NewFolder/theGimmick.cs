@@ -51,11 +51,14 @@ namespace Hawthorne.NewFolder
             lockedBox.shopPrice = 5;
             lockedBox.startsLocked = false;
             lockedBox.immediate = false;
-            lockedBox.effects = new Effect[1]
+            
+            lockedBox.effects = new Effect[]
             {
+                
                 new Effect(theBox, 1, null, Slots.Self)
             };
             lockedBox.AddItem();
+            //CombatManager c;
             isAdded = true;
         }
     }
@@ -84,6 +87,22 @@ namespace Hawthorne.NewFolder
             }
             Chocolate.Add();
             stats.AddExtraLootAddition("ChocolateCoin_EW");
+            return true;
+        }
+    }
+    public class OverrideMusicEffect : EffectSO
+    {
+        public string newsong;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            //return true;
+            CombatManager.Instance._musicEventHandler.OnWillStopCombatMusic(CombatManager.Instance._soundManager.MusicCombatEvent);
+            CombatManager.Instance._soundManager.StopCombatMusicTrack();
+            CombatManager.Instance._musicEventHandler.OnStopCombatMusic();
+            CombatManager.Instance._soundManager.PlayCombatMusicTrack(newsong);
+            CombatManager.Instance._musicEventHandler = new MusicTimelineEventHandler();
+            CombatManager.Instance._musicEventHandler.SetUpCombatMusicCallbacks(CombatManager.Instance._soundManager.MusicCombatEvent);
             return true;
         }
     }

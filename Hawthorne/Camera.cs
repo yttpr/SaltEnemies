@@ -1,9 +1,11 @@
 ﻿using BrutalAPI;
 using Hawthorne.NewFolder;
+using MonoMod.RuntimeDetour;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System.Reflection;
 
 namespace Hawthorne
 {
@@ -92,8 +94,37 @@ namespace Hawthorne
             ((ExtraAttackPassiveAbility)camera.passives[0])._extraAbility.ability = lens.EnemyAbility().ability;
             ((ExtraAttackPassiveAbility)camera.passives[0])._extraAbility.ability.name = "Lens Flash";
 
-            camera.abilities = new Ability[] { picture };
+            camera.abilities = new Ability[] {  picture };
             camera.AddEnemy();
+            SaltEnemies.PCall(CameraHandler.Setup);
+        }
+    }
+    public static class CameraHandler
+    {
+        public static void AddExtraAbility(Action<EnemyCombat, ExtraAbilityInfo> orig, EnemyCombat self, ExtraAbilityInfo extra)
+        {
+            if (extra.ability.name != "Lens Flash")
+            {
+                orig(self, extra);
+                return;
+            }
+            self.ExtraAbilities.Add(extra);
+            CombatAbility item = new CombatAbility(extra.ability, extra.rarity);
+            List<CombatAbility> list = new List<CombatAbility>() { item };
+            foreach (CombatAbility abil in self.Abilities) list.Add(abil);
+            self.Abilities = list;
+            CombatManager.Instance.AddUIAction(new EnemyUpdateAllAttacksUIAction(self.ID, self.Abilities.ToArray()));
+        }
+        public static void RemoveAttack(Action<EnemyCombatUIInfo, int> orig, EnemyCombatUIInfo self, int attackID)
+        {
+            if (attackID >= self.Abilities.Count) attackID = self.Abilities.Count - 1;
+            if (attackID < 0) return;
+            orig(self, attackID);
+        }
+        public static void Setup()
+        {
+            IDetour hook = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.AddExtraAbility), ~BindingFlags.Default), typeof(CameraHandler).GetMethod(nameof(AddExtraAbility), ~BindingFlags.Default));
+            IDetour hack = new Hook(typeof(EnemyCombatUIInfo).GetMethod(nameof(EnemyCombatUIInfo.RemoveAttack), ~BindingFlags.Default), typeof(CameraHandler).GetMethod(nameof(RemoveAttack), ~BindingFlags.Default));
         }
     }
 }
