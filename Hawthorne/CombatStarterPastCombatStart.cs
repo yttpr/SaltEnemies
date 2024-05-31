@@ -15,6 +15,8 @@ namespace Hawthorne
             orig(self);
             if (CombatStarted)
             {
+                if (self.GetStoredValue((UnitStoredValueNames)98412002) > 0) return;
+                else self.SetStoredValue((UnitStoredValueNames)98412002, 1);
                 try
                 {
                     self.StartCombat();

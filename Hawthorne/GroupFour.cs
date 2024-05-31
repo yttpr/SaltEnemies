@@ -372,6 +372,8 @@ namespace Hawthorne
             ModTwo.DancerHard();
             ModTwo.MooneEZ();
             ModTwo.MooneMed();
+            ModTwo.BaitMed();
+            ModTwo.BaitHard();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();

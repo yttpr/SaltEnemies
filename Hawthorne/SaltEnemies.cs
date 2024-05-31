@@ -1601,6 +1601,8 @@ namespace Hawthorne
             addSepulchrePool("Metronome_EN");
             addSepulchrePool("StageLight_EN");
             addSepulchrePool("Loudhailer_EN");
+            addSepulchrePool("DryBait_EN");
+            addSepulchrePool("NumbFrostbite_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
             //addFountainPool("FrowningChancellor_EN");
@@ -1610,6 +1612,8 @@ namespace Hawthorne
             addFountainPool("Metronome_EN");
             addFountainPool("StageLight_EN");
             addFountainPool("Loudhailer_EN");
+            addFountainPool("DryBait_EN");
+            addFountainPool("NumbFrostbite_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
             addBronzoPool("FrowningChancellor_EN");
@@ -1620,6 +1624,10 @@ namespace Hawthorne
             addBronzoPool("Metronome_EN");
             addBronzoPool("StageLight_EN");
             addBronzoPool("Loudhailer_EN");
+            addBronzoPool("DryBait_EN");
+            addBronzoPool("NumbFrostbite_EN");
+            addBronzoPool("Sign_EN");
+            addBronzoPool("PrizedCatch_EN");
             AddToAreaPool("MarbleMaw_EN", 2);
             AddToAreaPool("UnculturedSwine_EN", 0);
             AddToAreaPool("FrowningChancellor_EN", 2);
@@ -1629,6 +1637,8 @@ namespace Hawthorne
             AddToAreaPool("Metronome_EN", 1);
             AddToAreaPool("StageLight_EN", 1);
             AddToAreaPool("Loudhailer_EN", 1);
+            AddToAreaPool("DryBait_EN", 0);
+            AddToAreaPool("NumbFrostbite_EN", 1);
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -3197,7 +3207,7 @@ namespace Hawthorne
                     {
                         int limiter = 2;
                         if (area > 1) limiter = 5;
-                        ret = Flowers.UpTo(limiter).GetRandom();
+                        ret = Bots.UpTo(limiter).GetRandom();
                         if (forceRed) ret = "RedBot_EN";
                     }
                     else ret = RandomColor(area);
@@ -3301,7 +3311,7 @@ namespace Hawthorne
                     }
                     else if (picked == ColorType.Bots)
                     {
-                        ColorLastDouble = Bots.GetRandom();
+                        ColorLastDouble = area > 1 ? Bots.GetRandom() : Bots.UpTo(2).GetRandom();
                         if (forceRed) ColorLastDouble = "RedBot_EN";
                     }
                     else
@@ -3339,6 +3349,7 @@ namespace Hawthorne
                 if (EnemyExist("Clione_EN") && Half) list.Add("Clione_EN");
                 if (EnemyExist("UnculturedSwine_EN") && Half) list.Add("UnculturedSwine_EN");
                 if (EnemyExist("Pinano_EN")) list.Add("Pinano_EN");
+                if (EnemyExist("DryBait_EN") && Half) list.Add("DryBait_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -3499,6 +3510,7 @@ namespace Hawthorne
                 if (EnemyExist("FesteringMusicMan_EN")) list.Add("FesteringMusicMan_EN");
                 if (EnemyExist("Errant_EN") && Half) list.Add("Errant_EN");
                 if (!red && EnemyExist("Crystal_EN") && UnityEngine.Random.Range(0, 100) < (50 * CrystalSong.mod)) list.Add("Crystal_EN");
+                if (EnemyExist("NumbFrostbite_EN") && Fifth && Quarter) list.Add("NumbFrostbite_EN");
                 return list.GetRandom();
             }
             public static string Fag(bool red = false)

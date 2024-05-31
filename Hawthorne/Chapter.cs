@@ -85,7 +85,7 @@ namespace Hawthorne
                     effectItem.namePopup = true;
                     effectItem.consumedOnUse = false;
                     effectItem.itemPools = ItemPools.Shop;
-                    effectItem.shopPrice = 4;
+                    effectItem.shopPrice = 4;//up the cost! maybe. 
                     effectItem.startsLocked = false;
                     effectItem.immediate = false;
                     effectItem.triggerConditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<ThirdTurnPassedCondition>() };
