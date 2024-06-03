@@ -3114,6 +3114,10 @@ namespace Hawthorne
                     }
                 });
             }
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(Orpheum.BiggieGroup(main, 2));
+            }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();
             if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
@@ -3260,10 +3264,6 @@ namespace Hawthorne
                         Noses.Exclude(a).GetRandom(),
                     }
                 });
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                list.Add(Orpheum.BiggieGroup(main, 2));
             }
             list.CheckEncounters();
             ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = list.ToArray();

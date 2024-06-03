@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.5")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.5.2")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -3211,7 +3211,7 @@ namespace Hawthorne
                         if (forceRed) ret = "RedBot_EN";
                     }
                     else ret = RandomColor(area);
-                    if (reroll > 5 || forceRed)
+                    if (reroll > 50 || forceRed)
                     {
                         PreviousColors.Add(ret);
                         return ret;
@@ -4158,6 +4158,7 @@ namespace Hawthorne
                                 ResetColor();
                                 names.Add(SmartColor(1, true, !isRed));
                                 names.Add(SmartColor(1));
+                                ResetColor();
                                 if (Half) names.Add(RandomSupport(1, false, false));
                                 break;
                             case 2:
@@ -4219,6 +4220,7 @@ namespace Hawthorne
                                 break;
                             case 2:
                                 names.Add(main);
+                                ResetColor();
                                 names.Add(SmartColor(1, false, !isRed));
                                 if (Third) names.Add(RandomOrph);
                                 break;
@@ -4246,10 +4248,12 @@ namespace Hawthorne
                                 names.Add(SmartColor(1, true, !isRed));
                                 names.Add(SmartColor(1));
                                 if (Half) names.Add(RandomSupport(1, false, false));
+                                ResetColor();
                                 break;
                             case 2:
                                 names.Add(main);
                                 names.Add(main);
+                                ResetColor();
                                 names.Add(Either(RandomOrph, SmartColor(1, false, !isRed)));
                                 break;
                             case 3:
