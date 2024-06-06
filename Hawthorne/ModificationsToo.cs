@@ -801,7 +801,7 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         main,
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         ShoreSlop(),
                     }
                 });
@@ -810,7 +810,7 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         main,
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         Either(RandomShoreMidget(false), RandomSupport(0))
                     }
                 });
@@ -878,7 +878,7 @@ namespace Hawthorne
                     {
                         main,
                         ShoreSlop(Half),
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         Either(RandomShoreMidget(false), RandomSupport(0))
                     }
                 });
@@ -888,7 +888,7 @@ namespace Hawthorne
                     {
                         main,
                         RandomColor(0),
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         Either(RandomShoreMidget(false), RandomSupport(0))
                     }
                 });
@@ -897,7 +897,7 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         main,
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         ShoreSlop(),
                         Either(RandomColor(0), ShoreSlop())
                     }
@@ -907,7 +907,7 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         main,
-                        OrphWhore(),
+                        Shore.RandomShoreWhore(),
                         Either(RandomShoreMidget(false), RandomSupport(0)),
                         Either(RandomColor(0), ShoreSlop())
                     }
@@ -917,10 +917,420 @@ namespace Hawthorne
                     _enemyNames = new string[]
                     {
                         main,
-                        OrphWhore(),
-                        OrphWhore()
+                        Shore.RandomShoreWhore(),
+                        Shore.RandomShoreWhore(),
                     }
                 });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void EnnoEZ()
+        {
+            string bundle = "woah, lil' guy";
+            string main = "Enno_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomRedColor(false, true, false, false)
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(),
+                        Either(RandomShoreMidget(false), RandomSupport(0))
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(Shore.RandomShoreWhore(), ShoreSlop())
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Either(RandomShoreMidget(false), RandomSupport(0))
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void EnnoMed()
+        {
+            string bundle = "get stabbed, idiot";
+            string main = "Enno_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(Half),
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(0),
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(Half),
+                        ShoreSlop(),
+                        Either(RandomShoreMidget(false), RandomSupport(0))
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        RandomColor(0),
+                        ShoreSlop(),
+                        Either(RandomShoreMidget(false), RandomSupport(0))
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Shore.RandomShoreWhore(),
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Shore.RandomShoreWhore(),
+                        Either(RandomShoreMidget(false), RandomSupport(0))
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void EnnoHard()
+        {
+            string bundle = "you cannot eat them";
+            string main = "Enno_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(Half),
+                        ShoreSlop(),
+                        ShoreSlop()
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        SmartColor(0, true),
+                        SmartColor(0),
+                        ShoreSlop(),
+                    }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        ShoreSlop(Half),
+                        Shore.RandomShoreWhore(),
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Shore.RandomShoreWhore(),
+                        ShoreSlop(),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Shore.RandomShoreWhore(),
+                        ShoreSlop(),
+                        RandomShoreMidget(false),
+                    }
+                });
+                list.Add(new RandomEnemyGroup()
+                {
+                    _enemyNames = new string[]
+                    {
+                        main,
+                        Shore.RandomShoreWhore(),
+                        Either(RandomShoreMidget(false), RandomSupport(0, false, Half))
+                    }
+                });
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void CupMed()
+        {
+            string bundle = "pray";
+            string main = "God'sChalice_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        RandomSupport(2, false, false),
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true)
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
+                        RandomColor(2),
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true)
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
+                        Half ? (Third ? RandomColor(2) : RandomSupport(2, false, false)) : RandomSupport(2),
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        }
+                });
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(2, true),
+                        main,
+                        SmartColor(2)
+                    }
+                });
+                ResetColor();
+            }
+            if (BundleRandom(bundle))
+            {
+                List<RandomEnemyGroup> yad = new List<RandomEnemyGroup>(((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (RandomEnemyGroup g in list) yad.Add(g);
+                yad.CheckEncounters();
+                ((RandomEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yad.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified random " + bundle);
+            }
+            else if (BundleStatic(bundle))
+            {
+                List<SpecificEnemyGroup> yod = new List<SpecificEnemyGroup>(((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles);
+                foreach (SpecificEnemyGroup g in list.ToSpecificGroup()) yod.Add(g);
+                yod.CheckEncounters();
+                ((SpecificEnemyBundleSO)LoadedAssetsHandler.GetEnemyBundle(bundle))._enemyBundles = yod.ToArray();
+                if (DoDebugs.GenInfo) Debug.Log("Modified static " + bundle);
+            }
+        }
+        public static void CupHard()
+        {
+            string bundle = "I would tell you to pray, but it's way too late for that now";
+            string main = "God'sChalice_EN";
+            if (!EnemyExist(main)) return;
+            if (!BundleExist(bundle)) return;
+            List<RandomEnemyGroup> list = new List<RandomEnemyGroup>();
+            for (int i = 0; i < 3; i++)
+            {
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        Half ? RandomSupport(2, false, false) : RandomEncounters.Garden.RandomWhore(),
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true)
+                    }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
+                        RandomColor(2),
+                        main,
+                        RandomEncounters.Garden.RandomChunk(),
+                        RandomEncounters.Garden.RandomChunk(false, true),
+                        RandomSupport(2)
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
+                        RandomSupport(2, false, false),
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        Half ? RandomEncounters.Garden.RandomChunk() : RandomSupport(2, false, false)
+                        }
+                });
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                        {
+                        RandomColor(2),
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        Half ? RandomEncounters.Garden.RandomChunk() : RandomSupport(2, false, false)
+                        }
+                });
+                if (Half)
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                            {
+                        RandomSupport(2),
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomEncounters.Garden.RandomWhore()
+                            }
+                    });
+                }
+                else
+                {
+                    list.Add(new RandomEnemyGroup
+                    {
+                        _enemyNames = new string[]
+                            {
+                        main,
+                        RandomEncounters.Garden.RandomWhore(),
+                        RandomEncounters.Garden.RandomWhore()
+                            }
+                    });
+                }
+                ResetColor();
+                list.Add(new RandomEnemyGroup
+                {
+                    _enemyNames = new string[]
+                    {
+                        SmartColor(2, true),
+                        main,
+                        SmartColor(2),
+                        RandomSupport(2, false, false)
+                    }
+                });
+                ResetColor();
             }
             if (BundleRandom(bundle))
             {

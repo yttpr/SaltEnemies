@@ -20,6 +20,8 @@ using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.CanvasScaler;
 using static Hawthorne.Check;
+using System.Data.Common;
+using MUtility;
 
 namespace Hawthorne
 {
@@ -2095,6 +2097,7 @@ namespace Hawthorne
             if (notificationName == TriggerCalls.OnDeath.ToString() && sender is ITurn) TrainHandler.CheckAll();
             SigilSongHandler.NotifCheck(notificationName, sender, args);
             StampHandler.NotifCheck(notificationName, sender, args);
+            if (notificationName == TriggerCalls.CanChangeHealthColor.ToString() && sender is IUnit iu) iu.SwapPalm();
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -7119,6 +7122,50 @@ namespace Hawthorne
                 if (enemy.ContainsPassiveAbility(Passi.DragonAwakeFake.type)) return true;
             }
             return false;
+        }
+    }
+    public static class EyePalmHandler
+    {
+        public static void Swap(IUnit unit)
+        {
+            if (unit.IsUnitCharacter) return;
+            if (CombatManager.Instance._combatUI._enemiesInCombat.TryGetValue(unit.ID, out var value))
+            {
+                if (CombatManager.Instance._combatUI._enemyZone._enemies.Length > value.FieldID)
+                {
+                    if (unit.HealthColor == Pigments.Red)
+                    {
+                        CombatManager.Instance._combatUI._enemyZone._enemies[value.FieldID].FieldEntity.transform.Find("Locator").Find("Sprite").GetChild(1).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        CombatManager.Instance._combatUI._enemyZone._enemies[value.FieldID].FieldEntity.transform.Find("Locator").Find("Sprite").GetChild(1).gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+        public static void SwapPalm(this IUnit unit)
+        {
+            if (EnemyExist("EyePalm_EN"))
+            {
+                if (unit is EnemyCombat enemy && enemy.Enemy == LoadedAssetsHandler.GetEnemy("EyePalm_EN"))
+                {
+                    CombatManager.Instance.AddUIAction(new SwapPalmUIAction(unit));
+                }
+            }
+        }
+        public class SwapPalmUIAction : CombatAction
+        {
+            public IUnit unit;
+            public SwapPalmUIAction(IUnit unit)
+            {
+                this.unit = unit;
+            }
+            public override IEnumerator Execute(CombatStats stats)
+            {
+                EyePalmHandler.Swap(unit);
+                yield return null;
+            }
         }
     }
 }

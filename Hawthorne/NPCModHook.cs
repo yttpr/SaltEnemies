@@ -43,6 +43,7 @@ namespace Hawthorne
             effectItem.Ach = new AchievementSystem.AchieveInfo((Achievement)547283, AchievementUnlockType.Strangers, "Helpme", "Find Help.", ResourceLoader.LoadSprite("ItsMe.png", 32), true, "...");
             effectItem.Prepare();
             Item = effectItem;
+            Constructing.AddToDollPool(extra);
         }
         public static void Set(Action<string, bool> orig, string name, bool value)
         {

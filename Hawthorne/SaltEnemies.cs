@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.5.2")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.6")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -1603,6 +1603,8 @@ namespace Hawthorne
             addSepulchrePool("Loudhailer_EN");
             addSepulchrePool("DryBait_EN");
             addSepulchrePool("NumbFrostbite_EN");
+            addSepulchrePool("Enno_EN");
+            addSepulchrePool("God'sChalice_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
             //addFountainPool("FrowningChancellor_EN");
@@ -1614,6 +1616,8 @@ namespace Hawthorne
             addFountainPool("Loudhailer_EN");
             addFountainPool("DryBait_EN");
             addFountainPool("NumbFrostbite_EN");
+            addFountainPool("Enno_EN");
+            addFountainPool("God'sChalice_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
             addBronzoPool("FrowningChancellor_EN");
@@ -1628,6 +1632,8 @@ namespace Hawthorne
             addBronzoPool("NumbFrostbite_EN");
             addBronzoPool("Sign_EN");
             addBronzoPool("PrizedCatch_EN");
+            addBronzoPool("Enno_EN");
+            addBronzoPool("God'sChalice_EN");
             AddToAreaPool("MarbleMaw_EN", 2);
             AddToAreaPool("UnculturedSwine_EN", 0);
             AddToAreaPool("FrowningChancellor_EN", 2);
@@ -1639,6 +1645,8 @@ namespace Hawthorne
             AddToAreaPool("Loudhailer_EN", 1);
             AddToAreaPool("DryBait_EN", 0);
             AddToAreaPool("NumbFrostbite_EN", 1);
+            AddToAreaPool("Enno_EN", 0);
+            AddToAreaPool("God'sChalice_EN", 2);
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1648,6 +1656,9 @@ namespace Hawthorne
             They are friends :]
             Added meat flesh encounter
 
+            pray
+            I would tell you to pray, but it's way too late for that now
+
             crankin' my hog
             me n' the lads
             penis joke
@@ -1655,6 +1666,10 @@ namespace Hawthorne
             Family BBQ
             worm squared
             I'm running out of \"funny\" names for these
+
+            woah, lil' guy
+            get stabbed, idiot
+            you cannot eat them
 
             dancer (ez, med, hard)
             cha cha real smooth
@@ -2375,9 +2390,10 @@ namespace Hawthorne
 
     public static class Check
     {
+        public static List<string> Printeds = new List<string>();
         public static bool EnemyExist(string name)
         {
-            if (!LoadedAssetsHandler.LoadedEnemies.Keys.Contains(name) && LoadedAssetsHandler.LoadEnemy(name) == null) { if (DoDebugs.EnemyNull) Debug.LogWarning("Enemy: " + name + " is null"); return false; }
+            if (!LoadedAssetsHandler.LoadedEnemies.Keys.Contains(name) && LoadedAssetsHandler.LoadEnemy(name) == null) { if (DoDebugs.EnemyNull && !Printeds.Contains(name)) { Debug.LogWarning("Enemy: " + name + " is null"); Printeds.Add(name); } return false; }
             return LoadedAssetsHandler.GetEnemy(name) != null;
         }
         public static bool BundleExist(string name)
@@ -3350,6 +3366,7 @@ namespace Hawthorne
                 if (EnemyExist("UnculturedSwine_EN") && Half) list.Add("UnculturedSwine_EN");
                 if (EnemyExist("Pinano_EN")) list.Add("Pinano_EN");
                 if (EnemyExist("DryBait_EN") && Half) list.Add("DryBait_EN");
+                if (EnemyExist("Enno_EN")) list.Add("Enno_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -4590,6 +4607,7 @@ namespace Hawthorne
                 if (Quarter && EnemyExist("Stoplight_EN")) list.Add("Stoplight_EN");
                 if (!Red && Third && EnemyExist("ClockTower_EN")) list.Add("ClockTower_EN");
                 if (EnemyExist("OdetoHumanity_EN") && Half) list.Add("OdetoHumanity_EN");
+                if (EnemyExist("God'sChalice_EN") && Half) list.Add("God'sChalice_EN");
                 return list.GetRandom();
             }
             public static string RandomTwoSizeFag()
@@ -4663,8 +4681,8 @@ namespace Hawthorne
     {
         public static bool All => false;
         public static bool EnemyNull => true && All;
-        public static bool SpriteNull => true && All;
-        public static bool GenInfo => true && All;
+        public static bool SpriteNull => false && All;
+        public static bool GenInfo => false && All;
         public static bool MiscInfo => false && All;
     }
 

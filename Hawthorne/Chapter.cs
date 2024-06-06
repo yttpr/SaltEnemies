@@ -133,6 +133,7 @@ namespace Hawthorne
                     effectItem.equippedModifiers = new WearableStaticModifierSetterSO[] { abil };
                     effectItem.Prepare();
                     _four = effectItem;
+                    Constructing.AddToDollPool(abil);
                 }
                 return _four;
             }
@@ -617,6 +618,28 @@ namespace Hawthorne
                 unit.ApplyStatusEffect(spotlight_StatusEffect, 0);
             }
             return false;
+        }
+    }
+    public static class Constructing
+    {
+        public static void AddToDollPool(WearableStaticModifierSetterSO abil)
+        {
+            CasterAddRandomExtraAbilityEffect effect = (LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0] as Connection_PerformEffectPassiveAbility).connectionEffects[1].effect as CasterAddRandomExtraAbilityEffect;
+            switch (abil)
+            {
+                case BasicAbilityChange_Wearable_SMS changeWearableSms:
+                    effect._slapData = new List<BasicAbilityChange_Wearable_SMS>(effect._slapData)
+                    {
+                        changeWearableSms
+                    }.ToArray();
+                    break;
+                case ExtraAbility_Wearable_SMS abilityWearableSms:
+                    effect._extraData = new List<ExtraAbility_Wearable_SMS>(effect._extraData)
+                    {
+                        abilityWearableSms
+                    }.ToArray();
+                    break;
+            }
         }
     }
 }

@@ -322,7 +322,7 @@ namespace Hawthorne
             ModMod.LymphEZ();
             ModMod.LymphMed();
             ModMod.LymphHard();
-            ModMod.SheoOne();
+            //ModMod.SheoOne();
             ModMod.SheoTwo();
             ModMod.SpligBluePurpleOrph();
             ModMod.SpligRedYellowOrph();
@@ -374,6 +374,11 @@ namespace Hawthorne
             ModTwo.MooneMed();
             ModTwo.BaitMed();
             ModTwo.BaitHard();
+            ModTwo.EnnoEZ();
+            ModTwo.EnnoMed();
+            ModTwo.EnnoHard();
+            ModTwo.CupMed();
+            ModTwo.CupHard();
             SaltMod.PixelShore();
             SaltMod.PixelOrph();
             SaltMod.EnigmaOrph();
@@ -392,7 +397,7 @@ namespace Hawthorne
             SaltMod.SomethingHard();
             SaltMod.Stars();
             SaltMod.FreudOrph();
-            SaltMod.FreudGard();
+            //SaltMod.FreudGard();
             SaltMod.RusticHard();
             SaltMod.MortalHard();
             SaltMod.IllusionMed();

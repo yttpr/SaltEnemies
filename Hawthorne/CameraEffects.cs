@@ -3531,7 +3531,11 @@ namespace Hawthorne
             CombatManager.Instance._stats.timeline.TryAddNewExtraEnemyTurns(self, 1);
             return true;
         }
-
+        public static void TryAddNewExtraEnemyTurns(Action<Timeline, ITurn, int> orig, Timeline self, ITurn unit, int turnsToAdd)
+        {
+            if (unit is IUnit iu && iu.AbilityCount <= 0) return;
+            orig(self, unit, turnsToAdd);
+        }
         public static bool ExhaustAbilityUse(Func<EnemyCombat, bool> orig, EnemyCombat self)
         {
             return CombatManager.Instance._stats.timeline.TryRemoveRandomEnemyTurns(self, 1) > 0;
@@ -3540,6 +3544,7 @@ namespace Hawthorne
         {
             IDetour hook1 = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.RefreshAbilityUse), ~BindingFlags.Default), typeof(EnemyRefresher).GetMethod(nameof(RefreshAbilityUse), ~BindingFlags.Default));
             IDetour hook2 = new Hook(typeof(EnemyCombat).GetMethod(nameof(EnemyCombat.ExhaustAbilityUse), ~BindingFlags.Default), typeof(EnemyRefresher).GetMethod(nameof(ExhaustAbilityUse), ~BindingFlags.Default));
+            IDetour hook3 = new Hook(typeof(Timeline).GetMethod(nameof(Timeline.TryAddNewExtraEnemyTurns), ~BindingFlags.Default), typeof(EnemyRefresher).GetMethod(nameof(TryAddNewExtraEnemyTurns), ~BindingFlags.Default));
         }
     }
     public class RefreshEnemyInfoUIAction : CombatAction

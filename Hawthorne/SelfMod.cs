@@ -2571,7 +2571,7 @@ namespace Hawthorne
                     }
                 });
             }
-            if (MultiENExist("Indicator_EN, BlackStar_EN"))
+            if (MultiENExist("Indicator_EN", "BlackStar_EN"))
             {
                 list.Add(new RandomEnemyGroup
                 {
@@ -2671,7 +2671,7 @@ namespace Hawthorne
                     }
                 });
             }
-            if (MultiENExist("Indicator_EN, BlackStar_EN") && Half)
+            if (MultiENExist("Indicator_EN", "BlackStar_EN") && Half)
             {
                 list.Add(new RandomEnemyGroup
                 {
