@@ -34,6 +34,21 @@ namespace Hawthorne
             AbilitySO ability = self.CombatAbilities[abilityID].ability;
             if (self.ContainsStatusEffect((StatusEffectType)846750) && ability._abilityName != "Slap")
             {
+                try
+                {
+                    Vector3 loc = default(Vector3);
+                    CombatStats stats = CombatManager.Instance._stats;
+                    try
+                    {
+                        if (!self.IsUnitCharacter)
+                        {
+                            loc = stats.combatUI._characterZone._characters[self.FieldID].FieldEntity.Position;
+                        }
+                    }
+                    catch { }
+                    CombatManager.Instance.AddUIAction(new PlaySoundUIAction("event:/Hawthorne/Boowomp", loc));
+                }
+                catch { }
                 StringReference args = new StringReference(ability.GetAbilityLocData().text);
                 CombatManager.Instance.PostNotification(TriggerCalls.OnAbilityWillBeUsed.ToString(), self, args);
                 CombatManager.Instance.AddRootAction(new StartAbilityCostAction(self.ID, filledCost));
@@ -58,7 +73,24 @@ namespace Hawthorne
             AbilitySO ability = self.Abilities[abilitySlot].ability;
             if (self.ContainsStatusEffect((StatusEffectType)846750) && ability._abilityName != "Slap")
             {
+                try
+                {
+                    Vector3 loc = default(Vector3);
+                    CombatStats stats = CombatManager.Instance._stats;
+                    try
+                    {
+                        if (!self.IsUnitCharacter)
+                        {
+                            loc = stats.combatUI._enemyZone._enemies[self.FieldID].FieldEntity.Position;
+                        }
+                    }
+                    catch { }
+                    CombatManager.Instance.AddUIAction(new PlaySoundUIAction("event:/Hawthorne/Boowomp", loc));
+                }
+                catch { }
                 Debug.Log("is muted, used not slap");
+                StringReference args = new StringReference("Slap");
+                CombatManager.Instance.PostNotification(TriggerCalls.OnAbilityWillBeUsed.ToString(), self, args);
                 Effect slap = new Effect(ScriptableObject.CreateInstance<SlapEffect>(), 1, null, Slots.Self);
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[1] { slap }), (self as IUnit)));
                 self.EndTurn();
@@ -1154,6 +1186,7 @@ namespace Hawthorne
             Effect anim = new Effect(slapAnim, 1, null, Slots.Front);
             Effect slap = new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 1, null, Slots.Front);
             CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[2] { anim, slap }), caster));
+            CombatManager.Instance.AddRootAction(new EndAbilityAction(caster.ID, caster.IsUnitCharacter));
             exitAmount++;
             return exitAmount > 0;
         }

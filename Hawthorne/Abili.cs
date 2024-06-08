@@ -1535,22 +1535,28 @@ namespace Hawthorne
             {
                 if (_binder == null)
                 {
-                    DamageByMissingHealthEffect hit = ScriptableObject.CreateInstance<DamageByMissingHealthEffect>();
+                    DamageTargetsBySubTargetMissingHealthEffect hit = ScriptableObject.CreateInstance<DamageTargetsBySubTargetMissingHealthEffect>();
+                    hit.Sub = Slots.Front;
+                    AliveFrontTargetCondition front = ScriptableObject.CreateInstance<AliveFrontTargetCondition>();
                     _binder = new Ability()
                     {
                         name = "Binder",
-                        description = "Deal damage to the Opposing party member based on their missing health. \nDeal damage to the Left and Right party members based on the lesser of their missing healths, ignoring empty positions. \nDeal damage to the Far Left and Far Right party members based on the lesser of their missing healths, ignoring empty positions. \nContinue this pattern as long as possible.",
+                        description = "If there is an Opposing party member, deal damage equal to their missing health to the Opposing party member.\nIf there is an Opposing party member, deal damage equal to their missing health to the Left, Opposing, and Right party members. \nIf there is an Opposing party member, deal damage equal to their missing health to the Far Left, Left, Opposing, Right, and Far Right party members.\nContinue this pattern as long as possible.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(hit, 1, IntentType.Damage_16_20, Slots.Front),
-                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.LeftRight),
-                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-2, 2 }, false)),
-                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-3, 3 }, false)),
-                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-4, 4 }, false)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Ribbon", false, Slots.FrontLeftRight), 1, null, Slots.Front, front),
+                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.FrontLeftRight),
+                            new Effect(BasicEffects.GetVisuals("Salt/Ribbon", false, Slots.SlotTarget(new int[]{-2, -1, 0, 1, 2 }, false)), 1, null, Slots.Front, front),
+                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-2, -1, 0, 1, 2 }, false)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Ribbon", false, Slots.SlotTarget(new int[]{-3, -2, -1, 0, 1, 2, 3 }, false)), 1, null, Slots.Front, front),
+                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-3, -2, -1, 0, 1, 2, 3 }, false)),
+                            new Effect(BasicEffects.GetVisuals("Salt/Ribbon", false, Targetting.Everything(false)), 1, null, Slots.Front, front),
+                            new Effect(hit, 1, IntentType.Damage_16_20, Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4 }, false)),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
-                        animationTarget = Targetting.Everything(false),
+                        animationTarget = Slots.Front,
                     };
                 }
                 return _binder;
@@ -7515,6 +7521,40 @@ namespace Hawthorne
                 }
             }
             return exitAmount > 0;
+        }
+    }
+    public class DamageTargetsBySubTargetMissingHealthEffect : DamageEffect
+    {
+        public BaseCombatTargettingSO Sub;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (Sub != null)
+            {
+                foreach (TargetSlotInfo target in Sub.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter))
+                {
+                    if (target.HasUnit && target.Unit.CurrentHealth > 0)
+                    {
+                        if (exitAmount <= 0) exitAmount = target.Unit.MaximumHealth - target.Unit.CurrentHealth;
+                        else if (exitAmount > target.Unit.MaximumHealth - target.Unit.CurrentHealth) exitAmount = target.Unit.MaximumHealth - target.Unit.CurrentHealth;
+                    }
+                }
+            }
+            if (exitAmount > 0)
+                return base.PerformEffect(stats, caster, targets, areTargetSlots, exitAmount, out int exi);
+            return false;
+            
+        }
+    }
+    public class AliveFrontTargetCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            foreach (TargetSlotInfo target in Slots.Front.GetTargets(CombatManager.Instance._stats.combatSlots, caster.SlotID, caster.IsUnitCharacter))
+            {
+                if (target.HasUnit && target.Unit.CurrentHealth > 0) return true;
+            }
+            return false;
         }
     }
 }
