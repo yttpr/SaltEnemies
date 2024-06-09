@@ -2788,12 +2788,13 @@ namespace Hawthorne
                     _windle1 = new Ability()
                     {
                         name = "Whime",
-                        description = "If there is space, this enemy joins the party. Otherwise, this enemy does nothing. \n(This enemy does not intend to help.)",
+                        description = "If there is space, this enemy joins the party. Otherwise, this enemy takes a Little damage. \n(This enemy does not intend to help.)",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
-                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
+                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self, BasicEffects.DidThat(false, 2)),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,
@@ -2817,12 +2818,13 @@ namespace Hawthorne
                     _windle2 = new Ability()
                     {
                         name = "Whime",
-                        description = "If there is space, this enemy joins the party. Otherwise, this enemy does nothing. \n(This enemy does not intend to help.)",
+                        description = "If there is space, this enemy joins the party. Otherwise, this enemy takes a Little damage. \n(This enemy does not intend to help.)",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
-                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
+                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self, BasicEffects.DidThat(false, 2)),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,
@@ -2846,12 +2848,13 @@ namespace Hawthorne
                     _windle3 = new Ability()
                     {
                         name = "Whime",
-                        description = "If there is space, this enemy joins the party. Otherwise, this enemy does nothing. \n(This enemy does not intend to help.)",
+                        description = "If there is space, this enemy joins the party. Otherwise, this enemy takes a Little damage. \n(This enemy does not intend to help.)",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(win, 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<HasSpaceCondition>()),
-                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true))
+                            new Effect(ScriptableObject.CreateInstance<FleeTargetEffect>(), 1, Intents.Flee, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self, BasicEffects.DidThat(false, 2)),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Keyhole"),
                         animationTarget = Slots.Self,

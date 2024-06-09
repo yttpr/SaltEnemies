@@ -2099,8 +2099,9 @@ namespace Hawthorne
             {
                 return false;
             }
-            if (Hawthorne.Check.Half) CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Cheese!\""));
-            else CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Smile for the Camera!"));
+            if (Hawthorne.Check.Third) CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Cheese!\""));
+            else if (Hawthorne.Check.Half) CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Smile for the Camera!"));
+            else CombatManager.Instance.AddUIAction(new ShowAttackInformationUIAction(caster.ID, caster.IsUnitCharacter, "Say \"Fuzzy Pickles\"~!"));
             CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(CustomVisuals.GetVisuals("Salt/Lens"), Slots.Front, caster));
             CombatManager.Instance.AddUIAction(new WasteTimeUIAction(caster.ID, caster.IsUnitCharacter, ""));
             if (caster.MaximumHealth != targets[0].Unit.MaximumHealth) CombatManager.Instance.AddUIAction(new PlayHealthColorSoundUIAction());

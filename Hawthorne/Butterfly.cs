@@ -77,7 +77,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                
+                Passives.Slippery
             };
             enemy.abilities = new Ability[] { Abili.Windle1 };
             enemy.unitType = UnitType.Fish;
@@ -104,7 +104,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-
+                Passives.Slippery
             };
             enemy.abilities = new Ability[] { Abili.Windle2 };
             enemy.unitType = UnitType.Fish;
@@ -131,7 +131,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-
+                Passives.Slippery
             };
             enemy.abilities = new Ability[] { Abili.Windle3 };
             enemy.unitType = UnitType.Fish;

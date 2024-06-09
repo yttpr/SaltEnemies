@@ -322,7 +322,7 @@ namespace Hawthorne
             ModMod.LymphEZ();
             ModMod.LymphMed();
             ModMod.LymphHard();
-            //ModMod.SheoOne();
+            ModMod.SheoOne();
             ModMod.SheoTwo();
             ModMod.SpligBluePurpleOrph();
             ModMod.SpligRedYellowOrph();

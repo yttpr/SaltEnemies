@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.6.2")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.7")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -4718,6 +4718,7 @@ namespace Hawthorne
             U1_4_3_1();
             U1_4_3_2();
             U1_4_3_3();
+            U1_4_7();
         }
         public static void U1_3_27()
         {
@@ -4917,6 +4918,15 @@ namespace Hawthorne
                 PageCollector.UpdatePage("WindlePage.png");
                 PageCollector.UpdatePage("ArcelesPage.png");
                 PageCollector.UpdatePage("ChapterSevenIntroPage.png");
+            }
+        }
+        public static void U1_4_7()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_7.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_7.txt", "Updatd pages !");
+                PageCollector.UpdatePage("MawPage.png");
+                PageCollector.UpdatePage("WindlePage.png");
             }
         }
     }
