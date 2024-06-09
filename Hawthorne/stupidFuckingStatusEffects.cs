@@ -93,7 +93,7 @@ namespace Hawthorne
                 CombatManager.Instance.PostNotification(TriggerCalls.OnAbilityWillBeUsed.ToString(), self, args);
                 Effect slap = new Effect(ScriptableObject.CreateInstance<SlapEffect>(), 1, null, Slots.Self);
                 CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[1] { slap }), (self as IUnit)));
-                self.EndTurn();
+                //self.EndTurn();
                 return;
             }
             orig(self, abilitySlot);
