@@ -64,7 +64,6 @@ namespace Hawthorne
             BadStatus.List.Add("ApplyDrowningEffect", new string[] { "Hawthorne" });
             BadStatus.List.Add("ApplyPimplesEffect", new string[] { "Hawthorne" });
             BadStatus.List.Add("ApplyAcidEffect", new string[] { "PYMN4", "Unstoppable_Force" });
-            BadStatus.List.Add("ApplyGazeEffect", new string[] { "GreasyFools" });
             BadStatus.List.Add("ApplyTargetSwapEffect", new string[] { "BOSpecialItems.Content.Effects" });
             BadStatus.List.Add("ApplyWeakenedEffect", new string[] { "BOSpecialItems.Content.Effects" });
             BadStatus.List.Add("ApplyRemorseEffect", new string[] { "MarmoEnemies" });
