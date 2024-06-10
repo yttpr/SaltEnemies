@@ -83,6 +83,7 @@ namespace Hawthorne
         public static void StartMenu(Action<MainMenuController> orig, MainMenuController self)
         {
             orig(self);
+            SaltEnemies.PCall(PerformRandomEffectsSpecificAmongEffects.GO);
         }
         public static void InitializeCombat(Action<CombatManager> orig, CombatManager self)
         {

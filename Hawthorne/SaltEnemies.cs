@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.7")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.8")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -4719,6 +4719,7 @@ namespace Hawthorne
             U1_4_3_2();
             U1_4_3_3();
             U1_4_7();
+            U1_4_8();
         }
         public static void U1_3_27()
         {
@@ -4927,6 +4928,22 @@ namespace Hawthorne
                 File.WriteAllText(SavePath + "Update_1_4_7.txt", "Updatd pages !");
                 PageCollector.UpdatePage("MawPage.png");
                 PageCollector.UpdatePage("WindlePage.png");
+            }
+        }
+        public static void U1_4_8()
+        {
+            if (!File.Exists(SavePath + "Update_1_4_8.txt"))
+            {
+                File.WriteAllText(SavePath + "Update_1_4_8.txt", "Updatd pages !");
+                PageCollector.UpdatePage("BlueFlowerPage.png");
+                PageCollector.UpdatePage("CoffinPage.png");
+                PageCollector.UpdatePage("MedamaudePage.png");
+                PageCollector.UpdatePage("OdePage.png");
+                PageCollector.UpdatePage("RedFlowerPage.png");
+                PageCollector.UpdatePage("TankPage.png");
+                PageCollector.UpdatePage("TortoisePage.png");
+                PageCollector.UpdatePage("YellowFlowerPage.png");
+                PageCollector.UpdatePage("YNLPage.png");
             }
         }
     }

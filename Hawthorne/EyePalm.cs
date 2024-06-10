@@ -29,21 +29,10 @@ namespace Hawthorne
             enemy.hurtSound = LoadedAssetsHandler.GetEnemy("ShiveringHomunculus_EN").damageSound;
             enemy.deathSound = LoadedAssetsHandler.GetEnemy("ShiveringHomunculus_EN").deathSound;
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
-            try
+            enemy.passives = new BasePassiveAbilitySO[]
             {
-                enemy.passives = new BasePassiveAbilitySO[]
-                {
-                    Passi.MissFaced
-                };
-            }
-            catch
-            {
-                Debug.LogError("miss faced didnt work, sad!");
-                enemy.passives = new BasePassiveAbilitySO[]
-                {
-                    Passives.TwoFaced
-                };
-            }
+                Passi.MissFaced, Passi.Scramble
+            };
             enemy.abilities = new Ability[] { Abili.BluePigs, Abili.CrazyBlood, Abili.Pinch };
             enemy.enemyID = "EyePalm_EN";
             enemy.AddEnemy();

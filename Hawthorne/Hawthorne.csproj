@@ -616,8 +616,10 @@
 	  <None Remove="RetributionIcon.png" />
 	  <None Remove="reworkicons\ClockFace.png" />
 	  <None Remove="reworkicons\HasteIcon.png" />
+	  <None Remove="reworkicons\Overgrowth.png" />
 	  <None Remove="reworkicons\PhotoIcon.png" />
 	  <None Remove="reworkicons\RootsIcon.png" />
+	  <None Remove="reworkicons\WarningPassive.png" />
 	  <None Remove="SecondPages\ChapterEightCompPage.png" />
 	  <None Remove="SecondPages\ChapterEightIntroPage.png" />
 	  <None Remove="SecondPages\ChapterElevenCompPage.png" />
@@ -727,6 +729,11 @@
 	  <None Remove="windleguy\WindlePassive.png" />
 	  <None Remove="windleguy\WindleWorld.png" />
 	  <None Remove="WitchPassiveDetermination.png" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="reworkicons\Overgrowth.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -1338,6 +1345,7 @@
 	  <EmbeddedResource Include="reworkicons\HasteIcon.png" />
 	  <EmbeddedResource Include="reworkicons\PhotoIcon.png" />
 	  <EmbeddedResource Include="reworkicons\RootsIcon.png" />
+	  <EmbeddedResource Include="reworkicons\WarningPassive.png" />
 	  <EmbeddedResource Include="SecondPages\ChapterEightCompPage.png" />
 	  <EmbeddedResource Include="SecondPages\ChapterEightIntroPage.png" />
 	  <EmbeddedResource Include="SecondPages\ChapterElevenCompPage.png" />

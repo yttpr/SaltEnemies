@@ -35,7 +35,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.Disable, Passi.Leaky(8), Passi.Rupture
+                Passi.Disable, Passi.Leaky(12), Passi.Rupture
             };
             enemy.abilities = new Ability[] { Abili.Sink, Abili.Rot, Abili.Writhe };
             enemy.enemyID = "Grandfather_EN";

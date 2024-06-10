@@ -1147,12 +1147,13 @@ namespace Hawthorne
                     _rot = new Ability()
                     {
                         name = "Rot",
-                        description = "Apply 2 Constricted to this enemy's position. Consume all pigment in the tray.",
+                        description = "Apply 2 Constricted to this enemy's position. Consume all pigment in the tray.\nInflict 1 Scar on every party member.",
                         rarity = 6,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Self),
                             new Effect(ScriptableObject.CreateInstance<ConsumeAllManaEffect>(), 1, IntentType.Mana_Consume, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Targetting.Everything(false))
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Claws"),
                         animationTarget = Slots.Self,
@@ -2946,11 +2947,11 @@ namespace Hawthorne
                     _transPain = new Ability()
                     {
                         name = "Transmit Pain",
-                        description = "Trigger the Linked damage action for 3 damage.",
+                        description = "Trigger the Linked damage action for 8 damage.",
                         rarity = 1,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<LinkedDamageEffect>(), 3, IntentType.Status_Linked, Slots.Self)
+                            new Effect(ScriptableObject.CreateInstance<LinkedDamageEffect>(), 8, IntentType.Status_Linked, Slots.Self),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Ribbon"),
                         animationTarget = Slots.Self,
@@ -2970,13 +2971,14 @@ namespace Hawthorne
                     _transSen = new Ability()
                     {
                         name = "Transmit Sensory",
-                        description = "Attempt to spawn a copy of this enemy. If successful, add Withering as a passive to this enemy. \nThis move does nothing if this enemy has Withering as a passive.",
+                        description = "Attempt to spawn a copy of this enemy. If successful, add Withering as a passive to this enemy. \nIf this enemy already has Withering as a passive, inflict 3 Linked on it.",
                         rarity = 100,
                         effects = new Effect[]
                         {
                             new Effect(BasicEffects.Empty, 0, IntentType.Other_Spawn, Slots.Self),
                             new Effect(BasicEffects.AddPassive(Passives.Withering), 1, CustomIntentIconSystem.GetIntent("WitheringIcon"), Slots.Self, ScriptableObject.CreateInstance<EmptyEnemySpaceNoWitheringEffectCondition>()),
-                            new Effect(ScriptableObject.CreateInstance<SpawnEnemyCopySelfEffect>(), 1, null, Slots.Self, BasicEffects.DidThat(true))
+                            new Effect(ScriptableObject.CreateInstance<SpawnEnemyCopySelfEffect>(), 1, null, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 3, IntentType.Status_Linked, Slots.Self, BasicEffects.DidThat(false, 2))
                         },
                         visuals = LoadedAssetsHandler.GetEnemyAbility("Sob_A").visuals,
                         animationTarget = Slots.Self,
@@ -2995,11 +2997,12 @@ namespace Hawthorne
                     _transEmo = new Ability()
                     {
                         name = "Transmit Emotion",
-                        description = "Deal a Little bit of Shield-Ignoring damage to this enemy.",
+                        description = "Deal a Little bit of Shield-Ignoring damage to this enemy.\nInflict 2 Linked on this enemy.",
                         rarity = 200,
                         effects = new Effect[]
                         {
-                            new Effect(BasicEffects.ShieldPierce, 2, IntentType.Damage_1_2, Slots.Self)
+                            new Effect(BasicEffects.ShieldPierce, 2, IntentType.Damage_1_2, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 2, IntentType.Status_Linked, Slots.Self)
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Rose"),
                         animationTarget = Slots.Self,
@@ -3018,14 +3021,14 @@ namespace Hawthorne
                     _transHung = new Ability()
                     {
                         name = "Transmit Hunger",
-                        description = "Deal a Painful amount of damage and inflict 6 Linked to the Left and Right party members.",
+                        description = "Inflict 6 Linked to the Left and Right party members and move them to random positions.",
                         rarity = 100,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 3, IntentType.Damage_3_6, Slots.LeftRight),
-                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 6, IntentType.Status_Linked, Slots.LeftRight)
+                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 6, IntentType.Status_Linked, Slots.LeftRight),
+                            new Effect(ScriptableObject.CreateInstance<SwapToRandomZoneFoolEffect>(), 1, IntentType.Swap_Mass, Slots.LeftRight)
                         },
-                        visuals = LoadedAssetsHandler.GetEnemyAbility("Chomp_A").visuals,
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Weave_1_A").visuals,
                         animationTarget = Slots.LeftRight,
                     };
                 }
@@ -7558,6 +7561,30 @@ namespace Hawthorne
                 if (target.HasUnit && target.Unit.CurrentHealth > 0) return true;
             }
             return false;
+        }
+    }
+    public class SwapToRandomZoneFoolEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            foreach (TargetSlotInfo targetSlotInfo in targets)
+            {
+                int num = UnityEngine.Random.Range(0, 4);
+                if (num == 4)
+                {
+                    num = UnityEngine.Random.Range(1, 3);
+                }
+                if (num >= caster.SlotID)
+                {
+                    num++;
+                }
+                if (num != caster.SlotID)
+                {
+                    stats.combatSlots.SwapCharacters(caster.SlotID, num, isMandatory: true);
+                }
+            }
+            return exitAmount > 0;
         }
     }
 }

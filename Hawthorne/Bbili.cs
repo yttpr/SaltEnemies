@@ -152,13 +152,14 @@ namespace Hawthorne
                     _petrify = new Ability()
                     {
                         name = "Petrify",
-                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Left, and change the Right enemy's health color to this enemy's health color.",
+                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Left, and change the Right enemy's health color to this enemy's health color and inflict 1 Pimples on them.",
                         rarity = 8,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.GoLeft, 1, IntentType.Swap_Left, Slots.Self),
-                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{1 }, true))
+                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{1 }, true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPimplesEffect>(), 1, GetIntent("Pimples"), Slots.SlotTarget(new int[]{ 1 }, true))
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
                         animationTarget = Slots.Front,
@@ -177,13 +178,14 @@ namespace Hawthorne
                     _partition = new Ability()
                     {
                         name = "Partition",
-                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Right, and change the Left enemy's health color to this enemy's health color.",
+                        description = "Deal a Painful amount of damage to the Opposing party member. \nMove Right, and change the Left enemy's health color to this enemy's health color and inflict 1 Pimples on them.",
                         rarity = 8,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                             new Effect(BasicEffects.GoRight, 1, IntentType.Swap_Right, Slots.Self),
-                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{-1 }, true))
+                            new Effect(ScriptableObject.CreateInstance<ChangeTargetHealthColorCasterHealthColorEffect>(), 1, IntentType.Mana_Modify, Slots.SlotTarget(new int[]{-1 }, true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPimplesEffect>(), 1, GetIntent("Pimples"), Slots.SlotTarget(new int[]{-1 }, true))
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
                         animationTarget = Slots.Front,
@@ -199,15 +201,18 @@ namespace Hawthorne
             {
                 if (_postular == null)
                 {
+                    ApplyPimplesEffect rando = ScriptableObject.CreateInstance<ApplyPimplesEffect>();
+                    rando._randomBetweenPrevious = true;
                     _postular = new Ability()
                     {
                         name = "Postular",
-                        description = "Inflict 1 Pimple on all other enemies with this enemy's health color.",
+                        description = "Inflict 1-2 Pimple on all other enemies with this enemy's health color.",
                         rarity = 3,
                         priority = -20,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<ApplyPimplesEffect>(), 1, GetIntent("Pimples"), TargettingBySameHealthColor.Create(true, false, true)),
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, TargettingBySameHealthColor.Create(true, false, true)),
+                            new Effect(rando, 2, GetIntent("Pimples"), TargettingBySameHealthColor.Create(true, false, true)),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Pop"),
                         animationTarget = TargettingBySameHealthColor.Create(true, false, true),
@@ -250,12 +255,12 @@ namespace Hawthorne
                     _portrait = new Ability()
                     {
                         name = "Please the Portrait",
-                        description = "Inflict 2 Linked on all party members who used Blue pigment last turn.",
+                        description = "Inflict 3 Linked on all party members who used Blue pigment last turn.",
                         rarity = 5,
                         priority = 0,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 2, IntentType.Status_Linked, TargettingByUsedBlue.Create(false))
+                            new Effect(ScriptableObject.CreateInstance<ApplyLinkedEffect>(), 3, IntentType.Status_Linked, TargettingByUsedBlue.Create(false))
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Door"),
                         animationTarget = TargettingByUsedBlue.Create(false),
@@ -323,12 +328,13 @@ namespace Hawthorne
                     _pledge = new Ability()
                     {
                         name = "Please the Pledge",
-                        description = "Apply 3 Haste to this enemy.",
+                        description = "Apply 3 Haste to this enemy. \nApply 5 Shield to this enemy.",
                         rarity = 3,
                         priority = -3,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 3, GetIntent("Haste"), Slots.Self)
+                            new Effect(ScriptableObject.CreateInstance<ApplyHasteEffect>(), 3, GetIntent("Haste"), Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Self),
                         },
                         visuals = CustomVisuals.GetVisuals("Salt/Cube"),
                         animationTarget = Slots.Self,
@@ -510,7 +516,7 @@ namespace Hawthorne
                         rarity = 10,
                         effects = new Effect[]
                         {
-                            new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, null, Slots.Self)
+                            new Effect(ScriptableObject.CreateInstance<WasteTimeEffect>(), 1, null, null)
                         },
                         visuals = null,
                         animationTarget = Slots.Self,
@@ -728,12 +734,13 @@ namespace Hawthorne
                     _holdHands = new Ability()
                     {
                         name = "Hold Hands",
-                        description = "Remove 1 random Resistance.\nDeal an Agonizing amount of damage to the Leftmost and Rightmost party member grid positions.\nInflict 1 Scar on this enemy.",
+                        description = "Remove 1 random Resistance.\nInflict 50 Pale and Curse the Leftmost and Rightmost party member grid positions.\nInflict 1 Scar on this enemy.",
                         rarity = 5,
                         effects = new Effect[]
                         {
                             new Effect(ScriptableObject.CreateInstance<RemoveRandomResistanceEffect>(), 1, (IntentType)3773404, Slots.Self),
-                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 8, IntentType.Damage_7_10, farthest),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPaleByTenEffect>(), 5, (IntentType)666888, farthest),
+                            new Effect(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, IntentType.Status_Cursed, farthest),
                             new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self),
                         },
                         visuals = LoadedAssetsHandler.GetCharacterAbility("Weave_1_A").visuals,
@@ -753,7 +760,7 @@ namespace Hawthorne
                     _voice = new Ability()
                     {
                         name = "Your Voice",
-                        description = "Curse the Opposing party member and deal a Painful amount of damage to them. \nIf no dmaage was dealt, deal it to this enemy instead. \nInflict 1 Scar on this enemy.",
+                        description = "Curse the Opposing party member and deal a Painful amount of damage to them. \nIf no damage was dealt, deal it to this enemy instead. \nInflict 1 Scar on this enemy.",
                         rarity = 5,
                         effects = new Effect[]
                         {

@@ -385,10 +385,10 @@ namespace Hawthorne
                 {
                     ArmorManager.Setup();
                     PerformEffectPassiveAbility armor = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
-                    armor._passiveName = "Heavily Armored";
+                    armor._passiveName = "Heavily Armored (10)";
                     armor.passiveIcon = ResourceLoader.LoadSprite("heavily_armored");
-                    armor._enemyDescription = "If any of this enemy's positions have no Shield, apply 4 Shield there.";
-                    armor._characterDescription = "If this party member's position has no Shield, apply 4 Shield there.";
+                    armor._enemyDescription = "If any of this enemy's positions have no Shield, apply 10 Shield there.";
+                    armor._characterDescription = "If this party member's position has no Shield, apply 10 Shield there.";
                     armor.type = ArmorManager.Armor;
                     armor.doesPassiveTriggerInformationPanel = false;
                     armor._triggerOn = new TriggerCalls[] { TriggerCalls.OnMoved };
@@ -1940,6 +1940,76 @@ namespace Hawthorne
                 return _forgetMe;
             }
         }
+        static BasePassiveAbilitySO _scramble;
+        public static BasePassiveAbilitySO Scramble
+        {
+            get
+            {
+                if (_scramble == null)
+                {
+                    ParentalPassiveAbility baseParent = LoadedAssetsHandler.GetEnemy("Flarb_EN").passiveAbilities[1] as ParentalPassiveAbility;
+                    ParentalPassiveAbility abandon = ScriptableObject.Instantiate<ParentalPassiveAbility>(baseParent);
+                    abandon._passiveName = "Parental";
+                    abandon._enemyDescription = "If an infantile enemy receives direct damage, this enemy will perform \"Scramble\" in retribution.";
+                    Ability parental = new Ability();
+                    parental.name = "Scramble";
+                    parental.description = "Randomize all enemy positions.";
+                    parental.effects = new Effect[1];
+                    parental.effects[0] = new Effect(ScriptableObject.CreateInstance<MassSwapZoneEffect>(), 1, IntentType.Swap_Mass, Targetting.AllAlly);
+                    parental.visuals = CustomVisuals.GetVisuals("Salt/Alarm");
+                    parental.animationTarget = Slots.Self;
+                    AbilitySO ability = parental.CharacterAbility().ability;
+                    abandon._parentalAbility.ability = parental.CharacterAbility().ability = ability;
+                    _scramble = abandon;
+                }
+                return _scramble;
+            }
+        }
+        static BasePassiveAbilitySO _warning;
+        public static BasePassiveAbilitySO Warning
+        {
+            get
+            {
+                if (_warning == null)
+                {
+                    TankHandler.Setup();
+                    PerformEffectPassiveAbility warn = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    warn._passiveName = "Warning";
+                    warn.type = (PassiveAbilityTypes)27279015;
+                    warn.passiveIcon = ResourceLoader.LoadSprite("WarningPassive.png", 32);
+                    warn._enemyDescription = "On taking direct damage, inflict 1 random Negative Status Effect on all party members.";
+                    warn._characterDescription = "On taking direct damage, inflict 1 random Negative Status Effect on all enemies.";
+                    warn.doesPassiveTriggerInformationPanel = true;
+                    warn.effects = ExtensionMethods.ToEffectInfoArray(new Effect[1] { new Effect(TankHandler.BadStatus, 1, null, Targetting.AllEnemy) });
+                    warn._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDirectDamaged };
+                    warn.conditions = Passives.Slippery.conditions;
+                    _warning = warn;
+                }
+                return _warning;
+            }
+        }
+        static BasePassiveAbilitySO _overgrowth;
+        public static BasePassiveAbilitySO Overgrowth
+        {
+            get
+            {
+                if (_overgrowth == null)
+                {
+                    PerformEffectPassiveAbility grow = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    grow._passiveName = "Overgrowth";
+                    grow.type = (PassiveAbilityTypes)27279415;
+                    grow.passiveIcon = ResourceLoader.LoadSprite("Overgrowth.png", 32);
+                    grow._enemyDescription = "On taking direct damage, inflict 3 Roots on the Opposing position.";
+                    grow._characterDescription = grow._enemyDescription;
+                    grow.doesPassiveTriggerInformationPanel = true;
+                    grow.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(CasterRootActionEffect.Create(new Effect[1] { new Effect(ScriptableObject.CreateInstance<ApplyRootsSlotEffect>(), 3, null, Slots.Front) }), 1, null, Slots.Self)});
+                    grow._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDirectDamaged };
+                    grow.conditions = Passives.Slippery.conditions;
+                    _overgrowth = grow;
+                }
+                return _overgrowth;
+            }
+        }
 
     }
 
@@ -2832,9 +2902,9 @@ namespace Hawthorne
                 {
                     CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(UnitID, character, Passi.Armor._passiveName, Passi.Armor.passiveIcon));
                     stats.slotStatusEffectDataBase.TryGetValue(SlotStatusEffectType.Shield, out var value);
-                    Shield_SlotStatusEffect shield_SlotStatusEffect = new Shield_SlotStatusEffect(SlotID, 4, character);
+                    Shield_SlotStatusEffect shield_SlotStatusEffect = new Shield_SlotStatusEffect(SlotID, 10, character);
                     shield_SlotStatusEffect.SetEffectInformation(value);
-                    stats.combatSlots.ApplySlotStatusEffect(SlotID, character, 4, shield_SlotStatusEffect);
+                    stats.combatSlots.ApplySlotStatusEffect(SlotID, character, 10, shield_SlotStatusEffect);
                 }
             }
             yield return null;

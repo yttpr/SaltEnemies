@@ -596,6 +596,7 @@ namespace Hawthorne
                                 DamageEffect indirect = ScriptableObject.CreateInstance<DamageEffect>();
                                 indirect._indirect = true;
                                 int maxHP = unit.CurrentHealth;
+                                if (Check.EnemyExist("MechanicalLens_EN") && newborn.Enemy == LoadedAssetsHandler.GetEnemy("MechanicalLens_EN")) maxHP = 20;
                                 //maxHP *= 2;
                                 Effect hit = new Effect(indirect, maxHP, IntentType.Damage_21, Slots.Self);
                                 RemoveStatusEffectEffect DPGone = ScriptableObject.CreateInstance<RemoveStatusEffectEffect>();

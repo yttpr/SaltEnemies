@@ -135,7 +135,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_YNL>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.Appointment
+                Passi.Appointment, Passives.Constricting
             };
             enemy.abilities = new Ability[] { Abili.ShockTherapy, Abili.Illuminate, Abili.Replacement };
             enemy.enemyID = "YNL_EN";

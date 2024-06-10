@@ -174,7 +174,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.BadDog, Passi.Multiattack(3), Passi.Fleeting(3), Passives.Slippery
+                Passi.BadDog, Passi.Multiattack(3), Passi.Fleeting(4), Passives.Slippery
             };
             enemy.abilities = new Ability[] { Abili.Hide, Abili.Seek, Abili.Stay, Abili.Salivate, Abili.Play };
             enemy.enemyID = "Maw_EN";

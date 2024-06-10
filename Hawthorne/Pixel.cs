@@ -475,14 +475,14 @@ namespace Hawthorne
                 return _cursed;
             }
         }
-        static ApplyPaleEffect _pale;
-        public static ApplyPaleEffect Pale
+        static ApplyPaleByTenEffect _pale;
+        public static ApplyPaleByTenEffect Pale
         {
             get
             {
                 if (_pale == null)
                 {
-                    _pale = ScriptableObject.CreateInstance<ApplyPaleEffect>();
+                    _pale = ScriptableObject.CreateInstance<ApplyPaleByTenEffect>();
                 }
                 return _pale;
             }
@@ -522,6 +522,13 @@ namespace Hawthorne
                 exitAmount += grah;
             }
             return exitAmount > 0;
+        }
+    }
+    public class ApplyPaleByTenEffect : ApplyPaleEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable * 10, out exitAmount);
         }
     }
 }

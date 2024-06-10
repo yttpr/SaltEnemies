@@ -31,7 +31,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_ByRarity>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passi.Armor, Passi.Unbreakable, Passi.Painless, Passives.Forgetful, Passi.Fleeting(9)
+                Passi.Armor, Passi.Painless, Passives.Forgetful, Passi.Fleeting(9)
             };
             enemy.enterEffects = new Effect[] { new Effect(ScriptableObject.CreateInstance<ArmorEffect>(), 1, null, Targetting.AllSelfSlots) };
             enemy.abilities = new Ability[] { Abili.DeepBreaths, Abili.Hurdle, Abili.Disembowel };

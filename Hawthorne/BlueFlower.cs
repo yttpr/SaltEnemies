@@ -31,7 +31,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_PigmentFlower>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passives.Pure, Passi.Splatter
+                Passives.Pure, Passi.Splatter, Passi.Overgrowth
             };
             enemy.abilities = new Ability[] { Abili.Aroma, Abili.Photosynthesize, Abili.Cry4U };
             enemy.enemyID = "BlueFlower_EN";
@@ -64,7 +64,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_PigmentFlower>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passives.Pure, Passi.Splatter
+                Passives.Pure, Passi.Splatter, Passi.Overgrowth
             };
             enemy.abilities = new Ability[] { Abili.Aroma, Abili.Photosynthesize, Abili.Love4U };
             enemy.enemyID = "RedFlower_EN";
@@ -96,7 +96,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_PigmentFlower>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passives.Pure, Passi.Splatter
+                Passives.Pure, Passi.Splatter, Passi.Overgrowth
             };
             enemy.abilities = new Ability[] { Abili.Aroma, Abili.Photosynthesize, Abili.Lie4U };
             enemy.enemyID = "PurpleFlower_EN";
@@ -129,7 +129,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_PigmentFlower>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passives.Pure, Passi.Splatter
+                Passives.Pure, Passi.Splatter, Passi.Overgrowth
             };
             enemy.abilities = new Ability[] { Abili.Aroma, Abili.Photosynthesize, Abili.Smile4U };
             enemy.enemyID = "YellowFlower_EN";
@@ -162,7 +162,7 @@ namespace Hawthorne
             enemy.abilitySelector = ScriptableObject.CreateInstance<AbilitySelector_PigmentFlower>();
             enemy.passives = new BasePassiveAbilitySO[]
             {
-                Passives.Pure, Passi.Splatter
+                Passives.Pure, Passi.Splatter, Passi.Overgrowth
             };
             enemy.abilities = new Ability[] { Abili.Aroma, Abili.Photosynthesize, Abili.Die4U };
             enemy.enemyID = "GreyFlower_EN";
