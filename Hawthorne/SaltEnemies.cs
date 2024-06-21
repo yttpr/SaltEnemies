@@ -43,7 +43,7 @@ using System.ComponentModel.Design;
 
 namespace Hawthorne
 {
-    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.8")]
+    [BepInPlugin("Salt.Hawthorne", "Salt Enemies \"TM\"", "1.4.9")]
     [BepInDependency("Bones404.BrutalAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class SaltEnemies : BaseUnityPlugin
     {
@@ -89,6 +89,7 @@ namespace Hawthorne
         }
 
         public static AssetBundle Group4;
+        public static AssetBundle Meow;
         public static List<CharacterSO> BaseChara = new List<CharacterSO>();
         public static int Numbah = 0;
         public static void increaseCostMod(int newNum)
@@ -120,6 +121,15 @@ namespace Hawthorne
             catch
             {
                 Debug.LogError("group 4 asset bundle");
+            }
+
+            try
+            {
+                Meow = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("meowy"));
+            }
+            catch
+            {
+                Debug.LogError("meowy asset bundle");
             }
             PCall(SoundClass.Setup);
 
@@ -301,6 +311,15 @@ namespace Hawthorne
             catch
             {
                 Debug.LogError("GROUP4 ASSETBUNDLE");
+            }
+            try
+            {
+                if (Meow == null)
+                    Meow = AssetBundle.LoadFromMemory(ResourceLoader.ResourceBinary("meowy"));
+            }
+            catch
+            {
+                Debug.LogError("MEOWY ASSETBUNDLE");
             }
             PCall(Hawthorne.CentralNervousSystem.Add);
             PCall(Hawthorne.FalseTruth.Add);

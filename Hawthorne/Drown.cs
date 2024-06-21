@@ -1067,6 +1067,8 @@ namespace Hawthorne
         {
             IDetour detour10 = (IDetour)new Hook((MethodBase)typeof(EnemySlotLayout).GetMethod("UpdateFieldListLayout", ~BindingFlags.Default), typeof(MoldView).GetMethod("UpdateFieldListModdedLayout", ~BindingFlags.Default));
             IDetour detour11 = (IDetour)new Hook((MethodBase)typeof(CharacterSlotLayout).GetMethod("UpdateFieldListLayout", ~BindingFlags.Default), typeof(MoldView).GetMethod("UpdateFieldListCharacterModdedLayout", ~BindingFlags.Default));
+
+            new CustomIntentInfo("Mold", (IntentType)68147961, ResourceLoader.LoadSprite("MoldIcon.png"), IntentType.Status_OilSlicked);
         }
 
     }

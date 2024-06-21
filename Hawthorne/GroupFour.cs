@@ -116,6 +116,7 @@ namespace Hawthorne
             PCall(Dragon.Add, 544454);
             PCall(Vase.Add, 544453);
             PCall(Forget.Add, 544452);
+            Meowy.AddEnemies();
         }
         public static void AddEncounters()
         {

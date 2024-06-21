@@ -776,6 +776,547 @@ namespace Hawthorne
                 return _voice;
             }
         }
+        static Ability _onSight;
+        public static Ability OnSight
+        {
+            get
+            {
+                if (_onSight == null)
+                {
+                    _onSight = new Ability()
+                    {
+                        name = "On Sight",
+                        description = "If the Far Far Left or Far Far Right party members have either manually moved or used an ability last turn, deal an Agonizing amount of damage to them.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<OnSightEffect>(), 7, IntentType.Damage_7_10, Slots.SlotTarget(new int[]{-3, 3}, false)),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
+                        animationTarget = Slots.SlotTarget(new int[] { -3, 3 }, false),
+                    };
+                }
+                return _onSight;
+            }
+        }
+        static Ability _trackPrints;
+        public static Ability TrackPrints
+        {
+            get
+            {
+                if (_trackPrints == null)
+                {
+                    _trackPrints = new Ability()
+                    {
+                        name = "Track the Prints",
+                        description = "Apply 0-2 Slip to every party member position. \nMove Left or Right and gain another action.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<MaybeApplySlipUpToEntryEffect>(), 2, CustomIntentIconSystem.GetIntent("Slip"), Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<AddTurnTargetToTimelineEffect>(), 1, IntentType.Misc, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Gaze"),
+                        animationTarget = Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, false),
+                    };
+                }
+                return _trackPrints;
+            }
+        }
+        static Ability _markThem;
+        public static Ability MarkThem
+        {
+            get
+            {
+                if (_markThem == null)
+                {
+                    _markThem = new Ability()
+                    {
+                        name = "Mark Them",
+                        description = "If the Far Far Left or Far Far Right party members are Frailed, deal an Agonizing amount of damage to them.\nInflict 3 Frail on the Far Left and Far Right party members.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<MarkThemEffect>(), 10, IntentType.Damage_7_10, Slots.SlotTarget(new int[]{-3, 3}, false)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyFrailEffect>(), 3, IntentType.Status_Frail, Slots.SlotTarget(new int[]{-2, 2}, false)),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crush_A").visuals,
+                        animationTarget = Slots.SlotTarget(new int[] { -3, 3 }, false),
+                    };
+                }
+                return _markThem;
+            }
+        }
+        static Ability _ringingNoise;
+        public static Ability RingingNoise
+        {
+            get
+            {
+                if (_ringingNoise == null)
+                {
+                    _ringingNoise = new Ability()
+                    {
+                        name = "Ringing Noise",
+                        description = "Apply 2 Slip on the Opposing position. \nDeal a Little damage to this enemy and inflict 1 Scar on it. \n50% chance to queue this ability again.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplySlipSlotEffect>(), 2, GetIntent("Slip"), Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, IntentType.Status_Scars, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<RingingNoiseEffect>(), 1, IntentType.Misc, Slots.Self, Conditions.Chance(50))
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Class"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _ringingNoise;
+            }
+        }
+        static Ability _bash;
+        public static Ability Bash
+        {
+            get
+            {
+                if (_bash == null)
+                {
+                    _bash = new Ability()
+                    {
+                        name = "Bash",
+                        description = "Deal a Painful amount of damage to the Opposing party member and move them Left or Right.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 5, IntentType.Damage_3_6, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Bash_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _bash;
+            }
+        }
+        static Ability _stingingPain;
+        public static Ability StingingPain
+        {
+            get
+            {
+                if (_stingingPain == null)
+                {
+                    _stingingPain = new Ability()
+                    {
+                        name = "Stinging Pain",
+                        description = "Inflict 2 Ruptured on the Opposing party member.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 2, IntentType.Status_Ruptured, Slots.Front),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _stingingPain;
+            }
+        }
+        static Ability _eyeFive;
+        public static Ability EyeFive
+        {
+            get
+            {
+                if (_eyeFive == null)
+                {
+                    GenericTargetting_BySlot_Index target = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    target.getAllies = false;
+                    target.slotPointerDirections = new int[] { 4 };
+                    _eyeFive = new Ability()
+                    {
+                        name = "Slaughter One",
+                        description = "Deal a Painful amount of damage to the Rightmost position. Gain 2 Power.",
+                        rarity = 999999999,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, target),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 2, (IntentType)987895, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Decapitate"),
+                        animationTarget = target,
+                    };
+                }
+                return _eyeFive;
+            }
+        }
+        static Ability _eyeFour;
+        public static Ability EyeFour
+        {
+            get
+            {
+                if (_eyeFour == null)
+                {
+                    GenericTargetting_BySlot_Index target = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    target.getAllies = false;
+                    target.slotPointerDirections = new int[] { 3 };
+                    _eyeFour = new Ability()
+                    {
+                        name = "Slaughter Two",
+                        description = "Deal a Painful amount of damage to the Center Right position. Gain 2 Power.",
+                        rarity = 9999999,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, target),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 2, (IntentType)987895, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Decapitate"),
+                        animationTarget = target,
+                    };
+                }
+                return _eyeFour;
+            }
+        }
+        static Ability _eyeThree;
+        public static Ability EyeThree
+        {
+            get
+            {
+                if (_eyeThree == null)
+                {
+                    GenericTargetting_BySlot_Index target = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    target.getAllies = false;
+                    target.slotPointerDirections = new int[] { 2 };
+                    _eyeThree = new Ability()
+                    {
+                        name = "Slaughter Three",
+                        description = "Deal a Painful amount of damage to the Central position. Gain 2 Power.",
+                        rarity = 99999,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, target),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 2, (IntentType)987895, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Decapitate"),
+                        animationTarget = target,
+                    };
+                }
+                return _eyeThree;
+            }
+        }
+        static Ability _eyeTwo;
+        public static Ability EyeTwo
+        {
+            get
+            {
+                if (_eyeTwo == null)
+                {
+                    GenericTargetting_BySlot_Index target = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    target.getAllies = false;
+                    target.slotPointerDirections = new int[] { 1 };
+                    _eyeTwo = new Ability()
+                    {
+                        name = "Slaughter Four",
+                        description = "Deal a Painful amount of damage to the Center Left position. Gain 2 Power.",
+                        rarity = 999,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, target),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 2, (IntentType)987895, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Decapitate"),
+                        animationTarget = target,
+                    };
+                }
+                return _eyeTwo;
+            }
+        }
+        static Ability _eyeOne;
+        public static Ability EyeOne
+        {
+            get
+            {
+                if (_eyeOne == null)
+                {
+                    GenericTargetting_BySlot_Index target = ScriptableObject.CreateInstance<GenericTargetting_BySlot_Index>();
+                    target.getAllies = false;
+                    target.slotPointerDirections = new int[] { 0 };
+                    _eyeOne = new Ability()
+                    {
+                        name = "Slaughter Five",
+                        description = "Deal a Painful amount of damage to the Leftmost position. Gain 2 Power.",
+                        rarity = 9,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, target),
+                            new Effect(ScriptableObject.CreateInstance<ApplyPowerEffect>(), 2, (IntentType)987895, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Decapitate"),
+                        animationTarget = target,
+                    };
+                }
+                return _eyeOne;
+            }
+        }
+        static Ability _weathering;
+        public static Ability Weathering
+        {
+            get
+            {
+                if (_weathering == null)
+                {
+                    _weathering = new Ability()
+                    {
+                        name = "Weathering",
+                        description = "Inflict 2 Scars on this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 2, IntentType.Status_Scars, Slots.Self),
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _weathering;
+            }
+        }
+        static Ability _putrification;
+        public static Ability Putrification
+        {
+            get
+            {
+                if (_putrification == null)
+                {
+                    _putrification = new Ability()
+                    {
+                        name = "Putrification",
+                        description = "Move all Party Members away from this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(BasicEffects.GoRight, 1, IntentType.Swap_Right, Slots.SlotTarget(new int[]{4, 3, 2, 1}, false)),
+                            new Effect(BasicEffects.GoLeft, 1, IntentType.Swap_Left, Slots.SlotTarget(new int[]{-4, -3, -2, -1}, false)),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Front),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals ,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _putrification;
+            }
+        }
+        static Ability _buriedUnder;
+        public static Ability BuriedUnder
+        {
+            get
+            {
+                if (_buriedUnder == null)
+                {
+                    _buriedUnder = new Ability()
+                    {
+                        name = "Buried Under",
+                        description = "Inflict 2 Mold on every position",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyMoldSlotEffect>(), 2, GetIntent("Mold"), MultiTargetting.Create(Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, false), Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, true))),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Claws"),
+                        animationTarget = MultiTargetting.Create(Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, false), Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, true)),
+                    };
+                }
+                return _buriedUnder;
+            }
+        }
+        static Ability _frontCannon;
+        public static Ability FrontCannon
+        {
+            get
+            {
+                if (_frontCannon == null)
+                {
+                    _frontCannon = new Ability()
+                    {
+                        name = "Frontal Cannon",
+                        description = "Deal a Painful amount of damage to the Opposing party member.",
+                        rarity = 100,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.Front),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _frontCannon;
+            }
+        }
+        static Ability _farCannon;
+        public static Ability FarCannon
+        {
+            get
+            {
+                if (_farCannon == null)
+                {
+                    _farCannon = new Ability()
+                    {
+                        name = "Far Cannon",
+                        description = "Deal a Painful amount of damage to the Far Left and Far Right party members.",
+                        rarity = 100,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 6, IntentType.Damage_3_6, Slots.SlotTarget(new int[]{-2, 2}, false)),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Cannon"),
+                        animationTarget = Slots.SlotTarget(new int[] { -2, 2 }, false),
+                    };
+                }
+                return _farCannon;
+            }
+        }
+        static Ability _wheelingHigh;
+        public static Ability WheelingHigh
+        {
+            get
+            {
+                if (_wheelingHigh == null)
+                {
+                    _wheelingHigh = new Ability()
+                    {
+                        name = "Wheeling",
+                        description = "Move to the Left or Right twice.",
+                        rarity = 100,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Wheel"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _wheelingHigh;
+            }
+        }
+        static Ability _encampment;
+        public static Ability Encampment
+        {
+            get
+            {
+                if (_encampment == null)
+                {
+                    _encampment = new Ability()
+                    {
+                        name = "Encampment",
+                        description = "Apply 4 Shield to the Left or Right positions, then move Left or Right.",
+                        rarity = 100,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 4, IntentType.Field_Shield, Slots.Sides),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Entrenched_1_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _encampment;
+            }
+        }
+        static Ability _grandBlast;
+        public static Ability GrandBlast
+        {
+            get
+            {
+                if (_grandBlast == null)
+                {
+                    _grandBlast = new Ability()
+                    {
+                        name = "Grand Blast",
+                        description = "Might deal a Deadly amount of damage to every party member.",
+                        rarity = 1,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, null, Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
+                            new Effect(ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>(), 12, IntentType.Damage_11_15, Slots.SlotTarget(new int[]{-4, -3, -2, -1, 0, 1, 2, 3, 4}, false)),
+                        },
+                        visuals = LoadedAssetsHandler.GetCharacterAbility("Clobber_1_A").visuals,
+                        animationTarget = Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, false),
+                    };
+                }
+                return _grandBlast;
+            }
+        }
+        static Ability _wheelingLow;
+        public static Ability WheelingLow
+        {
+            get
+            {
+                if (_wheelingLow == null)
+                {
+                    _wheelingLow = new Ability()
+                    {
+                        name = "Wheeling",
+                        description = "Move to the Left or Right twice.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Wheel"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _wheelingLow;
+            }
+        }
+        static Ability _laser;
+        public static Ability Laser
+        {
+            get
+            {
+                if (_laser == null)
+                {
+                    _laser = new Ability()
+                    {
+                        name = "Laser",
+                        description = "Deal an Agonizing amount of damage to the Opposing position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 8, IntentType.Damage_7_10, Slots.Front),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Crescendo_A").visuals,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _laser;
+            }
+        }
+        static Ability _trappings;
+        public static Ability Trappings
+        {
+            get
+            {
+                if (_trappings == null)
+                {
+                    _trappings = new Ability()
+                    {
+                        name = "Trappings",
+                        description = "Move to the Left or Right and inflict 2 Constricted on the Opposing position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(BasicEffects.GetVisuals("Salt/Cube", false, Slots.Front), 1, null, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Front),
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _trappings;
+            }
+        }
     }
     public class TrainEffect : EffectSO
     {
@@ -1877,5 +2418,101 @@ namespace Hawthorne
 
             return exitAmount > 0;
         }
+    }
+    public class OnSightEffect : DamageEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            List<TargetSlotInfo> targeti = new List<TargetSlotInfo>();
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit)
+                {
+                    if (target.Unit.HasManuallySwappedThisTurn || target.Unit.HasManuallyUsedAbilityThisTurn) targeti.Add(target);
+                }
+            }
+            return base.PerformEffect(stats, caster, targeti.ToArray(), areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public class MarkThemEffect : DamageEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            List<TargetSlotInfo> targeti = new List<TargetSlotInfo>();
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit)
+                {
+                    if (target.Unit.ContainsStatusEffect(StatusEffectType.Frail)) targeti.Add(target);
+                }
+            }
+            return base.PerformEffect(stats, caster, targeti.ToArray(), areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public class MaybeApplySlipUpToEntryEffect : ApplySlipSlotEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            foreach(TargetSlotInfo target in targets)
+            {
+                if (base.PerformEffect(stats, caster, target.SelfArray(), areTargetSlots, UnityEngine.Random.Range(0, entryVariable + 1), out int exi))
+                {
+                    exitAmount += exi;
+                }
+            }
+            return exitAmount > 0;
+        }
+    }
+    public class RingingNoiseEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (caster is EnemyCombat enemy)
+            {
+                stats.timeline.AddExtraEnemyTurns(new List<EnemyCombat>() { enemy }, new List<int>() { enemy.GetLastAbilityIDFromNameUsingAbilityName("Ringing Noise") });
+            }
+            return true;
+        }
+    }
+    public class AbilitySelector_EvilEye : AbilitySelector_ByRarity
+    {
+        public static UnitStoredValueNames value => (UnitStoredValueNames)838313109;
+        public override bool UsesRarity => false;
+
+        public override int GetNextAbilitySlotUsage(List<CombatAbility> abilities, IUnit unit)
+        {
+            int ret = -1;
+            if (unit is EnemyCombat enemy)
+            {
+                switch (enemy.GetStoredValue(value))
+                {
+                    case 0: 
+                        ret = enemy.GetLastAbilityIDFromNameUsingAbilityName("Slaughter One");
+                        enemy.SetStoredValue(value, 1);
+                        break;
+                    case 1:
+                        ret = enemy.GetLastAbilityIDFromNameUsingAbilityName("Slaughter Two");
+                        enemy.SetStoredValue(value, 2);
+                        break; 
+                    case 2:
+                        ret = enemy.GetLastAbilityIDFromNameUsingAbilityName("Slaughter Three");
+                        enemy.SetStoredValue(value, 3);
+                        break;
+                    case 3: 
+                        ret = enemy.GetLastAbilityIDFromNameUsingAbilityName("Slaughter Four");
+                        enemy.SetStoredValue(value, 4);
+                        break;
+                    case 4:
+                        ret = enemy.GetLastAbilityIDFromNameUsingAbilityName("Slaughter Five");
+                        enemy.SetStoredValue(value, 0);
+                        break;
+                }
+            }
+            if (ret >= 0) return ret;
+            else return base.GetNextAbilitySlotUsage(abilities, unit);
+        }
+
     }
 }

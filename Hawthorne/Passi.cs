@@ -22,6 +22,7 @@ using static UnityEngine.UI.CanvasScaler;
 using static Hawthorne.Check;
 using System.Data.Common;
 using MUtility;
+using System.Diagnostics.Contracts;
 
 namespace Hawthorne
 {
@@ -2010,6 +2011,102 @@ namespace Hawthorne
                 return _overgrowth;
             }
         }
+        static BasePassiveAbilitySO _fluttery;
+        public static BasePassiveAbilitySO Fluttery
+        {
+            get
+            {
+                if (_fluttery == null)
+                {
+                    PerformEffectPassiveAbility flutter = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    flutter._passiveName = "Fluttery";
+                    flutter.type = (PassiveAbilityTypes)27319415;
+                    flutter.passiveIcon = FlutteryCondition.Icon;
+                    flutter._enemyDescription = "On moving, move again in the same direction.";
+                    flutter._characterDescription = flutter._enemyDescription;
+                    flutter.doesPassiveTriggerInformationPanel = false;
+                    flutter.effects = new EffectInfo[0];
+                    flutter._triggerOn = new TriggerCalls[1] { TriggerCalls.OnMoved };
+                    flutter.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<FlutteryCondition>() };
+                    _fluttery = flutter;
+                }
+                return _fluttery;
+            }
+        }
+        static BasePassiveAbilitySO _warping;
+        public static BasePassiveAbilitySO Warping
+        {
+            get
+            {
+                if (_warping == null)
+                {
+                    PerformEffectPassiveAbility warp = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    warp._passiveName = "Warping";
+                    warp.type = WarpingHandler.Type;
+                    warp.passiveIcon = WarpingHandler.Icon;
+                    warp._enemyDescription = "Whenever anything damages this enemy, move the attacker to the Left or Right.";
+                    warp._characterDescription = warp._enemyDescription;
+                    warp.doesPassiveTriggerInformationPanel = false;
+                    warp.effects = new EffectInfo[0];
+                    warp._triggerOn = new TriggerCalls[1] { TriggerCalls.Count };
+                    warp.conditions = new EffectorConditionSO[0];
+                    _warping = warp;
+                }
+                return _warping;
+            }
+        }
+        static BasePassiveAbilitySO _jittery;
+        public static BasePassiveAbilitySO Jittery
+        {
+            get
+            {
+                if (_jittery == null)
+                {
+                    PerformEffectPassiveAbility jitter = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    jitter._passiveName = "Jittery";
+                    jitter.type = (PassiveAbilityTypes)43456415;
+                    jitter.passiveIcon = ResourceLoader.LoadSprite("JitteryPassive.png", 32);
+                    jitter._enemyDescription = "On any party member manually moving, move to the Left or Right";
+                    jitter._characterDescription = jitter._enemyDescription;
+                    jitter.doesPassiveTriggerInformationPanel = true;
+                    jitter.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self) });
+                    jitter._triggerOn = new TriggerCalls[1] { JitteryHandler.Call };
+                    jitter.conditions = new EffectorConditionSO[0];
+                    _jittery = jitter;
+                }
+                return _jittery;
+            }
+        }
+        static BasePassiveAbilitySO _desecration;
+        public static BasePassiveAbilitySO Desecration
+        {
+            get
+            {
+                if (_desecration == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    ExtraAttackPassiveAbility des = ScriptableObject.Instantiate<ExtraAttackPassiveAbility>(baseExtra);
+                    des._passiveName = "Desecration";
+                    des._enemyDescription = "If this enemy has less than 12 health, it will perforn an extra ability \"Desecration\" each turn.";
+                    des.conditions = new List<EffectorConditionSO>(baseExtra.conditions != null ? baseExtra.conditions : new EffectorConditionSO[0]) { ScriptableObject.CreateInstance<DefenderCondition>() }.ToArray();
+                    Ability bonus = new Ability();
+                    bonus.name = "Desecration";
+                    bonus.description = "Summon a Defender.";
+                    bonus.priority = -3;
+                    bonus.effects = new Effect[1];
+                    SpawnEnemyByStringNameEffect defender = ScriptableObject.CreateInstance<SpawnEnemyByStringNameEffect>();
+                    defender.enemyName = "Defender_EN";
+                    bonus.effects[0] = new Effect(defender, 1, IntentType.Other_Spawn, Slots.Self);
+                    bonus.visuals = LoadedAssetsHandler.GetEnemyAbility("UglyOnTheInside_A").visuals;
+                    bonus.animationTarget = Slots.Self;
+                    bonus.rarity = 0;
+                    AbilitySO ability = bonus.EnemyAbility().ability;
+                    des._extraAbility.ability = ability;
+                    _desecration = des;
+                }
+                return _desecration;
+            }
+        }
 
     }
 
@@ -2168,6 +2265,22 @@ namespace Hawthorne
             SigilSongHandler.NotifCheck(notificationName, sender, args);
             StampHandler.NotifCheck(notificationName, sender, args);
             if (notificationName == TriggerCalls.CanChangeHealthColor.ToString() && sender is IUnit iu) iu.SwapPalm();
+            if (notificationName == TriggerCalls.OnMoved.ToString())
+            {
+                if (sender is IUnit umnit)
+                {
+                    if (umnit.IsUnitCharacter)
+                    {
+                        
+                    }
+                    else
+                        foreach (CharacterCombat chara in CombatManager.Instance._stats.CharactersOnField.Values) CombatManager.Instance.PostNotification(JitteryHandler.Call.ToString(), chara, umnit);
+                }
+            }
+            if (notificationName == TriggerCalls.OnSwapTo.ToString())
+            {
+                if (sender is CharacterCombat) foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values) CombatManager.Instance.PostNotification(JitteryHandler.Call.ToString(), enemy, sender);
+            }
         }
 
         public static UnitStoredValueNames Sigil = (UnitStoredValueNames)68369752;
@@ -7236,6 +7349,106 @@ namespace Hawthorne
                 EyePalmHandler.Swap(unit);
                 yield return null;
             }
+        }
+    }
+    public class FlutteryCondition : EffectorConditionSO
+    {
+        static Sprite _icon;
+        public static Sprite Icon
+        {
+            get
+            {
+                if (_icon == null) _icon = ResourceLoader.LoadSprite("FlutteryIcon.png");
+                return _icon;
+            }
+        }
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (effector.SlotID >= 4 || effector.SlotID <= 0) return false;
+            if (args is IntegerReference inty)
+            {
+                if (inty.value < effector.SlotID)
+                {
+                    CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[]{new Effect(PriorityRootActionEffect.Create(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<FlutteryPassiveEffect>(), 1, null, Slots.Self, ScriptableObject.CreateInstance<IsAliveEffectCondition>()),
+                        new Effect(BasicEffects.GoRight, 1, null, Slots.Self, ScriptableObject.CreateInstance<IsAliveEffectCondition>())
+                    }), 1, null, Slots.Self) }), effector as IUnit));
+                }
+                else if (inty.value > effector.SlotID)
+                {
+                    CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[]{new Effect(PriorityRootActionEffect.Create(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<FlutteryPassiveEffect>(), 1, null, Slots.Self, ScriptableObject.CreateInstance<IsAliveEffectCondition>()),
+                        new Effect(BasicEffects.GoLeft, 1, null, Slots.Self, ScriptableObject.CreateInstance<IsAliveEffectCondition>())
+                    }), 1, null, Slots.Self) }), effector as IUnit));
+                }
+                else return false;
+            }
+            return false;
+        }
+    }
+    public class FlutteryPassiveEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(caster.ID, caster.IsUnitCharacter, "Fluttery", FlutteryCondition.Icon));
+            exitAmount = 0;
+            return true;
+        }
+    }
+    public static class WarpingHandler
+    {
+        public static PassiveAbilityTypes Type => (PassiveAbilityTypes)88371490;
+        static Sprite _icon;
+        public static Sprite Icon
+        {
+            get
+            {
+                if (_icon == null) _icon = ResourceLoader.LoadSprite("WarpingIcon");
+                return _icon;
+            }
+        }
+    }
+    public class WarpingPassiveEffect : EffectSO
+    {
+        public int ID;
+        public bool IsUnitCharacter;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            CombatManager.Instance.AddUIAction(new ShowPassiveInformationUIAction(ID, IsUnitCharacter, "Warping", WarpingHandler.Icon));
+            exitAmount = 0;
+            return true;
+        }
+    }
+    public static class JitteryHandler
+    {
+        public static TriggerCalls Call => (TriggerCalls)831209474;
+    }
+    public class SpawnEnemyByStringNameEffect : SpawnEnemyAnywhereEffect
+    {
+        public string enemyName;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            if (EnemyExist(enemyName))
+            {
+                base.enemy = LoadedAssetsHandler.GetEnemy(enemyName);
+            }
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public class DefenderCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            return effector.CurrentHealth <= 12;
+        }
+    }
+    public class IsAliveEffectCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            return caster.IsAlive;
         }
     }
 }

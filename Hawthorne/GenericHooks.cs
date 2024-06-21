@@ -64,6 +64,17 @@ namespace Hawthorne
                     Debug.LogError("Echo failed");
                 }
             }
+            if (killer != null && self.ContainsPassiveAbility(WarpingHandler.Type) && ret.damageAmount > 0)
+            {
+                WarpingPassiveEffect w = ScriptableObject.CreateInstance<WarpingPassiveEffect>();
+                w.ID = self.ID;
+                w.IsUnitCharacter = self.IsUnitCharacter;
+                CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[]
+                {
+                    new Effect(w, 1, null, Slots.Self),
+                    new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self)
+                }), killer));
+            }
             return ret;
         }
         public static int WillApplyDamage(Func<IUnit, int, IUnit, int> orig, IUnit self, int amount, IUnit targetUnit)

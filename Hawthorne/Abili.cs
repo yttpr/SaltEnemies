@@ -4548,6 +4548,25 @@ namespace Hawthorne
             return ret;
         }
     }
+    public class PriorityRootActionEffect : EffectSO
+    {
+        public Effect[] effects;
+
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            EffectInfo[] info = ExtensionMethods.ToEffectInfoArray(effects);
+            exitAmount = 0;
+            CombatManager.Instance.AddPriorityRootAction(new EffectAction(info, caster));
+            return true;
+        }
+
+        public static PriorityRootActionEffect Create(Effect[] e)
+        {
+            PriorityRootActionEffect ret = ScriptableObject.CreateInstance<PriorityRootActionEffect>();
+            ret.effects = e;
+            return ret;
+        }
+    }
     public class ChangeHealthColorEffect : EffectSO
     {
         public ManaColorSO color;
