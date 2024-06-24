@@ -110,6 +110,8 @@ namespace Hawthorne
             LoadVisuals("Salt/Unlock", SaltEnemies.assetBundle, "assets/Attack3/UnlockAnim.anim", "event:/Hawthorne/Attack3/Unlocking");
             LoadVisuals("Salt/Spotlight", SaltEnemies.assetBundle, "assets/Attack3/SpotlightAnim.anim", "event:/Hawthorne/Attack3/Spotlight");
             LoadVisuals("Salt/Scorch", SaltEnemies.assetBundle, "assets/16/ScorchAnim.anim", "event:/Hawthorne/Attack3/Scorch");
+            LoadVisuals("Salt/Curse", SaltEnemies.Meow, "assets/ani/thecurse.anim", LoadedAssetsHandler.GetEnemy("UnfinishedHeir_BOSS").abilities[2].ability.visuals.audioReference);
+            LoadVisuals("Salt/Nailing", SaltEnemies.Meow, "Assets/ani/Nailing.anim", "event:/Hawthorne/Attack3/Nailing");
 
         }
     }

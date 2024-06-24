@@ -58,16 +58,16 @@ namespace Hawthorne
         public static void AddEnemies()
         {
             PCall(Angel.Add, 544510);
-            PCall(Illusion.Add, 544509);
+            PCall(Illusion.Add, 544509);=
             PCall(RedFlower.Add, 544508);
             PCall(BlueFlower.Add, 544507);
             PCall(YellowFlower.Add, 544506);
             PCall(PurpleFlower.Add, 544505);
             PCall(GreyFlower.Add, 544504);
             PCall(Solvent.Add, 544503);
-            PCall(WindSong.Add, 544502);
+            PCall(WindSong.Add, 544502);//custom sounds
             PCall(Sigil.Add, 544501);
-            PCall(Tank.Add, 544500);
+            PCall(Tank.Add, 544500);//custom sounds
             PCall(ClockTower.Add, 544499);
             PCall(Tortoise.Add, 544498);
             PCall(Coffin.Add, 544497);
@@ -75,8 +75,8 @@ namespace Hawthorne
             PCall(Skyloft.Add, 544495);
             PCall(Miriam.Add, 544494);
             PCall(EyePalm.Add, 544493);
-            PCall(Merced.Add, 544492);
-            PCall(Butterfly.Add, 544491);
+            PCall(Merced.Add, 544492);//custom sounds
+            PCall(Butterfly.Add, 544491);//custom sounds
             PCall(Shua.Add, 544490);
             PCall(Nameless.Add, 544489);
             PCall(Tripod.Add, 544488);
@@ -84,14 +84,14 @@ namespace Hawthorne
             PCall(Glass.Add, 544486);
             PCall(Damocles.Add, 544485);
             PCall(Deep.Add, 544484);
-            PCall(Postmodern.Add, 544483);
+            PCall(Postmodern.Add, 544483);//custom sounds
             PCall(War.Add, 544482);
-            PCall(SnakeGod.Add, 544481);
+            PCall(SnakeGod.Add, 544481);//custom sounds
             PCall(CrashesYourGame.Add, 544480);
-            PCall(Hunter.Add, 544479);
+            PCall(Hunter.Add, 544479);//custom sounds
             PCall(Firebird.Add, 544478);
             PCall(Beak.Add, 544477);
-            PCall(Scarecrow.Add, 544476);
+            PCall(Scarecrow.Add, 544476);//custom sounds
             PCall(Windle.Add, 544475);
             PCall(Blackstar.Add, 544474);
             PCall(Singularity.Add, 544473);
@@ -103,16 +103,16 @@ namespace Hawthorne
             PCall(Pinano.Add, 544467);
             PCall(Spitato.Add, 544466);
             PCall(Minana.Add, 544465);
-            PCall(Boat.Add, 544464);
+            PCall(Boat.Add, 544464);//custom sounds?
             PCall(Train.Add, 544463);
-            PCall(RedBot.Add, 544462);
-            PCall(BlueBot.Add, 544461);
-            PCall(YellowBot.Add, 544460);
-            PCall(PurpleBot.Add, 544459);
-            PCall(GreyBot.Add, 544458);
+            PCall(RedBot.Add, 544462);//custom sounds
+            PCall(BlueBot.Add, 544461);//custom sounds
+            PCall(YellowBot.Add, 544460);//custom sounds
+            PCall(PurpleBot.Add, 544459);//custom sounds
+            PCall(GreyBot.Add, 544458);//custom sounds
             PCall(GlassedSun.Add, 544457);
-            PCall(Crystal.Add, 544456);
-            PCall(Stone.Add, 544455);
+            PCall(Crystal.Add, 544456);//custom sounds
+            PCall(Stone.Add, 544455);//custom sounds
             PCall(Dragon.Add, 544454);
             PCall(Vase.Add, 544453);
             PCall(Forget.Add, 544452);

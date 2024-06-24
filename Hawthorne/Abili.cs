@@ -1522,7 +1522,7 @@ namespace Hawthorne
                             new Effect(BasicEffects.ExitDamage, 1, IntentType.Damage_3_6, Slots.SlotTarget(new int[]{-3, 3 }, false)),
                             new Effect(BasicEffects.ExitDamage, 1, IntentType.Damage_3_6, Slots.SlotTarget(new int[]{-4, 4 }, false)),
                         },
-                        visuals = CustomVisuals.GetVisuals("Salt/Four"),
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Domination_A").visuals,
                         animationTarget = Targetting.Everything(false),
                     };
                 }
@@ -4394,6 +4394,7 @@ namespace Hawthorne
             if (intentInfo == null)
                 self._intentDB.Add(Flee, (IntentInfo)fleeIntent);
         }
+        public static IntentType Pale => (IntentType)666888;
         public static void Setup()
         {
             IDetour FleeType = (IDetour)new Hook((MethodBase)typeof(IntentHandlerSO).GetMethod("Initialize", ~BindingFlags.Default), typeof(Intents).GetMethod(nameof(FleeIntent), ~BindingFlags.Default));
@@ -5808,6 +5809,32 @@ namespace Hawthorne
         public override IEnumerator Execute(CombatStats stats)
         {
             CombatManager.Instance.AddSubAction(run);
+            yield return null;
+        }
+    }
+    public class RootActionAction : CombatAction
+    {
+        public CombatAction run;
+        public RootActionAction(CombatAction y)
+        {
+            run = y;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            CombatManager.Instance.AddRootAction(run);
+            yield return null;
+        }
+    }
+    public class PriorityRootActionAction : CombatAction
+    {
+        public CombatAction run;
+        public PriorityRootActionAction(CombatAction y)
+        {
+            run = y;
+        }
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            CombatManager.Instance.AddPriorityRootAction(run);
             yield return null;
         }
     }

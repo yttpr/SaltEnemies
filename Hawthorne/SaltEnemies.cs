@@ -1084,6 +1084,17 @@ namespace Hawthorne
             addSepulchrePool("CrystalStone_EN");
             addSepulchrePool("TheDragon_EN");
             addSepulchrePool("OdetoHumanity_EN");
+            addSepulchrePool("YellowAngel_EN");
+            addSepulchrePool("EvilDog_EN");
+            addSepulchrePool("EvilEyeball_EN");
+            addSepulchrePool("NobodyGrave_EN");
+            addSepulchrePool("Defender_EN");
+            addSepulchrePool("ToyUfo_EN");
+            addSepulchrePool("PersonalAngel_EN");
+            addSepulchrePool("Sinker_EN");
+            addSepulchrePool("Complimentary_EN");
+            addSepulchrePool("SkeletonShooter_EN");
+            addSepulchrePool("SkeletonHead_EN");
             AddScrungiePool("LostSheep_EN", 3);
             AddScrungiePool("Derogatory_EN", 2);
             AddScrungiePool("Denial_EN", 1);
@@ -1097,6 +1108,7 @@ namespace Hawthorne
             AddScrungiePool("Arceles_EN");
             AddScrungiePool("CrystalStone_EN", 2);
             AddScrungiePool("TortureMeNot_EN");
+            AddScrungiePool("SkeletonHead_EN", 2);
             addFountainPool("LostSheep_EN");
             addFountainPool("Enigma_EN");
             addFountainPool("A'Flower'_EN");
@@ -1146,6 +1158,17 @@ namespace Hawthorne
             addFountainPool("Crystal_EN");
             addFountainPool("CrystalStone_EN");
             addFountainPool("OdetoHumanity_EN");
+            addFountainPool("YellowAngel_EN");
+            addFountainPool("EvilDog_EN");
+            addFountainPool("EvilEyeball_EN");
+            addFountainPool("NobodyGrave_EN");
+            addFountainPool("Defender_EN");
+            addFountainPool("ToyUfo_EN");
+            addFountainPool("PersonalAngel_EN");
+            addFountainPool("Sinker_EN");
+            addFountainPool("Complimentary_EN");
+            addFountainPool("SkeletonShooter_EN");
+            addFountainPool("SkeletonHead_EN");
             addBronzoPool("LostSheep_EN");
             addBronzoPool("Enigma_EN");
             addBronzoPool("DeadPixel_EN");
@@ -1224,6 +1247,17 @@ namespace Hawthorne
             addBronzoPool("TheDragon_EN");
             addBronzoPool("OdetoHumanity_EN");
             addBronzoPool("TortureMeNot_EN");
+            addBronzoPool("YellowAngel_EN");
+            addBronzoPool("EvilDog_EN");
+            addBronzoPool("EvilEyeball_EN");
+            addBronzoPool("NobodyGrave_EN");
+            addBronzoPool("Defender_EN");
+            addBronzoPool("ToyUfo_EN");
+            addBronzoPool("PersonalAngel_EN");
+            addBronzoPool("Sinker_EN");
+            addBronzoPool("Complimentary_EN");
+            addBronzoPool("SkeletonShooter_EN");
+            addBronzoPool("SkeletonHead_EN");
 
             AddToAreaPool("LostSheep_EN", 0);
             AddToAreaPool("LostSheep_EN", 1);
@@ -1329,6 +1363,17 @@ namespace Hawthorne
             AddToAreaPool("Crystal_EN", 1);
             AddToAreaPool("CandyStone_EN", 1);
             AddToAreaPool("OdetoHumanity_EN", 2);
+            AddToAreaPool("YellowAngel_EN", 1);
+            AddToAreaPool("EvilDog_EN", 2);
+            AddToAreaPool("EvilEyeball_EN", 1);
+            AddToAreaPool("NobodyGrave_EN", 0);
+            AddToAreaPool("Defender_EN", 0);
+            AddToAreaPool("ToyUfo_EN", 0);
+            AddToAreaPool("PersonalAngel_EN", 2);
+            AddToAreaPool("Sinker_EN", 0);
+            AddToAreaPool("Complimentary_EN", 2);
+            AddToAreaPool("SkeletonShooter_EN", 1);
+            AddToAreaPool("SkeletonHead_EN", 1);
             //Salt Fools 2
             addSepulchrePool("Delusion_EN");
             addFountainPool("Delusion_EN");
@@ -2496,6 +2541,7 @@ namespace Hawthorne
                 if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Frostbite_EN")) list.Add("Frostbite_EN");
                 if (UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("BackupDancer_EN")) list.Add("BackupDancer_EN");
                 if (EnemyExist("Moone_EN")) list.Add("Moone_EN");
+                if (EnemyExist("SkeletonShooter_EN") && Half) list.Add("SkeletonShooter_EN"); 
                 return list[UnityEngine.Random.Range(0, list.Count)];
             }
         }
@@ -3386,6 +3432,9 @@ namespace Hawthorne
                 if (EnemyExist("Pinano_EN")) list.Add("Pinano_EN");
                 if (EnemyExist("DryBait_EN") && Half) list.Add("DryBait_EN");
                 if (EnemyExist("Enno_EN")) list.Add("Enno_EN");
+                if (EnemyExist("NobodyGrave_EN")) list.Add("NobodyGrave_EN");
+                if (EnemyExist("ToyUfo_EN")) list.Add("ToyUfo_EN");
+                if (EnemyExist("Sinker_EN")) list.Add("Sinker_EN");
                 return list.GetRandom();
             }
             public static string RandomShoreTwoSize()
@@ -3547,6 +3596,8 @@ namespace Hawthorne
                 if (EnemyExist("Errant_EN") && Half) list.Add("Errant_EN");
                 if (!red && EnemyExist("Crystal_EN") && UnityEngine.Random.Range(0, 100) < (50 * CrystalSong.mod)) list.Add("Crystal_EN");
                 if (EnemyExist("NumbFrostbite_EN") && Fifth && Quarter) list.Add("NumbFrostbite_EN");
+                if (!red && EnemyExist("YellowAngel_EN")) list.Add("YellowAngel_EN");
+                if (EnemyExist("EvilEyeball_EN")) list.Add("EvilEyeball_EN");
                 return list.GetRandom();
             }
             public static string Fag(bool red = false)
@@ -4593,6 +4644,7 @@ namespace Hawthorne
                 if (!Red && EnemyExist("MarbleMaw_EN") && Half) list.Add("MarbleMaw_EN");
                 if (!Red && EnemyExist("YNL_EN") && Half) list.Add("YNL_EN");
                 if (EnemyExist("EyePalm_EN") && Half) list.Add("EyePalm_EN");
+                if (EnemyExist("EvilDog_EN") && Half) list.Add("EvilDog_EN");
                 if (tryDouble || Half)
                 {
                     if (!Red && EnemyExist("Maw_EN") && Half) list.Add("Maw_EN");
@@ -4627,6 +4679,8 @@ namespace Hawthorne
                 if (!Red && Third && EnemyExist("ClockTower_EN")) list.Add("ClockTower_EN");
                 if (EnemyExist("OdetoHumanity_EN") && Half) list.Add("OdetoHumanity_EN");
                 if (EnemyExist("God'sChalice_EN") && Half) list.Add("God'sChalice_EN");
+                if (EnemyExist("Complimentary_EN") && Half) list.Add("Complimentary_EN");
+                if (EnemyExist("PersonalAngel_EN") && Quarter) list.Add("PersonalAngel_EN"); 
                 return list.GetRandom();
             }
             public static string RandomTwoSizeFag()

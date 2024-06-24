@@ -1317,6 +1317,236 @@ namespace Hawthorne
                 return _trappings;
             }
         }
+        static Ability _gatesHeaven;
+        public static Ability GatesHeaven
+        {
+            get
+            {
+                if (_gatesHeaven == null)
+                {
+                    _gatesHeaven = new Ability()
+                    {
+                        name = "Gates of Heaven",
+                        description = "Move in front of the nearest party member.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(CasterSubActionEffect.Create(new Effect[]
+                            {
+                                new Effect(ScriptableObject.CreateInstance<MoveToClosestTargetEffect>(), 1, IntentType.Swap_Sides, Slots.SlotTarget(new int[9] {-4, -3, -2, -1, 0, 1, 2, 3, 4}, false))
+                            }), 1, IntentType.Swap_Sides, Slots.Self)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Door"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _gatesHeaven;
+            }
+        }
+        static Ability _circlesHell;
+        public static Ability CirclesHell
+        {
+            get
+            {
+                if (_circlesHell == null)
+                {
+                    _circlesHell = new Ability()
+                    {
+                        name = "Circles of Hell",
+                        description = "Inflict 50 Pale on the Opposing party member.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 50, Intents.Pale, Slots.Front)
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Curse"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _circlesHell;
+            }
+        }
+        static Ability _nailing;
+        public static Ability Nailing
+        {
+            get
+            {
+                if (_nailing == null)
+                {
+                    _nailing = new Ability()
+                    {
+                        name = "Nailing",
+                        description = "Deal an Agonizing amount of damage to the Oppoisng party member and inflict 2 Ruptured and 2 Constricted on them.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageEffect>(), 10, IntentType.Damage_7_10, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 2, IntentType.Status_Ruptured, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<ApplyConstrictedSlotEffect>(), 2, IntentType.Field_Constricted, Slots.Front),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Nailing"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _nailing;
+            }
+        }
+        static Ability _gulp;
+        public static Ability Gulp
+        {
+            get
+            {
+                if (_gulp == null)
+                {
+                    _gulp = new Ability()
+                    {
+                        name = "Gulp",
+                        description = LoadedAssetsHandler.GetEnemyAbility("Gulp_A").GetAbilityLocData().description,
+                        rarity = 5,
+                        priority = -3,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ConsumeRandomManaEffect>(), 1, IntentType.Mana_Consume, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 2, IntentType.Field_Shield, Slots.Self),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Gulp_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _gulp;
+            }
+        }
+        static Ability _alarm;
+        public static Ability Alarm
+        {
+            get
+            {
+                if (_alarm == null)
+                {
+                    _alarm = new Ability()
+                    {
+                        name = "Alarm",
+                        description = "30% chance to spawn a random single tile Fish(?) enemy, doubles the chance if this is the only enemy in combat.\nIf this fails, give this enemy another action.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SpawnFishEffect>(), 1, IntentType.Other_Spawn, Slots.Self, ScriptableObject.CreateInstance<AlarmCondition>()),
+                            new Effect(ScriptableObject.CreateInstance<AddTurnTargetToTimelineEffect>(), 1, IntentType.Misc, Slots.Self, BasicEffects.DidThat(false)),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Alarm"),
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _alarm;
+            }
+        }
+        static Ability _coward;
+        public static Ability Coward
+        {
+            get
+            {
+                if (_coward == null)
+                {
+                    IsFrontTargetCondition front = ScriptableObject.CreateInstance<IsFrontTargetCondition>();
+                    front.returnTrue = true;
+                    _coward = new Ability()
+                    {
+                        name = "Coward",
+                        description = "If there is an Opposing party member, gain 10 Shield.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, front),
+                            new Effect(BasicEffects.GetVisuals("Weep_A", false, Slots.Self), 1, null, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 10, IntentType.Field_Shield, Slots.Self, BasicEffects.DidThat(true, 2))
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _coward;
+            }
+        }
+        static Ability _opportunist;
+        public static Ability Opportunist
+        {
+            get
+            {
+                if (_opportunist == null)
+                {
+                    IsFrontTargetCondition front = ScriptableObject.CreateInstance<IsFrontTargetCondition>();
+                    front.returnTrue = true;
+                    _opportunist = new Ability()
+                    {
+                        name = "Opportunist",
+                        description = "If there is an Opposing party member, apply 5 Shield on the Left and Right enemy positions and move Left or Right..",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, front),
+                            new Effect(BasicEffects.GetVisuals("Salt/Notif", false, Slots.Self), 1, null, Slots.Self, BasicEffects.DidThat(true)),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Sides, BasicEffects.DidThat(true, 2)),
+                            new Effect(CasterSubActionEffect.Create(new Effect[]
+                            {
+                                new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self),
+                            }), 1, IntentType.Swap_Sides, Slots.Self, BasicEffects.DidThat(true, 3)),
+                        },
+                        visuals = null,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _opportunist;
+            }
+        }
+        static Ability _wobble;
+        public static Ability Wobble
+        {
+            get
+            {
+                if (_wobble == null)
+                {
+                    _wobble = new Ability()
+                    {
+                        name = "Wobble",
+                        description = "Move to the Left or Right.\nApply 5 Shield to this enemy's position.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self),
+                            new Effect(ScriptableObject.CreateInstance<ApplyShieldSlotEffect>(), 5, IntentType.Field_Shield, Slots.Self),
+                        },
+                        visuals = LoadedAssetsHandler.GetEnemyAbility("Wriggle_A").visuals,
+                        animationTarget = Slots.Self,
+                    };
+                }
+                return _wobble;
+            }
+        }
+        static Ability _obliterate;
+        public static Ability Obliterate
+        {
+            get
+            {
+                if (_obliterate == null)
+                {
+                    _obliterate = new Ability()
+                    {
+                        name = "Obliterate",
+                        description = "Deal this enemy's current health as damage to the Opposing party member and obliterate this enemy.",
+                        rarity = 5,
+                        effects = new Effect[]
+                        {
+                            new Effect(ScriptableObject.CreateInstance<DamageByCasterHealthEffect>(), 1, IntentType.Damage_16_20, Slots.Front),
+                            new Effect(ScriptableObject.CreateInstance<DirectDeathEffect>(), 1, IntentType.Damage_Death, Slots.Self),
+                        },
+                        visuals = CustomVisuals.GetVisuals("Salt/Curse"),
+                        animationTarget = Slots.Front,
+                    };
+                }
+                return _obliterate;
+            }
+        }
     }
     public class TrainEffect : EffectSO
     {
@@ -2514,5 +2744,70 @@ namespace Hawthorne
             else return base.GetNextAbilitySlotUsage(abilities, unit);
         }
 
+    }
+    public static class FishPool
+    {
+        public static List<string> Fish;
+        public static void Setup()
+        {
+            Fish = new List<string>();
+            for (int i = 0; i < 2; i++) Fish.Add("Mung_EN");
+            for (int i = 0; i < 20; i++) Fish.Add("MudLung_EN");
+            for (int i = 0; i < 8; i++) Fish.Add("MunglingMudLung_EN");
+            for (int i = 0; i < 8; i++) Fish.Add("FlaMinGoa_EN");
+            for (int i = 0; i < 2; i++) Fish.Add("Goa_EN");
+            for (int i = 0; i < 3; i++) Fish.Add("Mungie_EN");
+            for (int i = 0; i < 2; i++) Fish.Add("Wringle_EN");
+            for (int i = 0; i < 1; i++) Fish.Add("ManicHips_EN");
+            for (int i = 0; i < 5; i++) Fish.Add("Spoggle_Spitfire_EN");
+            if (Check.EnemyExist("Monck")) for (int i = 0; i < 5; i++) Fish.Add("Monck");
+            if (Check.EnemyExist("Pinano_EN")) for (int i = 0; i < 8; i++) Fish.Add("Pinano_EN");
+            if (Check.EnemyExist("Minana_EN")) for (int i = 0; i < 2; i++) Fish.Add("Minana_EN");
+            if (Check.EnemyExist("A'Flower'_EN")) for (int i = 0; i < 5; i++) Fish.Add("Minana_EN");
+            if (Check.EnemyExist("Windle1_EN")) for (int i = 0; i < 2; i++) Fish.Add("Windle1_EN");
+            if (Check.EnemyExist("Sinker_EN")) for (int i = 0; i < 1; i++) Fish.Add("Sinker_EN");
+            if (Check.EnemyExist("Lurchin_EN")) for (int i = 0; i < 5; i++)  Fish.Add("Lurchin_EN");
+            if (Check.EnemyExist("Enno_EN")) for (int i = 0; i < 3; i++) Fish.Add("Enno_EN");
+            if (Check.EnemyExist("Clione_EN")) for (int i = 0; i < 4; i++) Fish.Add("Clione_EN");
+            if (Check.EnemyExist("Spitato_EN")) for (int i = 0; i < 1; i++) Fish.Add("Spitato_EN");
+            if (Check.EnemyExist("TripodFish_EN")) for (int i = 0; i < 2; i++) Fish.Add("TripodFish_EN");
+            if (Check.EnemyExist("TeachaMantoFish_EN")) for (int i = 0; i < 1; i++) Fish.Add("TeachaMantoFish_EN"); 
+            if (Check.EnemyExist("IchtyosatedSpoggle_EN")) for (int i = 0; i < 5; i++) Fish.Add("IchtyosatedSpoggle_EN");
+            if (Check.EnemyExist("LipBug_EN")) for (int i = 0; i < 4; i++) Fish.Add("LipBug_EN");
+        }
+    }
+    public class SpawnFishEffect : SpawnEnemyByStringNameEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            if (FishPool.Fish == null) FishPool.Setup();
+            enemyName = FishPool.Fish.GetRandom();
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, entryVariable, out exitAmount);
+        }
+    }
+    public class HasEnemySpaceEffectCondition : EffectConditionSO
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            foreach (CombatSlot slot in CombatManager.Instance._stats.combatSlots.EnemySlots) if (!slot.HasUnit) return true;
+            return false;
+        }
+    }
+    public class AlarmCondition : HasEnemySpaceEffectCondition
+    {
+        public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
+        {
+            int pass = 30;
+            if (CombatManager.Instance._stats.EnemiesOnField.Count <= 1) pass *= 2;
+            if (UnityEngine.Random.Range(0, 100) > pass) return false;
+            return base.MeetCondition(caster, effects, currentIndex);
+        }
+    }
+    public class DamageByCasterHealthEffect : DamageEffect
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            return base.PerformEffect(stats, caster, targets, areTargetSlots, caster.CurrentHealth * entryVariable, out exitAmount);
+        }
     }
 }

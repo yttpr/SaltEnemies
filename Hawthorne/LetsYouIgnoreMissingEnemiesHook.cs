@@ -150,6 +150,15 @@ namespace Hawthorne
             CheckEnemy("TheDragon_EN");
             CheckEnemy("OdetoHumanity_EN");
             CheckEnemy("TortureMeNot_EN");
+            CheckEnemy("YellowAngel_EN");
+            CheckEnemy("EvilDog_EN");
+            CheckEnemy("EvilEyeball_EN");
+            CheckEnemy("NobodyGrave_EN");
+            CheckEnemy("ToyUfo_EN");
+            CheckEnemy("PersonalAngel_EN");
+            CheckEnemy("Sinker_EN");
+            CheckEnemy("Complimentary_EN");
+            CheckEnemy("SkeletonShooter_EN");
         }
         public static void CheckEnemy(string enemy)
         {

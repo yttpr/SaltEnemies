@@ -23,6 +23,7 @@ using static Hawthorne.Check;
 using System.Data.Common;
 using MUtility;
 using System.Diagnostics.Contracts;
+using UnityEngine.Assertions.Must;
 
 namespace Hawthorne
 {
@@ -2066,7 +2067,7 @@ namespace Hawthorne
                     jitter._passiveName = "Jittery";
                     jitter.type = (PassiveAbilityTypes)43456415;
                     jitter.passiveIcon = ResourceLoader.LoadSprite("JitteryPassive.png", 32);
-                    jitter._enemyDescription = "On any party member manually moving, move to the Left or Right";
+                    jitter._enemyDescription = "On any party member manually moving, move to the Left or Right.";
                     jitter._characterDescription = jitter._enemyDescription;
                     jitter.doesPassiveTriggerInformationPanel = true;
                     jitter.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self) });
@@ -2092,7 +2093,7 @@ namespace Hawthorne
                     Ability bonus = new Ability();
                     bonus.name = "Desecration";
                     bonus.description = "Summon a Defender.";
-                    bonus.priority = -3;
+                    bonus.priority = 0;
                     bonus.effects = new Effect[1];
                     SpawnEnemyByStringNameEffect defender = ScriptableObject.CreateInstance<SpawnEnemyByStringNameEffect>();
                     defender.enemyName = "Defender_EN";
@@ -2105,6 +2106,156 @@ namespace Hawthorne
                     _desecration = des;
                 }
                 return _desecration;
+            }
+        }
+        static BasePassiveAbilitySO _judgment;
+        public static BasePassiveAbilitySO Judgement
+        {
+            get
+            {
+                if (_judgment == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    ExtraAttackPassiveAbility des = ScriptableObject.Instantiate<ExtraAttackPassiveAbility>(baseExtra);
+                    des._passiveName = "Judgement";
+                    des._enemyDescription = "This enemy will perform the extra ability \"Judgement\" each turn.";
+                    //des.conditions = new List<EffectorConditionSO>(baseExtra.conditions != null ? baseExtra.conditions : new EffectorConditionSO[0]) { ScriptableObject.CreateInstance<DefenderCondition>() }.ToArray();
+                    Ability bonus = new Ability();
+                    bonus.name = "Judgement";
+                    bonus.description = "Inflict 10 Pale on every party member.";
+                    bonus.priority = 0;
+                    bonus.effects = new Effect[1];
+                    bonus.effects[0] = new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, Intents.Pale, Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, false));
+                    bonus.visuals = LoadedAssetsHandler.GetEnemyAbility("UglyOnTheInside_A").visuals;
+                    bonus.animationTarget = Slots.SlotTarget(new int[] { -4, -3, -2, -1, 0, 1, 2, 3, 4 }, false);
+                    bonus.rarity = 0;
+                    AbilitySO ability = bonus.EnemyAbility().ability;
+                    des._extraAbility.ability = ability;
+                    _judgment = des;
+                }
+                return _judgment;
+            }
+        }
+        static BasePassiveAbilitySO _sniper;
+        public static BasePassiveAbilitySO Sniper
+        {
+            get
+            {
+                if (_sniper == null)
+                {
+                    ExtraAttackPassiveAbility baseExtra = LoadedAssetsHandler.GetEnemy("Xiphactinus_EN").passiveAbilities[1] as ExtraAttackPassiveAbility;
+                    ExtraAttackPassiveAbility des = ScriptableObject.Instantiate<ExtraAttackPassiveAbility>(baseExtra);
+                    des._passiveName = "Sniper";
+                    des._enemyDescription = "This enemy will peform the extra ability \"Sniper\" each turn.";
+                    //des.conditions = new List<EffectorConditionSO>(baseExtra.conditions != null ? baseExtra.conditions : new EffectorConditionSO[0]) { ScriptableObject.CreateInstance<DefenderCondition>() }.ToArray();
+                    Ability bonus = new Ability();
+                    bonus.name = "Sniper";
+                    bonus.description = "Summon a Skeleton Head.";
+                    bonus.priority = 0;
+                    bonus.effects = new Effect[1];
+                    SpawnEnemyByStringNameEffect defender = ScriptableObject.CreateInstance<SpawnEnemyByStringNameEffect>();
+                    defender.enemyName = "SkeletonHead_EN";
+                    bonus.effects[0] = new Effect(defender, 1, IntentType.Other_Spawn, Slots.Self);
+                    bonus.visuals = CustomVisuals.GetVisuals("Salt/Curse");
+                    bonus.animationTarget = Slots.Self;
+                    bonus.rarity = 0;
+                    AbilitySO ability = bonus.EnemyAbility().ability;
+                    des._extraAbility.ability = ability;
+                    _sniper = des;
+                }
+                return _sniper;
+            }
+        }
+        static BasePassiveAbilitySO _slippery2;
+        public static BasePassiveAbilitySO Slippery2
+        {
+            get
+            {
+                if (_slippery2 == null)
+                {
+                    PerformEffectPassiveAbility flutter = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    flutter._passiveName = "Slippery (2)";
+                    flutter.type = Passives.Slippery.type;
+                    flutter.passiveIcon = Passives.Slippery.passiveIcon;
+                    flutter._enemyDescription = "On receiving direct damage, move to the Left or Right, twice.";
+                    flutter._characterDescription = flutter._enemyDescription;
+                    flutter.doesPassiveTriggerInformationPanel = Passives.Slippery.doesPassiveTriggerInformationPanel;
+                    flutter.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+                    {
+                        new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self),
+                        new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, null, Slots.Self),
+                    });
+                    flutter._triggerOn = Passives.Slippery._triggerOn;
+                    flutter.conditions = Passives.Slippery.conditions;
+                    _slippery2 = flutter;
+                }
+                return _slippery2;
+            }
+        }
+        static BasePassiveAbilitySO _punisher;
+        public static BasePassiveAbilitySO Punisher
+        {
+            get
+            {
+                if (_punisher == null)
+                {
+                    PerformEffectPassiveAbility punish = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    punish._passiveName = "Punisher";
+                    punish.type = (PassiveAbilityTypes)6415272;
+                    punish.passiveIcon = ResourceLoader.LoadSprite("PunisherPassive.png", 32);
+                    punish._enemyDescription = "On moving, inflict 10 Pale on the Opposing party member. \nIf they already had over 100 Pale, trigger it.";
+                    punish._characterDescription = punish._enemyDescription;
+                    punish.doesPassiveTriggerInformationPanel = true;
+                    punish.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<TryTriggerPaleEffect>(), 1, null, Slots.Front), new Effect(ScriptableObject.CreateInstance<ApplyPaleEffect>(), 10, null, Slots.Front, BasicEffects.DidThat(false)),  });
+                    punish._triggerOn = new TriggerCalls[1] { TriggerCalls.OnMoved };
+                    punish.conditions = new EffectorConditionSO[0];
+                    _punisher = punish;
+                }
+                return _punisher;
+            }
+        }
+        static BasePassiveAbilitySO _divisible;
+        public static BasePassiveAbilitySO Divisible
+        {
+            get
+            {
+                if (_divisible == null)
+                {
+                    PerformEffectPassiveAbility punish = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    punish._passiveName = "Divisible";
+                    punish.type = (PassiveAbilityTypes)6427289;
+                    punish.passiveIcon = ResourceLoader.LoadSprite("DivisibleIcon.png", 32);
+                    punish._enemyDescription = "On taking any damage, if there is available space split into 2 copies of this enemy with half the health.";
+                    punish._characterDescription = punish._enemyDescription;
+                    punish.doesPassiveTriggerInformationPanel = true;
+                    punish.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<SplitInTwoEffect>(), 1, null, Slots.Self) });
+                    punish._triggerOn = new TriggerCalls[1] { TriggerCalls.OnDamaged };
+                    punish.conditions = new List<EffectorConditionSO>(Passives.Slippery.conditions != null ? Passives.Slippery.conditions : new EffectorConditionSO[0]) { ScriptableObject.CreateInstance<HasEnemySpaceCondition>() }.ToArray();
+                    _divisible = punish;
+                }
+                return _divisible;
+            }
+        }
+        static BasePassiveAbilitySO _lonely;
+        public static BasePassiveAbilitySO Lonely
+        {
+            get
+            {
+                if (_lonely == null)
+                {
+                    PerformEffectPassiveAbility punish = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+                    punish._passiveName = "Lonely";
+                    punish.type = (PassiveAbilityTypes)62789001;
+                    punish.passiveIcon = ResourceLoader.LoadSprite("LonelyIcon.png", 32);
+                    punish._enemyDescription = "On any enemy moving, dying, or fleeing, if this enemy is not next to another enemy attempt to move until it is next to one, unless there are no other enemies in combat.";
+                    punish._characterDescription = punish._enemyDescription;
+                    punish.doesPassiveTriggerInformationPanel = true;
+                    punish.effects = ExtensionMethods.ToEffectInfoArray(new Effect[] { new Effect(ScriptableObject.CreateInstance<LonelyEffect>(), 1, null, Slots.Self) });
+                    punish._triggerOn = new TriggerCalls[1] { (TriggerCalls)301832 };
+                    punish.conditions = new EffectorConditionSO[] { ScriptableObject.CreateInstance<LonelyCondition>() };
+                    _lonely = punish;
+                }
+                return _lonely;
             }
         }
 
@@ -2203,7 +2354,14 @@ namespace Hawthorne
             return true;
         }
     }
-
+    public class LonelySubAction : CombatAction
+    {
+        public override IEnumerator Execute(CombatStats stats)
+        {
+            foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values) CombatManager.Instance.PostNotification(Passi.Lonely._triggerOn[0].ToString(), enemy, null);
+            yield return null;
+        }
+    }
     public static class SigilManager
     {
         public static SigilPassiveAbility GetSigilPassive(IPassiveEffector unit)
@@ -2280,6 +2438,13 @@ namespace Hawthorne
             if (notificationName == TriggerCalls.OnSwapTo.ToString())
             {
                 if (sender is CharacterCombat) foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values) CombatManager.Instance.PostNotification(JitteryHandler.Call.ToString(), enemy, sender);
+            }
+            if (sender is IUnit uuu && !uuu.IsUnitCharacter)
+            {
+                if (notificationName == TriggerCalls.OnDeath.ToString() || notificationName == TriggerCalls.OnFleetingEnd.ToString() || notificationName == TriggerCalls.OnMoved.ToString())
+                {
+                    CombatManager.Instance.AddSubAction(new LonelySubAction());
+                }
             }
         }
 
@@ -7449,6 +7614,138 @@ namespace Hawthorne
         public override bool MeetCondition(IUnit caster, EffectInfo[] effects, int currentIndex)
         {
             return caster.IsAlive;
+        }
+    }
+    public class HasEnemySpaceCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            foreach (CombatSlot slot in CombatManager.Instance._stats.combatSlots.EnemySlots) if (!slot.HasUnit) return true;
+            return false;
+        }
+    }
+    public class SplitInTwoEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            if (caster.CurrentHealth <= 0) return false;
+            float gap = caster.CurrentHealth;
+            gap /= 2;
+            gap = Math.Max(1, gap);
+            int final = (int)Math.Ceiling(gap);
+            if (!(caster is EnemyCombat enemy)) return false;
+            EnemySO en = enemy.Enemy;
+            caster.DirectDeath(null);
+            CombatManager.Instance.AddSubAction(new Spawn2HalvesAction(en, final));
+            return true;
+        }
+        public class Spawn2HalvesAction : CombatAction
+        {
+            public EnemySO en;
+            public int final;
+            public Spawn2HalvesAction(EnemySO en, int final)
+            {
+                this.en = en;
+                this.final = final;
+            }
+            public override IEnumerator Execute(CombatStats stats)
+            {
+                int num = stats.GetRandomEnemySlot(en.size);
+                if (num != -1)
+                {
+                    if (stats.AddNewEnemy(en, num, false, SpawnType.Basic))
+                    {
+                        EnemyCombat newborn = stats.Enemies[stats.Enemies.Count - 1];
+                        if (newborn is IUnit unit)
+                        {
+                            newborn.SetHealthTo(final);
+                        }
+                    }
+                }
+                num = stats.GetRandomEnemySlot(en.size);
+                if (num != -1)
+                {
+                    if (stats.AddNewEnemy(en, num, false, SpawnType.Basic))
+                    {
+                        EnemyCombat newborn = stats.Enemies[stats.Enemies.Count - 1];
+                        if (newborn is IUnit unit)
+                        {
+                            newborn.SetHealthTo(final);
+                        }
+                    }
+                }
+                yield return null;
+            }
+        }
+    }
+    public class TryTriggerPaleEffect : EffectSO
+    {
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            foreach (TargetSlotInfo target in targets)
+            {
+                if (target.HasUnit)
+                {
+                    if (target.Unit.ContainsStatusEffect((StatusEffectType)888666, 100))
+                    {
+                        Effect soulHit = new Effect(ScriptableObject.CreateInstance<PaleHarmEffect>(), 100, new IntentType?(), Slots.Self);
+                        CombatManager.Instance.AddSubAction(new EffectAction(ExtensionMethods.ToEffectInfoArray(new Effect[1] { soulHit }), target.Unit));
+                        exitAmount++;
+                    }
+                }
+            }
+            return exitAmount > 0;
+        }
+    }
+    public class LonelyEffect : SwapToOneSideEffect
+    {
+        //public static UnitStoredValueNames value => (UnitStoredValueNames)8282501;
+        public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
+        {
+            exitAmount = 0;
+            int left = -1;
+            int right = -1;
+            foreach (CombatSlot slot in caster.IsUnitCharacter ? stats.combatSlots.CharacterSlots : stats.combatSlots.EnemySlots)
+            {
+                if (!slot.HasUnit) continue;
+                if (slot.SlotID >= caster.SlotID && slot.SlotID < caster.SlotID + caster.Size) continue;
+                if (slot.SlotID < caster.SlotID) left = caster.SlotID - slot.SlotID;
+                else if (slot.SlotID >= caster.SlotID + caster.Size) right = slot.SlotID - (caster.SlotID + caster.Size - 1);
+            }
+            if (left <= 1 && right <= 1) return false;
+            if (left <= 1) left = 99;
+            if (right <= 1) right = 99;
+            bool goLeft = (left < right) || (left == right && UnityEngine.Random.Range(0, 100) < 50);
+            //caster.SetStoredValue(value, 1);
+            if (goLeft)
+            {
+                _swapRight = false;
+                for (int i = 0; i < left - 1; i++) base.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, entryVariable, out exitAmount);
+            }
+            else
+            {
+
+                _swapRight = true;
+                for (int i = 0; i < right - 1; i++) base.PerformEffect(stats, caster, Slots.Self.GetTargets(stats.combatSlots, caster.SlotID, caster.IsUnitCharacter), Slots.Self.AreTargetSlots, entryVariable, out exitAmount);
+            }
+            //caster.SetStoredValue(value, 0);
+            return left > 0 || right > 0;
+        }
+    }
+    public class LonelyCondition : EffectorConditionSO
+    {
+        public override bool MeetCondition(IEffectorChecks effector, object args)
+        {
+            if (CombatManager.Instance._stats.EnemiesOnField.Count <= 1) return false;
+            //if ((effector as IUnit).GetStoredValue(LonelyEffect.value) > 0) return false;
+            foreach (CombatSlot slot in effector.IsUnitCharacter ? CombatManager.Instance._stats.combatSlots.CharacterSlots : CombatManager.Instance._stats.combatSlots.EnemySlots)
+            {
+                if (slot.SlotID == effector.SlotID - 1 && slot.HasUnit) return false;
+                else if (slot.SlotID == effector.SlotID + (effector as IUnit).Size && slot.HasUnit) return false; 
+            }
+            return true;
         }
     }
 }

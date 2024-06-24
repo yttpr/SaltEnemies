@@ -85,7 +85,7 @@ namespace Hawthorne
             kindness.effects[2] = new Effect(ScriptableObject.CreateInstance<ApplyRupturedEffect>(), 1, IntentType.Status_Ruptured, Slots.Front);
             kindness.effects[3] = new Effect(ScriptableObject.CreateInstance<SwapToSidesEffect>(), 1, IntentType.Swap_Sides, Slots.Self, Conditions.Chance(60));
             kindness.visuals = //LoadedAssetsHandler.GetEnemy("HeavensGateRed_BOSS").abilities[1].ability.visuals;
-                CustomVisuals.GetVisuals("Salt/Unlock");
+                CustomVisuals.GetVisuals("Salt/Nailing");
             kindness.animationTarget = Slots.Front;
             Ability tenderness = new Ability();
             tenderness.name = "Tenderness";
