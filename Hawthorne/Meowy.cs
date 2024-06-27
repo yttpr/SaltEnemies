@@ -58,14 +58,23 @@ namespace Hawthorne
         }
         public static void AddEncounters()
         {
-            //event:/Hawthorne/Noisy/YA_Roar
-            //event:/Hawthorne/EvilEyeTheme
-            //event:/Hawthorne/Noisy/Eye_Roar
-            //event:/Hawthorne/GraveTheme
-            //event:/Hawthorne/UFOTheme
+            YellowAngelTheme.Add(2467453);//waiting on maddie
+            EvilEyeSong.Add(2467454);
+            GraveSong.Add(2467455);
+            EvilDogTheme.Add(2467456);//waiting on millie
+            UFOSong.Add(2467457);
+            SinkerSong.Add(2467458);
             //event:/Hawthorne/Noisy/PA_Roar
-            //event:/Hawthorne/SinkerTheme
+            //event:/Hawthorne/PersonalAngelSong
             //event:/Hawthorne/Noisy/Bone_Roar
+            //event:/Hawthorne/ShooterSong
+            //event:/Hawthorne/ComplimentaryTheme
+            //event:/Hawthorne/EvilDogTheme
+
+            //event:/Blackwater/InventionSong
+            //event:/Blackwater/BlackAndBlueSong
+            //event:/Blackwater/BlueSkySong
         }
     }
+    
 }

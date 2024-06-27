@@ -58,7 +58,7 @@ namespace Hawthorne
         public static void AddEnemies()
         {
             PCall(Angel.Add, 544510);
-            PCall(Illusion.Add, 544509);=
+            PCall(Illusion.Add, 544509);
             PCall(RedFlower.Add, 544508);
             PCall(BlueFlower.Add, 544507);
             PCall(YellowFlower.Add, 544506);

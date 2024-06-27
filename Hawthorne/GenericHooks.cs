@@ -109,6 +109,10 @@ namespace Hawthorne
         public static void PlayerTurnEnd(Action<CombatStats> orig, CombatStats self)
         {
             orig(self);
+            foreach (EnemyCombat enemy in CombatManager.Instance._stats.EnemiesOnField.Values)
+            {
+                enemy.SetStoredValue(EnemyRefresher.Did, 0);
+            }
         }
         public static void PostNotification(Action<CombatManager, string, object, object> orig, CombatManager self, string call, object sender, object args)
         {

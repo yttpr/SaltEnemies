@@ -1668,6 +1668,7 @@ namespace Hawthorne
             addSepulchrePool("DryBait_EN");
             addSepulchrePool("NumbFrostbite_EN");
             addSepulchrePool("Enno_EN");
+            addSepulchrePool("Vagabond_EN");
             addSepulchrePool("God'sChalice_EN");
             addFountainPool("MarbleMaw_EN");
             addFountainPool("UnculturedSwine_EN");
@@ -1682,6 +1683,7 @@ namespace Hawthorne
             addFountainPool("NumbFrostbite_EN");
             addFountainPool("Enno_EN");
             addFountainPool("God'sChalice_EN");
+            addFountainPool("Vagabond_EN");
             addBronzoPool("MarbleMaw_EN");
             addBronzoPool("UnculturedSwine_EN");
             addBronzoPool("FrowningChancellor_EN");
@@ -1698,6 +1700,8 @@ namespace Hawthorne
             addBronzoPool("PrizedCatch_EN");
             addBronzoPool("Enno_EN");
             addBronzoPool("God'sChalice_EN");
+            addBronzoPool("Vagabond_EN");
+            addBronzoPool("March_EN");
             AddToAreaPool("MarbleMaw_EN", 2);
             AddToAreaPool("UnculturedSwine_EN", 0);
             AddToAreaPool("FrowningChancellor_EN", 2);
@@ -1711,6 +1715,7 @@ namespace Hawthorne
             AddToAreaPool("NumbFrostbite_EN", 1);
             AddToAreaPool("Enno_EN", 0);
             AddToAreaPool("God'sChalice_EN", 2);
+            AddToAreaPool("Vagabond_EN", 2);
             /*
             Marble Maw and the lads
             Minister and his pet kidney stone
@@ -1739,6 +1744,10 @@ namespace Hawthorne
             cha cha real smooth
             im so full of tumors yum
             in the orpheum, straight up jorkin it
+
+            Grey Lad
+            they have no idea whats going on
+            castle crashers thief
             */
 
             //furyball
@@ -2719,6 +2728,7 @@ namespace Hawthorne
                 if (!mustSmall && !red && !movable && UnityEngine.Random.Range(0, 100) < 35 && EnemyExist("Monck_EN")) list.Add("Monck_EN");
                 if (!mustSmall && !red && UnityEngine.Random.Range(0, 100) < 50 && EnemyExist("Windle1_EN")) list.Add("Windle1_EN");
                 if (!red && EnemyExist("Arceles_EN")) list.Add("Arceles_EN");
+                if (!red && EnemyExist("NobodyGrave_EN")) list.Add("NobodyGrave_EN");
                 if (list.Count <= 0) list.Add("Mung_EN");
             }
             if (zone == 1)
@@ -2785,6 +2795,7 @@ namespace Hawthorne
                 if (!mustSmall && UnityEngine.Random.Range(0, 100) < 25 && EnemyExist("OdetoHumanity_EN")) list.Add("OdetoHumanity_EN");
                 if (EnemyExist("TortureMeNot_EN") && Half) list.Add("TortureMeNot_EN");
                 if (!red && Quarter && EnemyExist("Boomer_EN")) list.Add("Boomer_EN");
+                if (!red && Half && EnemyExist("Vagabond_EN")) list.Add("Vagabond_EN");
             }
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
@@ -2807,6 +2818,8 @@ namespace Hawthorne
             if (EnemyExist("LivingSolvent_EN")) for (int i = 0; i < 1; i++) list.Add("LivingSolvent_EN");
             if (EnemyExist("LivingSolvent_EN") && harder) for (int i = 0; i < 2; i++) list.Add("LivingSolvent_EN");
             if (EnemyExist("Windle2_EN") && !harder) for (int i = 0; i < 5; i++) list.Add("Windle2_EN");
+            if (EnemyExist("EvilEyeball_EN") && !harder) for (int i = 0; i < 3; i++) list.Add("EvilEyeball_EN");
+            if (EnemyExist("SkeketonShooter_EN") && !harder) for (int i = 0; i < 5; i++) list.Add("SkeketonShooter_EN");
             if (EnemyExist("Windle3_EN") && harder) for (int i = 0; i < 5; i++) list.Add("Windle3_EN");
             if (EnemyExist("Sigil_EN")) for (int i = 0; i < 5; i++) list.Add("Sigil_EN");
             if (harder && EnemyExist("ClockTower_EN")) for (int i = 0; i < 5; i++) list.Add("ClockTower_EN");
@@ -2874,6 +2887,7 @@ namespace Hawthorne
             if (EnemyExist("Stoplight_EN") && harder) for (int i = 0; i < 1; i++) ret.Add("Stoplight_EN");
             if (EnemyExist("RedBot_EN")) for (int i = 0; i < 2; i++) ret.Add("RedBot_EN");
             if (EnemyExist("OdetoHumanity_EN")) for (int i = 0; i < 1; i++) ret.Add("OdetoHumanity_EN");
+            if (EnemyExist("EvilEyeball_EN") && !harder) for (int i = 0; i < 3; i++) ret.Add("EvilEyeball_EN");
             return ret.GetRandom();
         }
 

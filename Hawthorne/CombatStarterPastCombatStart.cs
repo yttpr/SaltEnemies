@@ -13,10 +13,10 @@ namespace Hawthorne
         public static void ConnectPassives(Action<EnemyCombat> orig, EnemyCombat self)
         {
             orig(self);
+            if (self.GetStoredValue((UnitStoredValueNames)98412002) > 0) return;
+            else self.SetStoredValue((UnitStoredValueNames)98412002, 1);
             if (CombatStarted)
             {
-                if (self.GetStoredValue((UnitStoredValueNames)98412002) > 0) return;
-                else self.SetStoredValue((UnitStoredValueNames)98412002, 1);
                 try
                 {
                     self.StartCombat();

@@ -1874,7 +1874,7 @@ namespace Hawthorne
                 signType = (SignType)sign,
                 musicEvent = "event:/Hawthorne/LobotomyTheme",
                 roarEvent = LoadedAssetsHandler.GetEnemy("ChoirBoy_EN").deathSound,
-                difficulty = EncounterDifficulty.Easy
+                difficulty = EncounterDifficulty.Medium
             };
             List<FieldEnemy[]> fields = new List<FieldEnemy[]>();
             if (EnemyExist("YNL_EN"))

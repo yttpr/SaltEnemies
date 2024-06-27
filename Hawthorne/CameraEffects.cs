@@ -3527,8 +3527,10 @@ namespace Hawthorne
     }
     public static class EnemyRefresher
     {
+        public static UnitStoredValueNames Did => (UnitStoredValueNames)28270847;
         public static bool RefreshAbilityUse(Func<EnemyCombat, bool> orig, EnemyCombat self)
         {
+            if (self.GetStoredValue(Did) > 20) return false;
             CombatManager.Instance._stats.timeline.TryAddNewExtraEnemyTurns(self, 1);
             return true;
         }

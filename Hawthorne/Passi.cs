@@ -7626,6 +7626,19 @@ namespace Hawthorne
     }
     public class SplitInTwoEffect : EffectSO
     {
+        public bool SilentDeath(EnemyCombat self, IUnit killer, bool obliteration = false)
+        {
+            if (!self.CanBeInstaKilled)
+            {
+                return false;
+            }
+
+            int currentHealth = self.CurrentHealth;
+            self.CurrentHealth = 0;
+            CombatManager.Instance.AddUIAction(new EnemyDamagedUIAction(self.ID, self.CurrentHealth, self.MaximumHealth, currentHealth, DamageType.Weak));
+            CombatManager.Instance.AddSubAction(new WitherlessEnemyDeathAction(self.ID, killer, DeathType.DirectDeath));
+            return true;
+        }
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
             exitAmount = 0;
@@ -7636,7 +7649,7 @@ namespace Hawthorne
             int final = (int)Math.Ceiling(gap);
             if (!(caster is EnemyCombat enemy)) return false;
             EnemySO en = enemy.Enemy;
-            caster.DirectDeath(null);
+            SilentDeath(enemy, null);
             CombatManager.Instance.AddSubAction(new Spawn2HalvesAction(en, final));
             return true;
         }
